@@ -1,0 +1,45 @@
+[PROJECT]
+Target=led.hex
+Processor_Text=PIC24FJ128GA006
+CCSVerions=5.112
+Compiler=PCD
+CCSVersion=5.112
+[Target Data]
+FileList=led.c
+[Directories]
+Include=
+[C:\Users\eelab\Documents\dspic30f4011\LED_TOGGLE\led]
+Type=4
+[mru-list]
+1=led.c
+
+[fileformats]
+forcecoff=0
+
+[ProjectLog]
+Days=1
+D1=24-04-2024
+D1_L=4
+D1_L1=[45893]Project Opened.
+D1_L2=[45911]Started Editing.
+D1_L3=[46232]Stopped Editing.
+TotalEdit=6
+TotalDebug=0
+D1_E=6
+D1_D=0
+D1_L4=[46232]Project Closed.
+
+[Opened Files]
+1=led.c
+t1=1
+Count=2
+2=..\main.c
+t2=1
+[led.c]
+Type=4
+[Units]
+Count=1
+1=led (main)
+
+[defines]
+buildcount=1

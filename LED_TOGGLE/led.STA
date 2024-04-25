@@ -1,0 +1,47 @@
+
+ROM used:   532/88060 (1%)
+            532/88060 (1%) including unused fragments
+
+            0.5 Average locations per line
+            266.0 Average locations per statement
+
+RAM used:   129/8192 (2%) at main() level
+            129/8192 (2%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 128
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   17     2 100  led.c
+   12     0   0  led.h
+ 1038     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Devices\24FJ128GA006.h
+----- -----
+ 1067     2 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     20   2    1     14  0.8  main
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              2
+    Comments                160
+    Volume (V)              16
+    Difficulty (D)          0.5
+    Effort to implement (E) 8
+    Time to implement (T)   0 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    179
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-001FE   508  0  
+00200-0FFFE    20  65004  
+10000-157FA     0  22524  
+
+
+

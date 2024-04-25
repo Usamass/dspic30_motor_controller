@@ -1,0 +1,16 @@
+#include <led.h>
+#use delay (clock=8MHz)
+
+
+void main()
+{
+   
+
+
+
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+
+}

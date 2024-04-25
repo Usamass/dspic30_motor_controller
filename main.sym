@@ -1,0 +1,148 @@
+W0      @SCRATCH
+W0L     _RETURN_
+W0      @delay_ms1.P1
+W0 -W1  @READ_ROM_MEMORY.P2
+W0 -W3  @FLT64.P3
+W0 -W2  @F48TOSI64.P4
+W0 -W1  @DIV3232B.P5
+W0 -W2  @MULFF48.P6
+W0 -W1  @MULFF.P7
+W0 -W3  @DIVFF64.P8
+W0      @delay_us1.P9
+W0 -W3  @F64TOSI64.P10
+W0 -W3  @SI64TOF48.P11
+W0 -W1  @DIVFF.P12
+W0 -W3  @ADDFF64.P13
+W0 -W3  @I64TOF48.P14
+W0 -W2  @DIVFF48.P15
+W0 -W3  @MULFF64.P16
+W0 -W1  @FLT.P17
+W0 -W2  @FLT48.P18
+W0 -W1  @SFTOI.P19
+W0      @ITOF.P20
+W0 -W1  @ADDFF.P21
+W0 -W3  @I64TOF64.P22
+W0      @SITOF.P23
+W0 -W3  @F64TOI64.P24
+W0 -W2  @ADDFF48.P25
+W0 -W3  @SI64TOF64.P26
+W0 -W2  @F48TO64.P27
+W0 -W1  @MULS3232.P28
+W1      @SCRATCH
+W1      @WRITE_PACKED_MEMORY.P1
+W1      @READ_PACKED_MEMORY.P2
+W2 -W3  @DIVFF.P1
+W2 -W3  @MULS3232.P2
+W2      @READ_ROM_MEMORY.P3
+W2 -W3  @FLT.P4
+W2 -W3  @DIV3232B.P5
+W2      @WRITE_PACKED_MEMORY.P6
+W2 -W3  @ADDFF.P7
+W2      @READ_PACKED_MEMORY.P8
+W2 -W3  @MULFF.P9
+W3 -W5  @FLT48.P1
+W3      @READ_PACKED_MEMORY.P2
+W3      @WRITE_PACKED_MEMORY.P3
+W3 -W5  @ADDFF48.P4
+W3 -W5  @DIVFF48.P5
+W3 -W5  @MULFF48.P6
+W3      @READ_ROM_MEMORY.P7
+W4 -W7  @MULFF64.P1
+W4 -W7  @FLT64.P2
+W4 -W7  @ADDFF64.P3
+W4 -W7  @DIVFF64.P4
+800-827 pas_64
+828-84F qas_64
+850-87F pat_64
+880-8AF qat_64
+8B0-8B5 duty
+8B6-8B7 sample
+8B8-8B9 peak_voltage
+8BA-8C5 reference
+8C6-901 sine_table
+902-903 sine_index
+904-909 phase_angle
+90A-911 theeta
+912-B07 timer_table
+B08-D07 gain_table
+D08-D09 raw_adc
+D0A-D0B throttle_level
+D0C-D0D freq
+D0E-D0F temp
+D10.0   tick
+D11     tick_count
+D12-D15 millis_count
+D16-D1D timer_reload.intr_per_sample
+D16-D17 voltage_gain.i
+D18-D19 voltage_gain.i
+D1A-D21 sin.x
+D1A-D1B voltage_gain.i
+D1E-D1F timer_reload.sample
+D2A-D31 cos.x
+D32     cos.quad
+D33     cos.i
+D34-D3B cos.y
+D3C-D43 cos.t
+D44-D4B cos.t2
+D4C-D53 cos.frac
+D54-D9B cos.p_64
+DDC-DDD timer1_isr.i
+F80-FFF _STACK_
+
+ROM Allocation:
+000100  PWM1_isr
+000150  @MULS3232
+000192  timer1_isr
+000390  initMCPWM
+0003EA  @I64TOF64
+000454  @MULFF64
+000564  @DIVFF64
+00066C  @ADDFF64
+00085A  @FLT64
+0008DE  @F64TOI64
+00093C  cos
+000BE4  sin
+000C20  @F64TOSI64
+000C7E  fill_sine_table
+000D46  @SI64TOF64
+000DB0  timer_reload
+000E80  voltage_gain
+000F48  @cinit1
+000F48  MAIN
+000F72  @cinit2
+
+Project Directory:
+    C:\Users\eelab\Documents\dspic30f4011\
+
+Project Files:
+    main.c                                                  [25-Apr-24 16:44  CRC=6DE2FE03]
+    ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h  [21-Oct-22 11:12  CRC=AE0CC97E]
+    ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
+
+Source signature=20360EAF
+Program memory checksum=0000
+Hex file CRC=3C98
+
+Units:
+    C:\Users\eelab\Documents\dspic30f4011\main (main)
+
+Compiler Settings:
+    Processor:      DSPIC30F4011
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: SIGNED: 8,16,32
+    Float,Double:   32,64
+    Compile Mode:   CCS5
+
+Output Files:
+    XREF file:   main.xsym
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.ccspjt
+    Call Tree:   main.tre
+    Statistics:  main.STA

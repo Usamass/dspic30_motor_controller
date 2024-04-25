@@ -1,0 +1,119 @@
+[PROJECT]
+Target=main.hex
+Processor_Text=DSPIC30F4011
+CCSVerions=5.112
+Compiler=PCD
+CCSVersion=5.112
+[Target Data]
+FileList=main.c
+[Directories]
+Include=
+[C:\Users\eelab\Documents\dspic30f4011\main]
+Type=4
+[mru-list]
+1=main.c
+
+[fileformats]
+forcecoff=0
+
+[ProjectLog]
+Days=2
+D1=24-04-2024
+D1_L=27
+D1_L1=[38590]Project Opened.
+D1_L2=[38698]Started Editing.
+D1_L3=[40373]Stopped Editing.
+D1_L4=[41393]Started Editing.
+D1_L5=[41693]Stopped Editing.
+D1_L6=[42220]Started Editing.
+D1_L7=[42905]Stopped Editing.
+D1_L8=[43127]Started Editing.
+D1_L9=[43826]Stopped Editing.
+D1_L10=[43940]Started Editing.
+D1_L11=[44386]Stopped Editing.
+TotalEdit=129
+TotalDebug=0
+D1_E=41
+D1_D=0
+D1_L12=[44542]Project Closed.
+D1_L13=[44542]Project Opened.
+D1_L14=[44547]Project Closed.
+D1_L15=[44547]Project Opened.
+D1_L16=[45522]Started Editing.
+D1_L17=[45631]Stopped Editing.
+D1_L18=[45631]Project Closed.
+D1_L19=[51535]Project Opened.
+D1_L20=[51546]Started Editing.
+D1_L21=[51848]Stopped Editing.
+D1_L22=[56672]Started Editing.
+D1_L23=[57157]Stopped Editing.
+D1_L24=[58041]Started Editing.
+D1_L25=[58342]Stopped Editing.
+D1_L26=[58666]Started Editing.
+D1_L27=[59131]Stopped Editing.
+D2=25-04-2024
+D2_L=45
+D2_L1=[37411]Started Editing.
+D2_L2=[38603]Stopped Editing.
+D2_L3=[40600]Started Editing.
+D2_L4=[43004]Stopped Editing.
+D2_E=88
+D2_D=0
+D2_L5=[43005]Project Closed.
+D2_L6=[43481]Project Opened.
+D2_L7=[43488]Started Editing.
+D2_L8=[44134]Stopped Editing.
+D2_L9=[44170]Started Editing.
+D2_L10=[44614]Stopped Editing.
+D2_L11=[44880]Project Closed.
+D2_L12=[45484]Project Opened.
+D2_L13=[45685]Started Editing.
+D2_L14=[45986]Stopped Editing.
+D2_L15=[46175]Started Editing.
+D2_L16=[46510]Stopped Editing.
+D2_L17=[47001]Started Editing.
+D2_L18=[47006]Stopped Editing.
+D2_L19=[47006]Project Closed.
+D2_L20=[52832]Project Opened.
+D2_L21=[52840]Started Editing.
+D2_L22=[52998]Stopped Editing.
+D2_L23=[52998]Project Closed.
+D2_L24=[53435]Project Opened.
+D2_L25=[53505]Started Editing.
+D2_L26=[53683]Stopped Editing.
+D2_L27=[53683]Project Closed.
+D2_L28=[55666]Project Opened.
+D2_L29=[55811]Started Editing.
+D2_L30=[56440]Stopped Editing.
+D2_L31=[56440]Project Closed.
+D2_L32=[56445]Project Opened.
+D2_L33=[56449]Started Editing.
+D2_L34=[57569]Stopped Editing.
+D2_L35=[57606]Started Editing.
+D2_L36=[57908]Stopped Editing.
+D2_L37=[57939]Started Editing.
+D2_L38=[58384]Stopped Editing.
+D2_L39=[58809]Started Editing.
+D2_L40=[59238]Stopped Editing.
+D2_L41=[59239]Started Editing.
+D2_L42=[59546]Stopped Editing.
+D2_L43=[59807]Started Editing.
+D2_L44=[60158]Stopped Editing.
+D2_L45=[60235]Started Editing.
+
+[Opened Files]
+1=main.c
+t1=221
+Count=1
+2=main.h
+t2=1
+3=..\motor_controller\20242422 1721 dspic202_timer1.c
+t3=1
+[main.c]
+Type=4
+
+[defines]
+buildcount=132
+[Units]
+Count=1
+1=main (main)

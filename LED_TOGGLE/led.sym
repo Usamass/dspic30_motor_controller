@@ -1,0 +1,62 @@
+W0      @SCRATCH
+W0L     _RETURN_
+W0 -W1  @DIV3232B.P1
+W0 -W1  @READ_ROM_MEMORY.P2
+W0      @delay_ms1.P3
+W0      @delay_ms2.P4
+W0      @delay_us1.P5
+W0      @delay_us2.P6
+W1      @SCRATCH
+W1      @READ_PACKED_MEMORY.P1
+W1      @WRITE_PACKED_MEMORY.P2
+W2 -W3  @DIV3232B.P1
+W2      @WRITE_PACKED_MEMORY.P2
+W2      @READ_ROM_MEMORY.P3
+W2      @READ_PACKED_MEMORY.P4
+W3      @WRITE_PACKED_MEMORY.P1
+W3      @READ_PACKED_MEMORY.P2
+W3      @READ_ROM_MEMORY.P3
+630.6   C1OUT
+630.7   C2OUT
+2780-27FF _STACK_
+
+ROM Allocation:
+000200  @cinit1
+000200  main
+00020E  @cinit2
+
+Project Directory:
+    C:\Users\eelab\Documents\dspic30f4011\LED_TOGGLE\
+
+Project Files:
+    led.c                                                   [24-Apr-24 12:46  CRC=D872A938]
+    led.h                                                   [24-Apr-24 12:44  CRC=6F516549]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\24FJ128GA006.h [21-Oct-22 11:11  CRC=52D2916D]
+
+Source signature=ED69315B
+Program memory checksum=0000
+Hex file CRC=6CF4
+
+Units:
+    C:\Users\eelab\Documents\dspic30f4011\LED_TOGGLE\led (main)
+
+Compiler Settings:
+    Processor:      PIC24FJ128GA006
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: SIGNED: 8,16,32
+    Float,Double:   32,64
+    Compile Mode:   CCS5
+
+Output Files:
+    XREF file:   led.xsym
+    Errors:      led.err
+    Ext Symbols: led.esym
+    INHX8:       led.hex
+    Symbols:     led.sym
+    List:        led.lst
+    Debug/COFF:  led.cof
+    Project:     led.ccspjt
+    Call Tree:   led.tre
+    Statistics:  led.STA

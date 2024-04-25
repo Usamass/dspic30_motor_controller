@@ -1,0 +1,71 @@
+CCS PCD C Compiler, Version 5.112, 5967               24-Apr-24 12:46
+
+               Filename:   C:\Users\eelab\Documents\dspic30f4011\LED_TOGGLE\led.lst
+
+               ROM used:   532 bytes (1%)
+                           Largest free fragment is 65004
+               RAM used:   129 (2%) at main() level
+                           129 (2%) worst case
+               Stack used: 0 locations
+               Stack size: 128
+
+*
+00000:  GOTO    200
+.................... #include <led.h>
+.................... #include <24FJ128GA006.h>
+.................... //////////// Standard Header file for the PIC24FJ128GA006 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC24FJ128GA006
+.................... 
+.................... #list
+.................... 
+.................... #device ICSP=1
+.................... #use delay(internal=8000000)
+.................... 
+.................... #FUSES NOWDT                 	//No Watch Dog Timer
+.................... #FUSES CKSFSM                	//Clock Switching is enabled, fail Safe clock monitor is enabled
+.................... 
+.................... 
+.................... #use FIXED_IO( B_outputs=PIN_B5 )
+.................... 
+.................... 
+.................... 
+.................... #use delay (clock=8MHz)
+.................... 
+.................... 
+.................... void main()
+*
+00200:  MOV     #2780,W15
+00202:  MOV     #27FF,W0
+00204:  MOV     W0,20
+00206:  NOP     
+00208:  BSET.B  81.7
+0020A:  CLR     744
+0020C:  SETM    32C
+.................... {
+....................    
+.................... 
+.................... 
+.................... 
+....................    while(TRUE)
+....................    {
+0020E:  GOTO    20E
+....................       //TODO: User Code
+....................    }
+.................... 
+.................... }
+00212:  PWRSAV  #0
+
+Configuration Fuses:
+   Word  1L: 3F7F   WPOSTS16 WDT128 WINDIS NOWDT ICSP2 NODEBUG NOWRT NOPROTECT NOJTAG
+          H: 0000  
+   Word  2L: 8703   NOPR OSCIO CKSFSM FRC_PS IESO
+          H: 0000  
