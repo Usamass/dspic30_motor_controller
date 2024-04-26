@@ -11,6 +11,7 @@
 #FUSES PWMPIN   
 
 #include <math.h>
+#include <stdio.h>
 
 
 #define P1TCON 0x01C0
@@ -68,8 +69,7 @@ unsigned int16 sine_index,phase_angle[3] = {0 , 0 , 0};
 double theeta;
 
 const unsigned max_freq = 250; //Hz
-//!const double per_clock_tick = 0.006405; //ms
-const double per_clock_tick = 0.007996; //ms
+const double per_clock_tick = 0.006405; //ms
 unsigned int16 timer_table[max_freq+1];
 
 unsigned int16 gain_table[256];
@@ -159,7 +159,7 @@ void  timer1_isr(void)
    
 void main()
 { 
- 
+   printf("%d" , 100);
    freq = 1;
    
    initMCPWM();

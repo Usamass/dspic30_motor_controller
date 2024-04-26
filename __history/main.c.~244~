@@ -68,14 +68,13 @@ unsigned int16 sine_index,phase_angle[3] = {0 , 0 , 0};
 double theeta;
 
 const unsigned max_freq = 250; //Hz
-//!const double per_clock_tick = 0.006405; //ms
 const double per_clock_tick = 0.007996; //ms
 unsigned int16 timer_table[max_freq+1];
 
 unsigned int16 gain_table[256];
 unsigned int16 raw_adc =0 ;
 signed int16 throttle_level = 0;
-unsigned int16 freq = 1;
+unsigned int16 freq = 1;   
 unsigned int16 temp = 0;
 
 int1 tick = 0;

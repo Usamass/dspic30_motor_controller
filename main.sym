@@ -93,35 +93,35 @@ ROM Allocation:
 000100  PWM1_isr
 000150  @MULS3232
 000192  timer1_isr
-000390  initMCPWM
-0003EA  @I64TOF64
-000454  @MULFF64
-000564  @DIVFF64
-00066C  @ADDFF64
-00085A  @FLT64
-0008DE  @F64TOI64
-00093C  cos
-000BE4  sin
-000C20  @F64TOSI64
-000C7E  fill_sine_table
-000D46  @SI64TOF64
-000DB0  timer_reload
-000E80  voltage_gain
-000F48  @cinit1
-000F48  MAIN
-000F72  @cinit2
+000398  initMCPWM
+0003F2  @I64TOF64
+00045C  @MULFF64
+00056C  @DIVFF64
+000674  @ADDFF64
+000862  @FLT64
+0008E6  @F64TOI64
+000944  cos
+000BEC  sin
+000C28  @F64TOSI64
+000C86  fill_sine_table
+000D4E  @SI64TOF64
+000DB8  timer_reload
+000E88  voltage_gain
+000F50  @cinit1
+000F50  MAIN
+000F7A  @cinit2
 
 Project Directory:
     C:\Users\eelab\Documents\dspic30f4011\
 
 Project Files:
-    main.c                                                  [25-Apr-24 16:44  CRC=6DE2FE03]
+    main.c                                                  [26-Apr-24 12:25  CRC=7780302E]
     ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h  [21-Oct-22 11:12  CRC=AE0CC97E]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
 
-Source signature=20360EAF
+Source signature=29D340DA
 Program memory checksum=0000
-Hex file CRC=3C98
+Hex file CRC=ABC0
 
 Units:
     C:\Users\eelab\Documents\dspic30f4011\main (main)
@@ -129,7 +129,7 @@ Units:
 Compiler Settings:
     Processor:      DSPIC30F4011
     Pointer Size:   16
-    ADC Range:      0-65535
+    ADC Range:      0-1023
     Opt Level:      9
     Short,Int,Long: SIGNED: 8,16,32
     Float,Double:   32,64

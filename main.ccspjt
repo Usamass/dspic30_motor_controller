@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=2
+Days=3
 D1=24-04-2024
 D1_L=27
 D1_L1=[38590]Project Opened.
@@ -31,7 +31,7 @@ D1_L8=[43127]Started Editing.
 D1_L9=[43826]Stopped Editing.
 D1_L10=[43940]Started Editing.
 D1_L11=[44386]Stopped Editing.
-TotalEdit=129
+TotalEdit=150
 TotalDebug=0
 D1_E=41
 D1_D=0
@@ -52,12 +52,12 @@ D1_L25=[58342]Stopped Editing.
 D1_L26=[58666]Started Editing.
 D1_L27=[59131]Stopped Editing.
 D2=25-04-2024
-D2_L=45
+D2_L=47
 D2_L1=[37411]Started Editing.
 D2_L2=[38603]Stopped Editing.
 D2_L3=[40600]Started Editing.
 D2_L4=[43004]Stopped Editing.
-D2_E=88
+D2_E=109
 D2_D=0
 D2_L5=[43005]Project Closed.
 D2_L6=[43481]Project Opened.
@@ -100,10 +100,31 @@ D2_L42=[59546]Stopped Editing.
 D2_L43=[59807]Started Editing.
 D2_L44=[60158]Stopped Editing.
 D2_L45=[60235]Started Editing.
+D2_L46=[60584]Stopped Editing.
+D2_L47=[60717]Project Closed.
+D3=26-04-2024
+D3_L=17
+D3_L1=[33266]Project Opened.
+D3_L2=[33635]Started Editing.
+D3_L3=[35547]Stopped Editing.
+D3_L4=[35657]Started Editing.
+D3_L5=[36471]Stopped Editing.
+D3_L6=[37752]Started Editing.
+D3_L7=[38215]Stopped Editing.
+D3_L8=[38252]Started Editing.
+D3_L9=[38564]Stopped Editing.
+D3_L10=[39350]Started Editing.
+D3_L11=[39650]Stopped Editing.
+D3_L12=[40007]Started Editing.
+D3_L13=[40311]Stopped Editing.
+D3_L14=[42498]Started Editing.
+D3_L15=[43009]Stopped Editing.
+D3_L16=[44658]Started Editing.
+D3_L17=[45051]Stopped Editing.
 
 [Opened Files]
 1=main.c
-t1=221
+t1=49
 Count=1
 2=main.h
 t2=1
@@ -113,7 +134,7 @@ t3=1
 Type=4
 
 [defines]
-buildcount=132
+buildcount=182
 [Units]
 Count=1
 1=main (main)
