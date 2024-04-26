@@ -94,34 +94,34 @@ ROM Allocation:
 000150  @MULS3232
 000192  timer1_isr
 000398  initMCPWM
-0003F2  @I64TOF64
-00045C  @MULFF64
-00056C  @DIVFF64
-000674  @ADDFF64
-000862  @FLT64
-0008E6  @F64TOI64
-000944  cos
-000BEC  sin
-000C28  @F64TOSI64
-000C86  fill_sine_table
-000D4E  @SI64TOF64
-000DB8  timer_reload
-000E88  voltage_gain
-000F50  @cinit1
-000F50  MAIN
-000F7A  @cinit2
+0003F0  @I64TOF64
+00045A  @MULFF64
+00056A  @DIVFF64
+000672  @ADDFF64
+000860  @FLT64
+0008E4  @F64TOI64
+000942  cos
+000BEA  sin
+000C26  @F64TOSI64
+000C84  fill_sine_table
+000D4C  @SI64TOF64
+000DB6  timer_reload
+000E86  voltage_gain
+000F4E  @cinit1
+000F4E  MAIN
+000F78  @cinit2
 
 Project Directory:
     C:\Users\eelab\Documents\dspic30f4011\
 
 Project Files:
-    main.c                                                  [26-Apr-24 12:25  CRC=7780302E]
+    main.c                                                  [26-Apr-24 17:19  CRC=CB28998F]
     ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h  [21-Oct-22 11:12  CRC=AE0CC97E]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
 
-Source signature=29D340DA
+Source signature=7D7BAA3B
 Program memory checksum=0000
-Hex file CRC=ABC0
+Hex file CRC=4429
 
 Units:
     C:\Users\eelab\Documents\dspic30f4011\main (main)

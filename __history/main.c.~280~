@@ -1,11 +1,10 @@
 #include <30F4011.h>
-#DEVICE ADC=10
 #device ICSP=1
 #use delay(clock=64000000,crystal=8000000)
 
 #FUSES NOWDT                    //No Watch Dog Timer
 #FUSES CKSFSM                   //Clock Switching is enabled, fail Safe clock monitor is enabled
-#FUSES BORV42                   //Brownout reset at 4.5V
+#FUSES BORV45                   //Brownout reset at 4.5V
 #FUSES WRT                      //Program Memory Write Protected
 #FUSES PROTECT                  //Code protected from reads
 #include <math.h>
@@ -56,7 +55,7 @@ void timer_reload(void);
 void voltage_gain(void); 
 
 
-unsigned int16 duty[3]={voltage_offset,voltage_offset,voltage_offset},sample=0;
+unsigned int16 duty[3]={0,0,0},sample=0;
 signed int16 peak_voltage =0;//  1184; 
 signed int32 reference[3] = {0,0,0};
 
@@ -220,13 +219,17 @@ void main()
 
 
 void initMCPWM(void) 
-{    
+{   
+   
+   
    *(P1TCON+1)=0x80;  *P1TCON=0x02;
+ //  *(P1TMR+1)=0x00;  *P1TMR=0x78;
    *(P1TPER+1)=0x03;  *P1TPER=0xE7;  
+//!   *(P1TPER+1)=0x00;  *P1TPER=0xFA;
    *(P1SECMP+1)=0x00;  *P1SECMP=0x01; //
    *(PWM1CON1+1)=0x00;  *PWM1CON1=0x77;  
    *(PWM1CON2+1)=0x00;  *PWM1CON2=0x02;
-   *(P1DTCON1+1)=0x00;  *P1DTCON1=0x10; //0x09
+   *(P1DTCON1+1)=0x00;  *P1DTCON1=0x09; //0x09
    *(P1DTCON2+1)=0x00;  *P1DTCON2=0x00;
    *(P1FLTACON+1)=0x00;  *P1FLTACON=0x00; //0x0000
    *(P1OVDCON+1)=0x3F;  *P1OVDCON=0x0F;
@@ -234,7 +237,41 @@ void initMCPWM(void)
    *(P1DC2+1) = duty[1]>>8;   *P1DC2 = duty[1];
    *(P1DC3+1) = duty[2]>>8;   *P1DC3 = duty[2];  
    *(IPC14+1) =0x00;*(IPC14) =0x70;
-  }
+  
+   
+//!       *(P1TCON + 1) = 0b10000000;     //Upper Byte: 0x80 - Turn ON PWM Time Base
+//!    *P1TCON = 0b00000010;           //Lower Byte: 0x02 - PWM time base operates in a continuous up/down counting mode
+//!
+//!    // *(P1TMR + 1) = 0b00000000;   //Upper Byte: 0x00 - PWM time base is counting up
+//!    // *P1TMR = 0b01111000;         //Lower Byte: 0x78 - PWM Timebase Register Count Value
+//!
+//!    *(P1TPER + 1) = 0x03 ;//0b00000000;     //Upper Byte: 0x00 - PWM Time Base Period Value bits 9-14
+//!    *P1TPER = 0xE7; //0b11111111;           //Lower Byte: 0xFA - PWM Time Base Period Value bits 0-8
+//!
+//!    *(P1SECMP + 1) = 0b00000000;    //Upper Byte: 0x00 - bit.15: A special event trigger will occur when the PWM time base is counting upwards.
+//!    *P1SECMP = 0b00000001;          //Lower Byte: 0x01 - Special Event Compare Value bits 0-14
+//!
+//!    *(PWM1CON1 + 1) = 0b00000000;   //Upper Byte: 0x00 - PWM I/O pin pair is in the complementary output mode
+//!    *PWM1CON1 = 0b01110111;         //Lower Byte: 0x77 - Enable PWM output for PWMxL & PWMxH (@ x = [1 2 3])
+//!
+//!    *(PWM1CON2 + 1) = 0b00000000;   //Upper Byte: 0x00 - PWM Special Event Trigger Output Postscale is 1:1
+//!    *PWM1CON2 = 0b00000010;         //Lower Byte: 0x02 - Updates to the active PDC registers are synchronized to the PWM time base
+//!                                    //                 - Output overrides via the OVDCON register are synchronized to the PWM time base
+//!                                    //                 - Updates from duty cycle and period buffer registers are enabled
+//!
+//!    *(P1DTCON1 + 1) = 0b00000000;   //Upper Byte: 0x00 - Clock period for Dead Time Unit B is TCY
+//!    *P1DTCON1 = 0b00001001;         //Lower Byte: 0x09 - Clock period for Dead Time Unit A is TCY
+//!                                    //                 - Unsigned 6-bit Dead Time Value bits for Dead Time Unit A: 9
+//!
+//!    *(P1DTCON2 + 1) = 0b00000000;   //Upper Byte: 0x00 - <Unimplemented>
+//!    *P1DTCON2 = 0b00000000;         //Lower Byte: 0x00 - All Dead time is provided from Unit A
+//!
+//!    *(P1FLTACON + 1) = 0b00000000;  //Upper Byte: 0x00 - The PWM output pin is driven INACTIVE on an external fault input event
+//!    *P1FLTACON = 0b00000000;        //Lower Byte: 0x00 - PWMxH/PWMxL pin pair is not controlled by Fault Input A
+//!
+//!    *(P1OVDCON + 1) = 0b00111111;   //Upper Byte: 0x3F - Output on PWMxx I/O pin is controlled by the PWM generator
+//!    *P1OVDCON = 0b00111111;         //Lower Byte: 0x0F - PWMxx I/O pin is driven ACTIVE when the corresponding POVDxx bit is cleared
+}
 
 
    

@@ -1,13 +1,15 @@
 #include <30F4011.h>
-#DEVICE ADC=10
+#device ADC=10
 #device ICSP=1
-#use delay(clock=64000000,crystal=8000000)
+#use delay(clock=64000000,crystal=8000000)  
+
+//!#use delay(clock=40000000, Aux: crystal=8000000)
 
 #FUSES NOWDT                    //No Watch Dog Timer
 #FUSES CKSFSM                   //Clock Switching is enabled, fail Safe clock monitor is enabled
-#FUSES BORV42                   //Brownout reset at 4.5V
-#FUSES WRT                      //Program Memory Write Protected
-#FUSES PROTECT                  //Code protected from reads
+#FUSES LPOL_LOW                 //Low-Side Transistors Polarity is Active-Low (PWM 0,2,4 and 6)
+#FUSES PWMPIN   
+
 #include <math.h>
 
 
@@ -56,7 +58,7 @@ void timer_reload(void);
 void voltage_gain(void); 
 
 
-unsigned int16 duty[3]={voltage_offset,voltage_offset,voltage_offset},sample=0;
+unsigned int16 duty[3]={0,0,0},sample=0;
 signed int16 peak_voltage =0;//  1184; 
 signed int32 reference[3] = {0,0,0};
 
@@ -220,21 +222,23 @@ void main()
 
 
 void initMCPWM(void) 
-{    
+{   
    *(P1TCON+1)=0x80;  *P1TCON=0x02;
+ //  *(P1TMR+1)=0x00;  *P1TMR=0x78;
    *(P1TPER+1)=0x03;  *P1TPER=0xE7;  
+//!   *(P1TPER+1)=0x00;  *P1TPER=0xFA;
    *(P1SECMP+1)=0x00;  *P1SECMP=0x01; //
-   *(PWM1CON1+1)=0x00;  *PWM1CON1=0x77;  
-   *(PWM1CON2+1)=0x00;  *PWM1CON2=0x02;
-   *(P1DTCON1+1)=0x00;  *P1DTCON1=0x10; //0x09
-   *(P1DTCON2+1)=0x00;  *P1DTCON2=0x00;
+   *(PWM1CON1+1)=0x00;  *PWM1CON1=0x77;
+   *(PWM1CON2+1)=0x0F;  *PWM1CON2=0x02;
+   *(P1DTCON1+1)=0x00;  *P1DTCON1=0x09; //0x09
+   *(P1DTCON2+1)=0x00;  *P1DTCON2=0x08;
    *(P1FLTACON+1)=0x00;  *P1FLTACON=0x00; //0x0000
-   *(P1OVDCON+1)=0x3F;  *P1OVDCON=0x0F;
+   *(P1OVDCON+1)=0x7F;  *P1OVDCON=0x7F;
    *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0]; 
    *(P1DC2+1) = duty[1]>>8;   *P1DC2 = duty[1];
    *(P1DC3+1) = duty[2]>>8;   *P1DC3 = duty[2];  
    *(IPC14+1) =0x00;*(IPC14) =0x70;
-  }
+}
 
 
    
