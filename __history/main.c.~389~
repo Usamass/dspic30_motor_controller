@@ -5,8 +5,8 @@
 #use rs232(UART2, baud=9600, stream=UART_PORT2)
 
 #FUSES NOWDT                    //No Watch Dog Timer
-#FUSES CKSFSM                   //Clock Switching is enabled, fail Safe clock monitor is enabled
-#FUSES BORV42                   //Brownout reset at 4.5V
+//#FUSES CKSFSM                   //Clock Switching is enabled, fail Safe clock monitor is enabled
+#FUSES BORV27                   //Brownout reset at 4.5V
 #FUSES WRT                      //Program Memory Write Protected
 #FUSES PROTECT                  //Code protected from reads
 #include <math.h>
@@ -110,8 +110,8 @@ void  PWM1_isr(void)
 #INT_TIMER1
 void  timer1_isr(void) 
 {
-    
    output_bit(TIM_tick_pin , 1);
+   setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64, timer_table[freq]); 
 //!   delay_us(10);
 //!   output_bit(TIM_tick_pin , 0); 
 //!   
@@ -151,9 +151,7 @@ void  timer1_isr(void)
    *P1DC2 = reference[1];  *(P1DC2+1) = reference[1]>>8;
    *P1DC3 = reference[2];  *(P1DC3+1) = reference[2]>>8;
    
-   setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64, timer_table[freq]);
-   
-   
+
   
 //!   if(sample < 15)
 //!   {
@@ -222,12 +220,12 @@ void main()
          {
             throttle_level = 0;
          }                                      
-         freq = throttle_level +8; 
+         freq = throttle_level; 
          if (freq > max_freq) {
             freq = max_freq;
          }
-  //       peak_voltage = gain_table[throttle_level];
-         peak_voltage = gain_table[55];  
+         peak_voltage = gain_table[throttle_level];
+           
              
         
          output_bit(PWM_tick_pin , 0);
@@ -236,9 +234,14 @@ void main()
       
       if (uart_tick) 
       {
-         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
-         printf(Serial_OutputBuffer);
-         
+//!         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
+//!         printf(Serial_OutputBuffer);
+      for (int sample = 1 ; sample <= max_freq ; sample++) 
+      {
+         printf("table[%d]: %d\r\n" , sample , timer_table[sample]);    
+      }
+      uart_tick = 0;
+      
       
       }
     } 

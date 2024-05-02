@@ -2,7 +2,6 @@
 #DEVICE ADC=10
 #device ICSP=1
 #use delay(clock=64000000,crystal=8000000)
-#use rs232(UART2, baud=9600, stream=UART_PORT2)
 
 #FUSES NOWDT                    //No Watch Dog Timer
 #FUSES CKSFSM                   //Clock Switching is enabled, fail Safe clock monitor is enabled
@@ -52,6 +51,7 @@
   
   
 void initMCPWM(void);
+void initUART(void);
 void fill_sine_table(void);  
 void timer_reload(void);
 void voltage_gain(void); 
@@ -79,11 +79,8 @@ unsigned int16 freq = 1;
 unsigned int16 temp = 0;
 
 int1 tick = 0;
-int1 uart_tick = 0;
 int8 tick_count = 0;
 unsigned long millis_count = 0;
-
-char Serial_OutputBuffer[60];
 
 
 #int_PWM1
@@ -93,24 +90,21 @@ void  PWM1_isr(void)
    tick_count++;
    if(tick_count >= 8)
    {   
-//!      output_bit(PWM_tick_pin , 1);
+      output_bit(PWM_tick_pin , 1);
       millis_count++;
       tick = 1;
       tick_count=0;
    
    }
    if (millis_count >= 500) {
-//!      output_toggle(LED_PIN);
-      uart_tick = 1;
+      output_toggle(LED_PIN);
       millis_count = 0;
-      
    }
 
 }
 #INT_TIMER1
 void  timer1_isr(void) 
 {
-    
    output_bit(TIM_tick_pin , 1);
 //!   delay_us(10);
 //!   output_bit(TIM_tick_pin , 0); 
@@ -150,10 +144,6 @@ void  timer1_isr(void)
    *P1DC1 = reference[0];  *(P1DC1+1) = reference[0]>>8;
    *P1DC2 = reference[1];  *(P1DC2+1) = reference[1]>>8;
    *P1DC3 = reference[2];  *(P1DC3+1) = reference[2]>>8;
-   
-   setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64, timer_table[freq]);
-   
-   
   
 //!   if(sample < 15)
 //!   {
@@ -169,8 +159,6 @@ void  timer1_isr(void)
    
 void main()
 { 
-    sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
-    printf(Serial_OutputBuffer);
  
    freq = 1;
    
@@ -205,7 +193,6 @@ void main()
     
    while(TRUE)         
    {
-      
       if (tick) {
          raw_adc = read_adc();
          if (raw_adc > 1023) 
@@ -222,27 +209,16 @@ void main()
          {
             throttle_level = 0;
          }                                      
-         freq = throttle_level +8; 
-         if (freq > max_freq) {
-            freq = max_freq;
-         }
-  //       peak_voltage = gain_table[throttle_level];
-         peak_voltage = gain_table[55];  
+         freq = throttle_level - 5 ;   
+         peak_voltage = gain_table[throttle_level];
+         setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64, timer_table[freq]);   
              
         
          output_bit(PWM_tick_pin , 0);
          tick = 0;      
-      } 
-      
-      if (uart_tick) 
-      {
-         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
-         printf(Serial_OutputBuffer);
-         
-      
-      }
+      }     
     } 
-}    
+}
 
 
 void initMCPWM(void) 
@@ -284,8 +260,6 @@ void timer_reload(void)
       timer_table[sample] = (intr_per_sample/per_clock_tick) - 100;     
    }
    timer_table[0] = timer_table[1];
-   
-   
 }
 
 void voltage_gain(void) 
@@ -310,5 +284,28 @@ void voltage_gain(void)
 }
 
 
+void initUART(void) 
+{
+   U1MODE.STSEL = 0; // 1-Stop bit
+   U1MODE.PDSEL = 0; // No Parity, 8-Data bits
+   U1MODE.ABAUD = 0; // Auto-Baud disabled
+   U1MODE.BRGH = 0; // Standard-Speed mode
+   U1BRG = BRGVAL; // Baud Rate setting for 9600
+   U1STA.UTXISEL0 = 0; // Interrupt after one TX character is transmitted
+   U1STA.UTXISEL1 = 0;
+   IEC0.U1TXIE = 1; // Enable UART TX interrupt
+   IEC0.U1RXIE = 1; // Enable UART RX interrupt
+   U1STA.URXISEL = 0; // Interrupt after one RX character is received;
+   U1MODE.UARTEN = 1; // Enable UART
+   U1STA.UTXEN = 1; // Enable UART TX
+//!   /* Wait at least 105 microseconds (1/9600) before sending first char */
+   delay_us(105);
+   RPINR18.U1RXR=11;
+   RPOR5=0x0003;
+   
+
+
+
+}
 
 

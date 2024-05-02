@@ -222,7 +222,7 @@ void main()
          {
             throttle_level = 0;
          }                                      
-         freq = throttle_level +8; 
+         freq = throttle_level; 
          if (freq > max_freq) {
             freq = max_freq;
          }

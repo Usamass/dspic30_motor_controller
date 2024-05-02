@@ -1,56 +1,59 @@
 W0      @SCRATCH
 W0L     _RETURN_
-W0      @delay_ms1.P1
-W0 -W1  @READ_ROM_MEMORY.P2
-W0 -W3  @FLT64.P3
-W0 -W2  @F48TOSI64.P4
-W0 -W1  @DIV3232B.P5
-W0 -W2  @MULFF48.P6
-W0 -W1  @MULFF.P7
-W0 -W3  @DIVFF64.P8
-W0      @delay_us1.P9
-W0 -W3  @F64TOSI64.P10
-W0 -W3  @SI64TOF48.P11
-W0 -W1  @DIVFF.P12
-W0 -W3  @ADDFF64.P13
-W0 -W3  @I64TOF48.P14
-W0 -W2  @DIVFF48.P15
-W0 -W3  @MULFF64.P16
-W0 -W1  @FLT.P17
-W0 -W2  @FLT48.P18
-W0 -W1  @SFTOI.P19
-W0      @ITOF.P20
-W0 -W1  @ADDFF.P21
-W0 -W3  @I64TOF64.P22
-W0      @SITOF.P23
-W0 -W3  @F64TOI64.P24
-W0 -W2  @ADDFF48.P25
-W0 -W3  @SI64TOF64.P26
-W0 -W2  @F48TO64.P27
-W0 -W1  @MULS3232.P28
+W0 -W2  @F48TOSI64.P1
+W0 -W3  @I64TOF48.P2
+W0 -W1  @READ_ROM_MEMORY.P3
+W0 -W2  @MULFF48.P4
+W0      @delay_us1.P5
+W0 -W1  @DIV3232B.P6
+W0 -W3  @F64TOSI64.P7
+W0 -W1  @DIVFF.P8
+W0 -W3  @ADDFF64.P9
+W0L     @SPRINTF.P10
+W0 -W1  @MULFF.P11
+W0      @PRINTFD16_1289.P12
+W0 -W1  @FLT.P13
+W0 -W2  @DIVFF48.P14
+W0 -W3  @FLT64.P15
+W0 -W1  @SFTOI.P16
+W0 -W3  @F64TOI64.P17
+W0      @ITOF.P18
+W0 -W3  @I64TOF64.P19
+W0 -W3  @DIVFF64.P20
+W0 -W3  @MULFF64.P21
+W0 -W1  @ADDFF.P22
+W0 -W2  @ADDFF48.P23
+W0 -W3  @SI64TOF64.P24
+W0 -W3  @SI64TOF48.P25
+W0 -W2  @FLT48.P26
+W0      @delay_ms1.P27
+W0 -W2  @F48TO64.P28
+W0      @SITOF.P29
+W0 -W1  @MULS3232.P30
 W1      @SCRATCH
-W1      @WRITE_PACKED_MEMORY.P1
-W1      @READ_PACKED_MEMORY.P2
+W1      @READ_PACKED_MEMORY.P1
+W1      @WRITE_PACKED_MEMORY.P2
 W2 -W3  @DIVFF.P1
-W2 -W3  @MULS3232.P2
-W2      @READ_ROM_MEMORY.P3
-W2 -W3  @FLT.P4
-W2 -W3  @DIV3232B.P5
-W2      @WRITE_PACKED_MEMORY.P6
-W2 -W3  @ADDFF.P7
-W2      @READ_PACKED_MEMORY.P8
-W2 -W3  @MULFF.P9
-W3 -W5  @FLT48.P1
+W2      @READ_ROM_MEMORY.P2
+W2      @READ_PACKED_MEMORY.P3
+W2 -W3  @MULFF.P4
+W2      @WRITE_PACKED_MEMORY.P5
+W2 -W3  @ADDFF.P6
+W2 -W3  @FLT.P7
+W2 -W3  @DIV3232B.P8
+W2 -W3  @MULS3232.P9
+W3      @WRITE_PACKED_MEMORY.P1
 W3      @READ_PACKED_MEMORY.P2
-W3      @WRITE_PACKED_MEMORY.P3
-W3 -W5  @ADDFF48.P4
-W3 -W5  @DIVFF48.P5
-W3 -W5  @MULFF48.P6
-W3      @READ_ROM_MEMORY.P7
-W4 -W7  @MULFF64.P1
-W4 -W7  @FLT64.P2
-W4 -W7  @ADDFF64.P3
-W4 -W7  @DIVFF64.P4
+W3 -W5  @MULFF48.P3
+W3 -W5  @DIVFF48.P4
+W3      @READ_ROM_MEMORY.P5
+W3 -W5  @ADDFF48.P6
+W3 -W5  @FLT48.P7
+W4      @PRINTFD16_1289.P1
+W4 -W7  @ADDFF64.P2
+W4 -W7  @MULFF64.P3
+W4 -W7  @FLT64.P4
+W4 -W7  @DIVFF64.P5
 800-827 pas_64
 828-84F qas_64
 850-87F pat_64
@@ -70,58 +73,64 @@ D0A-D0B throttle_level
 D0C-D0D freq
 D0E-D0F temp
 D10.0   tick
+D10.1   uart_tick
 D11     tick_count
 D12-D15 millis_count
-D16-D1D timer_reload.intr_per_sample
-D16-D17 voltage_gain.i
-D18-D19 voltage_gain.i
-D1A-D21 sin.x
-D1A-D1B voltage_gain.i
-D1E-D1F timer_reload.sample
-D2A-D31 cos.x
-D32     cos.quad
-D33     cos.i
-D34-D3B cos.y
-D3C-D43 cos.t
-D44-D4B cos.t2
-D4C-D53 cos.frac
-D54-D9B cos.p_64
-DDC-DDD timer1_isr.i
+D16-D51 Serial_OutputBuffer
+D52-D53 @sprintf_string
+D54-D5B timer_reload.intr_per_sample
+D54-D55 voltage_gain.i
+D56-D57 voltage_gain.i
+D58-D5F sin.x
+D58-D59 voltage_gain.i
+D5C-D5D timer_reload.sample
+D68-D6F cos.x
+D70     cos.quad
+D71     cos.i
+D72-D79 cos.y
+D7A-D81 cos.t
+D82-D89 cos.t2
+D8A-D91 cos.frac
+D92-DD9 cos.p_64
+E1A-E1B timer1_isr.i
 F80-FFF _STACK_
 
 ROM Allocation:
-000100  PWM1_isr
-000150  @MULS3232
-000192  timer1_isr
-000398  initMCPWM
-0003F0  @I64TOF64
-00045A  @MULFF64
-00056A  @DIVFF64
-000672  @ADDFF64
-000860  @FLT64
-0008E4  @F64TOI64
-000942  cos
-000BEA  sin
-000C26  @F64TOSI64
-000C84  fill_sine_table
-000D4C  @SI64TOF64
-000DB6  timer_reload
-000E86  voltage_gain
-000F4E  @cinit1
-000F4E  MAIN
-000F78  @cinit2
+000100  @const1287.call
+000128  PWM1_isr
+000172  @MULS3232
+0001B4  timer1_isr
+0003CC  @SPRINTF
+0003DA  initMCPWM
+000432  @I64TOF64
+00049C  @MULFF64
+0005AC  @DIVFF64
+0006B4  @ADDFF64
+0008A2  @FLT64
+000926  @F64TOI64
+000984  cos
+000C2C  sin
+000C68  @F64TOSI64
+000CC6  fill_sine_table
+000D8E  @SI64TOF64
+000DF8  timer_reload
+000EF2  voltage_gain
+000FBA  @PRINTFD16_1289
+0010EA  @cinit1
+0010EA  MAIN
+001124  @cinit2
 
 Project Directory:
     C:\Users\eelab\Documents\dspic30f4011\
 
 Project Files:
-    main.c                                                  [26-Apr-24 17:19  CRC=CB28998F]
+    main.c                                                  [30-Apr-24 17:31  CRC=F7EA54AA]
     ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h  [21-Oct-22 11:12  CRC=AE0CC97E]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
 
-Source signature=7D7BAA3B
+Source signature=AA3D6556
 Program memory checksum=0000
-Hex file CRC=4429
+Hex file CRC=D8E5
 
 Units:
     C:\Users\eelab\Documents\dspic30f4011\main (main)

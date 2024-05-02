@@ -1,0 +1,8 @@
+Compiling C:\Users\eelab\Documents\dspic30f4011\main on 30-Apr-24 at 17:43
+*** Error 12 "C:\Users\eelab\Documents\dspic30f4011\main.c" Line 154(17,29): Undefined identifier   TMR_INTERNAL
+*** Error 12 "C:\Users\eelab\Documents\dspic30f4011\main.c" Line 186(14,30): Undefined identifier   ADC_CLOCK_DIV_32
+*** Error 12 "C:\Users\eelab\Documents\dspic30f4011\main.c" Line 187(20,28): Undefined identifier   sAN0
+*** Error 12 "C:\Users\eelab\Documents\dspic30f4011\main.c" Line 191(17,29): Undefined identifier   TMR_INTERNAL
+*** Error 12 "C:\Users\eelab\Documents\dspic30f4011\main.c" Line 192(22,32): Undefined identifier   INT_TIMER1
+*** Error 12 "C:\Users\eelab\Documents\dspic30f4011\main.c" Line 194(22,30): Undefined identifier   INT_PWM1
+*** Error 12 "C:\Users\eelab\Documents\dspic30f4011\main.c" Line 195(22,33): Undefined identifier   INTR_GLOBAL

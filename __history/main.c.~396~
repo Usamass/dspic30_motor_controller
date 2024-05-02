@@ -222,12 +222,12 @@ void main()
          {
             throttle_level = 0;
          }                                      
-         freq = throttle_level +8; 
+         freq = throttle_level; 
          if (freq > max_freq) {
             freq = max_freq;
          }
-  //       peak_voltage = gain_table[throttle_level];
-         peak_voltage = gain_table[55];  
+         peak_voltage = gain_table[throttle_level];
+           
              
         
          output_bit(PWM_tick_pin , 0);
