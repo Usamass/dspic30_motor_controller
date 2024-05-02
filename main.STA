@@ -1,23 +1,23 @@
 
-ROM used:   4974/32768 (15%)
-            4974/32768 (15%) including unused fragments
+ROM used:   5186/32768 (16%)
+            5186/32768 (16%) including unused fragments
 
             1.5 Average locations per line
-            4.7 Average locations per statement
+            4.8 Average locations per statement
 
-RAM used:   1492/2048 (73%) at main() level
-            1699/2048 (83%) worst case
+RAM used:   1504/2048 (73%) at main() level
+            1711/2048 (84%) worst case
 
 Stack used: 96 worst case (46 in main + 50 for interrupts)
 Stack size: 128
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  315   135  13  main.c
+  344   155  14  main.c
   878     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
- 2228   925  87  ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
+ 2228   925  86  ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
 ----- -----
- 3421  1060 Total
+ 3450  1080 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -31,36 +31,36 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0    264   3   51             @DIVFF64
 0    680   7  114   1209  9.7  cos
 0     60   1    9     39  1.8  sin
-0     74   1    0    170  3.1  PWM1_isr
+0     78   1    0    193  3.1  PWM1_isr
 0    536   5    2   1747  8.8  timer1_isr
 0     66   1    1             @MULS3232
-0    644   6    0   1224  6.3  MAIN
-0     40   0    0             @const1287
+0    852   8    0   1928  9.3  MAIN
+0     40   0    0             @const1290
 0     14   0    0             @SPRINTF
-0    304   3    0    482  5.8  @PRINTFD16_1289
+0    304   3    0    482  5.8  @PRINTFD16_1292
 0     88   1    0   1224  3.9  initMCPWM
 0    200   2    0    175  4.2  fill_sine_table
-0    250   3   10    278  4.9  timer_reload
+0    250   2   10    278  4.9  timer_reload
 0    200   2    6    482  5.8  voltage_gain
  Inline         0             @cinit1
 
 Program metrics:
     Functions               10
-    Statements              1060
-    Comments                468
-    Volume (V)              10355
-    Difficulty (D)          54.3
-    Effort to implement (E) 562020
-    Time to implement (T)   8 hours, 40 minutes
+    Statements              1080
+    Comments                467
+    Volume (V)              11302
+    Difficulty (D)          57.3
+    Effort to implement (E) 648131
+    Time to implement (T)   10 hours, 0 minutes
     Est Delivered Bugs (B)  2
-    Cyclomatic Complexity   28
-    Maintainability (MI)    13
+    Cyclomatic Complexity   32
+    Maintainability (MI)    12
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-000FE   252  0  
-00100-07FFE  4718  27794  
+00100-07FFE  4930  27582  
 
 
 

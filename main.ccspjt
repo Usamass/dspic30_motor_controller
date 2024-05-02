@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=5
+Days=6
 D1=24-04-2024
 D1_L=27
 D1_L1=[38590]Project Opened.
@@ -213,10 +213,19 @@ D5_L19=[63070]Started Editing.
 D5_L20=[63390]Stopped Editing.
 D5_L21=[63680]Started Editing.
 D5_L22=[64132]Stopped Editing.
+D6=02-05-2024
+D6_L=7
+D6_L1=[57833]Started Editing.
+D6_L2=[58736]Stopped Editing.
+D6_L3=[59112]Project Opened.
+D6_L4=[59842]Project Closed.
+D6_L5=[60204]Project Opened.
+D6_L6=[60373]Started Editing.
+D6_L7=[60682]Stopped Editing.
 
 [Opened Files]
 1=main.c
-t1=202
+t1=121
 Count=2
 2=..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
 t2=1
@@ -226,7 +235,7 @@ t3=28
 Type=4
 
 [defines]
-buildcount=323
+buildcount=325
 [Units]
 Count=1
 1=main (main)

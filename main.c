@@ -49,6 +49,9 @@
 #define PWM_tick_pin PIN_B2
 #define TIM_tick_pin PIN_B3
 
+#define kalman_up 14
+#define kalman_diff_down 7
+
   
   
 void initMCPWM(void);
@@ -85,6 +88,8 @@ unsigned long millis_count = 0;
 
 char Serial_OutputBuffer[60];
 
+signed int32 kalman_big_1=0, kalman_big_2=0, kalman_diff=0;
+
 
 #int_PWM1
 void  PWM1_isr(void) 
@@ -100,7 +105,7 @@ void  PWM1_isr(void)
    
    }
    if (millis_count >= 500) {
-//!      output_toggle(LED_PIN);
+      output_toggle(LED_PIN);
       uart_tick = 1;
       millis_count = 0;
       
@@ -212,6 +217,24 @@ void main()
          {
             raw_adc = 1023;
          }
+         kalman_big_1 =  raw_adc << kalman_up;
+         kalman_diff = kalman_big_1 - kalman_big_2;
+         if(kalman_diff > 0)
+         {
+            kalman_diff = kalman_diff >> kalman_diff_down;
+            kalman_big_2 = kalman_big_2 + kalman_diff; 
+         }
+         else if(kalman_diff < 0)
+         {
+            kalman_diff = 0 - kalman_diff;
+            kalman_diff = kalman_diff >> kalman_diff_down;
+            kalman_big_2 = kalman_big_2 - kalman_diff;   
+         }
+         if(kalman_big_2 < 0)
+         {
+            kalman_big_2 = 0 ;
+         }
+         raw_adc = kalman_big_2 >> kalman_up;
          raw_adc = raw_adc >> 2;
          throttle_level = raw_adc;  
          if (throttle_level > 255)
@@ -221,8 +244,14 @@ void main()
          if (throttle_level < 0)   
          {
             throttle_level = 0;
-         }                                      
-         freq = throttle_level +8; 
+         }  
+         if (throttle_level >= 0 && throttle_level <=8) {
+            freq = 8;
+         }
+          else {
+            freq = throttle_level; 
+          }
+          
          if (freq > max_freq) {
             freq = max_freq;
          }
