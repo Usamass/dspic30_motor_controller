@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=6
+Days=7
 D1=24-04-2024
 D1_L=27
 D1_L1=[38590]Project Opened.
@@ -214,7 +214,7 @@ D5_L20=[63390]Stopped Editing.
 D5_L21=[63680]Started Editing.
 D5_L22=[64132]Stopped Editing.
 D6=02-05-2024
-D6_L=7
+D6_L=9
 D6_L1=[57833]Started Editing.
 D6_L2=[58736]Stopped Editing.
 D6_L3=[59112]Project Opened.
@@ -222,11 +222,25 @@ D6_L4=[59842]Project Closed.
 D6_L5=[60204]Project Opened.
 D6_L6=[60373]Started Editing.
 D6_L7=[60682]Stopped Editing.
+D6_L8=[61062]Started Editing.
+D6_L9=[61362]Stopped Editing.
+D7=03-05-2024
+D7_L=10
+D7_L1=[36166]Started Editing.
+D7_L2=[36977]Stopped Editing.
+D7_L3=[42748]Started Editing.
+D7_L4=[43049]Stopped Editing.
+D7_L5=[43332]Started Editing.
+D7_L6=[43859]Stopped Editing.
+D7_L7=[44096]Started Editing.
+D7_L8=[45093]Stopped Editing.
+D7_L9=[45537]Started Editing.
+D7_L10=[46836]Stopped Editing.
 
 [Opened Files]
 1=main.c
-t1=121
-Count=2
+t1=96
+Count=1
 2=..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
 t2=1
 3=math.h
@@ -235,7 +249,7 @@ t3=28
 Type=4
 
 [defines]
-buildcount=325
+buildcount=345
 [Units]
 Count=1
 1=main (main)

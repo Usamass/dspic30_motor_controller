@@ -1,6 +1,6 @@
 
-ROM used:   5186/32768 (16%)
-            5186/32768 (16%) including unused fragments
+ROM used:   5176/32768 (16%)
+            5176/32768 (16%) including unused fragments
 
             1.5 Average locations per line
             4.8 Average locations per statement
@@ -13,11 +13,11 @@ Stack size: 128
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  344   155  14  main.c
+  348   152  14  main.c
   878     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
  2228   925  86  ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
 ----- -----
- 3450  1080 Total
+ 3454  1077 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -34,10 +34,10 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     78   1    0    193  3.1  PWM1_isr
 0    536   5    2   1747  8.8  timer1_isr
 0     66   1    1             @MULS3232
-0    852   8    0   1928  9.3  MAIN
+0    842   8    0   1862  9.3  MAIN
 0     40   0    0             @const1290
 0     14   0    0             @SPRINTF
-0    304   3    0    482  5.8  @PRINTFD16_1292
+0    304   3    0             @PRINTFD16_1292
 0     88   1    0   1224  3.9  initMCPWM
 0    200   2    0    175  4.2  fill_sine_table
 0    250   2   10    278  4.9  timer_reload
@@ -45,22 +45,22 @@ Page ROM  %  RAM    Vol Diff  Functions:
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               10
-    Statements              1080
+    Functions               9
+    Statements              1077
     Comments                467
-    Volume (V)              11302
-    Difficulty (D)          57.3
-    Effort to implement (E) 648131
-    Time to implement (T)   10 hours, 0 minutes
+    Volume (V)              10298
+    Difficulty (D)          51.4
+    Effort to implement (E) 529612
+    Time to implement (T)   8 hours, 10 minutes
     Est Delivered Bugs (B)  2
-    Cyclomatic Complexity   32
-    Maintainability (MI)    12
+    Cyclomatic Complexity   27
+    Maintainability (MI)    7
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-000FE   252  0  
-00100-07FFE  4930  27582  
+00100-07FFE  4920  27592  
 
 
 

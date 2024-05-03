@@ -127,13 +127,13 @@ Project Directory:
     C:\Users\eelab\Documents\dspic30f4011\
 
 Project Files:
-    main.c                                                  [02-May-24 16:18  CRC=1EDEA4AD]
+    main.c                                                  [03-May-24 12:55  CRC=AE27951C]
     ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h  [21-Oct-22 11:12  CRC=AE0CC97E]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
 
-Source signature=D131B559
+Source signature=607AA5C8
 Program memory checksum=0000
-Hex file CRC=914A
+Hex file CRC=F768
 
 Units:
     C:\Users\eelab\Documents\dspic30f4011\main (main)

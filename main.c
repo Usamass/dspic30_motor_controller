@@ -49,8 +49,10 @@
 #define PWM_tick_pin PIN_B2
 #define TIM_tick_pin PIN_B3
 
-#define kalman_up 14
-#define kalman_diff_down 7
+#define kalman_up 18
+#define kalman_diff_down 8
+
+#define init_freq 30
 
   
   
@@ -156,6 +158,8 @@ void  timer1_isr(void)
    *P1DC2 = reference[1];  *(P1DC2+1) = reference[1]>>8;
    *P1DC3 = reference[2];  *(P1DC3+1) = reference[2]>>8;
    
+
+         
    setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64, timer_table[freq]);
    
    
@@ -245,16 +249,16 @@ void main()
          {
             throttle_level = 0;
          }  
-         if (throttle_level >= 0 && throttle_level <=8) {
-            freq = 8;
+         if (throttle_level >= 0 && throttle_level <=30) 
+         {
+            freq = init_freq;
          }
-          else {
-            freq = throttle_level; 
-          }
-          
-         if (freq > max_freq) {
-            freq = max_freq;
+         else
+         {
+            freq = throttle_level -5; 
          }
+                   
+         
   //       peak_voltage = gain_table[throttle_level];
          peak_voltage = gain_table[55];  
              

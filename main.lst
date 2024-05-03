@@ -1,9 +1,9 @@
-CCS PCD C Compiler, Version 5.112, 5967               02-May-24 16:18
+CCS PCD C Compiler, Version 5.112, 5967               03-May-24 12:55
 
                Filename:   C:\Users\eelab\Documents\dspic30f4011\main.lst
 
-               ROM used:   5186 bytes (16%)
-                           Largest free fragment is 27582
+               ROM used:   5176 bytes (16%)
+                           Largest free fragment is 27592
                RAM used:   1504 (73%) at main() level
                            1711 (84%) worst case
                Stack used: 96 locations (46 in main + 50 for interrupts)
@@ -3652,8 +3652,10 @@ CCS PCD C Compiler, Version 5.112, 5967               02-May-24 16:18
 .................... #define PWM_tick_pin PIN_B2
 .................... #define TIM_tick_pin PIN_B3
 .................... 
-.................... #define kalman_up 14
-.................... #define kalman_diff_down 7
+.................... #define kalman_up 18
+.................... #define kalman_diff_down 8
+.................... 
+.................... #define init_freq 30
 .................... 
 ....................   
 ....................   
@@ -4047,6 +4049,8 @@ CCS PCD C Compiler, Version 5.112, 5967               02-May-24 16:18
 03A4:  MOV.B   8C3,W0L
 03A6:  MOV.B   W0L,1DB
 ....................    
+.................... 
+....................          
 ....................    setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64, timer_table[freq]);
 03A8:  MOV     D0C,W0
 03AA:  SL      W0,#1,W0
@@ -4331,7 +4335,7 @@ CCS PCD C Compiler, Version 5.112, 5967               02-May-24 16:18
 ....................       
 ....................       if (tick) {
 12A2:  BTSS.B  D10.0
-12A4:  BRA     13BA
+12A4:  BRA     13B0
 ....................          raw_adc = read_adc();
 12A6:  BCLR.B  2A0.0
 12A8:  BSET.B  2A0.1
@@ -4350,7 +4354,7 @@ CCS PCD C Compiler, Version 5.112, 5967               02-May-24 16:18
 12BC:  MOV     W4,D08
 ....................          }
 ....................          kalman_big_1 =  raw_adc << kalman_up;
-12BE:  MOV     #E,W4
+12BE:  MOV     #12,W4
 12C0:  MOV     D08,W0
 12C2:  MOV     #0,W1
 12C4:  INC     W4,W4
@@ -4380,13 +4384,13 @@ CCS PCD C Compiler, Version 5.112, 5967               02-May-24 16:18
 12F0:  BRA     LEU,1310
 ....................          {
 ....................             kalman_diff = kalman_diff >> kalman_diff_down;
-12F2:  MOV     #7,W4
-12F4:  INC     W4,W4
-12F6:  DEC     W4,W4
-12F8:  BRA     Z,1300
-12FA:  LSR     D5C
-12FC:  RRC     D5A
-12FE:  BRA     12F6
+12F2:  MOV.B   D5B,W0L
+12F4:  MOV.B   W0L,D5A
+12F6:  MOV.B   D5C,W0L
+12F8:  MOV.B   W0L,D5B
+12FA:  MOV.B   D5D,W0L
+12FC:  MOV.B   W0L,D5C
+12FE:  CLR.B   D5D
 ....................             kalman_big_2 = kalman_big_2 + kalman_diff; 
 1300:  MOV     D56,W0
 1302:  ADD     D5A,W0
@@ -4416,13 +4420,13 @@ CCS PCD C Compiler, Version 5.112, 5967               02-May-24 16:18
 132A:  SUBB    W4,W3,W0
 132C:  MOV     W0,D5C
 ....................             kalman_diff = kalman_diff >> kalman_diff_down;
-132E:  MOV     #7,W4
-1330:  INC     W4,W4
-1332:  DEC     W4,W4
-1334:  BRA     Z,133C
-1336:  LSR     D5C
-1338:  RRC     D5A
-133A:  BRA     1332
+132E:  MOV.B   D5B,W0L
+1330:  MOV.B   W0L,D5A
+1332:  MOV.B   D5C,W0L
+1334:  MOV.B   W0L,D5B
+1336:  MOV.B   D5D,W0L
+1338:  MOV.B   W0L,D5C
+133A:  CLR.B   D5D
 ....................             kalman_big_2 = kalman_big_2 - kalman_diff;   
 133C:  MOV     D56,W4
 133E:  MOV     D5A,W3
@@ -4447,7 +4451,7 @@ CCS PCD C Compiler, Version 5.112, 5967               02-May-24 16:18
 135C:  CLR     D58
 ....................          }
 ....................          raw_adc = kalman_big_2 >> kalman_up;
-135E:  MOV     #E,W4
+135E:  MOV     #12,W4
 1360:  MOV     D56,W0
 1362:  MOV     D58,W1
 1364:  INC     W4,W4
@@ -4481,108 +4485,103 @@ CCS PCD C Compiler, Version 5.112, 5967               02-May-24 16:18
 ....................             throttle_level = 0;
 138C:  CLR     D0A
 ....................          }  
-....................          if (throttle_level >= 0 && throttle_level <=8) {
+....................          if (throttle_level >= 0 && throttle_level <=30) 
 138E:  MOV     D0A,W4
 1390:  CP      W4,#0
 1392:  BRA     LT,13A0
 1394:  MOV     D0A,W4
-1396:  CP      W4,#8
+1396:  CP      W4,#1E
 1398:  BRA     GT,13A0
-....................             freq = 8;
-139A:  MOV     #8,W4
+....................          {
+....................             freq = init_freq;
+139A:  MOV     #1E,W4
 139C:  MOV     W4,D0C
 ....................          }
-139E:  BRA     13A4
-....................           else {
-....................             freq = throttle_level; 
-13A0:  PUSH    D0A
-13A2:  POP     D0C
-....................           }
-....................           
-....................          if (freq > max_freq) {
-13A4:  MOV     D0C,W4
-13A6:  MOV     #FA,W3
-13A8:  CP      W3,W4
-13AA:  BRA     C,13B0
-....................             freq = max_freq;
-13AC:  MOV     #FA,W4
-13AE:  MOV     W4,D0C
+139E:  BRA     13A6
+....................          else
+....................          {
+....................             freq = throttle_level -5; 
+13A0:  MOV     D0A,W4
+13A2:  SUB     W4,#5,W0
+13A4:  MOV     W0,D0C
 ....................          }
+....................                    
+....................          
 ....................   //       peak_voltage = gain_table[throttle_level];
 ....................          peak_voltage = gain_table[55];  
-13B0:  PUSH    B76
-13B2:  POP     8B8
+13A6:  PUSH    B76
+13A8:  POP     8B8
 ....................              
 ....................         
 ....................          output_bit(PWM_tick_pin , 0);
-13B4:  BCLR.B  2CA.2
-13B6:  BCLR.B  2C6.2
+13AA:  BCLR.B  2CA.2
+13AC:  BCLR.B  2C6.2
 ....................          tick = 0;      
-13B8:  BCLR.B  D10.0
+13AE:  BCLR.B  D10.0
 ....................       } 
 ....................       
 ....................       if (uart_tick) 
-13BA:  BTSS.B  D10.1
-13BC:  BRA     143E
+13B0:  BTSS.B  D10.1
+13B2:  BRA     1434
 ....................       {
 ....................          sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
-13BE:  MOV     #D16,W4
-13C0:  MOV     W4,D5E
-13C2:  MOV.B   #D,W0L
-13C4:  CALL    3D0
-13C8:  MOV.B   #A,W0L
-13CA:  CALL    3D0
-13CE:  MOV.B   #20,W0L
-13D0:  CALL    3D0
-13D4:  MOV     D08,W0
-13D6:  MOV     #0,W4
-13D8:  CALL    FBE
-13DC:  MOV.B   #20,W0L
-13DE:  CALL    3D0
-13E2:  MOV.B   #2C,W0L
-13E4:  CALL    3D0
-13E8:  MOV.B   #20,W0L
-13EA:  CALL    3D0
-13EE:  MOV     D0A,W0
-13F0:  MOV     #0,W4
-13F2:  CALL    FBE
-13F6:  MOV.B   #20,W0L
-13F8:  CALL    3D0
-13FC:  MOV.B   #2C,W0L
-13FE:  CALL    3D0
-1402:  MOV.B   #20,W0L
-1404:  CALL    3D0
-1408:  MOV     D0C,W0
-140A:  MOV     #0,W4
-140C:  CALL    FBE
-1410:  MOV.B   #20,W0L
-1412:  CALL    3D0
-1416:  MOV.B   #2C,W0L
-1418:  CALL    3D0
-141C:  MOV.B   #20,W0L
-141E:  CALL    3D0
-1422:  MOV     8B8,W0
-1424:  MOV     #0,W4
-1426:  CALL    FBE
+13B4:  MOV     #D16,W4
+13B6:  MOV     W4,D5E
+13B8:  MOV.B   #D,W0L
+13BA:  CALL    3D0
+13BE:  MOV.B   #A,W0L
+13C0:  CALL    3D0
+13C4:  MOV.B   #20,W0L
+13C6:  CALL    3D0
+13CA:  MOV     D08,W0
+13CC:  MOV     #0,W4
+13CE:  CALL    FBE
+13D2:  MOV.B   #20,W0L
+13D4:  CALL    3D0
+13D8:  MOV.B   #2C,W0L
+13DA:  CALL    3D0
+13DE:  MOV.B   #20,W0L
+13E0:  CALL    3D0
+13E4:  MOV     D0A,W0
+13E6:  MOV     #0,W4
+13E8:  CALL    FBE
+13EC:  MOV.B   #20,W0L
+13EE:  CALL    3D0
+13F2:  MOV.B   #2C,W0L
+13F4:  CALL    3D0
+13F8:  MOV.B   #20,W0L
+13FA:  CALL    3D0
+13FE:  MOV     D0C,W0
+1400:  MOV     #0,W4
+1402:  CALL    FBE
+1406:  MOV.B   #20,W0L
+1408:  CALL    3D0
+140C:  MOV.B   #2C,W0L
+140E:  CALL    3D0
+1412:  MOV.B   #20,W0L
+1414:  CALL    3D0
+1418:  MOV     8B8,W0
+141A:  MOV     #0,W4
+141C:  CALL    FBE
 ....................          printf(Serial_OutputBuffer);
-142A:  MOV     #D16,W1
-142C:  CP0.B   [W1]
-142E:  BRA     Z,143E
-1430:  BTSC.B  219.1
-1432:  BRA     1430
-1434:  MOV.B   [W1+#0],W0L
-1436:  MOV.B   W0L,21A
-1438:  CLR.B   21B
-143A:  INC     W1,W1
-143C:  BRA     142C
+1420:  MOV     #D16,W1
+1422:  CP0.B   [W1]
+1424:  BRA     Z,1434
+1426:  BTSC.B  219.1
+1428:  BRA     1426
+142A:  MOV.B   [W1+#0],W0L
+142C:  MOV.B   W0L,21A
+142E:  CLR.B   21B
+1430:  INC     W1,W1
+1432:  BRA     1422
 ....................          
 ....................       
 ....................       }
-143E:  BRA     12A2
+1434:  BRA     12A2
 ....................     } 
 .................... }    
 .................... 
-1440:  PWRSAV  #0
+1436:  PWRSAV  #0
 .................... 
 .................... void initMCPWM(void) 
 .................... {    

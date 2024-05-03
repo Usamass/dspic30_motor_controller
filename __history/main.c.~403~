@@ -49,6 +49,9 @@
 #define PWM_tick_pin PIN_B2
 #define TIM_tick_pin PIN_B3
 
+#define kalman_up 18
+#define kalman_diff_down 8
+
   
   
 void initMCPWM(void);
@@ -85,6 +88,8 @@ unsigned long millis_count = 0;
 
 char Serial_OutputBuffer[60];
 
+signed int32 kalman_big_1=0, kalman_big_2=0, kalman_diff=0;
+
 
 #int_PWM1
 void  PWM1_isr(void) 
@@ -93,7 +98,7 @@ void  PWM1_isr(void)
    tick_count++;
    if(tick_count >= 8)
    {   
-      output_bit(PWM_tick_pin , 1);
+//!      output_bit(PWM_tick_pin , 1);
       millis_count++;
       tick = 1;
       tick_count=0;
@@ -103,12 +108,14 @@ void  PWM1_isr(void)
       output_toggle(LED_PIN);
       uart_tick = 1;
       millis_count = 0;
+      
    }
 
 }
 #INT_TIMER1
 void  timer1_isr(void) 
 {
+    
    output_bit(TIM_tick_pin , 1);
 //!   delay_us(10);
 //!   output_bit(TIM_tick_pin , 0); 
@@ -148,6 +155,10 @@ void  timer1_isr(void)
    *P1DC1 = reference[0];  *(P1DC1+1) = reference[0]>>8;
    *P1DC2 = reference[1];  *(P1DC2+1) = reference[1]>>8;
    *P1DC3 = reference[2];  *(P1DC3+1) = reference[2]>>8;
+   
+   setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64, timer_table[freq]);
+   
+   
   
 //!   if(sample < 15)
 //!   {
@@ -206,6 +217,24 @@ void main()
          {
             raw_adc = 1023;
          }
+         kalman_big_1 =  raw_adc << kalman_up;
+         kalman_diff = kalman_big_1 - kalman_big_2;
+         if(kalman_diff > 0)
+         {
+            kalman_diff = kalman_diff >> kalman_diff_down;
+            kalman_big_2 = kalman_big_2 + kalman_diff; 
+         }
+         else if(kalman_diff < 0)
+         {
+            kalman_diff = 0 - kalman_diff;
+            kalman_diff = kalman_diff >> kalman_diff_down;
+            kalman_big_2 = kalman_big_2 - kalman_diff;   
+         }
+         if(kalman_big_2 < 0)
+         {
+            kalman_big_2 = 0 ;
+         }
+         raw_adc = kalman_big_2 >> kalman_up;
          raw_adc = raw_adc >> 2;
          throttle_level = raw_adc;  
          if (throttle_level > 255)
@@ -215,13 +244,19 @@ void main()
          if (throttle_level < 0)   
          {
             throttle_level = 0;
-         }                                      
-         freq = throttle_level - 5 ; 
-         if (freq < 0) {
-            freq = 0;
+         }  
+//!         if (throttle_level >= 0 && throttle_level <=8) {
+//!            freq = 8;
+//!         }
+//!          else {
+//!            freq = throttle_level; 
+//!          }
+                   
+         if (freq > max_freq) {
+            freq = max_freq;
          }
-         peak_voltage = gain_table[throttle_level];
-         setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64, timer_table[freq]);   
+  //       peak_voltage = gain_table[throttle_level];
+         peak_voltage = gain_table[55];  
              
         
          output_bit(PWM_tick_pin , 0);
@@ -232,8 +267,7 @@ void main()
       {
          sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
          printf(Serial_OutputBuffer);
-         uart_tick = 0;
-      
+         
       
       }
     } 
@@ -279,6 +313,8 @@ void timer_reload(void)
       timer_table[sample] = (intr_per_sample/per_clock_tick) - 100;     
    }
    timer_table[0] = timer_table[1];
+   
+   
 }
 
 void voltage_gain(void) 
