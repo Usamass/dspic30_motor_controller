@@ -1,5 +1,4 @@
 #include <30F4011.h>
-#include <Inc/lookup_tables.h>
 #DEVICE ADC=10
 #device ICSP=1
 #use delay(clock=64000000,crystal=8000000)
@@ -42,7 +41,6 @@
 #define break_level 5
 #define sustain_level 200  
 #define break_amplitude 0 
-//!#define pedestal_amplitude 85
 #define pedestal_amplitude 500
 #define peak_amplitude 950
 
@@ -79,7 +77,7 @@ const unsigned max_freq = 250; //Hz
 const double per_clock_tick = 0.004; //ms
 //!unsigned int16 timer_table[max_freq+1];
 
-
+unsigned int16 gain_table[256];
 unsigned int16 raw_adc =0 ;
 signed int16 throttle_level = 0;
 unsigned int16 freq = 1;
@@ -93,6 +91,17 @@ unsigned long millis_count = 0;
 char Serial_OutputBuffer[60];
 
 signed int32 kalman_big_1=0, kalman_big_2=0, kalman_diff=0;
+
+const int timer_table[] = {
+0,1041,1041,1041,1041,1041,1041,1041,925,833,757,694,641,595,555,520,490,462,438,416,396,378,362,347,333,320,308,297,287,277,268,260,252,245,238,231,
+225,219,213,208,203,198,193,189,185,181,177,173,170,166,163,160,157,154,151,148,146,143,141,138,136,134,132,130,128,126,124,122,120,
+119,117,115,114,112,111,109,108,106,105,104,102,101,100,99,98,96,95,94,93,92,91,90,89,88,87,86,85,85,84,83,82,81,80,80,79,78,77,77,
+76,75,75,74,73,73,72,71,71,70,7070,68,68,67,67,66,66,66,65,64,64,63,63,62,62,61,61,60,60,60,59,59,58,58,57,57,57,56,56,56,55,55,55,
+54,54,53,53,53,52,52,52,51,51,51,51,50,50,50,49,49,49,49,48,48,47,47,47,47,46,46,46,46,45,45,45,45,44,44,44,44,43,43,43,43,43,42,42,
+42,42,41,41,41,41,41,40,40,40,40,40,39,39,39,39,39,38,38,38,38,38,38,37,37,37,37,37,37,37,37,36,36,36,36,36,36,35,35,35,35,35,35,34,
+34,34,34,34,34,33,33,33,33,33
+};
+
 
 
 #int_PWM1
@@ -197,7 +206,7 @@ void main()
    initMCPWM();
    fill_sine_table();
 //!   timer_reload();
-//!   voltage_gain(); 
+   voltage_gain(); 
    
    output_drive(LED_PIN);
    output_drive(PWM_tick_pin);
@@ -208,7 +217,9 @@ void main()
    set_adc_channel(0);
    delay_us(10);
    
-
+//!   setup_timer2(TMR_INTERNAL | TMR_DIV_BY_64 ,1000);            
+//!   enable_interrupts(INT_TIMER2); 
+  
    setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64,timer_table[freq]);            
    enable_interrupts(INT_TIMER1);  
       
@@ -261,14 +272,14 @@ void main()
             throttle_level = 255;
          }
          if (throttle_level < 0)   
-         {  
-            throttle_level = 0; 
+         {
+            throttle_level = 0;
          }  
+         freq = 5; 
+                   
          
-         freq = throttle_level;
-       
-         peak_voltage = gain_table[throttle_level];
-//!         peak_voltage = gain_table[55];  
+  //       peak_voltage = gain_table[throttle_level];
+         peak_voltage = gain_table[55];  
         
          output_bit(PWM_tick_pin , 0);
          tick = 0;      
@@ -276,7 +287,6 @@ void main()
       
       if (uart_tick) 
       {
-//!         sprintf(Serial_OutputBuffer, "CHECKING SERIAL!");
          sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
          printf(Serial_OutputBuffer);
          
@@ -329,26 +339,26 @@ void fill_sine_table(void)
 //!   
 //!}
 
-//!void voltage_gain(void) 
-//!{
-//!   for (int i = 0 ; i <= break_level ; i++) {
-//!            gain_table[i] = 0; 
-//!   }
-//!   
-//!   for (int i = break_level+1 ; i <= sustain_level; i++) 
-//!   {
-//!       temp = SLOPE * i + pedestal_amplitude;
-//!       if(temp > peak_amplitude ) 
-//!       {
-//!         temp = peak_amplitude;
-//!       }
-//!       gain_table[i] = temp;
-//!   }
-//!   for (int i = sustain_level+1 ; i <= 255; i++) {     
-//!      gain_table[i] = peak_amplitude;
-//!   }
-//!
-//!}
+void voltage_gain(void) 
+{
+   for (int i = 0 ; i <= break_level ; i++) {
+            gain_table[i] = 0; 
+   }
+   
+   for (int i = break_level+1 ; i <= sustain_level; i++) 
+   {
+       temp = SLOPE * i + pedestal_amplitude;
+       if(temp > peak_amplitude ) 
+       {
+         temp = peak_amplitude;
+       }
+       gain_table[i] = temp;
+   }
+   for (int i = sustain_level+1 ; i <= 255; i++) {     
+      gain_table[i] = peak_amplitude;
+   }
+
+}
 
 
 

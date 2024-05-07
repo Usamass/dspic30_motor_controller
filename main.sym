@@ -1,59 +1,59 @@
 W0      @SCRATCH
 W0L     _RETURN_
-W0 -W3  @I64TOF48.P1
-W0 -W2  @MULFF48.P2
-W0 -W1  @READ_ROM_MEMORY.P3
-W0      @delay_us1.P4
-W0 -W2  @ADDFF48.P5
-W0 -W1  @DIV3232B.P6
-W0 -W1  @DIVFF.P7
-W0 -W3  @ADDFF64.P8
-W0 -W3  @I64TOF64.P9
-W0L     @SPRINTF.P10
-W0 -W1  @FLT.P11
-W0 -W2  @DIVFF48.P12
-W0 -W1  @SFTOI.P13
-W0 -W3  @F64TOI64.P14
-W0      @ITOF.P15
-W0 -W2  @F48TO64.P16
-W0 -W1  @MULFF.P17
-W0 -W3  @DIVFF64.P18
-W0 -W1  @MULS3232.P19
-W0 -W1  @ADDFF.P20
-W0 -W3  @F64TOSI64.P21
-W0 -W3  @SI64TOF64.P22
-W0 -W2  @F48TOSI64.P23
-W0 -W3  @FLT64.P24
-W0      @delay_ms1.P25
-W0 -W3  @SI64TOF48.P26
-W0 -W2  @FLT48.P27
-W0      @SITOF.P28
-W0      @PRINTFD16_1292.P29
-W0 -W3  @MULFF64.P30
+W0 -W1  @READ_ROM_MEMORY.P1
+W0 -W3  @F64TOI64.P2
+W0 -W3  @I64TOF48.P3
+W0 -W1  @DIV3232B.P4
+W0 -W2  @MULFF48.P5
+W0      @delay_us1.P6
+W0 -W1  @MULS3232.P7
+W0 -W2  @ADDFF48.P8
+W0 -W3  @SI64TOF48.P9
+W0 -W1  @DIVFF.P10
+W0 -W3  @ADDFF64.P11
+W0L     @SPRINTF.P12
+W0 -W1  @MULFF.P13
+W0 -W1  @FLT.P14
+W0 -W2  @DIVFF48.P15
+W0 -W1  @SFTOI.P16
+W0 -W2  @F48TOSI64.P17
+W0      @ITOF.P18
+W0 -W3  @I64TOF64.P19
+W0 -W3  @F64TOSI64.P20
+W0 -W3  @DIVFF64.P21
+W0 -W1  @ADDFF.P22
+W0 -W3  @SI64TOF64.P23
+W0 -W2  @F48TO64.P24
+W0      @PRINTFD16_1297.P25
+W0 -W2  @FLT48.P26
+W0 -W3  @FLT64.P27
+W0      @delay_ms1.P28
+W0 -W3  @MULFF64.P29
+W0      @SITOF.P30
 W1      @SCRATCH
-W1      @READ_PACKED_MEMORY.P1
-W1      @WRITE_PACKED_MEMORY.P2
-W2      @WRITE_PACKED_MEMORY.P1
-W2      @READ_PACKED_MEMORY.P2
-W2 -W3  @DIVFF.P3
-W2 -W3  @DIV3232B.P4
+W1      @WRITE_PACKED_MEMORY.P1
+W1      @READ_PACKED_MEMORY.P2
+W2      @READ_ROM_MEMORY.P1
+W2 -W3  @DIVFF.P2
+W2      @WRITE_PACKED_MEMORY.P3
+W2 -W3  @ADDFF.P4
 W2 -W3  @FLT.P5
-W2 -W3  @MULFF.P6
-W2 -W3  @MULS3232.P7
-W2 -W3  @ADDFF.P8
-W2      @READ_ROM_MEMORY.P9
+W2      @READ_PACKED_MEMORY.P6
+W2 -W3  @DIV3232B.P7
+W2 -W3  @MULS3232.P8
+W2 -W3  @MULFF.P9
 W3 -W5  @DIVFF48.P1
-W3      @READ_PACKED_MEMORY.P2
-W3      @WRITE_PACKED_MEMORY.P3
-W3 -W5  @ADDFF48.P4
-W3      @READ_ROM_MEMORY.P5
-W3 -W5  @FLT48.P6
-W3 -W5  @MULFF48.P7
-W4 -W7  @MULFF64.P1
-W4 -W7  @DIVFF64.P2
-W4      @PRINTFD16_1292.P3
-W4 -W7  @FLT64.P4
-W4 -W7  @ADDFF64.P5
+W3 -W5  @ADDFF48.P2
+W3      @READ_ROM_MEMORY.P3
+W3 -W5  @MULFF48.P4
+W3      @READ_PACKED_MEMORY.P5
+W3      @WRITE_PACKED_MEMORY.P6
+W3 -W5  @FLT48.P7
+W4 -W7  @ADDFF64.P1
+W4 -W7  @MULFF64.P2
+W4 -W7  @FLT64.P3
+W4      @PRINTFD16_1297.P4
+W4 -W7  @DIVFF64.P5
 800-827 pas_64
 828-84F qas_64
 850-87F pat_64
@@ -66,74 +66,70 @@ W4 -W7  @ADDFF64.P5
 902-903 sine_index
 904-909 phase_angle
 90A-911 theeta
-912-B07 timer_table
-B08-D07 gain_table
-D08-D09 raw_adc
-D0A-D0B throttle_level
-D0C-D0D freq
-D0E-D0F temp
-D10.0   tick
-D10.1   uart_tick
-D11     tick_count
-D12-D15 millis_count
-D16-D51 Serial_OutputBuffer
-D52-D55 kalman_big_1
-D56-D59 kalman_big_2
-D5A-D5D kalman_diff
-D5E-D5F @sprintf_string
-D60-D61 voltage_gain.i
-D60-D67 timer_reload.intr_per_sample
-D62-D63 voltage_gain.i
-D64-D65 voltage_gain.i
-D64-D6B sin.x
-D68-D69 timer_reload.sample
-D74-D7B cos.x
-D7C     cos.quad
-D7D     cos.i
-D7E-D85 cos.y
-D86-D8D cos.t
-D8E-D95 cos.t2
-D96-D9D cos.frac
-D9E-DE5 cos.p_64
-E26-E27 timer1_isr.i
+912-913 raw_adc
+914-915 throttle_level
+916-917 freq
+918-919 temp
+91A.0   tick
+91A.1   uart_tick
+91B     tick_count
+91C-91F millis_count
+920-95B Serial_OutputBuffer
+95C-95F kalman_big_1
+960-963 kalman_big_2
+964-967 kalman_diff
+968-969 @sprintf_string
+96E-975 sin.x
+97E-985 cos.x
+986     cos.quad
+987     cos.i
+988-98F cos.y
+990-997 cos.t
+998-99F cos.t2
+9A0-9A7 cos.frac
+9A8-9EF cos.p_64
+A30-A31 timer1_isr.i
 F80-FFF _STACK_
 
 ROM Allocation:
-000100  @const1290.call
-000128  PWM1_isr
-000176  @MULS3232
-0001B8  timer1_isr
-0003D0  @SPRINTF
-0003DE  initMCPWM
-000436  @I64TOF64
-0004A0  @MULFF64
-0005B0  @DIVFF64
-0006B8  @ADDFF64
-0008A6  @FLT64
-00092A  @F64TOI64
-000988  cos
-000C30  sin
-000C6C  @F64TOSI64
-000CCA  fill_sine_table
-000D92  @SI64TOF64
-000DFC  timer_reload
-000EF6  voltage_gain
-000FBE  @PRINTFD16_1292
-0010EE  @cinit1
-0010EE  MAIN
-001134  @cinit2
+000100  timer_table.call
+000122  timer_table.data
+000278  gain_table.call
+00029A  gain_table.data
+0003F0  @const1295.call
+000418  PWM1_isr
+000466  @MULS3232
+0004A8  timer1_isr
+0006B8  timer2_isr
+0006E4  @SPRINTF
+0006F2  initMCPWM
+00074A  @I64TOF64
+0007B4  @MULFF64
+0008C4  @DIVFF64
+0009CC  @ADDFF64
+000BBA  @FLT64
+000C3E  @F64TOI64
+000C9C  cos
+000F44  sin
+000F80  @F64TOSI64
+000FDE  fill_sine_table
+0010A6  @PRINTFD16_1297
+0011D6  MAIN
+0011D6  @cinit1
+00121C  @cinit2
 
 Project Directory:
     C:\Users\eelab\Documents\dspic30f4011\
 
 Project Files:
-    main.c                                                  [03-May-24 12:55  CRC=AE27951C]
+    main.c                                                  [07-May-24 14:11  CRC=2733865D]
     ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h  [21-Oct-22 11:12  CRC=AE0CC97E]
+    Inc\lookup_tables.h                                     [07-May-24 14:08  CRC=07FE9554]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
 
-Source signature=607AA5C8
+Source signature=E1852C5D
 Program memory checksum=0000
-Hex file CRC=F768
+Hex file CRC=ECE1
 
 Units:
     C:\Users\eelab\Documents\dspic30f4011\main (main)

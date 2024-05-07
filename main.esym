@@ -1,10 +1,9 @@
-F N "voltage_gain" 0 328 ""
-D G "__PCD__" 0 353 ""5.112""
-D G "__DEVICE__" 0 353 "4011"
-D G "__DATE__" 0 353 ""03-May-24""
-D G "__TIME__" 0 353 ""12:55:36""
-D G "_UNICODE" 0 353 ""?""
-D G "__EVAL" 0 353 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
+D G "__PCD__" 0 402 ""5.112""
+D G "__DEVICE__" 0 402 "4011"
+D G "__DATE__" 0 402 ""07-May-24""
+D G "__TIME__" 0 402 ""14:11:43""
+D G "_UNICODE" 0 402 ""?""
+D G "__EVAL" 0 402 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
 c L "set_tris_b" 1 3 6 "FUNCTION"
 F N "set_tris_b" 1 45 ""
 V L "value" 1 45 "int16" `55 
@@ -1454,629 +1453,624 @@ D G "INT_CAN1" 1 872 "39"
 D G "INT_PWM1" 1 873 "58"
 D G "INT_QEI" 1 874 "60"
 D G "INT_FAULTA" 1 875 "66"
-D G "MATH_H" 2 30 ""
-D G "PI" 2 35 "3.1415926535897932"
-D G "SQRT2" 2 38 "1.4142135623730950"
-C L "jump_to_isr" 2 2 3 "FUNCTION"
-F N "CEIL_FLOOR" 2 45 ""
-V L "x" 2 45 "float" `834 
-V L "n" 2 45 "int8" `835 
-F G "CEIL_FLOOR" 2 46 "float(float x,int8 n)" `833 
-V L "y" 2 47 "float" `836 
-V L "res" 2 47 "float" `837 
-V L "l" 2 48 "int16" `838 
-V L "s" 2 49 "int1" `839 
-C L "CEIL_FLOOR" 2 2 2 "FUNCTION"
-F N "CEIL_FLOOR" 2 96 ""
-V L "x" 2 96 "?" `854 
-V L "n" 2 96 "int8" `855 
-F G "CEIL_FLOOR" 2 97 "?(? x,int8 n)" `853 
-V L "y" 2 98 "?" `856 
-V L "res" 2 98 "?" `857 
-V L "l" 2 99 "int32" `858 
-V L "s" 2 100 "int1" `859 
-C L "CEIL_FLOOR" 2 2 1 "FUNCTION"
-F N "CEIL_FLOOR" 2 149 ""
-V L "x" 2 149 "?" `874 
-V L "n" 2 149 "int8" `875 
-F G "CEIL_FLOOR" 2 150 "?(? x,int8 n)" `873 
-V L "y" 2 151 "?" `876 
-V L "res" 2 151 "?" `877 
-V L "l" 2 152 "?" `878 
-V L "s" 2 153 "int1" `879 
-C L "floor" 2 2 3 "FUNCTION"
-F N "floor" 2 207 ""
-V L "x" 2 207 "float" `898 
-F G "floor" 2 208 "float(float x)" `897 
-C L "floor" 2 2 2 "FUNCTION"
-F N "floor" 2 214 ""
-V L "x" 2 214 "?" `900 
-F G "floor" 2 215 "?(? x)" `899 
-C L "floor" 2 2 1 "FUNCTION"
-F N "floor" 2 220 ""
-V L "x" 2 220 "?" `902 
-F G "floor" 2 221 "?(? x)" `901 
-C L "ceil" 2 2 3 "FUNCTION"
-F N "ceil" 2 233 ""
-V L "x" 2 233 "float" `904 
-F G "ceil" 2 234 "float(float x)" `903 
-C L "ceil" 2 2 2 "FUNCTION"
-F N "ceil" 2 240 ""
-V L "x" 2 240 "?" `906 
-F G "ceil" 2 241 "?(? x)" `905 
-C L "ceil" 2 2 1 "FUNCTION"
-F N "ceil" 2 246 ""
-V L "x" 2 246 "?" `908 
-F G "ceil" 2 247 "?(? x)" `907 
-D G "fabs" 2 259 "abs"
-C L "fmod" 2 2 6 "FUNCTION"
-F N "fmod" 2 271 ""
-V L "x" 2 271 "float" `910 
-V L "y" 2 271 "float" `911 
-F G "fmod" 2 272 "float(float x,float y)" `909 
-V L "i" 2 273 "float" `912 
-C L "fmod" 2 2 2 "FUNCTION"
-F N "fmod" 2 291 ""
-V L "x" 2 291 "?" `917 
-V L "y" 2 291 "?" `918 
-F G "fmod" 2 292 "?(? x,? y)" `916 
-V L "i" 2 293 "?" `919 
-C L "fmod" 2 2 1 "FUNCTION"
-F N "fmod" 2 309 ""
-V L "x" 2 309 "?" `924 
-V L "y" 2 309 "?" `925 
-F G "fmod" 2 310 "?(? x,? y)" `923 
-V L "i" 2 311 "?" `926 
-D G "LN2" 2 334 "0.6931471805599453"
-D G "LN2_INV" 2 335 "1.4426950408889634073"
-V G "pe" 2 337 "[6]" `931 
-F N "exp" 2 341 ""
-V L "x" 2 341 "float" `934 
-F G "exp" 2 342 "float(float x)" `933 
-V L "y" 2 343 "float" `935 
-V L "res" 2 343 "float" `936 
-V L "r" 2 343 "float" `937 
-V L "data1" 2 345 "sint8" `938 
-V L "n" 2 347 "sint8" `939 
-V L "s" 2 348 "int1" `940 
-C L "exp" 2 2 1 "FUNCTION"
-C L "exp" 2 2 2 "FUNCTION"
-F N "exp" 2 400 ""
-V L "x" 2 400 "?" `944 
-F G "exp" 2 401 "?(? x)" `943 
-V L "y" 2 402 "?" `945 
-V L "res" 2 402 "?" `946 
-V L "r" 2 402 "?" `947 
-V L "data1" 2 403 "sint8" `948 
-V L "n" 2 404 "sint8" `949 
-V L "s" 2 405 "int1" `950 
-V G "pe_64" 2 449 "[12]" `954 
-F N "exp" 2 456 ""
-V L "x" 2 456 "?" `957 
-F G "exp" 2 457 "?(? x)" `956 
-V L "y" 2 458 "?" `958 
-V L "res" 2 458 "?" `959 
-V L "r" 2 458 "?" `960 
-V L "data1" 2 459 "int16" `961 
-V L "data2" 2 459 "int16" `962 
-V L "p" 2 460 "*int16" `963 
-V L "n" 2 461 "sint16" `964 
-V L "s" 2 462 "int1" `965 
-V G "pl" 2 525 "[4]" `967 
-V G "ql" 2 526 "[4]" `970 
-C L "log" 2 2 3 "FUNCTION"
-F N "log" 2 534 ""
-V L "x" 2 534 "float" `973 
-F G "log" 2 535 "float(float x)" `972 
-V L "y" 2 536 "float" `974 
-V L "res" 2 536 "float" `975 
-V L "r" 2 536 "float" `976 
-V L "y2" 2 536 "float" `977 
-V L "data1" 2 538 "int8" `978 
-V L "data2" 2 538 "int8" `979 
-V L "n" 2 540 "sint8" `980 
-C L "log" 2 2 1 "FUNCTION"
-V G "pl_64" 2 610 "[4]" `982 
-V G "ql_64" 2 613 "[4]" `985 
-F N "log" 2 616 ""
-V L "x" 2 616 "?" `988 
-F G "log" 2 617 "?(? x)" `987 
-V L "y" 2 618 "?" `989 
-V L "res" 2 618 "?" `990 
-V L "r" 2 618 "?" `991 
-V L "y2" 2 618 "?" `992 
-V L "data1" 2 619 "int8" `993 
-V L "data2" 2 619 "int8" `994 
-V L "n" 2 620 "sint8" `995 
-F N "log" 2 684 ""
-V L "x" 2 684 "?" `997 
-F G "log" 2 685 "?(? x)" `996 
-V L "y" 2 686 "?" `998 
-V L "res" 2 686 "?" `999 
-V L "r" 2 686 "?" `1000 
-V L "y2" 2 686 "?" `1001 
-V L "data1" 2 687 "int16" `1002 
-V L "data2" 2 687 "int16" `1003 
-V L "p" 2 688 "*int16" `1004 
-V L "n" 2 689 "sint16" `1005 
-D G "LN10" 2 758 "2.3025850929940456"
-D G "LN10_INV" 2 759 "0.4342944819032518276"
-C L "log10" 2 2 3 "FUNCTION"
-F N "log10" 2 767 ""
-V L "x" 2 767 "float" `1007 
-F G "log10" 2 768 "float(float x)" `1006 
-V L "r" 2 769 "float" `1008 
-C L "log10" 2 2 2 "FUNCTION"
-F N "log10" 2 779 ""
-V L "x" 2 779 "?" `1010 
-F G "log10" 2 780 "?(? x)" `1009 
-V L "r" 2 781 "?" `1011 
-C L "log10" 2 2 1 "FUNCTION"
-F N "log10" 2 789 ""
-V L "x" 2 789 "?" `1013 
-F G "log10" 2 790 "?(? x)" `1012 
-V L "r" 2 791 "?" `1014 
-C L "modf" 2 2 6 "FUNCTION"
-F N "modf" 2 808 ""
-V L "value" 2 808 "float" `1016 
-V L "iptr" 2 808 "*float" `1017 
-F G "modf" 2 809 "float(float value,*float iptr)" `1015 
-C L "modf" 2 2 2 "FUNCTION"
-F N "modf" 2 816 ""
-V L "value" 2 816 "?" `1019 
-V L "iptr" 2 816 "??0 *" `1020 
-F G "modf" 2 817 "?(? value,??0 * iptr)" `1018 
-C L "modf" 2 2 1 "FUNCTION"
-F N "modf" 2 822 ""
-V L "value" 2 822 "?" `1022 
-V L "iptr" 2 822 "??0 *" `1023 
-F G "modf" 2 823 "?(? value,??0 * iptr)" `1021 
-C L "pwr" 2 2 4 "FUNCTION"
-F N "pwr" 2 836 ""
-V L "x" 2 836 "float" `1025 
-V L "y" 2 836 "float" `1026 
-F G "pwr" 2 837 "float(float x,float y)" `1024 
-C L "pwr" 2 2 2 "FUNCTION"
-F N "pwr" 2 855 ""
-V L "x" 2 855 "?" `1028 
-V L "y" 2 855 "?" `1029 
-F G "pwr" 2 856 "?(? x,? y)" `1027 
-C L "pwr" 2 2 1 "FUNCTION"
-F N "pwr" 2 872 ""
-V L "x" 2 872 "?" `1031 
-V L "y" 2 872 "?" `1032 
-F G "pwr" 2 873 "?(? x,? y)" `1030 
-C L "pow" 2 2 5 "FUNCTION"
-F N "pow" 2 899 ""
-V L "x" 2 899 "float" `1034 
-V L "y" 2 899 "float" `1035 
-F G "pow" 2 900 "float(float x,float y)" `1033 
-C L "pow" 2 2 2 "FUNCTION"
-F N "pow" 2 918 ""
-V L "x" 2 918 "?" `1037 
-V L "y" 2 918 "?" `1038 
-F G "pow" 2 919 "?(? x,? y)" `1036 
-C L "pow" 2 2 1 "FUNCTION"
-F N "pow" 2 936 ""
-V L "x" 2 936 "?" `1040 
-V L "y" 2 936 "?" `1041 
-F G "pow" 2 937 "?(? x,? y)" `1039 
-C L "sqrt" 2 2 3 "FUNCTION"
-F N "sqrt" 2 960 ""
-V L "x" 2 960 "float" `1043 
-F G "sqrt" 2 961 "float(float x)" `1042 
-V L "y" 2 962 "float" `1044 
-V L "res" 2 962 "float" `1045 
-V L "data1" 2 964 "int16" `1046 
-V L "data2" 2 964 "int16" `1047 
-C L "sqrt" 2 2 2 "FUNCTION"
-F N "sqrt" 2 1033 ""
-V L "x" 2 1033 "?" `1049 
-F G "sqrt" 2 1034 "?(? x)" `1048 
-V L "y" 2 1035 "?" `1050 
-V L "res" 2 1035 "?" `1051 
-V L "data1" 2 1036 "int16" `1052 
-V L "data2" 2 1036 "int16" `1053 
-V L "p" 2 1037 "*int8" `1054 
-C L "sqrt" 2 2 1 "FUNCTION"
-F N "sqrt" 2 1100 ""
-V L "x" 2 1100 "?" `1056 
-F G "sqrt" 2 1101 "?(? x)" `1055 
-V L "y" 2 1102 "?" `1057 
-V L "res" 2 1102 "?" `1058 
-V L "p" 2 1103 "*int16" `1059 
-V L "temp1" 2 1104 "int16" `1060 
-V L "temp2" 2 1104 "int16" `1061 
-D G "PI_DIV_BY_TWO_INV" 2 1156 "0.63661977236758134"
-D G "PI_DIV_BY_TWO" 2 1160 "1.5707963267948966"
-D G "TWOBYPI" 2 1164 "0.6366197723675813"
-C L "cos" 2 2 3 "FUNCTION"
-F N "cos" 2 1172 ""
-V L "x" 2 1172 "float" `1063 
-F G "cos" 2 1173 "float(float x)" `1062 
-V L "y" 2 1174 "float" `1064 
-V L "t" 2 1174 "float" `1065 
-V L "t2" 2 1174 "float" `1066 
-V L "quad" 2 1175 "int8" `1067 
-V L "i" 2 1175 "int8" `1068 
-V L "frac" 2 1176 "float" `1069 
-V L "p" 2 1177 "float[5]" `1070  "by the series definition for cosine"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 2 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 2 "FUNCTION"
-F N "cos" 2 1218 ""
-V L "x" 2 1218 "?" `1072 
-F G "cos" 2 1219 "?(? x)" `1071 
-V L "y" 2 1220 "?" `1073 
-V L "t" 2 1220 "?" `1074 
-V L "t2" 2 1220 "?" `1075 
-V L "quad" 2 1221 "int8" `1076 
-V L "i" 2 1221 "int8" `1077 
-V L "frac" 2 1222 "?" `1078 
-V L "p" 2 1223 "?[6]" `1079  "by the series definition for cosine"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-F N "cos" 2 1260 ""
-V L "x" 2 1260 "?" `1081 
-F G "cos" 2 1261 "?(? x)" `1080 
-V L "y" 2 1262 "?" `1082 
-V L "t" 2 1262 "?" `1083 
-V L "t2" 2 1262 "?" `1084 
-V L "quad" 2 1263 "int8" `1085 
-V L "i" 2 1263 "int8" `1086 
-V L "frac" 2 1264 "?" `1087 
-V L "p_64" 2 1265 "?[9]" `1088  "by the series definition for cosine"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "cos" 2 2 1 "FUNCTION"
-C L "sin" 2 2 3 "FUNCTION"
-F N "sin" 2 1311 ""
-V L "x" 2 1311 "float" `1090 
-F G "sin" 2 1312 "float(float x)" `1089 
-C L "sin" 2 2 2 "FUNCTION"
-F N "sin" 2 1319 ""
-V L "x" 2 1319 "?" `1092 
-F G "sin" 2 1320 "?(? x)" `1091 
-C L "sin" 2 2 1 "FUNCTION"
-F N "sin" 2 1325 ""
-V L "x" 2 1325 "?" `1094 
-F G "sin" 2 1326 "?(? x)" `1093 
-C L "tan" 2 2 3 "FUNCTION"
-F N "tan" 2 1337 ""
-V L "x" 2 1337 "float" `1096 
-F G "tan" 2 1338 "float(float x)" `1095 
-V L "c" 2 1339 "float" `1097 
-V L "s" 2 1339 "float" `1098 
-C L "tan" 2 2 2 "FUNCTION"
-F N "tan" 2 1351 ""
-V L "x" 2 1351 "?" `1100 
-F G "tan" 2 1352 "?(? x)" `1099 
-V L "c" 2 1353 "?" `1101 
-V L "s" 2 1353 "?" `1102 
-C L "tan" 2 2 1 "FUNCTION"
-F N "tan" 2 1364 ""
-V L "x" 2 1364 "?" `1104 
-F G "tan" 2 1365 "?(? x)" `1103 
-V L "c" 2 1366 "?" `1105 
-V L "s" 2 1366 "?" `1106 
-V G "pas" 2 1377 "[3]" `1108 
-V G "qas" 2 1378 "[3]" `1111 
-F N "ASIN_COS" 2 1380 ""
-V L "x" 2 1380 "float" `1114 
-V L "n" 2 1380 "int8" `1115 
-F G "ASIN_COS" 2 1381 "float(float x,int8 n)" `1113 
-V L "y" 2 1382 "float" `1116 
-V L "res" 2 1382 "float" `1117 
-V L "r" 2 1382 "float" `1118 
-V L "y2" 2 1382 "float" `1119 
-V L "s" 2 1383 "int1" `1120 
-C L "ASIN_COS" 2 2 1 "FUNCTION"
-C L "ASIN_COS" 2 2 1 "FUNCTION"
-C L "ASIN_COS" 2 2 2 "FUNCTION"
-F N "ASIN_COS" 2 1429 ""
-V L "x" 2 1429 "?" `1122 
-V L "n" 2 1429 "int8" `1123 
-F G "ASIN_COS" 2 1430 "?(? x,int8 n)" `1121 
-V L "y" 2 1431 "?" `1124 
-V L "res" 2 1431 "?" `1125 
-V L "r" 2 1431 "?" `1126 
-V L "y2" 2 1431 "?" `1127 
-V L "s" 2 1432 "int1" `1128 
-C L "ASIN_COS" 2 2 1 "FUNCTION"
-C L "ASIN_COS" 2 2 1 "FUNCTION"
-V G "pas_64" 2 1475 "?[5]" `1129 
-V G "qas_64" 2 1478 "?[5]" `1130 
-F N "ASIN_COS" 2 1481 ""
-V L "x" 2 1481 "?" `1132 
-V L "n" 2 1481 "int8" `1133 
-F G "ASIN_COS" 2 1482 "?(? x,int8 n)" `1131 
-V L "y" 2 1483 "?" `1134 
-V L "res" 2 1483 "?" `1135 
-V L "r" 2 1483 "?" `1136 
-V L "y2" 2 1483 "?" `1137 
-V L "s" 2 1484 "int1" `1138 
-C L "ASIN_COS" 2 2 1 "FUNCTION"
-C L "ASIN_COS" 2 2 1 "FUNCTION"
-C L "asin" 2 2 3 "FUNCTION"
-F N "asin" 2 1538 ""
-V L "x" 2 1538 "float" `1140 
-F G "asin" 2 1539 "float(float x)" `1139 
-V L "r" 2 1540 "float" `1141 
-C L "asin" 2 2 2 "FUNCTION"
-F N "asin" 2 1548 ""
-V L "x" 2 1548 "?" `1143 
-F G "asin" 2 1549 "?(? x)" `1142 
-V L "r" 2 1550 "?" `1144 
-C L "asin" 2 2 1 "FUNCTION"
-F N "asin" 2 1557 ""
-V L "x" 2 1557 "?" `1146 
-F G "asin" 2 1558 "?(? x)" `1145 
-V L "r" 2 1559 "?" `1147 
-C L "acos" 2 2 3 "FUNCTION"
-F N "acos" 2 1572 ""
-V L "x" 2 1572 "float" `1149 
-F G "acos" 2 1573 "float(float x)" `1148 
-V L "r" 2 1574 "float" `1150 
-C L "acos" 2 2 2 "FUNCTION"
-F N "acos" 2 1582 ""
-V L "x" 2 1582 "?" `1152 
-F G "acos" 2 1583 "?(? x)" `1151 
-V L "r" 2 1584 "?" `1153 
-C L "acos" 2 2 1 "FUNCTION"
-F N "acos" 2 1591 ""
-V L "x" 2 1591 "?" `1155 
-F G "acos" 2 1592 "?(? x)" `1154 
-V L "r" 2 1593 "?" `1156 
-V G "pat" 2 1600 "[4]" `1158 
-V G "qat" 2 1601 "[4]" `1161 
-C L "atan" 2 2 3 "FUNCTION"
-F N "atan" 2 1609 ""
-V L "x" 2 1609 "float" `1164 
-F G "atan" 2 1610 "float(float x)" `1163 
-V L "y" 2 1611 "float" `1165 
-V L "res" 2 1611 "float" `1166 
-V L "r" 2 1611 "float" `1167 
-V L "s" 2 1612 "int1" `1168 
-V L "flag" 2 1612 "int1" `1169 
-C L "atan" 2 2 1 "FUNCTION"
-C L "atan" 2 2 2 "FUNCTION"
-F N "atan" 2 1651 ""
-V L "x" 2 1651 "?" `1171 
-F G "atan" 2 1652 "?(? x)" `1170 
-V L "y" 2 1653 "?" `1172 
-V L "res" 2 1653 "?" `1173 
-V L "r" 2 1653 "?" `1174 
-V L "s" 2 1654 "int1" `1175 
-V L "flag" 2 1654 "int1" `1176 
-C L "atan" 2 2 1 "FUNCTION"
-V G "pat_64" 2 1691 "?[6]" `1177 
-V G "qat_64" 2 1694 "?[6]" `1178 
-C L "atan" 2 2 1 "FUNCTION"
-F N "atan" 2 1697 ""
-V L "x" 2 1697 "?" `1180 
-F G "atan" 2 1698 "?(? x)" `1179 
-V L "y" 2 1699 "?" `1181 
-V L "y2" 2 1699 "?" `1182 
-V L "res" 2 1699 "?" `1183 
-V L "r" 2 1699 "?" `1184 
-V L "s" 2 1700 "int1" `1185 
-V L "flag" 2 1700 "int1" `1186 
-C L "atan" 2 2 1 "FUNCTION"
-C L "atan2" 2 2 5 "FUNCTION"
-F N "atan2" 2 1752 ""
-V L "y" 2 1752 "float" `1188 
-V L "x" 2 1752 "float" `1189 
-F G "atan2" 2 1753 "float(float y,float x)" `1187 
-V L "z" 2 1754 "float" `1190 
-V L "sign" 2 1755 "int1" `1191 
-V L "quad" 2 1756 "int8" `1192 
-C L "atan2" 2 2 1 "FUNCTION"
-C L "atan2" 2 2 1 "FUNCTION"
-C L "atan2" 2 2 2 "FUNCTION"
-F N "atan2" 2 1824 ""
-V L "y" 2 1824 "?" `1194 
-V L "x" 2 1824 "?" `1195 
-F G "atan2" 2 1825 "?(? y,? x)" `1193 
-V L "z" 2 1826 "?" `1196 
-V L "sign" 2 1827 "int1" `1197 
-V L "quad" 2 1828 "int8" `1198 
-C L "atan2" 2 2 1 "FUNCTION"
-C L "atan2" 2 2 1 "FUNCTION"
-C L "atan2" 2 2 1 "FUNCTION"
-F N "atan2" 2 1894 ""
-V L "y" 2 1894 "?" `1200 
-V L "x" 2 1894 "?" `1201 
-F G "atan2" 2 1895 "?(? y,? x)" `1199 
-V L "z" 2 1896 "?" `1202 
-V L "sign" 2 1897 "int1" `1203 
-V L "quad" 2 1898 "int8" `1204 
-C L "atan2" 2 2 1 "FUNCTION"
-C L "atan2" 2 2 1 "FUNCTION"
-C L "cosh" 2 2 5 "FUNCTION"
-F N "cosh" 2 1974 ""
-V L "x" 2 1974 "float" `1206 
-F G "cosh" 2 1975 "float(float x)" `1205 
-C L "cosh" 2 2 2 "FUNCTION"
-F N "cosh" 2 1981 ""
-V L "x" 2 1981 "?" `1208 
-F G "cosh" 2 1982 "?(? x)" `1207 
-C L "cosh" 2 2 1 "FUNCTION"
-F N "cosh" 2 1987 ""
-V L "x" 2 1987 "?" `1210 
-F G "cosh" 2 1988 "?(? x)" `1209 
-C L "sinh" 2 2 4 "FUNCTION"
-F N "sinh" 2 2001 ""
-V L "x" 2 2001 "float" `1212 
-F G "sinh" 2 2002 "float(float x)" `1211 
-C L "sinh" 2 2 2 "FUNCTION"
-F N "sinh" 2 2009 ""
-V L "x" 2 2009 "?" `1214 
-F G "sinh" 2 2010 "?(? x)" `1213 
-C L "sinh" 2 2 1 "FUNCTION"
-F N "sinh" 2 2016 ""
-V L "x" 2 2016 "?" `1216 
-F G "sinh" 2 2017 "?(? x)" `1215 
-C L "tanh" 2 2 4 "FUNCTION"
-F N "tanh" 2 2031 ""
-V L "x" 2 2031 "float" `1218 
-F G "tanh" 2 2032 "float(float x)" `1217 
-C L "tanh" 2 2 2 "FUNCTION"
-F N "tanh" 2 2038 ""
-V L "x" 2 2038 "?" `1220 
-F G "tanh" 2 2039 "?(? x)" `1219 
-C L "tanh" 2 2 1 "FUNCTION"
-F N "tanh" 2 2044 ""
-V L "x" 2 2044 "?" `1222 
-F G "tanh" 2 2045 "?(? x)" `1221 
-D G "LOG2" 2 2061 ".30102999566398119521"
-D G "LOG2_INV" 2 2062 "3.32192809488736234787"
-F N "frexp" 2 2063 ""
-V L "x" 2 2063 "float" `1224 
-V L "exp" 2 2063 "*sint8" `1225 
-F G "frexp" 2 2064 "float(float x,*sint8 exp)" `1223 
-V L "res" 2 2065 "float" `1226 
-V L "sign" 2 2066 "int1" `1227 
-C L "frexp" 2 2 2 "FUNCTION"
-F N "frexp" 2 2110 ""
-V L "x" 2 2110 "?" `1229 
-V L "exp" 2 2110 "*sint8" `1230 
-F G "frexp" 2 2111 "?(? x,*sint8 exp)" `1228 
-V L "res" 2 2112 "?" `1231 
-V L "sign" 2 2113 "int1" `1232 
-C L "frexp" 2 2 1 "FUNCTION"
-F N "frexp" 2 2155 ""
-V L "x" 2 2155 "?" `1234 
-V L "exp" 2 2155 "*sint8" `1235 
-F G "frexp" 2 2156 "?(? x,*sint8 exp)" `1233 
-V L "res" 2 2157 "?" `1236 
-V L "sign" 2 2158 "int1" `1237 
-C L "ldexp" 2 2 4 "FUNCTION"
-F N "ldexp" 2 2208 ""
-V L "value" 2 2208 "float" `1241 
-V L "exp" 2 2208 "sint8" `1242 
-F G "ldexp" 2 2209 "float(float value,sint8 exp)" `1240 
-C L "ldexp" 2 2 2 "FUNCTION"
-F N "ldexp" 2 2216 ""
-V L "value" 2 2216 "?" `1244 
-V L "exp" 2 2216 "sint8" `1245 
-F G "ldexp" 2 2217 "?(? value,sint8 exp)" `1243 
-C L "ldexp" 2 2 1 "FUNCTION"
-F N "ldexp" 2 2221 ""
-V L "value" 2 2221 "?" `1247 
-V L "exp" 2 2221 "sint8" `1248 
-F G "ldexp" 2 2222 "?(? value,sint8 exp)" `1246 
-D G "P1TCON" 0 15 "0x01C0"
-D G "P1TMR" 0 16 "0x01C2"
-D G "P1TPER" 0 17 "0x01C4"
-D G "P1SECMP" 0 18 "0x01C6"
-D G "PWM1CON1" 0 19 "0x01C8"
-D G "PWM1CON2" 0 20 "0x01CA"
-D G "P1DTCON1" 0 21 "0x01CC"
-D G "P1DTCON2" 0 22 "0x01CE"
-D G "P1FLTACON" 0 23 "0x01D0"
-D G "P1OVDCON" 0 24 "0x01D4"
-D G "P1DC1" 0 25 "0x01D6"
-D G "P1DC2" 0 26 "0x01D8"
-D G "P1DC3" 0 27 "0x01DA"
-D G "IPC14" 0 28 "0x00C0"
-D G "CLKDIV" 0 29 "0x0744"
-D G "PLLFBD" 0 30 "0x0746"
-D G "ADC_pin" 0 33 "sAN0"
-D G "LED_PIN" 0 34 "PIN_B5"
-D G "voltage_offset" 0 36 "1000" "1248"
-D G "low_duty_limit" 0 37 "50"
-D G "high_duty_limit" 0 38 "1950"
-D G "SLOPE" 0 39 "5.4"
-D G "break_level" 0 41 "5"
-D G "sustain_level" 0 42 "200"
-D G "break_amplitude" 0 43 "0"
-D G "pedestal_amplitude" 0 44 "5"
-D G "peak_amplitude" 0 45 "950"
-D G "throttle_PIN" 0 48 "PIN_B1"
-D G "PWM_tick_pin" 0 49 "PIN_B2"
-D G "TIM_tick_pin" 0 50 "PIN_B3"
-D G "kalman_up" 0 52 "18"
-D G "kalman_diff_down" 0 53 "8"
-D G "init_freq" 0 55 "30"
-F N "initMCPWM" 0 59 ""
-f G "initMCPWM" 0 59 "void()" `1249 
-F N "fill_sine_table" 0 60 ""
-f G "fill_sine_table" 0 60 "void()" `1250 
-F N "timer_reload" 0 61 ""
-f G "timer_reload" 0 61 "void()" `1251 
-F N "voltage_gain" 0 62 ""
-f G "voltage_gain" 0 62 "void()" `1252 
-V G "duty" 0 65 "int16[3]" `1253 
-V G "sample" 0 65 "int16" `1254 
-V G "peak_voltage" 0 66 "sint16" `1255 
-C L "voltage_gain" 0 40 1 "FUNCTION"
-V G "reference" 0 67 "sint32[3]" `1256 
-V G "max_samples" 0 69 "int16" `1257 
-V G "sine_table" 0 70 "sint16[30]" `1259 
-V G "sine_index" 0 71 "int16" `1260 
-V G "phase_angle" 0 71 "int16[3]" `1261 
-V G "theeta" 0 72 "?" `1262 
-V G "max_freq" 0 74 "int16" `1263 
-C L "voltage_gain" 0 40 3 "FUNCTION"
-V G "per_clock_tick" 0 77 "?" `1265 
-C L "voltage_gain" 0 40 1 "FUNCTION"
-V G "timer_table" 0 78 "int16[251]" `1267 
-V G "gain_table" 0 80 "int16[256]" `1268 
-V G "raw_adc" 0 81 "int16" `1269 
-V G "throttle_level" 0 82 "sint16" `1270 
-V G "freq" 0 83 "int16" `1271 
-V G "temp" 0 84 "int16" `1272 
-V G "tick" 0 86 "int1" `1273 
-V G "uart_tick" 0 87 "int1" `1274 
-V G "tick_count" 0 88 "sint8" `1275 
-V G "millis_count" 0 89 "int32" `1276 
-V G "Serial_OutputBuffer" 0 91 "sint8[60]" `1277 
-V G "kalman_big_1" 0 93 "sint32" `1278 
-V G "kalman_big_2" 0 93 "sint32" `1279 
-V G "kalman_diff" 0 93 "sint32" `1280 
-F N "PWM1_isr" 0 97 ""
-F G "PWM1_isr" 0 98 "void()" `1281 
-C L "PWM1_isr" 0 40 1 "FUNCTION"
-F N "timer1_isr" 0 118 ""
-F G "timer1_isr" 0 119 "void()" `1282 
-C L "timer1_isr" 0 40 2 "FUNCTION"
-V L "i" 0 131 "sint16" `1283 
-C L "timer1_isr" 0 40 8 "FUNCTION"
-F N "MAIN" 0 179 ""
-F G "MAIN" 0 180 "void()" `1287 
-C L "MAIN" 0 40 4 "FUNCTION"
-C L "MAIN" 0 40 1 "FUNCTION"
-F N "initMCPWM" 0 281 ""
-F G "initMCPWM" 0 282 "void()" `1249 
-C L "initMCPWM" 0 40 1 "FUNCTION"
-C L "initMCPWM" 0 40 1 "FUNCTION"
-F N "fill_sine_table" 0 300 ""
-F G "fill_sine_table" 0 301 "void()" `1250 
-F N "timer_reload" 0 310 ""
-F G "timer_reload" 0 311 "void()" `1251 
-V L "intr_per_sample" 0 312 "?" `1298 
-V L "sample" 0 314 "sint16" `1299 
-F N "voltage_gain" 0 324 ""
-F G "voltage_gain" 0 325 "void()" `1252 
-V L "i" 0 326 "sint16" `1300 
-V L "i" 0 330 "sint16" `1301 
-V L "i" 0 339 "sint16" `1302 
+V G "timer_table" 2 1 "[1]" `828 
+V G "gain_table" 2 22 "[256]" `831 
+D G "MATH_H" 3 30 ""
+D G "PI" 3 35 "3.1415926535897932"
+D G "SQRT2" 3 38 "1.4142135623730950"
+C L "jump_to_isr" 3 2 3 "FUNCTION"
+F N "CEIL_FLOOR" 3 45 ""
+V L "x" 3 45 "float" `840 
+V L "n" 3 45 "int8" `841 
+F G "CEIL_FLOOR" 3 46 "float(float x,int8 n,float )" `839 
+V L "y" 3 47 "float" `842 
+V L "res" 3 47 "float" `843 
+V L "l" 3 48 "int16" `844 
+V L "s" 3 49 "int1" `845 
+C L "CEIL_FLOOR" 3 2 2 "FUNCTION"
+F N "CEIL_FLOOR" 3 96 ""
+V L "x" 3 96 "?" `860 
+V L "n" 3 96 "int8" `861 
+F G "CEIL_FLOOR" 3 97 "?(? x,int8 n,? )" `859 
+V L "y" 3 98 "?" `862 
+V L "res" 3 98 "?" `863 
+V L "l" 3 99 "int32" `864 
+V L "s" 3 100 "int1" `865 
+C L "CEIL_FLOOR" 3 2 1 "FUNCTION"
+F N "CEIL_FLOOR" 3 149 ""
+V L "x" 3 149 "?" `880 
+V L "n" 3 149 "int8" `881 
+F G "CEIL_FLOOR" 3 150 "?(? x,int8 n,? )" `879 
+V L "y" 3 151 "?" `882 
+V L "res" 3 151 "?" `883 
+V L "l" 3 152 "?" `884 
+V L "s" 3 153 "int1" `885 
+C L "floor" 3 2 3 "FUNCTION"
+F N "floor" 3 207 ""
+V L "x" 3 207 "float" `904 
+F G "floor" 3 208 "float(float x)" `903 
+C L "floor" 3 2 2 "FUNCTION"
+F N "floor" 3 214 ""
+V L "x" 3 214 "?" `906 
+F G "floor" 3 215 "?(? x)" `905 
+C L "floor" 3 2 1 "FUNCTION"
+F N "floor" 3 220 ""
+V L "x" 3 220 "?" `908 
+F G "floor" 3 221 "?(? x)" `907 
+C L "ceil" 3 2 3 "FUNCTION"
+F N "ceil" 3 233 ""
+V L "x" 3 233 "float" `910 
+F G "ceil" 3 234 "float(float x,float PI)" `909 
+C L "ceil" 3 2 2 "FUNCTION"
+F N "ceil" 3 240 ""
+V L "x" 3 240 "?" `912 
+F G "ceil" 3 241 "?(? x)" `911 
+C L "ceil" 3 2 1 "FUNCTION"
+F N "ceil" 3 246 ""
+V L "x" 3 246 "?" `914 
+F G "ceil" 3 247 "?(? x,float )" `913 
+D G "fabs" 3 259 "abs"
+C L "fmod" 3 2 6 "FUNCTION"
+F N "fmod" 3 271 ""
+V L "x" 3 271 "float" `916 
+V L "y" 3 271 "float" `917 
+F G "fmod" 3 272 "float(float x,float y,? PI)" `915 
+V L "i" 3 273 "float" `918 
+C L "fmod" 3 2 2 "FUNCTION"
+F N "fmod" 3 291 ""
+V L "x" 3 291 "?" `923 
+V L "y" 3 291 "?" `924 
+F G "fmod" 3 292 "?(? x,? y,? PI)" `922 
+V L "i" 3 293 "?" `925 
+C L "fmod" 3 2 1 "FUNCTION"
+F N "fmod" 3 309 ""
+V L "x" 3 309 "?" `930 
+V L "y" 3 309 "?" `931 
+F G "fmod" 3 310 "?(? x,? y)" `929 
+V L "i" 3 311 "?" `932 
+D G "LN2" 3 334 "0.6931471805599453"
+D G "LN2_INV" 3 335 "1.4426950408889634073"
+V G "pe" 3 337 "[6]" `937 
+F N "exp" 3 341 ""
+V L "x" 3 341 "float" `940 
+F G "exp" 3 342 "float(float x)" `939 
+V L "y" 3 343 "float" `941 
+V L "res" 3 343 "float" `942 
+V L "r" 3 343 "float" `943 
+V L "data1" 3 345 "sint8" `944 
+V L "n" 3 347 "sint8" `945 
+V L "s" 3 348 "int1" `946 
+C L "exp" 3 2 1 "FUNCTION"
+C L "exp" 3 2 2 "FUNCTION"
+F N "exp" 3 400 ""
+V L "x" 3 400 "?" `950 
+F G "exp" 3 401 "?(? x)" `949 
+V L "y" 3 402 "?" `951 
+V L "res" 3 402 "?" `952 
+V L "r" 3 402 "?" `953 
+V L "data1" 3 403 "sint8" `954 
+V L "n" 3 404 "sint8" `955 
+V L "s" 3 405 "int1" `956 
+V G "pe_64" 3 449 "[12]" `960 
+F N "exp" 3 456 ""
+V L "x" 3 456 "?" `963 
+F G "exp" 3 457 "?(? x)" `962 
+V L "y" 3 458 "?" `964 
+V L "res" 3 458 "?" `965 
+V L "r" 3 458 "?" `966 
+V L "data1" 3 459 "int16" `967 
+V L "data2" 3 459 "int16" `968 
+V L "p" 3 460 "*int16" `969 
+V L "n" 3 461 "sint16" `970 
+V L "s" 3 462 "int1" `971 
+V G "pl" 3 525 "[4]" `973 
+V G "ql" 3 526 "[4]" `976 
+C L "log" 3 2 3 "FUNCTION"
+F N "log" 3 534 ""
+V L "x" 3 534 "float" `979 
+F G "log" 3 535 "float(float x)" `978 
+V L "y" 3 536 "float" `980 
+V L "res" 3 536 "float" `981 
+V L "r" 3 536 "float" `982 
+V L "y2" 3 536 "float" `983 
+V L "data1" 3 538 "int8" `984 
+V L "data2" 3 538 "int8" `985 
+V L "n" 3 540 "sint8" `986 
+C L "log" 3 2 1 "FUNCTION"
+V G "pl_64" 3 610 "[4]" `988 
+V G "ql_64" 3 613 "[4]" `991 
+F N "log" 3 616 ""
+V L "x" 3 616 "?" `994 
+F G "log" 3 617 "?(? x)" `993 
+V L "y" 3 618 "?" `995 
+V L "res" 3 618 "?" `996 
+V L "r" 3 618 "?" `997 
+V L "y2" 3 618 "?" `998 
+V L "data1" 3 619 "int8" `999 
+V L "data2" 3 619 "int8" `1000 
+V L "n" 3 620 "sint8" `1001 
+F N "log" 3 684 ""
+V L "x" 3 684 "?" `1003 
+F G "log" 3 685 "?(? x)" `1002 
+V L "y" 3 686 "?" `1004 
+V L "res" 3 686 "?" `1005 
+V L "r" 3 686 "?" `1006 
+V L "y2" 3 686 "?" `1007 
+V L "data1" 3 687 "int16" `1008 
+V L "data2" 3 687 "int16" `1009 
+V L "p" 3 688 "*int16" `1010 
+V L "n" 3 689 "sint16" `1011 
+D G "LN10" 3 758 "2.3025850929940456"
+D G "LN10_INV" 3 759 "0.4342944819032518276"
+C L "log10" 3 2 3 "FUNCTION"
+F N "log10" 3 767 ""
+V L "x" 3 767 "float" `1013 
+F G "log10" 3 768 "float(float x)" `1012 
+V L "r" 3 769 "float" `1014 
+C L "log10" 3 2 2 "FUNCTION"
+F N "log10" 3 779 ""
+V L "x" 3 779 "?" `1016 
+F G "log10" 3 780 "?(? x,*float LN10)" `1015 
+V L "r" 3 781 "?" `1017 
+C L "log10" 3 2 1 "FUNCTION"
+F N "log10" 3 789 ""
+V L "x" 3 789 "?" `1019 
+F G "log10" 3 790 "?(? x,??0 * LN10)" `1018 
+V L "r" 3 791 "?" `1020 
+C L "modf" 3 2 6 "FUNCTION"
+F N "modf" 3 808 ""
+V L "value" 3 808 "float" `1022 
+V L "iptr" 3 808 "*float" `1023 
+F G "modf" 3 809 "float(float value,*float iptr)" `1021 
+C L "modf" 3 2 2 "FUNCTION"
+F N "modf" 3 816 ""
+V L "value" 3 816 "?" `1025 
+V L "iptr" 3 816 "??0 *" `1026 
+F G "modf" 3 817 "?(? value,??0 * iptr)" `1024 
+C L "modf" 3 2 1 "FUNCTION"
+F N "modf" 3 822 ""
+V L "value" 3 822 "?" `1028 
+V L "iptr" 3 822 "??0 *" `1029 
+F G "modf" 3 823 "?(? value,??0 * iptr)" `1027 
+C L "pwr" 3 2 4 "FUNCTION"
+F N "pwr" 3 836 ""
+V L "x" 3 836 "float" `1031 
+V L "y" 3 836 "float" `1032 
+F G "pwr" 3 837 "float(float x,float y)" `1030 
+C L "pwr" 3 2 2 "FUNCTION"
+F N "pwr" 3 855 ""
+V L "x" 3 855 "?" `1034 
+V L "y" 3 855 "?" `1035 
+F G "pwr" 3 856 "?(? x,? y)" `1033 
+C L "pwr" 3 2 1 "FUNCTION"
+F N "pwr" 3 872 ""
+V L "x" 3 872 "?" `1037 
+V L "y" 3 872 "?" `1038 
+F G "pwr" 3 873 "?(? x,? y)" `1036 
+C L "pow" 3 2 5 "FUNCTION"
+F N "pow" 3 899 ""
+V L "x" 3 899 "float" `1040 
+V L "y" 3 899 "float" `1041 
+F G "pow" 3 900 "float(float x,float y)" `1039 
+C L "pow" 3 2 2 "FUNCTION"
+F N "pow" 3 918 ""
+V L "x" 3 918 "?" `1043 
+V L "y" 3 918 "?" `1044 
+F G "pow" 3 919 "?(? x,? y)" `1042 
+C L "pow" 3 2 1 "FUNCTION"
+F N "pow" 3 936 ""
+V L "x" 3 936 "?" `1046 
+V L "y" 3 936 "?" `1047 
+F G "pow" 3 937 "?(? x,? y)" `1045 
+C L "sqrt" 3 2 3 "FUNCTION"
+F N "sqrt" 3 960 ""
+V L "x" 3 960 "float" `1049 
+F G "sqrt" 3 961 "float(float x)" `1048 
+V L "y" 3 962 "float" `1050 
+V L "res" 3 962 "float" `1051 
+V L "data1" 3 964 "int16" `1052 
+V L "data2" 3 964 "int16" `1053 
+C L "sqrt" 3 2 2 "FUNCTION"
+F N "sqrt" 3 1033 ""
+V L "x" 3 1033 "?" `1055 
+F G "sqrt" 3 1034 "?(? x,? x)" `1054 
+V L "y" 3 1035 "?" `1056 
+V L "res" 3 1035 "?" `1057 
+V L "data1" 3 1036 "int16" `1058 
+V L "data2" 3 1036 "int16" `1059 
+V L "p" 3 1037 "*int8" `1060 
+C L "sqrt" 3 2 1 "FUNCTION"
+F N "sqrt" 3 1100 ""
+V L "x" 3 1100 "?" `1062 
+F G "sqrt" 3 1101 "?(? x,float x)" `1061 
+V L "y" 3 1102 "?" `1063 
+V L "res" 3 1102 "?" `1064 
+V L "p" 3 1103 "*int16" `1065 
+V L "temp1" 3 1104 "int16" `1066 
+V L "temp2" 3 1104 "int16" `1067 
+D G "PI_DIV_BY_TWO_INV" 3 1156 "0.63661977236758134"
+D G "PI_DIV_BY_TWO" 3 1160 "1.5707963267948966"
+D G "TWOBYPI" 3 1164 "0.6366197723675813"
+C L "cos" 3 2 3 "FUNCTION"
+F N "cos" 3 1172 ""
+V L "x" 3 1172 "float" `1069 
+F G "cos" 3 1173 "float(float x)" `1068 
+V L "y" 3 1174 "float" `1070 
+V L "t" 3 1174 "float" `1071 
+V L "t2" 3 1174 "float" `1072 
+V L "quad" 3 1175 "int8" `1073 
+V L "i" 3 1175 "int8" `1074 
+V L "frac" 3 1176 "float" `1075 
+V L "p" 3 1177 "float[5]" `1076  "by the series definition for cosine"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 2 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 2 "FUNCTION"
+F N "cos" 3 1218 ""
+V L "x" 3 1218 "?" `1078 
+F G "cos" 3 1219 "?(? x)" `1077 
+V L "y" 3 1220 "?" `1079 
+V L "t" 3 1220 "?" `1080 
+V L "t2" 3 1220 "?" `1081 
+V L "quad" 3 1221 "int8" `1082 
+V L "i" 3 1221 "int8" `1083 
+V L "frac" 3 1222 "?" `1084 
+V L "p" 3 1223 "?[6]" `1085  "by the series definition for cosine"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+F N "cos" 3 1260 ""
+V L "x" 3 1260 "?" `1087 
+F G "cos" 3 1261 "?(? x)" `1086 
+V L "y" 3 1262 "?" `1088 
+V L "t" 3 1262 "?" `1089 
+V L "t2" 3 1262 "?" `1090 
+V L "quad" 3 1263 "int8" `1091 
+V L "i" 3 1263 "int8" `1092 
+V L "frac" 3 1264 "?" `1093 
+V L "p_64" 3 1265 "?[9]" `1094  "by the series definition for cosine"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "cos" 3 2 1 "FUNCTION"
+C L "sin" 3 2 3 "FUNCTION"
+F N "sin" 3 1311 ""
+V L "x" 3 1311 "float" `1096 
+F G "sin" 3 1312 "float(float x)" `1095 
+C L "sin" 3 2 2 "FUNCTION"
+F N "sin" 3 1319 ""
+V L "x" 3 1319 "?" `1098 
+F G "sin" 3 1320 "?(? x)" `1097 
+C L "sin" 3 2 1 "FUNCTION"
+F N "sin" 3 1325 ""
+V L "x" 3 1325 "?" `1100 
+F G "sin" 3 1326 "?(? x)" `1099 
+C L "tan" 3 2 3 "FUNCTION"
+F N "tan" 3 1337 ""
+V L "x" 3 1337 "float" `1102 
+F G "tan" 3 1338 "float(float x)" `1101 
+V L "c" 3 1339 "float" `1103 
+V L "s" 3 1339 "float" `1104 
+C L "tan" 3 2 2 "FUNCTION"
+F N "tan" 3 1351 ""
+V L "x" 3 1351 "?" `1106 
+F G "tan" 3 1352 "?(? x)" `1105 
+V L "c" 3 1353 "?" `1107 
+V L "s" 3 1353 "?" `1108 
+C L "tan" 3 2 1 "FUNCTION"
+F N "tan" 3 1364 ""
+V L "x" 3 1364 "?" `1110 
+F G "tan" 3 1365 "?(? x)" `1109 
+V L "c" 3 1366 "?" `1111 
+V L "s" 3 1366 "?" `1112 
+V G "pas" 3 1377 "[3]" `1114 
+V G "qas" 3 1378 "[3]" `1117 
+F N "ASIN_COS" 3 1380 ""
+V L "x" 3 1380 "float" `1120 
+V L "n" 3 1380 "int8" `1121 
+F G "ASIN_COS" 3 1381 "float(float x,int8 n,? x,int8 MATH_H)" `1119 
+V L "y" 3 1382 "float" `1122 
+V L "res" 3 1382 "float" `1123 
+V L "r" 3 1382 "float" `1124 
+V L "y2" 3 1382 "float" `1125 
+V L "s" 3 1383 "int1" `1126 
+C L "ASIN_COS" 3 2 1 "FUNCTION"
+C L "ASIN_COS" 3 2 1 "FUNCTION"
+C L "ASIN_COS" 3 2 2 "FUNCTION"
+F N "ASIN_COS" 3 1429 ""
+V L "x" 3 1429 "?" `1128 
+V L "n" 3 1429 "int8" `1129 
+F G "ASIN_COS" 3 1430 "?(? x,int8 n)" `1127 
+V L "y" 3 1431 "?" `1130 
+V L "res" 3 1431 "?" `1131 
+V L "r" 3 1431 "?" `1132 
+V L "y2" 3 1431 "?" `1133 
+V L "s" 3 1432 "int1" `1134 
+C L "ASIN_COS" 3 2 1 "FUNCTION"
+C L "ASIN_COS" 3 2 1 "FUNCTION"
+V G "pas_64" 3 1475 "?[5]" `1135 
+V G "qas_64" 3 1478 "?[5]" `1136 
+F N "ASIN_COS" 3 1481 ""
+V L "x" 3 1481 "?" `1138 
+V L "n" 3 1481 "int8" `1139 
+F G "ASIN_COS" 3 1482 "?(? x,int8 n,float x)" `1137 
+V L "y" 3 1483 "?" `1140 
+V L "res" 3 1483 "?" `1141 
+V L "r" 3 1483 "?" `1142 
+V L "y2" 3 1483 "?" `1143 
+V L "s" 3 1484 "int1" `1144 
+C L "ASIN_COS" 3 2 1 "FUNCTION"
+C L "ASIN_COS" 3 2 1 "FUNCTION"
+C L "asin" 3 2 3 "FUNCTION"
+F N "asin" 3 1538 ""
+V L "x" 3 1538 "float" `1146 
+F G "asin" 3 1539 "float(float x)" `1145 
+V L "r" 3 1540 "float" `1147 
+C L "asin" 3 2 2 "FUNCTION"
+F N "asin" 3 1548 ""
+V L "x" 3 1548 "?" `1149 
+F G "asin" 3 1549 "?(? x)" `1148 
+V L "r" 3 1550 "?" `1150 
+C L "asin" 3 2 1 "FUNCTION"
+F N "asin" 3 1557 ""
+V L "x" 3 1557 "?" `1152 
+F G "asin" 3 1558 "?(? x)" `1151 
+V L "r" 3 1559 "?" `1153 
+C L "acos" 3 2 3 "FUNCTION"
+F N "acos" 3 1572 ""
+V L "x" 3 1572 "float" `1155 
+F G "acos" 3 1573 "float(float x)" `1154 
+V L "r" 3 1574 "float" `1156 
+C L "acos" 3 2 2 "FUNCTION"
+F N "acos" 3 1582 ""
+V L "x" 3 1582 "?" `1158 
+F G "acos" 3 1583 "?(? x)" `1157 
+V L "r" 3 1584 "?" `1159 
+C L "acos" 3 2 1 "FUNCTION"
+F N "acos" 3 1591 ""
+V L "x" 3 1591 "?" `1161 
+F G "acos" 3 1592 "?(? x)" `1160 
+V L "r" 3 1593 "?" `1162 
+V G "pat" 3 1600 "[4]" `1164 
+V G "qat" 3 1601 "[4]" `1167 
+C L "atan" 3 2 3 "FUNCTION"
+F N "atan" 3 1609 ""
+V L "x" 3 1609 "float" `1170 
+F G "atan" 3 1610 "float(float x,? x)" `1169 
+V L "y" 3 1611 "float" `1171 
+V L "res" 3 1611 "float" `1172 
+V L "r" 3 1611 "float" `1173 
+V L "s" 3 1612 "int1" `1174 
+V L "flag" 3 1612 "int1" `1175 
+C L "atan" 3 2 1 "FUNCTION"
+C L "atan" 3 2 2 "FUNCTION"
+F N "atan" 3 1651 ""
+V L "x" 3 1651 "?" `1177 
+F G "atan" 3 1652 "?(? x)" `1176 
+V L "y" 3 1653 "?" `1178 
+V L "res" 3 1653 "?" `1179 
+V L "r" 3 1653 "?" `1180 
+V L "s" 3 1654 "int1" `1181 
+V L "flag" 3 1654 "int1" `1182 
+C L "atan" 3 2 1 "FUNCTION"
+V G "pat_64" 3 1691 "?[6]" `1183 
+V G "qat_64" 3 1694 "?[6]" `1184 
+C L "atan" 3 2 1 "FUNCTION"
+F N "atan" 3 1697 ""
+V L "x" 3 1697 "?" `1186 
+F G "atan" 3 1698 "?(? x)" `1185 
+V L "y" 3 1699 "?" `1187 
+V L "y2" 3 1699 "?" `1188 
+V L "res" 3 1699 "?" `1189 
+V L "r" 3 1699 "?" `1190 
+V L "s" 3 1700 "int1" `1191 
+V L "flag" 3 1700 "int1" `1192 
+C L "atan" 3 2 1 "FUNCTION"
+C L "atan2" 3 2 5 "FUNCTION"
+F N "atan2" 3 1752 ""
+V L "y" 3 1752 "float" `1194 
+V L "x" 3 1752 "float" `1195 
+F G "atan2" 3 1753 "float(float y,float x)" `1193 
+V L "z" 3 1754 "float" `1196 
+V L "sign" 3 1755 "int1" `1197 
+V L "quad" 3 1756 "int8" `1198 
+C L "atan2" 3 2 1 "FUNCTION"
+C L "atan2" 3 2 1 "FUNCTION"
+C L "atan2" 3 2 2 "FUNCTION"
+F N "atan2" 3 1824 ""
+V L "y" 3 1824 "?" `1200 
+V L "x" 3 1824 "?" `1201 
+F G "atan2" 3 1825 "?(? y,? x)" `1199 
+V L "z" 3 1826 "?" `1202 
+V L "sign" 3 1827 "int1" `1203 
+V L "quad" 3 1828 "int8" `1204 
+C L "atan2" 3 2 1 "FUNCTION"
+C L "atan2" 3 2 1 "FUNCTION"
+C L "atan2" 3 2 1 "FUNCTION"
+F N "atan2" 3 1894 ""
+V L "y" 3 1894 "?" `1206 
+V L "x" 3 1894 "?" `1207 
+F G "atan2" 3 1895 "?(? y,? x,? x)" `1205 
+V L "z" 3 1896 "?" `1208 
+V L "sign" 3 1897 "int1" `1209 
+V L "quad" 3 1898 "int8" `1210 
+C L "atan2" 3 2 1 "FUNCTION"
+C L "atan2" 3 2 1 "FUNCTION"
+C L "cosh" 3 2 5 "FUNCTION"
+F N "cosh" 3 1974 ""
+V L "x" 3 1974 "float" `1212 
+F G "cosh" 3 1975 "float(float x)" `1211 
+C L "cosh" 3 2 2 "FUNCTION"
+F N "cosh" 3 1981 ""
+V L "x" 3 1981 "?" `1214 
+F G "cosh" 3 1982 "?(? x)" `1213 
+C L "cosh" 3 2 1 "FUNCTION"
+F N "cosh" 3 1987 ""
+V L "x" 3 1987 "?" `1216 
+F G "cosh" 3 1988 "?(? x)" `1215 
+C L "sinh" 3 2 4 "FUNCTION"
+F N "sinh" 3 2001 ""
+V L "x" 3 2001 "float" `1218 
+F G "sinh" 3 2002 "float(float x)" `1217 
+C L "sinh" 3 2 2 "FUNCTION"
+F N "sinh" 3 2009 ""
+V L "x" 3 2009 "?" `1220 
+F G "sinh" 3 2010 "?(? x)" `1219 
+C L "sinh" 3 2 1 "FUNCTION"
+F N "sinh" 3 2016 ""
+V L "x" 3 2016 "?" `1222 
+F G "sinh" 3 2017 "?(? x)" `1221 
+C L "tanh" 3 2 4 "FUNCTION"
+F N "tanh" 3 2031 ""
+V L "x" 3 2031 "float" `1224 
+F G "tanh" 3 2032 "float(float x,*sint8 LN2)" `1223 
+C L "tanh" 3 2 2 "FUNCTION"
+F N "tanh" 3 2038 ""
+V L "x" 3 2038 "?" `1226 
+F G "tanh" 3 2039 "?(? x)" `1225 
+C L "tanh" 3 2 1 "FUNCTION"
+F N "tanh" 3 2044 ""
+V L "x" 3 2044 "?" `1228 
+F G "tanh" 3 2045 "?(? x,? x,*sint8 LN2)" `1227 
+D G "LOG2" 3 2061 ".30102999566398119521"
+D G "LOG2_INV" 3 2062 "3.32192809488736234787"
+F N "frexp" 3 2063 ""
+V L "x" 3 2063 "float" `1230 
+V L "exp" 3 2063 "*sint8" `1231 
+F G "frexp" 3 2064 "float(float x,*sint8 exp)" `1229 
+V L "res" 3 2065 "float" `1232 
+V L "sign" 3 2066 "int1" `1233 
+C L "frexp" 3 2 2 "FUNCTION"
+F N "frexp" 3 2110 ""
+V L "x" 3 2110 "?" `1235 
+V L "exp" 3 2110 "*sint8" `1236 
+F G "frexp" 3 2111 "?(? x,*sint8 exp)" `1234 
+V L "res" 3 2112 "?" `1237 
+V L "sign" 3 2113 "int1" `1238 
+C L "frexp" 3 2 1 "FUNCTION"
+F N "frexp" 3 2155 ""
+V L "x" 3 2155 "?" `1240 
+V L "exp" 3 2155 "*sint8" `1241 
+F G "frexp" 3 2156 "?(? x,*sint8 exp,sint8 LN2)" `1239 
+V L "res" 3 2157 "?" `1242 
+V L "sign" 3 2158 "int1" `1243 
+C L "ldexp" 3 2 4 "FUNCTION"
+F N "ldexp" 3 2208 ""
+V L "value" 3 2208 "float" `1247 
+V L "exp" 3 2208 "sint8" `1248 
+F G "ldexp" 3 2209 "float(float value,sint8 exp)" `1246 
+C L "ldexp" 3 2 2 "FUNCTION"
+F N "ldexp" 3 2216 ""
+V L "value" 3 2216 "?" `1250 
+V L "exp" 3 2216 "sint8" `1251 
+F G "ldexp" 3 2217 "?(? value,sint8 exp)" `1249 
+C L "ldexp" 3 2 1 "FUNCTION"
+F N "ldexp" 3 2221 ""
+V L "value" 3 2221 "?" `1253 
+V L "exp" 3 2221 "sint8" `1254 
+F G "ldexp" 3 2222 "?(? value,sint8 exp)" `1252 
+D G "P1TCON" 0 16 "0x01C0"
+D G "P1TMR" 0 17 "0x01C2"
+D G "P1TPER" 0 18 "0x01C4"
+D G "P1SECMP" 0 19 "0x01C6"
+D G "PWM1CON1" 0 20 "0x01C8"
+D G "PWM1CON2" 0 21 "0x01CA"
+D G "P1DTCON1" 0 22 "0x01CC"
+D G "P1DTCON2" 0 23 "0x01CE"
+D G "P1FLTACON" 0 24 "0x01D0"
+D G "P1OVDCON" 0 25 "0x01D4"
+D G "P1DC1" 0 26 "0x01D6"
+D G "P1DC2" 0 27 "0x01D8"
+D G "P1DC3" 0 28 "0x01DA"
+D G "IPC14" 0 29 "0x00C0"
+D G "CLKDIV" 0 30 "0x0744"
+D G "PLLFBD" 0 31 "0x0746"
+D G "ADC_pin" 0 34 "sAN0"
+D G "LED_PIN" 0 35 "PIN_B5"
+D G "voltage_offset" 0 37 "1000" "1248"
+D G "low_duty_limit" 0 38 "50"
+D G "high_duty_limit" 0 39 "1950"
+D G "SLOPE" 0 40 "0"
+D G "break_level" 0 42 "5"
+D G "sustain_level" 0 43 "200"
+D G "break_amplitude" 0 44 "0"
+D G "pedestal_amplitude" 0 46 "500"
+D G "peak_amplitude" 0 47 "950"
+D G "throttle_PIN" 0 50 "PIN_B1"
+D G "PWM_tick_pin" 0 51 "PIN_B2"
+D G "TIM_tick_pin" 0 52 "PIN_B3"
+D G "kalman_up" 0 54 "18"
+D G "kalman_diff_down" 0 55 "8"
+D G "init_freq" 0 57 "30"
+F N "initMCPWM" 0 61 ""
+f G "initMCPWM" 0 61 "void()" `1255 
+F N "fill_sine_table" 0 62 ""
+f G "fill_sine_table" 0 62 "void()" `1256 
+F N "timer_reload" 0 63 ""
+f G "timer_reload" 0 63 "void()" `1257 
+F N "voltage_gain" 0 64 ""
+f G "voltage_gain" 0 64 "void()" `1258 
+V G "duty" 0 67 "int16[3]" `1259 
+V G "sample" 0 67 "int16" `1260 
+V G "peak_voltage" 0 68 "sint16" `1261 
+C L "voltage_gain" 0 41 1 "FUNCTION"
+V G "reference" 0 69 "sint32[3]" `1262 
+V G "max_samples" 0 71 "int16" `1263 
+V G "sine_table" 0 72 "sint16[30]" `1265 
+V G "sine_index" 0 73 "int16" `1266 
+V G "phase_angle" 0 73 "int16[3]" `1267 
+V G "theeta" 0 74 "?" `1268 
+V G "max_freq" 0 76 "int16" `1269 
+C L "voltage_gain" 0 41 3 "FUNCTION"
+V G "per_clock_tick" 0 79 "?" `1271 
+C L "voltage_gain" 0 41 2 "FUNCTION"
+V G "raw_adc" 0 83 "int16" `1273 
+V G "throttle_level" 0 84 "sint16" `1274 
+V G "freq" 0 85 "int16" `1275 
+V G "temp" 0 86 "int16" `1276 
+V G "tick" 0 88 "int1" `1277 
+V G "uart_tick" 0 89 "int1" `1278 
+V G "tick_count" 0 90 "sint8" `1279 
+V G "millis_count" 0 91 "int32" `1280 
+V G "Serial_OutputBuffer" 0 93 "sint8[60]" `1281 
+V G "kalman_big_1" 0 95 "sint32" `1282 
+V G "kalman_big_2" 0 95 "sint32" `1283 
+V G "kalman_diff" 0 95 "sint32" `1284 
+F N "PWM1_isr" 0 99 ""
+F G "PWM1_isr" 0 100 "void()" `1285 
+C L "PWM1_isr" 0 41 1 "FUNCTION"
+F N "timer1_isr" 0 120 ""
+F G "timer1_isr" 0 121 "void()" `1286  "!    output_bit(TIM_tick_pin , 1);"
+C L "timer1_isr" 0 41 2 "FUNCTION"
+V L "i" 0 133 "sint16" `1287 
+C L "timer1_isr" 0 41 9 "FUNCTION"
+F N "timer2_isr" 0 181 ""
+F G "timer2_isr" 0 182 "void()" `1291 
+F N "MAIN" 0 190 ""
+F G "MAIN" 0 191 "void()" `1292 
+C L "MAIN" 0 41 2 "FUNCTION"
+C L "MAIN" 0 41 4 "FUNCTION"
+C L "MAIN" 0 41 1 "FUNCTION"
+C L "MAIN" 0 41 1 "FUNCTION"
+F N "initMCPWM" 0 289 ""
+F G "initMCPWM" 0 290 "void()" `1255 
+C L "initMCPWM" 0 41 1 "FUNCTION"
+C L "initMCPWM" 0 41 1 "FUNCTION"
+F N "fill_sine_table" 0 308 ""
+F G "fill_sine_table" 0 309 "void()" `1256 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1
