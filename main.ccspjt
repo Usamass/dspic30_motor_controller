@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=9
+Days=10
 D1=24-04-2024
 D1_L=27
 D1_L1=[38590]Project Opened.
@@ -297,20 +297,34 @@ D9_D=0
 D9_L31=[52727]Project Closed.
 D9_L32=[54520]Project Opened.
 D9_L33=[54562]Project Closed.
+D10=08-05-2024
+D10_L=12
+D10_L1=[34515]Project Opened.
+D10_L2=[34679]Started Editing.
+D10_L3=[35203]Stopped Editing.
+D10_L4=[35352]Started Editing.
+D10_L5=[36050]Stopped Editing.
+D10_L6=[36359]Started Editing.
+D10_L7=[36759]Stopped Editing.
+D10_L8=[36906]Started Editing.
+D10_L9=[37839]Stopped Editing.
+D10_L10=[37858]Started Editing.
+D10_L11=[38465]Stopped Editing.
+D10_L12=[38878]Started Editing.
 
 [Opened Files]
 1=main.c
-t1=194
-Count=1
+t1=1
+Count=2
 2=Inc\lookup_tables.h
-t2=1
+t2=28
 3=..\dspic30_motor_contr\quad_encoder.c
 t3=1
 [main.c]
 Type=4
 
 [defines]
-buildcount=471
+buildcount=485
 
 [ExtraIncludes]
 Count=0

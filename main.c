@@ -12,23 +12,22 @@
 #FUSES PROTECT                  //Code protected from reads
 #include <math.h>
 
-
-#define P1TCON 0x01C0
-#define P1TMR 0x01C2 
-#define P1TPER 0x01C4
-#define P1SECMP 0x01C6
-#define PWM1CON1 0x01C8 
-#define PWM1CON2 0x01CA
-#define P1DTCON1 0x01CC
-#define P1DTCON2 0x01CE  
+#define P1TCON    0x01C0
+#define P1TMR     0x01C2 
+#define P1TPER    0x01C4
+#define P1SECMP   0x01C6
+#define PWM1CON1  0x01C8 
+#define PWM1CON2  0x01CA
+#define P1DTCON1  0x01CC
+#define P1DTCON2  0x01CE  
 #define P1FLTACON 0x01D0
-#define P1OVDCON 0x01D4   
-#define P1DC1 0x01D6   
-#define P1DC2 0x01D8
-#define P1DC3 0x01DA
-#define IPC14 0x00C0  
-#define CLKDIV 0x0744 
-#define PLLFBD 0x0746
+#define P1OVDCON  0x01D4   
+#define P1DC1     0x01D6   
+#define P1DC2     0x01D8
+#define P1DC3     0x01DA
+#define IPC14     0x00C0  
+#define CLKDIV    0x0744 
+#define PLLFBD    0x0746
 
 
 #define ADC_pin sAN0
@@ -38,11 +37,11 @@
 #define low_duty_limit 50
 #define high_duty_limit 1950
 #define SLOPE 0
-//! #define SLOPE 6.2
+
 #define break_level 5
 #define sustain_level 200  
 #define break_amplitude 0 
-//!#define pedestal_amplitude 85
+
 #define pedestal_amplitude 500
 #define peak_amplitude 950
 
@@ -60,9 +59,6 @@
   
 void initMCPWM(void);
 void fill_sine_table(void);  
-void timer_reload(void);
-void voltage_gain(void); 
-
 
 unsigned int16 duty[3]={voltage_offset,voltage_offset,voltage_offset},sample=0;
 signed int16 peak_voltage =0;//  1184; 
@@ -74,11 +70,6 @@ unsigned int16 sine_index,phase_angle[3] = {0 , 0 , 0};
 double theeta;
 
 const unsigned max_freq = 250; //Hz
-//!const double per_clock_tick = 0.006405; //ms
-//!const double per_clock_tick = 0.007996; //ms
-const double per_clock_tick = 0.004; //ms
-//!unsigned int16 timer_table[max_freq+1];
-
 
 unsigned int16 raw_adc =0 ;
 signed int16 throttle_level = 0;
@@ -102,7 +93,6 @@ void  PWM1_isr(void)
    tick_count++;
    if(tick_count >= 8)
    {   
-//!      output_bit(PWM_tick_pin , 1);
       millis_count++;
       tick = 1;
       tick_count=0;
@@ -116,14 +106,12 @@ void  PWM1_isr(void)
    }
 
 }
-#INT_TIMER1
-void  timer1_isr(void) 
+
+#INT_TIMER3
+void  timer3_isr(void) 
 {
-//!    output_bit(TIM_tick_pin , 1);
-   
-//!   delay_us(10);
-//!   output_bit(TIM_tick_pin , 0); 
-//!   
+
+   output_bit(TIM_tick_pin , 1);
    
    sample = (sample+1)%max_samples;
    phase_angle[0] = sample;
@@ -159,32 +147,13 @@ void  timer1_isr(void)
    *P1DC1 = reference[0];  *(P1DC1+1) = reference[0]>>8;
    *P1DC2 = reference[1];  *(P1DC2+1) = reference[1]>>8;
    *P1DC3 = reference[2];  *(P1DC3+1) = reference[2]>>8;
-   
 
-         
    
-   setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64, timer_table[freq]);
-   
-  
-//!   if(sample < 15)
-//!   { 
-//!      output_bit(Sync_Out,1);
-//!   }
-//!   else
-//!   {
-//!      output_bit(Sync_Out,0);
-//!   }
-//!      output_bit(TIM_tick_pin , 0);
-}
-
-#INT_TIMER2
-void  timer2_isr(void) 
-{
-   output_bit(TIM_tick_pin , 1);
-   delay_us(10);
+   setup_timer2(TMR_INTERNAL | TMR_DIV_BY_1 | TMR_32_BIT , timer_table[freq]);
    output_bit(TIM_tick_pin , 0);
-
+   
 }
+
 
    
 void main()
@@ -196,9 +165,7 @@ void main()
    
    initMCPWM();
    fill_sine_table();
-//!   timer_reload();
-//!   voltage_gain(); 
-   
+
    output_drive(LED_PIN);
    output_drive(PWM_tick_pin);
    output_drive(TIM_tick_pin);   
@@ -208,22 +175,13 @@ void main()
    set_adc_channel(0);
    delay_us(10);
    
+   setup_timer2(TMR_INTERNAL | TMR_DIV_BY_1 | TMR_32_BIT , timer_table[freq]);
+   enable_interrupts(INT_TIMER3);   // enable interrupt in timer3 register (in case of 32bit mode) 
 
-   setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64,timer_table[freq]);            
-   enable_interrupts(INT_TIMER1);  
-      
    enable_interrupts(INT_PWM1);  
    enable_interrupts(INTR_GLOBAL);
    
-//!   duty[0] = 50;
-//!   duty[1] = 50;    
-//!   duty[2] = 50;  
-//!   
-//!   *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0];
-   
-  
-   
-    
+
    while(TRUE)         
    {
       
@@ -233,6 +191,8 @@ void main()
          {
             raw_adc = 1023;
          }
+         
+//------------- KALMAN FILTER IMPLEMENTATION---------------//
          kalman_big_1 =  raw_adc << kalman_up;
          kalman_diff = kalman_big_1 - kalman_big_2;
          if(kalman_diff > 0)
@@ -251,9 +211,10 @@ void main()
             kalman_big_2 = 0 ;
          }
          raw_adc = kalman_big_2 >> kalman_up;
+//------------- KALMAN FILTER IMPLEMENTATION---------------//
+
+
          raw_adc = raw_adc >> 2;
-         
-         
          throttle_level = raw_adc;  
          
          if (throttle_level > 255)
@@ -267,8 +228,7 @@ void main()
          
          freq = throttle_level;
        
-         peak_voltage = gain_table[throttle_level];
-//!         peak_voltage = gain_table[55];  
+         peak_voltage = gain_table[throttle_level]; 
         
          output_bit(PWM_tick_pin , 0);
          tick = 0;      
@@ -276,7 +236,6 @@ void main()
       
       if (uart_tick) 
       {
-//!         sprintf(Serial_OutputBuffer, "CHECKING SERIAL!");
          sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
          printf(Serial_OutputBuffer);
          
@@ -288,20 +247,21 @@ void main()
 
 void initMCPWM(void) 
 {    
-   *(P1TCON+1)=0x80;  *P1TCON=0x02;
-   *(P1TPER+1)=0x03;  *P1TPER=0xE7;  
-   *(P1SECMP+1)=0x00;  *P1SECMP=0x01; //
-   *(PWM1CON1+1)=0x00;  *PWM1CON1=0x77;  
-   *(PWM1CON2+1)=0x00;  *PWM1CON2=0x02;
-   *(P1DTCON1+1)=0x00;  *P1DTCON1=0x10; //0x09
-   *(P1DTCON2+1)=0x00;  *P1DTCON2=0x00;
-   *(P1FLTACON+1)=0x00;  *P1FLTACON=0x00; //0x0000
-   *(P1OVDCON+1)=0x3F;  *P1OVDCON=0x0F;
+   *(P1TCON+1)  =  0x80;  *P1TCON =  0x02;
+   *(P1TPER+1)  =  0x03;  *P1TPER =  0xE7;  
+   *(P1SECMP+1) =  0x00;  *P1SECMP=  0x01; //
+   *(PWM1CON1+1)=  0x00;  *PWM1CON1= 0x77;  
+   *(PWM1CON2+1)=  0x00;  *PWM1CON2= 0x02;
+   *(P1DTCON1+1)=  0x00;  *P1DTCON1= 0x10; //0x09
+   *(P1DTCON2+1)=  0x00;  *P1DTCON2= 0x00;
+   *(P1FLTACON+1)= 0x00;  *P1FLTACON=0x00; //0x0000
+   *(P1OVDCON+1)=  0x3F;  *P1OVDCON= 0x0F;
+   
    *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0]; 
    *(P1DC2+1) = duty[1]>>8;   *P1DC2 = duty[1];
    *(P1DC3+1) = duty[2]>>8;   *P1DC3 = duty[2];  
    *(IPC14+1) =0x00;*(IPC14) =0x70;
-  }
+}
 
 
    
@@ -314,41 +274,6 @@ void fill_sine_table(void)
    }
 }
 
-
-//!void timer_reload(void) 
-//!{
-//!   double intr_per_sample = 0.0;
-//!   
-//!   for (int sample = 1 ; sample <= max_freq ; sample++) 
-//!   {
-//!      intr_per_sample = ((1.0/sample)*1000)/max_samples;
-//!      timer_table[sample] = (intr_per_sample/per_clock_tick) - 100;     
-//!   }
-//!   timer_table[0] = timer_table[1];
-//!   
-//!   
-//!}
-
-//!void voltage_gain(void) 
-//!{
-//!   for (int i = 0 ; i <= break_level ; i++) {
-//!            gain_table[i] = 0; 
-//!   }
-//!   
-//!   for (int i = break_level+1 ; i <= sustain_level; i++) 
-//!   {
-//!       temp = SLOPE * i + pedestal_amplitude;
-//!       if(temp > peak_amplitude ) 
-//!       {
-//!         temp = peak_amplitude;
-//!       }
-//!       gain_table[i] = temp;
-//!   }
-//!   for (int i = sustain_level+1 ; i <= 255; i++) {     
-//!      gain_table[i] = peak_amplitude;
-//!   }
-//!
-//!}
 
 
 

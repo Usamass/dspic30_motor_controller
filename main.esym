@@ -1,9 +1,9 @@
-D G "__PCD__" 0 402 ""5.112""
-D G "__DEVICE__" 0 402 "4011"
-D G "__DATE__" 0 402 ""07-May-24""
-D G "__TIME__" 0 402 ""14:11:43""
-D G "_UNICODE" 0 402 ""?""
-D G "__EVAL" 0 402 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
+D G "__PCD__" 0 320 ""5.112""
+D G "__DEVICE__" 0 320 "4011"
+D G "__DATE__" 0 320 ""08-May-24""
+D G "__TIME__" 0 320 ""10:48:31""
+D G "_UNICODE" 0 320 ""?""
+D G "__EVAL" 0 320 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
 c L "set_tris_b" 1 3 6 "FUNCTION"
 F N "set_tris_b" 1 45 ""
 V L "value" 1 45 "int16" `55 
@@ -1453,8 +1453,9 @@ D G "INT_CAN1" 1 872 "39"
 D G "INT_PWM1" 1 873 "58"
 D G "INT_QEI" 1 874 "60"
 D G "INT_FAULTA" 1 875 "66"
-V G "timer_table" 2 1 "[1]" `828 
-V G "gain_table" 2 22 "[256]" `831 
+C L "jump_to_isr" 2 1 21 "FUNCTION"
+V G "timer_table" 2 23 "[1]" `828 
+V G "gain_table" 2 40 "[256]" `831 
 D G "MATH_H" 3 30 ""
 D G "PI" 3 35 "3.1415926535897932"
 D G "SQRT2" 3 38 "1.4142135623730950"
@@ -1982,95 +1983,83 @@ F N "ldexp" 3 2221 ""
 V L "value" 3 2221 "?" `1253 
 V L "exp" 3 2221 "sint8" `1254 
 F G "ldexp" 3 2222 "?(? value,sint8 exp)" `1252 
-D G "P1TCON" 0 16 "0x01C0"
-D G "P1TMR" 0 17 "0x01C2"
-D G "P1TPER" 0 18 "0x01C4"
-D G "P1SECMP" 0 19 "0x01C6"
-D G "PWM1CON1" 0 20 "0x01C8"
-D G "PWM1CON2" 0 21 "0x01CA"
-D G "P1DTCON1" 0 22 "0x01CC"
-D G "P1DTCON2" 0 23 "0x01CE"
-D G "P1FLTACON" 0 24 "0x01D0"
-D G "P1OVDCON" 0 25 "0x01D4"
-D G "P1DC1" 0 26 "0x01D6"
-D G "P1DC2" 0 27 "0x01D8"
-D G "P1DC3" 0 28 "0x01DA"
-D G "IPC14" 0 29 "0x00C0"
-D G "CLKDIV" 0 30 "0x0744"
-D G "PLLFBD" 0 31 "0x0746"
-D G "ADC_pin" 0 34 "sAN0"
-D G "LED_PIN" 0 35 "PIN_B5"
-D G "voltage_offset" 0 37 "1000" "1248"
-D G "low_duty_limit" 0 38 "50"
-D G "high_duty_limit" 0 39 "1950"
-D G "SLOPE" 0 40 "0"
-D G "break_level" 0 42 "5"
-D G "sustain_level" 0 43 "200"
-D G "break_amplitude" 0 44 "0"
-D G "pedestal_amplitude" 0 46 "500"
-D G "peak_amplitude" 0 47 "950"
-D G "throttle_PIN" 0 50 "PIN_B1"
-D G "PWM_tick_pin" 0 51 "PIN_B2"
-D G "TIM_tick_pin" 0 52 "PIN_B3"
-D G "kalman_up" 0 54 "18"
-D G "kalman_diff_down" 0 55 "8"
-D G "init_freq" 0 57 "30"
-F N "initMCPWM" 0 61 ""
-f G "initMCPWM" 0 61 "void()" `1255 
-F N "fill_sine_table" 0 62 ""
-f G "fill_sine_table" 0 62 "void()" `1256 
-F N "timer_reload" 0 63 ""
-f G "timer_reload" 0 63 "void()" `1257 
-F N "voltage_gain" 0 64 ""
-f G "voltage_gain" 0 64 "void()" `1258 
-V G "duty" 0 67 "int16[3]" `1259 
-V G "sample" 0 67 "int16" `1260 
-V G "peak_voltage" 0 68 "sint16" `1261 
-C L "voltage_gain" 0 41 1 "FUNCTION"
-V G "reference" 0 69 "sint32[3]" `1262 
-V G "max_samples" 0 71 "int16" `1263 
-V G "sine_table" 0 72 "sint16[30]" `1265 
-V G "sine_index" 0 73 "int16" `1266 
-V G "phase_angle" 0 73 "int16[3]" `1267 
-V G "theeta" 0 74 "?" `1268 
-V G "max_freq" 0 76 "int16" `1269 
-C L "voltage_gain" 0 41 3 "FUNCTION"
-V G "per_clock_tick" 0 79 "?" `1271 
-C L "voltage_gain" 0 41 2 "FUNCTION"
-V G "raw_adc" 0 83 "int16" `1273 
-V G "throttle_level" 0 84 "sint16" `1274 
-V G "freq" 0 85 "int16" `1275 
-V G "temp" 0 86 "int16" `1276 
-V G "tick" 0 88 "int1" `1277 
-V G "uart_tick" 0 89 "int1" `1278 
-V G "tick_count" 0 90 "sint8" `1279 
-V G "millis_count" 0 91 "int32" `1280 
-V G "Serial_OutputBuffer" 0 93 "sint8[60]" `1281 
-V G "kalman_big_1" 0 95 "sint32" `1282 
-V G "kalman_big_2" 0 95 "sint32" `1283 
-V G "kalman_diff" 0 95 "sint32" `1284 
-F N "PWM1_isr" 0 99 ""
-F G "PWM1_isr" 0 100 "void()" `1285 
-C L "PWM1_isr" 0 41 1 "FUNCTION"
-F N "timer1_isr" 0 120 ""
-F G "timer1_isr" 0 121 "void()" `1286  "!    output_bit(TIM_tick_pin , 1);"
-C L "timer1_isr" 0 41 2 "FUNCTION"
-V L "i" 0 133 "sint16" `1287 
-C L "timer1_isr" 0 41 9 "FUNCTION"
-F N "timer2_isr" 0 181 ""
-F G "timer2_isr" 0 182 "void()" `1291 
-F N "MAIN" 0 190 ""
-F G "MAIN" 0 191 "void()" `1292 
-C L "MAIN" 0 41 2 "FUNCTION"
-C L "MAIN" 0 41 4 "FUNCTION"
-C L "MAIN" 0 41 1 "FUNCTION"
-C L "MAIN" 0 41 1 "FUNCTION"
-F N "initMCPWM" 0 289 ""
-F G "initMCPWM" 0 290 "void()" `1255 
-C L "initMCPWM" 0 41 1 "FUNCTION"
-C L "initMCPWM" 0 41 1 "FUNCTION"
-F N "fill_sine_table" 0 308 ""
-F G "fill_sine_table" 0 309 "void()" `1256 
+D G "P1TCON" 0 15 "0x01C0"
+D G "P1TMR" 0 16 "0x01C2"
+D G "P1TPER" 0 17 "0x01C4"
+D G "P1SECMP" 0 18 "0x01C6"
+D G "PWM1CON1" 0 19 "0x01C8"
+D G "PWM1CON2" 0 20 "0x01CA"
+D G "P1DTCON1" 0 21 "0x01CC"
+D G "P1DTCON2" 0 22 "0x01CE"
+D G "P1FLTACON" 0 23 "0x01D0"
+D G "P1OVDCON" 0 24 "0x01D4"
+D G "P1DC1" 0 25 "0x01D6"
+D G "P1DC2" 0 26 "0x01D8"
+D G "P1DC3" 0 27 "0x01DA"
+D G "IPC14" 0 28 "0x00C0"
+D G "CLKDIV" 0 29 "0x0744"
+D G "PLLFBD" 0 30 "0x0746"
+D G "ADC_pin" 0 33 "sAN0"
+D G "LED_PIN" 0 34 "PIN_B5"
+D G "voltage_offset" 0 36 "1000" "1248"
+D G "low_duty_limit" 0 37 "50"
+D G "high_duty_limit" 0 38 "1950"
+D G "SLOPE" 0 39 "0"
+D G "break_level" 0 41 "5"
+D G "sustain_level" 0 42 "200"
+D G "break_amplitude" 0 43 "0"
+D G "pedestal_amplitude" 0 45 "500"
+D G "peak_amplitude" 0 46 "950"
+D G "throttle_PIN" 0 49 "PIN_B1"
+D G "PWM_tick_pin" 0 50 "PIN_B2"
+D G "TIM_tick_pin" 0 51 "PIN_B3"
+D G "kalman_up" 0 53 "18"
+D G "kalman_diff_down" 0 54 "8"
+D G "init_freq" 0 56 "30"
+F N "initMCPWM" 0 60 ""
+f G "initMCPWM" 0 60 "void()" `1255 
+F N "fill_sine_table" 0 61 ""
+f G "fill_sine_table" 0 61 "void()" `1256 
+V G "duty" 0 63 "int16[3]" `1257 
+V G "sample" 0 63 "int16" `1258 
+V G "peak_voltage" 0 64 "sint16" `1259 
+C L "fill_sine_table" 0 64 1 "FUNCTION"
+V G "reference" 0 65 "sint32[3]" `1260 
+V G "max_samples" 0 67 "int16" `1261 
+V G "sine_table" 0 68 "sint16[30]" `1263 
+V G "sine_index" 0 69 "int16" `1264 
+V G "phase_angle" 0 69 "int16[3]" `1265 
+V G "theeta" 0 70 "?" `1266 
+V G "max_freq" 0 72 "int16" `1267 
+C L "fill_sine_table" 0 64 1 "FUNCTION"
+V G "raw_adc" 0 74 "int16" `1269 
+V G "throttle_level" 0 75 "sint16" `1270 
+V G "freq" 0 76 "int16" `1271 
+V G "temp" 0 77 "int16" `1272 
+V G "tick" 0 79 "int1" `1273 
+V G "uart_tick" 0 80 "int1" `1274 
+V G "tick_count" 0 81 "sint8" `1275 
+V G "millis_count" 0 82 "int32" `1276 
+V G "Serial_OutputBuffer" 0 84 "sint8[60]" `1277 
+V G "kalman_big_1" 0 86 "sint32" `1278 
+V G "kalman_big_2" 0 86 "sint32" `1279 
+V G "kalman_diff" 0 86 "sint32" `1280 
+F N "PWM1_isr" 0 90 ""
+F G "PWM1_isr" 0 91 "void()" `1281 
+F N "timer3_isr" 0 111 ""
+F G "timer3_isr" 0 112 "void()" `1282 
+V L "i" 0 121 "sint16" `1283 
+F N "MAIN" 0 159 ""
+F G "MAIN" 0 160 "void()" `1287 
+C L "MAIN" 0 64 1 "FUNCTION"
+C L "MAIN" 0 64 1 "FUNCTION"
+C L "MAIN" 0 64 1 "FUNCTION"
+F N "initMCPWM" 0 248 ""
+F G "initMCPWM" 0 249 "void()" `1255 
+C L "initMCPWM" 0 64 1 "FUNCTION"
+C L "initMCPWM" 0 64 1 "FUNCTION"
+F N "fill_sine_table" 0 268 ""
+F G "fill_sine_table" 0 269 "void()" `1256 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1

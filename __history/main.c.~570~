@@ -1,4 +1,5 @@
 #include <30F4011.h>
+#include <Inc/lookup_tables.h>
 #DEVICE ADC=10
 #device ICSP=1
 #use delay(clock=64000000,crystal=8000000)
@@ -41,6 +42,7 @@
 #define break_level 5
 #define sustain_level 200  
 #define break_amplitude 0 
+//!#define pedestal_amplitude 85
 #define pedestal_amplitude 500
 #define peak_amplitude 950
 
@@ -58,9 +60,6 @@
   
 void initMCPWM(void);
 void fill_sine_table(void);  
-void timer_reload(void);
-void voltage_gain(void); 
-
 
 unsigned int16 duty[3]={voltage_offset,voltage_offset,voltage_offset},sample=0;
 signed int16 peak_voltage =0;//  1184; 
@@ -72,12 +71,7 @@ unsigned int16 sine_index,phase_angle[3] = {0 , 0 , 0};
 double theeta;
 
 const unsigned max_freq = 250; //Hz
-//!const double per_clock_tick = 0.006405; //ms
-//!const double per_clock_tick = 0.007996; //ms
-const double per_clock_tick = 0.004; //ms
-//!unsigned int16 timer_table[max_freq+1];
 
-unsigned int16 gain_table[256];
 unsigned int16 raw_adc =0 ;
 signed int16 throttle_level = 0;
 unsigned int16 freq = 1;
@@ -93,15 +87,42 @@ char Serial_OutputBuffer[60];
 signed int32 kalman_big_1=0, kalman_big_2=0, kalman_diff=0;
 
 const int timer_table[] = {
-0,1041,1041,1041,1041,1041,1041,1041,925,833,757,694,641,595,555,520,490,462,438,416,396,378,362,347,333,320,308,297,287,277,268,260,252,245,238,231,
-225,219,213,208,203,198,193,189,185,181,177,173,170,166,163,160,157,154,151,148,146,143,141,138,136,134,132,130,128,126,124,122,120,
-119,117,115,114,112,111,109,108,106,105,104,102,101,100,99,98,96,95,94,93,92,91,90,89,88,87,86,85,85,84,83,82,81,80,80,79,78,77,77,
-76,75,75,74,73,73,72,71,71,70,7070,68,68,67,67,66,66,66,65,64,64,63,63,62,62,61,61,60,60,60,59,59,58,58,57,57,57,56,56,56,55,55,55,
-54,54,53,53,53,52,52,52,51,51,51,51,50,50,50,49,49,49,49,48,48,47,47,47,47,46,46,46,46,45,45,45,45,44,44,44,44,43,43,43,43,43,42,42,
-42,42,41,41,41,41,41,40,40,40,40,40,39,39,39,39,39,38,38,38,38,38,38,37,37,37,37,37,37,37,37,36,36,36,36,36,36,35,35,35,35,35,35,34,
-34,34,34,34,34,33,33,33,33,33
-};
+65068,65068,65068,65068,65068,65068,65068,65068,65068,65068,65068,65068,65068,65068,65068,65068,
+65068,65068,65068,65068,65068,61218,57795,54733,51977,49484,47217,45148,43251,41505,39894,38402,
+37016,35726,34522,33395,32339,31346,30412,29531,28699,27912,27165,26458,25785,25145,24535,23954,
+23399,22868,22360,21874,21408,20961,20531,20118,19721,19339,18971,18616,18273,17943,17624,17315,
+17017,16728,16448,16177,15915,15660,15413,15173,14940,14714,14494,14280,14072,13869,13672,13480,
+13292,13110,12932,12758,12589,12423,12262,12104,11950,11799,11652,11508,11367,11229,11094,10962,
+10832,10705,10581,10459,10340,10223,10108,9995,9884,9776,9669,9564,9461,9360,9261,9163,9067,8973,
+8880,8789,8699,8611,8523,8438,8353,8270,8188,8108,8028,7950,7873,7796,7721,7647,7574,7502,7431,7361,
+7291,7223,7155,7089,7023,6958,6893,6830,6767,6705,6643,6582,6522,6463,6404,6346,6289,6232,6175,6120,
+6064,6010,5955,5902,5849,5796,5744,5692,5641,5590,5540,5490,5441,5392,5343,5295,5247,5200,5153,5106,
+5059,5013,4968,4923,4878,4833,4789,4745,4701,4657,4614,4572,4529,4487,4445,4403,4362,4321,4280,4239,
+4199,4159,4119,4079,4040,4000,3961,3923,3884,3846,3808,3770,3732,3695,3658,3621,3584,3547,3511,3475,
+3439,3403,3368,3332,3297,3262,3227,3193,3158,3124,3090,3056,3023,2989,2956,2923,2890,2858,2825,2793,
+2761,2729,2697,2666,2634,2603,2572,2542,2511,2481,2451,2421,2391,2361,2332,2303,2274,2245,2217,2188,
+2160,2132};
 
+const unsigned int16 gain_table[256] = {
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,85,85,85,86,
+86,86,86,86,86,87,87,87,87,87,88,88,88,88,88,89,89,
+89,89,90,90,90,90,91,91,91,91,92,92,92,92,93,93,93,
+94,94,94,95,95,95,95,96,96,96,97,97,97,98,98,98,99,
+99,100,100,101,101,101,102,102,102,103,103,104,104,
+105,105,106,106,106,107,107,108,108,109,110,110,111,
+111,112,112,113,113,114,114,115,116,116,117,117,118,
+119,120,120,121,122,122,123,124,125,125,126,127,127,
+128,129,130,130,131,132,133,134,135,136,137,138,139,
+140,141,142,143,144,145,146,147,148,149,150,151,152,
+153,154,155,156,157,158,159,161,162,163,164,166,167,
+169,170,172,173,175,177,178,180,182,184,186,188,191,
+193,194,195,196,198,199,200,201,203,204,206,207,209,
+210,212,213,215,216,218,220,222,223,225,227,229,231,
+233,235,237,240,242,244,247,249,252,254,257,260,263,
+266,269,272,275,279,282,286,289,293,297,301,306,310,
+315,320,325,330,335,341,347,353,360,367,374,381,389,
+397,406,415,425,436,436,436,436,436,436,436,436
+};
 
 
 #int_PWM1
@@ -111,7 +132,6 @@ void  PWM1_isr(void)
    tick_count++;
    if(tick_count >= 8)
    {   
-//!      output_bit(PWM_tick_pin , 1);
       millis_count++;
       tick = 1;
       tick_count=0;
@@ -125,14 +145,12 @@ void  PWM1_isr(void)
    }
 
 }
-#INT_TIMER1
-void  timer1_isr(void) 
+
+#INT_TIMER3
+void  timer3_isr(void) 
 {
-//!    output_bit(TIM_tick_pin , 1);
-   
-//!   delay_us(10);
-//!   output_bit(TIM_tick_pin , 0); 
-//!   
+
+   output_bit(TIM_tick_pin , 1);
    
    sample = (sample+1)%max_samples;
    phase_angle[0] = sample;
@@ -168,32 +186,13 @@ void  timer1_isr(void)
    *P1DC1 = reference[0];  *(P1DC1+1) = reference[0]>>8;
    *P1DC2 = reference[1];  *(P1DC2+1) = reference[1]>>8;
    *P1DC3 = reference[2];  *(P1DC3+1) = reference[2]>>8;
-   
 
-         
    
-   setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64, timer_table[freq]);
-   
-  
-//!   if(sample < 15)
-//!   { 
-//!      output_bit(Sync_Out,1);
-//!   }
-//!   else
-//!   {
-//!      output_bit(Sync_Out,0);
-//!   }
-//!      output_bit(TIM_tick_pin , 0);
-}
-
-#INT_TIMER2
-void  timer2_isr(void) 
-{
-   output_bit(TIM_tick_pin , 1);
-   delay_us(10);
+   setup_timer2(TMR_INTERNAL | TMR_DIV_BY_1 | TMR_32_BIT , timer_table[freq]);
    output_bit(TIM_tick_pin , 0);
-
+   
 }
+
 
    
 void main()
@@ -205,9 +204,7 @@ void main()
    
    initMCPWM();
    fill_sine_table();
-//!   timer_reload();
-   voltage_gain(); 
-   
+
    output_drive(LED_PIN);
    output_drive(PWM_tick_pin);
    output_drive(TIM_tick_pin);   
@@ -217,24 +214,13 @@ void main()
    set_adc_channel(0);
    delay_us(10);
    
-//!   setup_timer2(TMR_INTERNAL | TMR_DIV_BY_64 ,1000);            
-//!   enable_interrupts(INT_TIMER2); 
-  
-   setup_timer1(TMR_INTERNAL | TMR_DIV_BY_64,timer_table[freq]);            
-   enable_interrupts(INT_TIMER1);  
-      
+   setup_timer2(TMR_INTERNAL | TMR_DIV_BY_1 | TMR_32_BIT , timer_table[freq]);
+   enable_interrupts(INT_TIMER3);   // enable interrupt in timer3 register (in case of 32bit mode) 
+
    enable_interrupts(INT_PWM1);  
    enable_interrupts(INTR_GLOBAL);
    
-//!   duty[0] = 50;
-//!   duty[1] = 50;    
-//!   duty[2] = 50;  
-//!   
-//!   *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0];
-   
-  
-   
-    
+
    while(TRUE)         
    {
       
@@ -244,6 +230,8 @@ void main()
          {
             raw_adc = 1023;
          }
+         
+//------------- KALMAN FILTER IMPLIMENTATION---------------//
          kalman_big_1 =  raw_adc << kalman_up;
          kalman_diff = kalman_big_1 - kalman_big_2;
          if(kalman_diff > 0)
@@ -262,9 +250,10 @@ void main()
             kalman_big_2 = 0 ;
          }
          raw_adc = kalman_big_2 >> kalman_up;
+//------------- KALMAN FILTER IMPLIMENTATION---------------//
+
+
          raw_adc = raw_adc >> 2;
-         
-         
          throttle_level = raw_adc;  
          
          if (throttle_level > 255)
@@ -276,20 +265,9 @@ void main()
             throttle_level = 0; 
          }  
          
-         if (throttle_level >= 0 && throttle_level <=30) 
-         {
-            freq = init_freq;
-         }
-         else
-         {
-            freq = throttle_level -5; 
-         }
-                   
-          
-                   
-         
-  //       peak_voltage = gain_table[throttle_level];
-         peak_voltage = gain_table[55];  
+         freq = throttle_level;
+       
+         peak_voltage = gain_table[throttle_level]; 
         
          output_bit(PWM_tick_pin , 0);
          tick = 0;      
@@ -297,7 +275,6 @@ void main()
       
       if (uart_tick) 
       {
-//!         sprintf(Serial_OutputBuffer, "CHECKING SERIAL!");
          sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
          printf(Serial_OutputBuffer);
          
@@ -309,20 +286,21 @@ void main()
 
 void initMCPWM(void) 
 {    
-   *(P1TCON+1)=0x80;  *P1TCON=0x02;
-   *(P1TPER+1)=0x03;  *P1TPER=0xE7;  
-   *(P1SECMP+1)=0x00;  *P1SECMP=0x01; //
-   *(PWM1CON1+1)=0x00;  *PWM1CON1=0x77;  
-   *(PWM1CON2+1)=0x00;  *PWM1CON2=0x02;
-   *(P1DTCON1+1)=0x00;  *P1DTCON1=0x10; //0x09
-   *(P1DTCON2+1)=0x00;  *P1DTCON2=0x00;
-   *(P1FLTACON+1)=0x00;  *P1FLTACON=0x00; //0x0000
-   *(P1OVDCON+1)=0x3F;  *P1OVDCON=0x0F;
+   *(P1TCON+1)  =  0x80;  *P1TCON =  0x02;
+   *(P1TPER+1)  =  0x03;  *P1TPER =  0xE7;  
+   *(P1SECMP+1) =  0x00;  *P1SECMP=  0x01; //
+   *(PWM1CON1+1)=  0x00;  *PWM1CON1= 0x77;  
+   *(PWM1CON2+1)=  0x00;  *PWM1CON2= 0x02;
+   *(P1DTCON1+1)=  0x00;  *P1DTCON1= 0x10; //0x09
+   *(P1DTCON2+1)=  0x00;  *P1DTCON2= 0x00;
+   *(P1FLTACON+1)= 0x00;  *P1FLTACON=0x00; //0x0000
+   *(P1OVDCON+1)=  0x3F;  *P1OVDCON= 0x0F;
+   
    *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0]; 
    *(P1DC2+1) = duty[1]>>8;   *P1DC2 = duty[1];
    *(P1DC3+1) = duty[2]>>8;   *P1DC3 = duty[2];  
    *(IPC14+1) =0x00;*(IPC14) =0x70;
-  }
+}
 
 
    
@@ -335,41 +313,6 @@ void fill_sine_table(void)
    }
 }
 
-
-//!void timer_reload(void) 
-//!{
-//!   double intr_per_sample = 0.0;
-//!   
-//!   for (int sample = 1 ; sample <= max_freq ; sample++) 
-//!   {
-//!      intr_per_sample = ((1.0/sample)*1000)/max_samples;
-//!      timer_table[sample] = (intr_per_sample/per_clock_tick) - 100;     
-//!   }
-//!   timer_table[0] = timer_table[1];
-//!   
-//!   
-//!}
-
-void voltage_gain(void) 
-{
-   for (int i = 0 ; i <= break_level ; i++) {
-            gain_table[i] = 0; 
-   }
-   
-   for (int i = break_level+1 ; i <= sustain_level; i++) 
-   {
-       temp = SLOPE * i + pedestal_amplitude;
-       if(temp > peak_amplitude ) 
-       {
-         temp = peak_amplitude;
-       }
-       gain_table[i] = temp;
-   }
-   for (int i = sustain_level+1 ; i <= 255; i++) {     
-      gain_table[i] = peak_amplitude;
-   }
-
-}
 
 
 

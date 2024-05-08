@@ -1,8 +1,8 @@
 
-ROM used:   5386/32768 (16%)
-            5386/32768 (16%) including unused fragments
+ROM used:   5354/32768 (16%)
+            5354/32768 (16%) including unused fragments
 
-            1.5 Average locations per line
+            1.6 Average locations per line
             5.1 Average locations per statement
 
 RAM used:   490/2048 (24%) at main() level
@@ -13,17 +13,17 @@ Stack size: 128
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  356   129  12  main.c
+  281   128  12  main.c
   878     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
-   42     0   0  Inc\lookup_tables.h
+   60     0   0  Inc\lookup_tables.h
  2228   925  88  ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
 ----- -----
- 3504  1054 Total
+ 3447  1053 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
-0    376   3    0             @const828
-0    376   3    0             @const831
+0    376   4    0             @const828
+0    376   4    0             @const831
 0    132   1    0             @FLT64
 0     94   1    0             @F64TOI64
 0    106   1    1             @I64TOF64
@@ -34,34 +34,33 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0    680   6  114   1209  9.7  cos
 0     60   1    9     39  1.8  sin
 0     78   1    0    193  3.1  PWM1_isr
-0    528   5    2   1647  8.8  timer1_isr
-0     66   1    1   1661  7.8  @MULS3232
-0     44   0    0     74  1.6  timer2_isr
-0    820   8    0   1661  7.8  MAIN
-0     40   0    0             @const1295
-0     14   0    0    480  6.0  @SPRINTF
-0    304   3    0    175  4.2  @PRINTFD16_1297
+0    538   5    2   1764  8.8  timer3_isr
+0     66   1    1   1764  8.8  @MULS3232
+0    822   8    0   1677  7.8  MAIN
+0     40   0    0   1677  7.8  @const1290
+0     14   0    0    175  4.2  @SPRINTF
+0    304   3    0    480  6.0  @PRINTFD16_1292
 0     88   1    0   1224  3.9  initMCPWM
 0    200   2    0    175  4.2  fill_sine_table
- Inline         0    480  6.0  @cinit1
+ Inline         0    175  4.2  @cinit1
 
 Program metrics:
     Functions               14
-    Statements              1054
-    Comments                507
-    Volume (V)              15921
-    Difficulty (D)          75.8
-    Effort to implement (E) 1206364
-    Time to implement (T)   18 hours, 37 minutes
+    Statements              1053
+    Comments                469
+    Volume (V)              18174
+    Difficulty (D)          81.7
+    Effort to implement (E) 1484560
+    Time to implement (T)   22 hours, 55 minutes
     Est Delivered Bugs (B)  4
-    Cyclomatic Complexity   41
-    Maintainability (MI)    69
+    Cyclomatic Complexity   43
+    Maintainability (MI)    85
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-000FE   252  0  
-00100-07FFE  5130  27382  
+00100-07FFE  5098  27414  
 
 
 

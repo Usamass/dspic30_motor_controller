@@ -1,0 +1,6 @@
+Compiling C:\Users\eelab\Documents\dspic30f4011\main on 08-May-24 at 10:48
+>>> Warning 202 "C:\Users\eelab\Documents\dspic30f4011\main.c" Line 72(16,24): Variable never used:   max_freq
+>>> Warning 202 "C:\Users\eelab\Documents\dspic30f4011\main.c" Line 77(16,20): Variable never used:   temp
+      Memory usage:   ROM=16%      RAM=24% - 34%
+      0 Errors,  2 Warnings.
+Build Successful.
