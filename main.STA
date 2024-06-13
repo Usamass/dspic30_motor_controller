@@ -1,9 +1,9 @@
 
-ROM used:   6690/32768 (20%)
-            6690/32768 (20%) including unused fragments
+ROM used:   6738/32768 (21%)
+            6738/32768 (21%) including unused fragments
 
             1.2 Average locations per line
-            3.8 Average locations per statement
+            3.9 Average locations per statement
 
 RAM used:   624/2048 (30%) at main() level
             831/2048 (41%) worst case
@@ -13,7 +13,7 @@ Stack size: 128
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  419   161   9  main.c
+  415   160   9  main.c
   878     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
   116     0   0  Inc\lookup_tables.h
  2228   925  53  ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
@@ -22,7 +22,7 @@ Lines Stmts  %   Files
   435   129   7  ..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
    28     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
 ----- -----
- 5490  1739 Total
+ 5486  1738 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -44,11 +44,11 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     66   0    1             @MULS3232
 0    112   1    0    295  3.7  PWM1_isr
 0    530   4    2   1663  8.8  timer3_isr
-0    928   7    0   2660 10.3  MAIN
+0    976   7    0   2660 10.3  MAIN
 0     40   0    0     86  3.9  @const1620
 0     14   0    0             @SPRINTF
-0    312   2    0             @PRINTFD32_1622
 0    304   2    0             @PRINTFD16_1622
+0    312   2    0             @PRINTFD32_1622
 0     88   1    0   1224  3.9  initMCPWM
 0    200   1    0    175  4.2  fill_sine_table
 0     14   0    0     86  3.9  QEI_get_direction
@@ -56,7 +56,7 @@ Page ROM  %  RAM    Vol Diff  Functions:
 
 Program metrics:
     Functions               10
-    Statements              1739
+    Statements              1738
     Comments                1408
     Volume (V)              10558
     Difficulty (D)          54.4
@@ -70,7 +70,7 @@ Program metrics:
 -----------  ----  ----
 00000-00002     4  0  
 00004-000FE   252  0  
-00100-07FFE  6434  26078  
+00100-07FFE  6482  26030  
 
 
 

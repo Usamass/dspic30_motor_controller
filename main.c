@@ -265,10 +265,11 @@ void main()
          
          if (throttle_level > 20) 
          {
+            ascending_speed  = ascend_speed_table[attained_throttle];
+            descending_speed = descend_speed_table[attained_throttle];
+            attained_speed = enc_count;       
             if(throttle_level > attained_throttle)
             {
-               ascending_speed  = ascend_speed_table[attained_throttle];
-               attained_speed = enc_count;
                if (attained_speed >= ascending_speed) 
                {
                   attained_throttle++; 
@@ -276,8 +277,6 @@ void main()
             }
             if(throttle_level < attained_throttle)
             {
-               descending_speed = descend_speed_table[attained_throttle];
-               attained_speed = enc_count;
                if (attained_speed < descending_speed) 
                {
                   attained_throttle--; 
@@ -292,11 +291,8 @@ void main()
             //
             }
          }
-
          freq = attained_throttle;
-       
          peak_voltage = gain_table[attained_throttle]; 
-         
          output_bit(PWM_tick_pin , 0);
          tick = 0;      
       } 
@@ -305,8 +301,8 @@ void main()
       {
          
          //!         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
-         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d" , enc_count , throttle_level , attained_throttle);
-         printf(Serial_OutputBuffer);
+         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d , %d" , throttle_level , attained_throttle,  enc_count , ascending_speed , descending_speed);
+         printf(Serial_OutputBuffer); 
          
          uart_tick = 0;
       

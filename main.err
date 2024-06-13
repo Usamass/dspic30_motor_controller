@@ -1,1 +1,10 @@
-Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 13-Jun-24 at 15:53
+Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 13-Jun-24 at 16:31
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 87(16,24): Variable never used:   max_freq
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 92(16,20): Variable never used:   temp
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 98(6,21): Variable never used:   str_capture_flg
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 112(14,26): Variable never used:   kalman_big_1
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 112(30,42): Variable never used:   kalman_big_2
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 112(46,57): Variable never used:   kalman_diff
+      Memory usage:   ROM=21%      RAM=30% - 41%
+      0 Errors,  6 Warnings.
+Build Successful.

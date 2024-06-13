@@ -1,9 +1,9 @@
-CCS PCD C Compiler, Version 5.112, 5967               13-Jun-24 15:41
+CCS PCD C Compiler, Version 5.112, 5967               13-Jun-24 16:31
 
                Filename:   C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.lst
 
-               ROM used:   6690 bytes (20%)
-                           Largest free fragment is 26078
+               ROM used:   6738 bytes (21%)
+                           Largest free fragment is 26030
                RAM used:   624 (30%) at main() level
                            831 (41%) worst case
                Stack used: 108 locations (58 in main + 50 for interrupts)
@@ -1605,330 +1605,330 @@ CCS PCD C Compiler, Version 5.112, 5967               13-Jun-24 15:41
 12FC:  MOV     [--W15],W5
 12FE:  RETURN  
 *
-13C8:  MOV     W6,[W15++]
-13CA:  MOV     W7,[W15++]
-13CC:  MOV     W8,[W15++]
-13CE:  MOV     W9,[W15++]
-13D0:  CLR     W4
-13D2:  CLR     W5
-13D4:  CLR     W6
-13D6:  CLR     W7
-13D8:  XOR     W2,W3,W8
-13DA:  BRA     Z,13FE
-13DC:  MOV     #20,W8
-13DE:  BCLR.B  42.0
-13E0:  RLC     W0,W0
-13E2:  RLC     W1,W1
-13E4:  RLC     W4,W4
-13E6:  RLC     W5,W5
-13E8:  CP      W5,W3
-13EA:  BRA     NZ,13EE
-13EC:  CPB     W4,W2
-13EE:  BRA     NC,13F6
-13F0:  SUB     W4,W2,W4
-13F2:  SUBB    W5,W3,W5
-13F4:  BSET.B  42.0
-13F6:  RLC     W6,W6
-13F8:  RLC     W7,W7
-13FA:  DEC     W8,W8
-13FC:  BRA     NZ,13DE
-13FE:  MOV     W7,W1
-1400:  MOV     W6,W0
-1402:  MOV     [--W15],W9
-1404:  MOV     [--W15],W8
-1406:  MOV     [--W15],W7
-1408:  MOV     [--W15],W6
-140A:  RETURN  
-140C:  MOV     W5,[W15++]
-140E:  MOV     #C,W5
-1410:  REPEAT  #7
-1412:  MOV     [W5++],[W15++]
-1414:  BTSS    W1.F
-1416:  BRA     1426
-1418:  NEG     W0,W0
-141A:  BRA     Z,141E
-141C:  BRA     NZ,1422
-141E:  NEG     W1,W1
-1420:  BRA     1424
-1422:  COM     W1,W1
-1424:  BSET    W4.8
-1426:  CLR     W5
-1428:  MOV     W0,W6
-142A:  MOV     W1,W7
-142C:  MOV     W4,W12
-142E:  BCLR    W4.F
-1430:  CP0.B   W4L
-1432:  BRA     NZ,1436
-1434:  BRA     147E
-1436:  SUB.B   W4L,#B,W5L
-1438:  BRA     NC,147E
-143A:  SUB.B   W4L,W5L,W4L
-143C:  BTSS    W12.F
-143E:  BRA     1460
-1440:  BTSS    W4.8
-1442:  BRA     145C
-1444:  MOV     #2D,W0
-1446:  MOV     W1,[W15++]
-1448:  MOV     W4,[W15++]
-144A:  MOV     W0,[W15++]
-144C:  MOV     [--W15],W0
-144E:  CALL    A06
-1452:  MOV     [--W15],W4
-1454:  MOV     [--W15],W1
-1456:  BCLR    W4.8
-1458:  DEC     W5,W5
-145A:  BRA     N,147E
-145C:  MOV     #30,W0
-145E:  BRA     1462
-1460:  MOV     #20,W0
-1462:  MOV     W0,[W15++]
-1464:  MOV     W1,[W15++]
-1466:  MOV     W4,[W15++]
-1468:  MOV     W0,[W15++]
-146A:  MOV     [--W15],W0
-146C:  CALL    A06
-1470:  MOV     [--W15],W4
-1472:  MOV     [--W15],W1
-1474:  MOV     [--W15],W0
-1476:  DEC     W5,W5
-1478:  BRA     NN,1462
-147A:  BTSC    W4.8
-147C:  DEC.B   W4L,W4L
-147E:  MOV     #E,W8
-1480:  MOV     #0,W9
-1482:  LNK     #10
-1484:  MOV     W12,[W14+W8]
-1486:  DEC2    W8,W8
-1488:  BRA     NN,1484
-148A:  MOV     W4,W5
-148C:  MOV     #A,W4
-148E:  BTSC    W5.8
-1490:  INC     W4,W4
-1492:  BSET    W5.E
-1494:  BTSC    W12.F
-1496:  BSET    W5.F
-1498:  CP0.B   W5L
-149A:  BRA     Z,149E
-149C:  DEC.B   W5L,W5L
-149E:  MOV     W4,[W14]
-14A0:  MOV     W5,[W14+#2]
-14A2:  MOV     W6,W0
-14A4:  MOV     W7,W1
-14A6:  MOV     #CA00,W2
-14A8:  MOV     #3B9A,W3
-14AA:  MOV     #2710,W8
-14AC:  BCLR    W13.F
-14AE:  BCLR.B  43.0
-14B0:  CALL    13C8
-14B4:  BTG     W13.F
-14B6:  BTSC    W13.F
-14B8:  BRA     14C8
-14BA:  MOV     W0,[W14+#8]
-14BC:  MOV     W1,[W14+#A]
-14BE:  MOV     W0,W2
-14C0:  MOV     W1,W3
-14C2:  MOV     [W14+#4],W0
-14C4:  MOV     [W14+#6],W1
-14C6:  BRA     14AE
-14C8:  MOV     W2,[W14+#8]
-14CA:  MOV     W3,[W14+#A]
-14CC:  MOV     W4,[W14+#4]
-14CE:  MOV     W5,[W14+#6]
-14D0:  MOV     [W14],W4
-14D2:  MOV     [W14+#2],W5
-14D4:  MOV     #30,W6
-14D6:  CP0     W0
-14D8:  BRA     NZ,14FC
-14DA:  BTSS    W5.E
-14DC:  BRA     1500
-14DE:  DEC     W4,W4
-14E0:  MOV     W4,[W14]
-14E2:  CP0     W4
-14E4:  BRA     Z,1500
-14E6:  CP.B    W4L,W5L
-14E8:  BRA     Z,14EE
-14EA:  BTSC.B  42.0
-14EC:  BRA     152A
-14EE:  BTSS    W5.F
-14F0:  BRA     14F8
-14F2:  BTSS    W5.8
-14F4:  BRA     151C
-14F6:  BRA     1506
-14F8:  MOV     #20,W6
-14FA:  BRA     151C
-14FC:  BCLR    W5.E
-14FE:  MOV     W5,[W14+#2]
-1500:  MOV     [W14+#2],W5
-1502:  BTSS    W5.8
-1504:  BRA     151C
-1506:  BCLR    W5.8
-1508:  MOV     W5,[W14+#2]
-150A:  MOV     W0,W10
-150C:  MOV     #2D,W0
-150E:  MOV     W4,[W15++]
-1510:  MOV     W0,[W15++]
-1512:  MOV     [--W15],W0
-1514:  CALL    A06
-1518:  MOV     [--W15],W4
-151A:  MOV     W10,W0
-151C:  ADD.B   W6L,W0L,W0L
-151E:  MOV     W4,[W15++]
-1520:  MOV     W0,[W15++]
-1522:  MOV     [--W15],W0
-1524:  CALL    A06
-1528:  MOV     [--W15],W4
-152A:  MOV     [W14+#8],W0
-152C:  MOV     [W14+#A],W1
-152E:  MOV     #A,W2
-1530:  CLR     W3
-1532:  CP      W0,#1
-1534:  BRA     Z,1538
-1536:  BRA     14AE
-1538:  ULNK    
-153A:  MOV     #1A,W5
-153C:  REPEAT  #7
-153E:  MOV     [--W15],[W5--]
-1540:  MOV     [--W15],W5
-1542:  RETURN  
-1544:  MOV     W5,[W15++]
-1546:  MOV     #C,W5
-1548:  REPEAT  #3
-154A:  MOV     [W5++],[W15++]
-154C:  BTSS    W0.F
-154E:  BRA     156E
-1550:  NEG     W0,W0
-1552:  BSET    W4.8
-1554:  BTSS    W4.F
-1556:  BRA     156E
-1558:  MOV     W0,[W15++]
-155A:  MOV     #2D,W0
-155C:  MOV     W4,[W15++]
-155E:  MOV     W0,[W15++]
-1560:  MOV     [--W15],W0
-1562:  CALL    A06
-1566:  MOV     [--W15],W4
-1568:  MOV     [--W15],W0
-156A:  BCLR    W4.8
-156C:  DEC.B   0008
-156E:  CLR     W5
-1570:  MOV     W0,W7
-1572:  MOV     W4,W9
-1574:  BCLR    W4.F
-1576:  CP0.B   W4L
-1578:  BRA     NZ,1586
-157A:  BTSC    W9.F
-157C:  BRA     1582
-157E:  MOV     #0,W5
-1580:  BRA     15B0
-1582:  MOV     #0,W5
-1584:  BRA     15B0
-1586:  BTSS    W9.8
-1588:  SUB.B   W4L,#6,W5L
-158A:  BTSC    W9.8
-158C:  SUB.B   W4L,#7,W5L
-158E:  BRA     NC,15AE
-1590:  MOV     #30,W0
-1592:  BTSS    W9.F
-1594:  MOV     #20,W0
-1596:  MOV     W0,[W15++]
-1598:  MOV     W4,[W15++]
-159A:  MOV     W0,[W15++]
-159C:  MOV     [--W15],W0
-159E:  CALL    A06
-15A2:  MOV     [--W15],W4
+13C8:  MOV     W5,[W15++]
+13CA:  MOV     #C,W5
+13CC:  REPEAT  #3
+13CE:  MOV     [W5++],[W15++]
+13D0:  BTSS    W0.F
+13D2:  BRA     13F2
+13D4:  NEG     W0,W0
+13D6:  BSET    W4.8
+13D8:  BTSS    W4.F
+13DA:  BRA     13F2
+13DC:  MOV     W0,[W15++]
+13DE:  MOV     #2D,W0
+13E0:  MOV     W4,[W15++]
+13E2:  MOV     W0,[W15++]
+13E4:  MOV     [--W15],W0
+13E6:  CALL    A06
+13EA:  MOV     [--W15],W4
+13EC:  MOV     [--W15],W0
+13EE:  BCLR    W4.8
+13F0:  DEC.B   0008
+13F2:  CLR     W5
+13F4:  MOV     W0,W7
+13F6:  MOV     W4,W9
+13F8:  BCLR    W4.F
+13FA:  CP0.B   W4L
+13FC:  BRA     NZ,140A
+13FE:  BTSC    W9.F
+1400:  BRA     1406
+1402:  MOV     #0,W5
+1404:  BRA     1434
+1406:  MOV     #0,W5
+1408:  BRA     1434
+140A:  BTSS    W9.8
+140C:  SUB.B   W4L,#6,W5L
+140E:  BTSC    W9.8
+1410:  SUB.B   W4L,#7,W5L
+1412:  BRA     NC,1432
+1414:  MOV     #30,W0
+1416:  BTSS    W9.F
+1418:  MOV     #20,W0
+141A:  MOV     W0,[W15++]
+141C:  MOV     W4,[W15++]
+141E:  MOV     W0,[W15++]
+1420:  MOV     [--W15],W0
+1422:  CALL    A06
+1426:  MOV     [--W15],W4
+1428:  MOV     [--W15],W0
+142A:  DEC     W5,W5
+142C:  BRA     NN,141A
+142E:  MOV     #5,W5
+1430:  BRA     1434
+1432:  MOV     W4,W5
+1434:  MOV     #6,W4
+1436:  BTSC    W5.8
+1438:  INC     W4,W4
+143A:  BSET    W5.E
+143C:  BTSC    W9.F
+143E:  BSET    W5.F
+1440:  MOV     #2710,W8
+1442:  REPEAT  #11
+1444:  DIV.U   W7,W8
+1446:  CALL    149A
+144A:  MOV     W1,W7
+144C:  MOV     #3E8,W8
+144E:  REPEAT  #11
+1450:  DIV.U   W7,W8
+1452:  CALL    149A
+1456:  MOV     W1,W7
+1458:  MOV     #64,W8
+145A:  REPEAT  #11
+145C:  DIV.U   W7,W8
+145E:  CALL    149A
+1462:  MOV     W1,W7
+1464:  MOV     #A,W8
+1466:  REPEAT  #11
+1468:  DIV.U   W7,W8
+146A:  CALL    149A
+146E:  BTSS    W9.8
+1470:  BRA     1486
+1472:  MOV     #2D,W0
+1474:  MOV     W1,[W15++]
+1476:  MOV     W4,[W15++]
+1478:  MOV     W0,[W15++]
+147A:  MOV     [--W15],W0
+147C:  CALL    A06
+1480:  MOV     [--W15],W4
+1482:  MOV     [--W15],W1
+1484:  BCLR    W9.8
+1486:  MOV     #30,W0
+1488:  ADD.B   W1L,W0L,W0L
+148A:  MOV     W0,2A
+148C:  MOV     W4,[W15++]
+148E:  MOV     W0,[W15++]
+1490:  MOV     [--W15],W0
+1492:  CALL    A06
+1496:  MOV     [--W15],W4
+1498:  BRA     14EE
+149A:  MOV     #30,W6
+149C:  CP0     W0
+149E:  BRA     NZ,14BC
+14A0:  BTSS    W5.E
+14A2:  BRA     14DA
+14A4:  DEC     W4,W4
+14A6:  CP.B    W4L,W5L
+14A8:  BRA     Z,14AE
+14AA:  BTSC.B  42.0
+14AC:  RETURN  
+14AE:  CP0     W0
+14B0:  BRA     NZ,14BC
+14B2:  BTSS    W5.E
+14B4:  BRA     14DA
+14B6:  BTSS    W5.F
+14B8:  MOV     #20,W6
+14BA:  BRA     14DA
+14BC:  BCLR    W5.E
+14BE:  BTSS    W9.8
+14C0:  BRA     14DA
+14C2:  MOV     W0,W10
+14C4:  MOV     #2D,W0
+14C6:  MOV     W1,[W15++]
+14C8:  MOV     W4,[W15++]
+14CA:  MOV     W0,[W15++]
+14CC:  MOV     [--W15],W0
+14CE:  CALL    A06
+14D2:  MOV     [--W15],W4
+14D4:  MOV     [--W15],W1
+14D6:  BCLR    W9.8
+14D8:  MOV     W10,W0
+14DA:  ADD.B   W6L,W0L,W0L
+14DC:  MOV     W1,[W15++]
+14DE:  MOV     W4,[W15++]
+14E0:  MOV     W0,[W15++]
+14E2:  MOV     [--W15],W0
+14E4:  CALL    A06
+14E8:  MOV     [--W15],W4
+14EA:  MOV     [--W15],W1
+14EC:  RETURN  
+14EE:  MOV     #12,W5
+14F0:  REPEAT  #3
+14F2:  MOV     [--W15],[W5--]
+14F4:  MOV     [--W15],W5
+14F6:  RETURN  
+14F8:  MOV     W6,[W15++]
+14FA:  MOV     W7,[W15++]
+14FC:  MOV     W8,[W15++]
+14FE:  MOV     W9,[W15++]
+1500:  CLR     W4
+1502:  CLR     W5
+1504:  CLR     W6
+1506:  CLR     W7
+1508:  XOR     W2,W3,W8
+150A:  BRA     Z,152E
+150C:  MOV     #20,W8
+150E:  BCLR.B  42.0
+1510:  RLC     W0,W0
+1512:  RLC     W1,W1
+1514:  RLC     W4,W4
+1516:  RLC     W5,W5
+1518:  CP      W5,W3
+151A:  BRA     NZ,151E
+151C:  CPB     W4,W2
+151E:  BRA     NC,1526
+1520:  SUB     W4,W2,W4
+1522:  SUBB    W5,W3,W5
+1524:  BSET.B  42.0
+1526:  RLC     W6,W6
+1528:  RLC     W7,W7
+152A:  DEC     W8,W8
+152C:  BRA     NZ,150E
+152E:  MOV     W7,W1
+1530:  MOV     W6,W0
+1532:  MOV     [--W15],W9
+1534:  MOV     [--W15],W8
+1536:  MOV     [--W15],W7
+1538:  MOV     [--W15],W6
+153A:  RETURN  
+153C:  MOV     W5,[W15++]
+153E:  MOV     #C,W5
+1540:  REPEAT  #7
+1542:  MOV     [W5++],[W15++]
+1544:  BTSS    W1.F
+1546:  BRA     1556
+1548:  NEG     W0,W0
+154A:  BRA     Z,154E
+154C:  BRA     NZ,1552
+154E:  NEG     W1,W1
+1550:  BRA     1554
+1552:  COM     W1,W1
+1554:  BSET    W4.8
+1556:  CLR     W5
+1558:  MOV     W0,W6
+155A:  MOV     W1,W7
+155C:  MOV     W4,W12
+155E:  BCLR    W4.F
+1560:  CP0.B   W4L
+1562:  BRA     NZ,1566
+1564:  BRA     15AE
+1566:  SUB.B   W4L,#B,W5L
+1568:  BRA     NC,15AE
+156A:  SUB.B   W4L,W5L,W4L
+156C:  BTSS    W12.F
+156E:  BRA     1590
+1570:  BTSS    W4.8
+1572:  BRA     158C
+1574:  MOV     #2D,W0
+1576:  MOV     W1,[W15++]
+1578:  MOV     W4,[W15++]
+157A:  MOV     W0,[W15++]
+157C:  MOV     [--W15],W0
+157E:  CALL    A06
+1582:  MOV     [--W15],W4
+1584:  MOV     [--W15],W1
+1586:  BCLR    W4.8
+1588:  DEC     W5,W5
+158A:  BRA     N,15AE
+158C:  MOV     #30,W0
+158E:  BRA     1592
+1590:  MOV     #20,W0
+1592:  MOV     W0,[W15++]
+1594:  MOV     W1,[W15++]
+1596:  MOV     W4,[W15++]
+1598:  MOV     W0,[W15++]
+159A:  MOV     [--W15],W0
+159C:  CALL    A06
+15A0:  MOV     [--W15],W4
+15A2:  MOV     [--W15],W1
 15A4:  MOV     [--W15],W0
 15A6:  DEC     W5,W5
-15A8:  BRA     NN,1596
-15AA:  MOV     #5,W5
-15AC:  BRA     15B0
-15AE:  MOV     W4,W5
-15B0:  MOV     #6,W4
-15B2:  BTSC    W5.8
-15B4:  INC     W4,W4
-15B6:  BSET    W5.E
-15B8:  BTSC    W9.F
-15BA:  BSET    W5.F
-15BC:  MOV     #2710,W8
-15BE:  REPEAT  #11
-15C0:  DIV.U   W7,W8
-15C2:  CALL    1616
-15C6:  MOV     W1,W7
-15C8:  MOV     #3E8,W8
-15CA:  REPEAT  #11
-15CC:  DIV.U   W7,W8
-15CE:  CALL    1616
-15D2:  MOV     W1,W7
-15D4:  MOV     #64,W8
-15D6:  REPEAT  #11
-15D8:  DIV.U   W7,W8
-15DA:  CALL    1616
-15DE:  MOV     W1,W7
-15E0:  MOV     #A,W8
-15E2:  REPEAT  #11
-15E4:  DIV.U   W7,W8
-15E6:  CALL    1616
-15EA:  BTSS    W9.8
-15EC:  BRA     1602
-15EE:  MOV     #2D,W0
-15F0:  MOV     W1,[W15++]
-15F2:  MOV     W4,[W15++]
-15F4:  MOV     W0,[W15++]
-15F6:  MOV     [--W15],W0
-15F8:  CALL    A06
-15FC:  MOV     [--W15],W4
-15FE:  MOV     [--W15],W1
-1600:  BCLR    W9.8
-1602:  MOV     #30,W0
-1604:  ADD.B   W1L,W0L,W0L
-1606:  MOV     W0,2A
-1608:  MOV     W4,[W15++]
-160A:  MOV     W0,[W15++]
-160C:  MOV     [--W15],W0
-160E:  CALL    A06
-1612:  MOV     [--W15],W4
-1614:  BRA     166A
-1616:  MOV     #30,W6
-1618:  CP0     W0
-161A:  BRA     NZ,1638
-161C:  BTSS    W5.E
-161E:  BRA     1656
-1620:  DEC     W4,W4
-1622:  CP.B    W4L,W5L
-1624:  BRA     Z,162A
-1626:  BTSC.B  42.0
-1628:  RETURN  
-162A:  CP0     W0
-162C:  BRA     NZ,1638
-162E:  BTSS    W5.E
-1630:  BRA     1656
-1632:  BTSS    W5.F
-1634:  MOV     #20,W6
-1636:  BRA     1656
-1638:  BCLR    W5.E
-163A:  BTSS    W9.8
-163C:  BRA     1656
-163E:  MOV     W0,W10
-1640:  MOV     #2D,W0
-1642:  MOV     W1,[W15++]
-1644:  MOV     W4,[W15++]
-1646:  MOV     W0,[W15++]
-1648:  MOV     [--W15],W0
-164A:  CALL    A06
-164E:  MOV     [--W15],W4
-1650:  MOV     [--W15],W1
-1652:  BCLR    W9.8
-1654:  MOV     W10,W0
-1656:  ADD.B   W6L,W0L,W0L
-1658:  MOV     W1,[W15++]
-165A:  MOV     W4,[W15++]
-165C:  MOV     W0,[W15++]
-165E:  MOV     [--W15],W0
-1660:  CALL    A06
-1664:  MOV     [--W15],W4
-1666:  MOV     [--W15],W1
-1668:  RETURN  
-166A:  MOV     #12,W5
-166C:  REPEAT  #3
+15A8:  BRA     NN,1592
+15AA:  BTSC    W4.8
+15AC:  DEC.B   W4L,W4L
+15AE:  MOV     #E,W8
+15B0:  MOV     #0,W9
+15B2:  LNK     #10
+15B4:  MOV     W12,[W14+W8]
+15B6:  DEC2    W8,W8
+15B8:  BRA     NN,15B4
+15BA:  MOV     W4,W5
+15BC:  MOV     #A,W4
+15BE:  BTSC    W5.8
+15C0:  INC     W4,W4
+15C2:  BSET    W5.E
+15C4:  BTSC    W12.F
+15C6:  BSET    W5.F
+15C8:  CP0.B   W5L
+15CA:  BRA     Z,15CE
+15CC:  DEC.B   W5L,W5L
+15CE:  MOV     W4,[W14]
+15D0:  MOV     W5,[W14+#2]
+15D2:  MOV     W6,W0
+15D4:  MOV     W7,W1
+15D6:  MOV     #CA00,W2
+15D8:  MOV     #3B9A,W3
+15DA:  MOV     #2710,W8
+15DC:  BCLR    W13.F
+15DE:  BCLR.B  43.0
+15E0:  CALL    14F8
+15E4:  BTG     W13.F
+15E6:  BTSC    W13.F
+15E8:  BRA     15F8
+15EA:  MOV     W0,[W14+#8]
+15EC:  MOV     W1,[W14+#A]
+15EE:  MOV     W0,W2
+15F0:  MOV     W1,W3
+15F2:  MOV     [W14+#4],W0
+15F4:  MOV     [W14+#6],W1
+15F6:  BRA     15DE
+15F8:  MOV     W2,[W14+#8]
+15FA:  MOV     W3,[W14+#A]
+15FC:  MOV     W4,[W14+#4]
+15FE:  MOV     W5,[W14+#6]
+1600:  MOV     [W14],W4
+1602:  MOV     [W14+#2],W5
+1604:  MOV     #30,W6
+1606:  CP0     W0
+1608:  BRA     NZ,162C
+160A:  BTSS    W5.E
+160C:  BRA     1630
+160E:  DEC     W4,W4
+1610:  MOV     W4,[W14]
+1612:  CP0     W4
+1614:  BRA     Z,1630
+1616:  CP.B    W4L,W5L
+1618:  BRA     Z,161E
+161A:  BTSC.B  42.0
+161C:  BRA     165A
+161E:  BTSS    W5.F
+1620:  BRA     1628
+1622:  BTSS    W5.8
+1624:  BRA     164C
+1626:  BRA     1636
+1628:  MOV     #20,W6
+162A:  BRA     164C
+162C:  BCLR    W5.E
+162E:  MOV     W5,[W14+#2]
+1630:  MOV     [W14+#2],W5
+1632:  BTSS    W5.8
+1634:  BRA     164C
+1636:  BCLR    W5.8
+1638:  MOV     W5,[W14+#2]
+163A:  MOV     W0,W10
+163C:  MOV     #2D,W0
+163E:  MOV     W4,[W15++]
+1640:  MOV     W0,[W15++]
+1642:  MOV     [--W15],W0
+1644:  CALL    A06
+1648:  MOV     [--W15],W4
+164A:  MOV     W10,W0
+164C:  ADD.B   W6L,W0L,W0L
+164E:  MOV     W4,[W15++]
+1650:  MOV     W0,[W15++]
+1652:  MOV     [--W15],W0
+1654:  CALL    A06
+1658:  MOV     [--W15],W4
+165A:  MOV     [W14+#8],W0
+165C:  MOV     [W14+#A],W1
+165E:  MOV     #A,W2
+1660:  CLR     W3
+1662:  CP      W0,#1
+1664:  BRA     Z,1668
+1666:  BRA     15DE
+1668:  ULNK    
+166A:  MOV     #1A,W5
+166C:  REPEAT  #7
 166E:  MOV     [--W15],[W5--]
 1670:  MOV     [--W15],W5
 1672:  RETURN  
@@ -7318,7 +7318,7 @@ CCS PCD C Compiler, Version 5.112, 5967               13-Jun-24 15:41
 ....................       
 ....................       if (tick) {
 1864:  BTSS.B  994.2
-1866:  BRA     1910
+1866:  BRA     190C
 ....................          output_bit(TIM_tick_pin , 1);
 1868:  BSET.B  2CA.3
 186A:  BCLR.B  2C6.3
@@ -7398,257 +7398,269 @@ CCS PCD C Compiler, Version 5.112, 5967               13-Jun-24 15:41
 ....................          if (throttle_level > 20) 
 18A6:  MOV     982,W4
 18A8:  CP      W4,#14
-18AA:  BRA     LE,18FC
+18AA:  BRA     LE,18F8
 ....................          {
-....................             if(throttle_level > attained_throttle)
+....................             ascending_speed  = ascend_speed_table[attained_throttle];
 18AC:  MOV     9E0,W0
-18AE:  MOV     982,W4
-18B0:  CP      W4,W0
-18B2:  BRA     LE,18CC
+18AE:  SL      W0,#1,W0
+18B0:  CALL    100
+18B4:  MOV     W0,9DA
+....................             descending_speed = descend_speed_table[attained_throttle];
+18B6:  MOV     9E0,W0
+18B8:  SL      W0,#1,W0
+18BA:  CALL    278
+18BE:  MOV     W0,9DC
+....................             attained_speed = enc_count;       
+18C0:  PUSH    990
+18C2:  POP     9DE
+....................             if(throttle_level > attained_throttle)
+18C4:  MOV     9E0,W0
+18C6:  MOV     982,W4
+18C8:  CP      W4,W0
+18CA:  BRA     LE,18D6
 ....................             {
-....................                ascending_speed  = ascend_speed_table[attained_throttle];
-18B4:  MOV     9E0,W0
-18B6:  SL      W0,#1,W0
-18B8:  CALL    100
-18BC:  MOV     W0,9DA
-....................                attained_speed = enc_count;
-18BE:  PUSH    990
-18C0:  POP     9DE
 ....................                if (attained_speed >= ascending_speed) 
-18C2:  MOV     9DA,W0
-18C4:  MOV     9DE,W4
-18C6:  CP      W4,W0
-18C8:  BRA     NC,18CC
+18CC:  MOV     9DA,W0
+18CE:  MOV     9DE,W4
+18D0:  CP      W4,W0
+18D2:  BRA     NC,18D6
 ....................                {
 ....................                   attained_throttle++; 
-18CA:  INC     09E0
+18D4:  INC     09E0
 ....................                }
 ....................             }
 ....................             if(throttle_level < attained_throttle)
-18CC:  MOV     982,W0
-18CE:  MOV     9E0,W4
-18D0:  CP      W4,W0
-18D2:  BRA     LE,18F6
+18D6:  MOV     982,W0
+18D8:  MOV     9E0,W4
+18DA:  CP      W4,W0
+18DC:  BRA     LE,18F2
 ....................             {
-....................                descending_speed = descend_speed_table[attained_throttle];
-18D4:  MOV     9E0,W0
-18D6:  SL      W0,#1,W0
-18D8:  CALL    278
-18DC:  MOV     W0,9DC
-....................                attained_speed = enc_count;
-18DE:  PUSH    990
-18E0:  POP     9DE
 ....................                if (attained_speed < descending_speed) 
-18E2:  MOV     9DE,W0
-18E4:  MOV     9DC,W4
-18E6:  CP      W4,W0
-18E8:  BRA     LEU,18F6
+18DE:  MOV     9DE,W0
+18E0:  MOV     9DC,W4
+18E2:  CP      W4,W0
+18E4:  BRA     LEU,18F2
 ....................                {
 ....................                   attained_throttle--; 
-18EA:  DEC     09E0
+18E6:  DEC     09E0
 ....................                   if (attained_throttle < 20)
-18EC:  MOV     9E0,W4
-18EE:  CP      W4,#14
-18F0:  BRA     C,18F6
+18E8:  MOV     9E0,W4
+18EA:  CP      W4,#14
+18EC:  BRA     C,18F2
 ....................                   {
 ....................                      attained_throttle = 20;
-18F2:  MOV     #14,W4
-18F4:  MOV     W4,9E0
+18EE:  MOV     #14,W4
+18F0:  MOV     W4,9E0
 ....................                   }
 ....................                }
 ....................             }
 ....................             if(throttle_level == attained_throttle)
-18F6:  MOV     982,W0
-18F8:  CP      9E0
-18FA:  BRA     NZ,18FC
+18F2:  MOV     982,W0
+18F4:  CP      9E0
+18F6:  BRA     NZ,18F8
 ....................             {
 ....................             //
 ....................             }
 ....................          }
-.................... 
 ....................          freq = attained_throttle;
-18FC:  PUSH    9E0
-18FE:  POP     984
-....................        
+18F8:  PUSH    9E0
+18FA:  POP     984
 ....................          peak_voltage = gain_table[attained_throttle]; 
-1900:  MOV     9E0,W0
-1902:  SL      W0,#1,W0
-1904:  CALL    568
-1908:  MOV     W0,926
-....................          
+18FC:  MOV     9E0,W0
+18FE:  SL      W0,#1,W0
+1900:  CALL    568
+1904:  MOV     W0,926
 ....................          output_bit(PWM_tick_pin , 0);
-190A:  BCLR.B  2CA.2
-190C:  BCLR.B  2C6.2
+1906:  BCLR.B  2CA.2
+1908:  BCLR.B  2C6.2
 ....................          tick = 0;      
-190E:  BCLR.B  994.2
+190A:  BCLR.B  994.2
 ....................       } 
 ....................       
 ....................       if (uart_tick) 
-1910:  BTSS.B  994.4
-1912:  BRA     197E
+190C:  BTSS.B  994.4
+190E:  BRA     19AE
 ....................       {
 ....................          
 ....................          //!         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
-....................          sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d" , enc_count , throttle_level , attained_throttle);
-1914:  MOV     #99E,W4
-1916:  MOV     W4,9EE
-1918:  MOV.B   #D,W0L
-191A:  CALL    A06
-191E:  MOV.B   #A,W0L
-1920:  CALL    A06
-1924:  MOV.B   #20,W0L
-1926:  CALL    A06
-192A:  MOV     990,W0
-192C:  MOV     992,W1
-192E:  MOV     #0,W4
-1930:  CALL    140C
-1934:  MOV.B   #20,W0L
+....................          sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d , %d" , throttle_level , attained_throttle,  enc_count , ascending_speed , descending_speed);
+1910:  MOV     #99E,W4
+1912:  MOV     W4,9EE
+1914:  MOV.B   #D,W0L
+1916:  CALL    A06
+191A:  MOV.B   #A,W0L
+191C:  CALL    A06
+1920:  MOV.B   #20,W0L
+1922:  CALL    A06
+1926:  MOV     982,W0
+1928:  MOV     #0,W4
+192A:  CALL    13C8
+192E:  MOV.B   #20,W0L
+1930:  CALL    A06
+1934:  MOV.B   #2C,W0L
 1936:  CALL    A06
-193A:  MOV.B   #2C,W0L
+193A:  MOV.B   #20,W0L
 193C:  CALL    A06
-1940:  MOV.B   #20,W0L
-1942:  CALL    A06
-1946:  MOV     982,W0
-1948:  MOV     #0,W4
-194A:  CALL    1544
-194E:  MOV.B   #20,W0L
+1940:  MOV     9E0,W0
+1942:  MOV     #0,W4
+1944:  CALL    13C8
+1948:  MOV.B   #20,W0L
+194A:  CALL    A06
+194E:  MOV.B   #2C,W0L
 1950:  CALL    A06
-1954:  MOV.B   #2C,W0L
+1954:  MOV.B   #20,W0L
 1956:  CALL    A06
-195A:  MOV.B   #20,W0L
-195C:  CALL    A06
-1960:  MOV     9E0,W0
-1962:  MOV     #0,W4
-1964:  CALL    1544
-....................          printf(Serial_OutputBuffer);
-1968:  MOV     #99E,W1
-196A:  CP0.B   [W1]
-196C:  BRA     Z,197C
-196E:  BTSC.B  20F.1
-1970:  BRA     196E
-1972:  MOV.B   [W1+#0],W0L
-1974:  MOV.B   W0L,210
-1976:  CLR.B   211
-1978:  INC     W1,W1
-197A:  BRA     196A
+195A:  MOV     990,W0
+195C:  MOV     992,W1
+195E:  MOV     #0,W4
+1960:  CALL    153C
+1964:  MOV.B   #20,W0L
+1966:  CALL    A06
+196A:  MOV.B   #2C,W0L
+196C:  CALL    A06
+1970:  MOV.B   #20,W0L
+1972:  CALL    A06
+1976:  MOV     9DA,W0
+1978:  MOV     #0,W4
+197A:  CALL    13C8
+197E:  MOV.B   #20,W0L
+1980:  CALL    A06
+1984:  MOV.B   #2C,W0L
+1986:  CALL    A06
+198A:  MOV.B   #20,W0L
+198C:  CALL    A06
+1990:  MOV     9DC,W0
+1992:  MOV     #0,W4
+1994:  CALL    13C8
+....................          printf(Serial_OutputBuffer); 
+1998:  MOV     #99E,W1
+199A:  CP0.B   [W1]
+199C:  BRA     Z,19AC
+199E:  BTSC.B  20F.1
+19A0:  BRA     199E
+19A2:  MOV.B   [W1+#0],W0L
+19A4:  MOV.B   W0L,210
+19A6:  CLR.B   211
+19A8:  INC     W1,W1
+19AA:  BRA     199A
 ....................          
 ....................          uart_tick = 0;
-197C:  BCLR.B  994.4
+19AC:  BCLR.B  994.4
 ....................       
 ....................       }
 ....................       if (enc_tick) 
-197E:  BTSS.B  994.3
-1980:  BRA     1A1E
+19AE:  BTSS.B  994.3
+19B0:  BRA     1A4E
 ....................       {
 ....................          position_count = *(POSCNT +1);
-1982:  MOV.B   127,W0L
-1984:  MOV.B   W0L,988
-1986:  CLR.B   989
-1988:  CLR     98A
+19B2:  MOV.B   127,W0L
+19B4:  MOV.B   W0L,988
+19B6:  CLR.B   989
+19B8:  CLR     98A
 ....................          position_count = position_count << 8;
-198A:  MOV.B   98A,W0L
-198C:  MOV.B   W0L,98B
-198E:  MOV.B   989,W0L
-1990:  MOV.B   W0L,98A
-1992:  MOV.B   988,W0L
-1994:  MOV.B   W0L,989
-1996:  CLR.B   988
+19BA:  MOV.B   98A,W0L
+19BC:  MOV.B   W0L,98B
+19BE:  MOV.B   989,W0L
+19C0:  MOV.B   W0L,98A
+19C2:  MOV.B   988,W0L
+19C4:  MOV.B   W0L,989
+19C6:  CLR.B   988
 ....................          position_count = position_count | *POSCNT; 
-1998:  MOV.B   126,W0L
-199A:  CLR.B   1
-199C:  IOR     988
+19C8:  MOV.B   126,W0L
+19CA:  CLR.B   1
+19CC:  IOR     988
 .................... 
 .................... 
 ....................          direction_flag = QEI_get_direction();
-199E:  CALL    1674
-19A2:  BCLR.B  994.0
-19A4:  BTSC.B  0.0
-19A6:  BSET.B  994.0
+19CE:  CALL    1674
+19D2:  BCLR.B  994.0
+19D4:  BTSC.B  0.0
+19D6:  BSET.B  994.0
 .................... 
 ....................          enc_count = position_count - prev_count;
-19A8:  MOV     988,W4
-19AA:  MOV     98C,W3
-19AC:  SUB     W4,W3,W0
-19AE:  MOV     W0,990
-19B0:  MOV     98A,W4
-19B2:  MOV     98E,W3
-19B4:  SUBB    W4,W3,W0
-19B6:  MOV     W0,992
+19D8:  MOV     988,W4
+19DA:  MOV     98C,W3
+19DC:  SUB     W4,W3,W0
+19DE:  MOV     W0,990
+19E0:  MOV     98A,W4
+19E2:  MOV     98E,W3
+19E4:  SUBB    W4,W3,W0
+19E6:  MOV     W0,992
 ....................      
 ....................          if (direction_flag == 1 && enc_count < 0) 
-19B8:  BTSS.B  994.0
-19BA:  BRA     19D8
-19BC:  MOV     992,W4
-19BE:  CP      W4,#0
-19C0:  BRA     GT,19D8
-19C2:  BRA     LT,19CA
-19C4:  MOV     990,W4
-19C6:  CP      W4,#0
-19C8:  BRA     C,19D8
+19E8:  BTSS.B  994.0
+19EA:  BRA     1A08
+19EC:  MOV     992,W4
+19EE:  CP      W4,#0
+19F0:  BRA     GT,1A08
+19F2:  BRA     LT,19FA
+19F4:  MOV     990,W4
+19F6:  CP      W4,#0
+19F8:  BRA     C,1A08
 ....................          {
 ....................             enc_count = enc_count + TIM_OVERFLOW_VAL ;
-19CA:  MOV     #FFFF,W4
-19CC:  MOV     990,W3
-19CE:  ADD     W3,W4,W0
-19D0:  MOV     W0,990
-19D2:  MOV     992,W4
-19D4:  ADDC    W4,#0,W0
-19D6:  MOV     W0,992
+19FA:  MOV     #FFFF,W4
+19FC:  MOV     990,W3
+19FE:  ADD     W3,W4,W0
+1A00:  MOV     W0,990
+1A02:  MOV     992,W4
+1A04:  ADDC    W4,#0,W0
+1A06:  MOV     W0,992
 .................... 
 ....................          }
 .................... 
 ....................          if (direction_flag == 0 && enc_count > 0) 
-19D8:  BTSC.B  994.0
-19DA:  BRA     19F8
-19DC:  MOV     992,W4
-19DE:  CP      W4,#0
-19E0:  BRA     LT,19F8
-19E2:  BRA     GT,19EA
-19E4:  MOV     990,W4
-19E6:  CP      W4,#0
-19E8:  BRA     LEU,19F8
+1A08:  BTSC.B  994.0
+1A0A:  BRA     1A28
+1A0C:  MOV     992,W4
+1A0E:  CP      W4,#0
+1A10:  BRA     LT,1A28
+1A12:  BRA     GT,1A1A
+1A14:  MOV     990,W4
+1A16:  CP      W4,#0
+1A18:  BRA     LEU,1A28
 ....................          {
 ....................             enc_count = enc_count - TIM_OVERFLOW_VAL ;
-19EA:  MOV     990,W4
-19EC:  MOV     #FFFF,W3
-19EE:  SUB     W4,W3,W0
-19F0:  MOV     W0,990
-19F2:  MOV     992,W4
-19F4:  SUBB    W4,#0,W0
-19F6:  MOV     W0,992
+1A1A:  MOV     990,W4
+1A1C:  MOV     #FFFF,W3
+1A1E:  SUB     W4,W3,W0
+1A20:  MOV     W0,990
+1A22:  MOV     992,W4
+1A24:  SUBB    W4,#0,W0
+1A26:  MOV     W0,992
 ....................          }
 ....................    
 ....................          enc_count = abs(enc_count);
-19F8:  MOV     990,W0
-19FA:  MOV     992,W1
-19FC:  BTSS    W1.F
-19FE:  BRA     1A0C
-1A00:  MOV     #0,W4
-1A02:  MOV     990,W3
-1A04:  SUB     W4,W3,W0
-1A06:  MOV     #0,W4
-1A08:  MOV     992,W3
-1A0A:  SUBB    W4,W3,W1
-1A0C:  MOV     W0,990
-1A0E:  MOV     W1,992
+1A28:  MOV     990,W0
+1A2A:  MOV     992,W1
+1A2C:  BTSS    W1.F
+1A2E:  BRA     1A3C
+1A30:  MOV     #0,W4
+1A32:  MOV     990,W3
+1A34:  SUB     W4,W3,W0
+1A36:  MOV     #0,W4
+1A38:  MOV     992,W3
+1A3A:  SUBB    W4,W3,W1
+1A3C:  MOV     W0,990
+1A3E:  MOV     W1,992
 ....................          enc_count = enc_count >> 1;
-1A10:  LSR     992
-1A12:  RRC     990
+1A40:  LSR     992
+1A42:  RRC     990
 ....................          prev_count = position_count;
-1A14:  PUSH    988
-1A16:  POP     98C
-1A18:  PUSH    98A
-1A1A:  POP     98E
+1A44:  PUSH    988
+1A46:  POP     98C
+1A48:  PUSH    98A
+1A4A:  POP     98E
 ....................          
 ....................          enc_tick = 0;
-1A1C:  BCLR.B  994.3
+1A4C:  BCLR.B  994.3
 .................... 
 ....................       }
-1A1E:  BRA     1864
+1A4E:  BRA     1864
 ....................     } 
 .................... }    
 .................... 
-1A20:  PWRSAV  #0
+1A50:  PWRSAV  #0
 .................... 
 .................... void initMCPWM(void) 
 .................... {    

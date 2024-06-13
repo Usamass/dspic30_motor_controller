@@ -1,9 +1,10 @@
-D G "__PCD__" 0 420 ""5.112""
-D G "__DEVICE__" 0 420 "4011"
-D G "__DATE__" 0 420 ""13-Jun-24""
-D G "__TIME__" 0 420 ""15:41:12""
-D G "_UNICODE" 0 420 ""?""
-D G "__EVAL" 0 420 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
+F N "MAIN" 0 189 ""
+D G "__PCD__" 0 416 ""5.112""
+D G "__DEVICE__" 0 416 "4011"
+D G "__DATE__" 0 416 ""13-Jun-24""
+D G "__TIME__" 0 416 ""16:31:25""
+D G "_UNICODE" 0 416 ""?""
+D G "__EVAL" 0 416 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
 c L "set_tris_b" 1 3 6 "FUNCTION"
 F N "set_tris_b" 1 45 ""
 V L "value" 1 45 "int16" `55 
@@ -2624,14 +2625,14 @@ F G "MAIN" 0 190 "void()" `1617
 C L "MAIN" 0 33 1 "FUNCTION"
 C L "MAIN" 0 33 20 "FUNCTION"
 C L "MAIN" 0 33 1 "FUNCTION"
-F N "initMCPWM" 0 347 ""
-F G "initMCPWM" 0 348 "void()" `1576 
+F N "initMCPWM" 0 343 ""
+F G "initMCPWM" 0 344 "void()" `1576 
 C L "initMCPWM" 0 33 1 "FUNCTION"
 C L "initMCPWM" 0 33 1 "FUNCTION"
-F N "fill_sine_table" 0 367 ""
-F G "fill_sine_table" 0 368 "void()" `1577 
-F N "QEI_get_direction" 0 376 ""
-F G "QEI_get_direction" 0 377 "int8()" `1578 
+F N "fill_sine_table" 0 363 ""
+F G "fill_sine_table" 0 364 "void()" `1577 
+F N "QEI_get_direction" 0 372 ""
+F G "QEI_get_direction" 0 373 "int8()" `1578 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1
