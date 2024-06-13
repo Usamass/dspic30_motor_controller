@@ -274,7 +274,7 @@ void main()
                   attained_throttle++; 
                }
             }
-            if(throttle_level < attained_throttle)
+            if(throttle_level =< attained_throttle)
             {
                descending_speed = descend_speed_table[attained_throttle];
                attained_speed = enc_count;

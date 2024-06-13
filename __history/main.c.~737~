@@ -95,7 +95,6 @@ int32 position_count = 0;
 int32 prev_count = 0;
 int32 enc_count = 0;
 int1 direction_flag = 0;
-int1 str_capture_flg = 0;
 
 int1 tick = 0;
 int1 enc_tick = 0;
@@ -106,10 +105,31 @@ unsigned long current_millis = 0;
 
 char Serial_OutputBuffer[60];
 
-unsigned int16 ascending_speed , descending_speed , attained_speed ,attained_throttle;  
+unsigned int16 ascending_speed , descending_speed , attained_speed ,attained_throttle = 20;
 
 
 signed int32 kalman_big_1=0, kalman_big_2=0, kalman_diff=0;
+char recv_char;
+char num_str[4] = {0};
+int i = 0;
+#INT_RDA 
+void serial_ISR(void) 
+{
+   i++;
+   if (num_str[i] = getc() == '/') 
+   {
+      num_str[i] = '\0';
+      i = 0;
+      
+   }
+  
+//!  
+//!   num_str[i] = getc();
+//!   if (num_str[i] == '\n') 
+//!   i++;
+//!   if (i >= 3) i = 0;
+
+}
 
 #int_PWM1
 void  PWM1_isr(void) 
@@ -188,9 +208,9 @@ void  timer3_isr(void)
    
 void main()
 { 
-   sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
-   printf(Serial_OutputBuffer);
-   attained_throttle = 20;
+    sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
+    printf(Serial_OutputBuffer);
+ 
    freq = 1;
    
    initMCPWM();
@@ -250,9 +270,23 @@ void main()
 //------------- KALMAN FILTER IMPLEMENTATION---------------//
 
         
-         raw_adc = raw_adc -200;
-         throttle_level = raw_adc;
-        
+//!         raw_adc = raw_adc >> 2;
+//!         if (i > 2) 
+//!         {
+//!            num_str[3] = '\0';
+//!            
+//!         }
+//!         else if (i == 2) 
+//!         {
+//!            num_str[2] = '\0';
+//!         }
+//!         else 
+//!         {
+//!            num_str[1] = '\0';
+//!         }
+         
+//!         throttle_level = atoi(num_str); 
+         
          
          if (throttle_level > 255)
          {
@@ -265,34 +299,29 @@ void main()
          
          if (throttle_level > 20) 
          {
-            if(throttle_level > attained_throttle)
+         
+            ascending_speed  = ascend_speed_table[throttle_level];
+            descending_speed = descend_speed_table[throttle_level];
+            attained_speed = enc_count;
+            // Required throttle > Attained throttle
+            if (ascending_speed > attained_speed) 
             {
-               ascending_speed  = ascend_speed_table[attained_throttle];
-               attained_speed = enc_count;
-               if (attained_speed >= ascending_speed) 
-               {
-                  attained_throttle++; 
-               }
+               attained_throttle++; 
             }
-            if(throttle_level < attained_throttle)
+         
+            // Required throttle < Attained throttle
+         
+            if (descending_speed < attained_speed) 
             {
-               descending_speed = descend_speed_table[attained_throttle];
-               attained_speed = enc_count;
-               if (attained_speed < descending_speed) 
-               {
-                  attained_throttle--; 
-                  if (attained_throttle < 20)
-                  {
-                     attained_throttle = 20;
-                  }
-               }
+               attained_throttle--;
+                  
             }
-            if(throttle_level == attained_throttle)
-            {
-            //
-            }
+            
+         
+         
          }
-
+         
+         
          freq = attained_throttle;
        
          peak_voltage = gain_table[attained_throttle]; 
@@ -305,7 +334,7 @@ void main()
       {
          
          //!         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d", raw_adc , throttle_level , freq , peak_voltage);
-         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d" , enc_count , throttle_level , attained_throttle);
+         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %c , %c , %d" , enc_count , throttle_level , num_str[0] , num_str[1] , i);
          printf(Serial_OutputBuffer);
          
          uart_tick = 0;
@@ -372,7 +401,7 @@ void fill_sine_table(void)
       sine_table[sine_index]=255*sin(theeta);
    }
 }
-
+// FUNCTION FOR GETTING THE DIRECTION OF THE MOTOR.
 int1 QEI_get_direction(void) 
 {
    if (*(QEICON +1) & (1 << UPDN)) return 1;

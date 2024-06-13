@@ -1,66 +1,76 @@
 
-ROM used:   5354/32768 (16%)
-            5354/32768 (16%) including unused fragments
+ROM used:   6690/32768 (20%)
+            6690/32768 (20%) including unused fragments
 
-            1.6 Average locations per line
-            5.1 Average locations per statement
+            1.2 Average locations per line
+            3.8 Average locations per statement
 
-RAM used:   490/2048 (24%) at main() level
-            697/2048 (34%) worst case
+RAM used:   624/2048 (30%) at main() level
+            831/2048 (41%) worst case
 
-Stack used: 96 worst case (46 in main + 50 for interrupts)
+Stack used: 108 worst case (58 in main + 50 for interrupts)
 Stack size: 128
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  281   128  12  main.c
+  419   161   9  main.c
   878     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
-   60     0   0  Inc\lookup_tables.h
- 2228   925  88  ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
+  116     0   0  Inc\lookup_tables.h
+ 2228   925  53  ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
+ 1354   524  30  ..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
+   32     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
+  435   129   7  ..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
+   28     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
 ----- -----
- 3447  1053 Total
+ 5490  1739 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
-0    376   4    0             @const828
-0    376   4    0             @const831
+0     68   1    0             @DIV3232B
+0    376   3    0             @const828
+0    376   3    0             @const831
+0    376   3    0             @const834
+0    376   3    0             @const837
+0     58   0    0             @RCV_ISR_1
 0    132   1    0             @FLT64
 0     94   1    0             @F64TOI64
 0    106   1    1             @I64TOF64
-0    272   3    1             @MULFF64
+0    272   2    1             @MULFF64
 0     94   1    1             @F64TOSI64
-0    494   5   51     39  1.8  @ADDFF64
-0    264   2   51   1440  7.8  @DIVFF64
-0    680   6  114   1209  9.7  cos
-0     60   1    9     39  1.8  sin
-0     78   1    0    193  3.1  PWM1_isr
-0    538   5    2   1764  8.8  timer3_isr
-0     66   1    1   1764  8.8  @MULS3232
-0    822   8    0   1677  7.8  MAIN
-0     40   0    0   1677  7.8  @const1290
-0     14   0    0    175  4.2  @SPRINTF
-0    304   3    0    480  6.0  @PRINTFD16_1292
+0    494   4   51             @ADDFF64
+0    264   2   51             @DIVFF64
+0    680   5  114   1209  9.7  cos
+0     60   0    9     39  1.8  sin
+0     66   0    1             @MULS3232
+0    112   1    0    295  3.7  PWM1_isr
+0    530   4    2   1663  8.8  timer3_isr
+0    928   7    0   2660 10.3  MAIN
+0     40   0    0     86  3.9  @const1620
+0     14   0    0             @SPRINTF
+0    312   2    0             @PRINTFD32_1622
+0    304   2    0             @PRINTFD16_1622
 0     88   1    0   1224  3.9  initMCPWM
-0    200   2    0    175  4.2  fill_sine_table
- Inline         0    175  4.2  @cinit1
+0    200   1    0    175  4.2  fill_sine_table
+0     14   0    0     86  3.9  QEI_get_direction
+ Inline         0     86  3.9  @cinit1
 
 Program metrics:
-    Functions               14
-    Statements              1053
-    Comments                469
-    Volume (V)              18174
-    Difficulty (D)          81.7
-    Effort to implement (E) 1484560
-    Time to implement (T)   22 hours, 55 minutes
-    Est Delivered Bugs (B)  4
-    Cyclomatic Complexity   43
-    Maintainability (MI)    85
+    Functions               10
+    Statements              1739
+    Comments                1408
+    Volume (V)              10558
+    Difficulty (D)          54.4
+    Effort to implement (E) 574620
+    Time to implement (T)   8 hours, 52 minutes
+    Est Delivered Bugs (B)  2
+    Cyclomatic Complexity   32
+    Maintainability (MI)    28
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-000FE   252  0  
-00100-07FFE  5098  27414  
+00100-07FFE  6434  26078  
 
 
 

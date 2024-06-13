@@ -267,16 +267,16 @@ void main()
          {
             if(throttle_level > attained_throttle)
             {
-               ascending_speed  = ascend_speed_table[attained_throttle];
+               ascending_speed  = ascend_speed_table[throttle_level];
                attained_speed = enc_count;
-               if (attained_speed >= ascending_speed) 
+               if (attained_speed > ascending_speed) 
                {
                   attained_throttle++; 
                }
             }
             if(throttle_level < attained_throttle)
             {
-               descending_speed = descend_speed_table[attained_throttle];
+               descending_speed = descend_speed_table[throttle_level];
                attained_speed = enc_count;
                if (attained_speed < descending_speed) 
                {
