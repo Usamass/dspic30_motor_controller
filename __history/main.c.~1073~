@@ -195,6 +195,14 @@ void  timer3_isr(void)
 //!   output_bit(TIM_tick_pin , 0);
    
 }
+char msg[8] = "hello\r\n";
+#INT_TBE
+void  tbe_isr(void) 
+{
+   // set flag for new tx-data. 
+  
+}
+
 
    
 void main()
@@ -203,7 +211,6 @@ void main()
    sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
    printf(Serial_OutputBuffer);
    
-   *U1BRG = 8;  
    attained_throttle = 20;
    position_capture = 0;
    freq = 1;
@@ -223,11 +230,14 @@ void main()
    enable_interrupts(INT_TIMER3);   // enable interrupt in timer3 register (in case of 32bit mode) 
 
    enable_interrupts(INT_PWM1);
+   enable_interrupts(INT_TBE);
    enable_interrupts(INTR_GLOBAL);
    
 
    while(TRUE)         
    {
+//!      sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
+//!      printf(Serial_OutputBuffer); 
       
       if (tick) {
          
@@ -292,8 +302,8 @@ void main()
           {
           //
           }
-         sprintf(Serial_OutputBuffer, "\r\n %d,%d,%d,%d" , throttle_level , attained_throttle,  attained_speed , ascending_speed);
-         printf(Serial_OutputBuffer);  
+         sprintf(Serial_OutputBuffer, "%d%d" , throttle_level , attained_throttle);
+         printf(Serial_OutputBuffer);
          
          freq = attained_throttle;
          peak_voltage = gain_table[attained_throttle];

@@ -1,10 +1,13 @@
-Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 13-Jun-24 at 16:31
->>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 87(16,24): Variable never used:   max_freq
->>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 92(16,20): Variable never used:   temp
->>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 98(6,21): Variable never used:   str_capture_flg
->>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 112(14,26): Variable never used:   kalman_big_1
->>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 112(30,42): Variable never used:   kalman_big_2
->>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 112(46,57): Variable never used:   kalman_diff
-      Memory usage:   ROM=21%      RAM=30% - 41%
-      0 Errors,  6 Warnings.
+Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 28-Jun-24 at 10:04
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 91(16,24): Variable never used:   max_freq
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 96(16,20): Variable never used:   temp
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 104(16,29): Variable never used:   speed_capture
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 117(6,18): Variable never used:   descend_flag
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 118(6,17): Variable never used:   ascend_flag
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 119(15,18): Variable never used:   val
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 120(14,26): Variable never used:   kalman_big_1
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 120(30,42): Variable never used:   kalman_big_2
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 120(46,57): Variable never used:   kalman_diff
+      Memory usage:   ROM=19%      RAM=33% - 43%
+      0 Errors,  9 Warnings.
 Build Successful.

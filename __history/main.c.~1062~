@@ -12,8 +12,6 @@
 #FUSES PROTECT                  //Code protected from reads
 #include <math.h>
 #include <stdlib.h>
-#define clock_freq 64000000
-
 #define P1TCON    0x01C0
 #define P1TMR     0x01C2 
 #define P1TPER    0x01C4
@@ -46,7 +44,6 @@
 
 #define TIM_OVERFLOW_VAL 65535
 #define U1TXREG   0x0210
-#define U1BRG     0x0214
 
 #define ADC_pin sAN1
 #define LED_PIN PIN_C13
@@ -77,7 +74,6 @@ void initMCPWM(void);
 void fill_sine_table(void);  
 int1 QEI_get_direction(void); 
 void uart1_write (char*, unsigned int);
-int16 baud_rate_calc (unsigned int32 baud_rate);
 
 unsigned int16 duty[3]={voltage_offset,voltage_offset,voltage_offset},sample=0;
 signed int16 peak_voltage =0;//  1184; 
@@ -195,15 +191,23 @@ void  timer3_isr(void)
 //!   output_bit(TIM_tick_pin , 0);
    
 }
+char msg[8] = "hello\r\n";
+#INT_TBE
+void  tbe_isr(void) 
+{
+   // set flag for new tx-data. 
+  
+}
+
 
    
 void main()
 { 
    
-   sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
-   printf(Serial_OutputBuffer);
+//!   sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
+//!   printf(Serial_OutputBuffer);
    
-   *U1BRG = 8;  
+   
    attained_throttle = 20;
    position_capture = 0;
    freq = 1;
@@ -223,11 +227,14 @@ void main()
    enable_interrupts(INT_TIMER3);   // enable interrupt in timer3 register (in case of 32bit mode) 
 
    enable_interrupts(INT_PWM1);
+   enable_interrupts(INT_TBE);
    enable_interrupts(INTR_GLOBAL);
    
 
    while(TRUE)         
    {
+//!      sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
+//!      printf(Serial_OutputBuffer); 
       
       if (tick) {
          
@@ -292,8 +299,8 @@ void main()
           {
           //
           }
-         sprintf(Serial_OutputBuffer, "\r\n %d,%d,%d,%d" , throttle_level , attained_throttle,  attained_speed , ascending_speed);
-         printf(Serial_OutputBuffer);  
+         sprintf(Serial_OutputBuffer, "%d%d" , throttle_level , attained_throttle);
+         printf(Serial_OutputBuffer);
          
          freq = attained_throttle;
          peak_voltage = gain_table[attained_throttle];
@@ -392,19 +399,6 @@ void uart1_write (char* str , unsigned int str_size)
 
 
 }
-int16 baud_rate_calc (unsigned int32 baud_rate) 
-{
-   int16 UBRG = ((clock_freq/baud_rate)/16) -1;
-   return UBRG;
-}
-
-
-
-
-  
-   
-
-
 
 //-----------------IMPLEMENATION REQUIRED--------------//
 

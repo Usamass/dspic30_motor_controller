@@ -292,8 +292,8 @@ void main()
           {
           //
           }
-         sprintf(Serial_OutputBuffer, "\r\n %d,%d,%d,%d" , throttle_level , attained_throttle,  attained_speed , ascending_speed);
-         printf(Serial_OutputBuffer);  
+         sprintf(Serial_OutputBuffer, "%d%d\n" , throttle_level , attained_throttle);
+         printf(Serial_OutputBuffer);
          
          freq = attained_throttle;
          peak_voltage = gain_table[attained_throttle];
