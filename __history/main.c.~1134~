@@ -91,6 +91,7 @@ const unsigned max_freq = 250; //Hz
 unsigned int16 raw_adc =0 ;
 signed int16 throttle_level = 0;
 unsigned int16 freq = 1;
+unsigned int16 temp = 0;
 
 int32 position_count = 0;
 int32 prev_count = 0;
@@ -98,6 +99,7 @@ int32 enc_count = 0;
 int32 position_count_new = 0;
 int1 direction_flag = 0;
 unsigned int16 position_capture = 0;
+unsigned int16 speed_capture = 0;
 
 int1 tick = 0;
 int1 enc_tick = 0;
@@ -262,17 +264,17 @@ void main()
             attained_throttle++;
 
           }
-//!          else if (throttle_level > attained_throttle && attained_speed < prev_speed)   
-//!          {
-//!            
-//!            attained_throttle--;
-//!            if (attained_throttle < 20) 
-//!            {
-//!               attained_throttle = 20;
-//!               
-//!            }
-//!          
-//!          }
+          else if (throttle_level > attained_throttle && attained_speed < prev_speed)   
+          {
+            
+            attained_throttle--;
+            if (attained_throttle < 20) 
+            {
+               attained_throttle = 20;
+               
+            }
+          
+          }
           else if(throttle_level < attained_throttle && attained_speed <= descending_speed)
           {
             

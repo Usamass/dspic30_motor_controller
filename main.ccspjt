@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=27
+Days=28
 D1=24-04-2024
 D1_L=27
 D1_L1=[38590]Project Opened.
@@ -625,7 +625,7 @@ D26_L8=[38250]Stopped Editing.
 D26_L9=[38349]Started Editing.
 D26_L10=[39081]Stopped Editing.
 D27=28-06-2024
-D27_L=7
+D27_L=17
 D27_L1=[33208]Started Editing.
 D27_L2=[33597]Stopped Editing.
 D27_L3=[33856]Started Editing.
@@ -633,13 +633,47 @@ D27_L4=[34230]Stopped Editing.
 D27_L5=[34924]Started Editing.
 D27_L6=[36516]Stopped Editing.
 D27_L7=[37082]Project Opened.
+D27_L8=[52402]Started Editing.
+D27_L9=[53142]Stopped Editing.
+D27_L10=[54044]Started Editing.
+D27_L11=[54829]Stopped Editing.
+D27_L12=[54853]Started Editing.
+D27_L13=[55282]Stopped Editing.
+D27_L14=[55641]Started Editing.
+D27_L15=[56973]Stopped Editing.
+D27_L16=[57496]Started Editing.
+D27_L17=[58232]Stopped Editing.
+D28=01-07-2024
+D28_L=22
+D28_L1=[36519]Started Editing.
+D28_L2=[36868]Stopped Editing.
+D28_L3=[36932]Started Editing.
+D28_L4=[37232]Stopped Editing.
+D28_L5=[37275]Started Editing.
+D28_L6=[37655]Stopped Editing.
+D28_L7=[38002]Started Editing.
+D28_L8=[38302]Stopped Editing.
+D28_L9=[38525]Started Editing.
+D28_L10=[38866]Stopped Editing.
+D28_L11=[41275]Started Editing.
+D28_L12=[41585]Stopped Editing.
+D28_L13=[42836]Started Editing.
+D28_L14=[43524]Stopped Editing.
+D28_L15=[44774]Started Editing.
+D28_L16=[45098]Stopped Editing.
+D28_L17=[50982]Started Editing.
+D28_L18=[51386]Stopped Editing.
+D28_L19=[51439]Started Editing.
+D28_L20=[51945]Stopped Editing.
+D28_L21=[53372]Started Editing.
+D28_L22=[53730]Stopped Editing.
 
 [Opened Files]
 1=main.c
-t1=1
-Count=1
-2=..\dspic30_uart_driver\main.c
-t2=1
+t1=256
+Count=2
+2=Inc\lookup_tables.h
+t2=113
 3=..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
 t3=1
 4=..\dspic30_uart_driver\main.c
@@ -648,7 +682,7 @@ t4=1
 Type=4
 
 [defines]
-buildcount=934
+buildcount=969
 
 [ExtraIncludes]
 Count=0

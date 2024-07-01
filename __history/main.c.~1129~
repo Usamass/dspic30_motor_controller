@@ -91,6 +91,7 @@ const unsigned max_freq = 250; //Hz
 unsigned int16 raw_adc =0 ;
 signed int16 throttle_level = 0;
 unsigned int16 freq = 1;
+unsigned int16 temp = 0;
 
 int32 position_count = 0;
 int32 prev_count = 0;
@@ -98,6 +99,7 @@ int32 enc_count = 0;
 int32 position_count_new = 0;
 int1 direction_flag = 0;
 unsigned int16 position_capture = 0;
+unsigned int16 speed_capture = 0;
 
 int1 tick = 0;
 int1 enc_tick = 0;
@@ -112,6 +114,8 @@ unsigned int16 ascending_speed , descending_speed , attained_speed ,attained_thr
 
 int1 descend_flag = 0;
 int1 ascend_flag = 0;
+unsigned int8 val = 0;
+signed int32 kalman_big_1=0, kalman_big_2=0, kalman_diff=0;
 
 static int1 enc_mutx = 0;
 #int_PWM1
@@ -130,7 +134,8 @@ void  PWM1_isr(void)
    }
    if (uart_millis >= 10) 
    {
-//!      uart_tick = 1;
+//!      output_toggle(LED_PIN);
+      uart_tick = 1;
       uart_millis = 0;
       
    
@@ -262,17 +267,17 @@ void main()
             attained_throttle++;
 
           }
-//!          else if (throttle_level > attained_throttle && attained_speed < prev_speed)   
-//!          {
-//!            
-//!            attained_throttle--;
-//!            if (attained_throttle < 20) 
-//!            {
-//!               attained_throttle = 20;
-//!               
-//!            }
-//!          
-//!          }
+          else if (throttle_level > attained_throttle && attained_speed < prev_speed)   
+          {
+            
+            attained_throttle--;
+            if (attained_throttle < 20) 
+            {
+               attained_throttle = 20;
+               
+            }
+          
+          }
           else if(throttle_level < attained_throttle && attained_speed <= descending_speed)
           {
             
@@ -291,17 +296,15 @@ void main()
          
          freq = attained_throttle;
          peak_voltage = gain_table[attained_throttle];
-         
-         prev_speed = attained_speed; 
-         
          tick = 0;  
          output_bit(LED_PIN , 0);
-        
+         prev_speed  = attained_speed;
       } 
       
       if (uart_tick) 
       {
-         
+//!         sprintf(Serial_OutputBuffer, "\r\n %d , %d , %d , %d , %d , %d" , throttle_level , attained_throttle,  attained_speed , ascending_speed , descending_speed , speed_capture);
+//!         printf(Serial_OutputBuffer);         
          uart_tick = 0;
       
       }

@@ -262,17 +262,17 @@ void main()
             attained_throttle++;
 
           }
-//!          else if (throttle_level > attained_throttle && attained_speed < prev_speed)   
-//!          {
-//!            
-//!            attained_throttle--;
-//!            if (attained_throttle < 20) 
-//!            {
-//!               attained_throttle = 20;
-//!               
-//!            }
-//!          
-//!          }
+          else if (throttle_level > attained_throttle && attained_speed < prev_speed)   
+          {
+            
+            attained_throttle--;
+            if (attained_throttle < 20) 
+            {
+               attained_throttle = 20;
+               
+            }
+          
+          }
           else if(throttle_level < attained_throttle && attained_speed <= descending_speed)
           {
             
