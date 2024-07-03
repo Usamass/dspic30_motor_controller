@@ -1,0 +1,9 @@
+Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 03-Jul-24 at 11:20
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 89(16,24): Variable never used:   max_freq
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 105(6,15): Variable never used:   drive_inc
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 107(7,15): Variable never used:   sec_tick
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 115(6,18): Variable never used:   descend_flag
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 116(6,17): Variable never used:   ascend_flag
+      Memory usage:   ROM=19%      RAM=32% - 42%
+      0 Errors,  5 Warnings.
+Build Successful.

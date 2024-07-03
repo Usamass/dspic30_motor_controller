@@ -338,7 +338,7 @@ void main()
          prev_count = position_count;           
          position_count_new = enc_count;
          
-         sprintf(Serial_OutputBuffer, "\r\n %d,%d,%d,%d,%d,%d" , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed);
+         sprintf(Serial_OutputBuffer, "\r\n %d,%d,%d,%d,%d,%d,%d" , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed , direction_flag);
          printf(Serial_OutputBuffer);
          
          enc_mutx = 0;

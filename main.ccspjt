@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=28
+Days=30
 D1=24-04-2024
 D1_L=27
 D1_L1=[38590]Project Opened.
@@ -667,13 +667,64 @@ D28_L19=[51439]Started Editing.
 D28_L20=[51945]Stopped Editing.
 D28_L21=[53372]Started Editing.
 D28_L22=[53730]Stopped Editing.
+D29=02-07-2024
+D29_L=30
+D29_L1=[34653]Started Editing.
+D29_L2=[35070]Stopped Editing.
+D29_L3=[35080]Started Editing.
+D29_L4=[35635]Stopped Editing.
+D29_L5=[36396]Started Editing.
+D29_L6=[36696]Stopped Editing.
+D29_L7=[41119]Started Editing.
+D29_L8=[41419]Stopped Editing.
+D29_L9=[41887]Started Editing.
+D29_L10=[42187]Stopped Editing.
+D29_L11=[45434]Started Editing.
+D29_L12=[45771]Stopped Editing.
+D29_L13=[46294]Started Editing.
+D29_L14=[47243]Stopped Editing.
+D29_L15=[52317]Started Editing.
+D29_L16=[52699]Stopped Editing.
+D29_L17=[54134]Started Editing.
+D29_L18=[54744]Stopped Editing.
+D29_L19=[55075]Started Editing.
+D29_L20=[56335]Stopped Editing.
+D29_L21=[56416]Started Editing.
+D29_L22=[56783]Stopped Editing.
+D29_L23=[57682]Started Editing.
+D29_L24=[58307]Stopped Editing.
+D29_L25=[58670]Started Editing.
+D29_L26=[58970]Stopped Editing.
+D29_L27=[59728]Started Editing.
+D29_L28=[60069]Stopped Editing.
+D29_L29=[60467]Started Editing.
+D29_L30=[60802]Stopped Editing.
+D30=03-07-2024
+D30_L=17
+D30_L1=[32923]Started Editing.
+D30_L2=[33243]Stopped Editing.
+D30_L3=[33709]Started Editing.
+D30_L4=[34139]Stopped Editing.
+D30_L5=[34419]Started Editing.
+D30_L6=[34719]Stopped Editing.
+D30_L7=[34824]Started Editing.
+D30_L8=[35124]Stopped Editing.
+D30_L9=[35988]Started Editing.
+D30_L10=[36622]Stopped Editing.
+D30_L11=[38096]Started Editing.
+D30_L12=[38397]Stopped Editing.
+D30_L13=[38465]Started Editing.
+D30_L14=[39179]Stopped Editing.
+D30_L15=[40195]Started Editing.
+D30_L16=[41155]Stopped Editing.
+D30_L17=[50371]Started Editing.
 
 [Opened Files]
 1=main.c
-t1=256
+t1=319
 Count=2
 2=Inc\lookup_tables.h
-t2=113
+t2=118
 3=..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
 t3=1
 4=..\dspic30_uart_driver\main.c
@@ -682,7 +733,7 @@ t4=1
 Type=4
 
 [defines]
-buildcount=969
+buildcount=1024
 
 [ExtraIncludes]
 Count=0

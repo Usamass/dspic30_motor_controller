@@ -196,13 +196,18 @@ void  timer3_isr(void)
 void main()
 { 
    
+   prev_speed = 0;
 
    *U1BRG = 8;    // setting uart baudrate to 115200.
    
    sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
    printf(Serial_OutputBuffer);
    
-   
+   for (int i = 0 ;i <= 255; i++) 
+   {  
+      sprintf(Serial_OutputBuffer , "[%d] : %d\n" , i , ascend_speed_table[i]);
+      printf(Serial_OutputBuffer);
+   }
    attained_throttle = 20;
    position_capture = 0;
    freq = 1;
@@ -469,13 +474,6 @@ if (current_speed != set_speed && current_speed == next_speed)
 //!      sec_tick = 0;
 //!   
 //!   }
-
-   // printing tables//
-   for (int i = 0 ;i <= 255; i++) 
-   {  
-      sprintf(Serial_OutputBuffer , "[%d] : %d\n" , i , ascend_speed_table[i]);
-      printf(Serial_OutputBuffer);
-   }
   
 
 */

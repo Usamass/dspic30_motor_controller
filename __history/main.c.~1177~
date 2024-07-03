@@ -196,6 +196,7 @@ void  timer3_isr(void)
 void main()
 { 
    
+   prev_speed = 0;
 
    *U1BRG = 8;    // setting uart baudrate to 115200.
    

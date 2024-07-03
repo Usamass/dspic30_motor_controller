@@ -1,71 +1,71 @@
 W0      @SCRATCH
 W0L     _RETURN_
-W0      @PRINTFD16_1624.P1
+W0 -W3  @I64TOF48.P1
 W0 -W1  @READ_ROM_MEMORY.P2
-W0 -W2  @MULFF48.P3
-W0 -W3  @MULS6464.P4
-W0 -W1  @DIV3232B.P5
-W0      @delay_ms1.P6
-W0 -W3  @DIVS6464.P7
-W0      @delay_us1.P8
-W0 -W3  @I64TOF64.P9
-W0 -W1  @ADDFF.P10
-W0 -W3  @DIVFF64.P11
-W0 -W1  @MUL3232.P12
-W0 -W3  @F64TOI64.P13
-W0 -W2  @FLT48.P14
-W0 -W3  @MULFF64.P15
-W0 -W2  @F48TO64.P16
-W0 -W1  @FLT.P17
-W0 -W3  @F64TOSI64.P18
-W0      @SITOF.P19
-W0 -W1  @SFTOI.P20
-W0 -W3  @SI64TOF64.P21
-W0      @ITOF.P22
-W0 -W2  @ADDFF48.P23
-W0 -W1  @MULFF.P24
+W0 -W3  @MULS6464.P3
+W0 -W1  @DIV3232B.P4
+W0      @delay_ms1.P5
+W0      @delay_us1.P6
+W0 -W2  @DIVFF48.P7
+W0 -W1  @ADDFF.P8
+W0 -W3  @DIVFF64.P9
+W0 -W1  @MUL3232.P10
+W0 -W3  @F64TOI64.P11
+W0 -W3  @I64TOF64.P12
+W0 -W3  @MULFF64.P13
+W0 -W2  @F48TO64.P14
+W0 -W1  @FLT.P15
+W0 -W3  @F64TOSI64.P16
+W0      @SITOF.P17
+W0 -W1  @SFTOI.P18
+W0 -W3  @SI64TOF64.P19
+W0      @ITOF.P20
+W0 -W2  @ADDFF48.P21
+W0 -W1  @MULFF.P22
+W0 -W2  @FLT48.P23
+W0 -W2  @DIVS4848.P24
 W0L     @SPRINTF.P25
 W0 -W2  @F48TOSI64.P26
 W0 -W2  @MULS4848.P27
 W0 -W1  @DIVS3232A.P28
-W0 -W2  @DIVS4848.P29
+W0 -W2  @MULFF48.P29
 W0 -W3  @FLT64.P30
-W0 -W3  @SI64TOF48.P31
-W0 -W1  @DIVFF.P32
+W0 -W1  @DIVFF.P31
+W0 -W3  @SI64TOF48.P32
 W0 -W3  @ADDFF64.P33
-W0 -W3  @I64TOF48.P34
+W0      @PRINTFD16_1626.P34
 W0 -W1  @MULS3232.P35
-W0 -W2  @DIVFF48.P36
+W0 -W3  @DIVS6464.P36
 W1      @SCRATCH
 W1      @READ_PACKED_MEMORY.P1
 W1      @WRITE_PACKED_MEMORY.P2
-W2 -W3  @MULFF.P1
-W2 -W3  @FLT.P2
-W2      @READ_PACKED_MEMORY.P3
-W2      @WRITE_PACKED_MEMORY.P4
-W2 -W3  @MULS3232.P5
-W2 -W3  @DIVFF.P6
-W2 -W3  @MUL3232.P7
-W2 -W3  @DIV3232B.P8
-W2 -W3  @ADDFF.P9
-W2      @READ_ROM_MEMORY.P10
-W2 -W3  @DIVS3232A.P11
-W3      @READ_PACKED_MEMORY.P1
-W3      @READ_ROM_MEMORY.P2
-W3 -W5  @FLT48.P3
-W3 -W5  @MULS4848.P4
-W3 -W5  @DIVS4848.P5
-W3      @WRITE_PACKED_MEMORY.P6
-W3 -W5  @DIVFF48.P7
-W3 -W5  @ADDFF48.P8
+W2      @WRITE_PACKED_MEMORY.P1
+W2      @READ_PACKED_MEMORY.P2
+W2      @READ_ROM_MEMORY.P3
+W2 -W3  @MULFF.P4
+W2 -W3  @ADDFF.P5
+W2 -W3  @MUL3232.P6
+W2 -W3  @FLT.P7
+W2 -W3  @DIVS3232A.P8
+W2 -W3  @DIV3232B.P9
+W2 -W3  @DIVFF.P10
+W2 -W3  @MULS3232.P11
+W3      @READ_ROM_MEMORY.P1
+W3 -W5  @DIVS4848.P2
+W3 -W5  @ADDFF48.P3
+W3      @WRITE_PACKED_MEMORY.P4
+W3 -W5  @DIVFF48.P5
+W3      @READ_PACKED_MEMORY.P6
+W3 -W5  @MULS4848.P7
+W3 -W5  @FLT48.P8
 W3 -W5  @MULFF48.P9
-W4 -W7  @MULFF64.P1
-W4 -W7  @MULS6464.P2
-W4 -W7  @DIVS6464.P3
-W4 -W7  @FLT64.P4
-W4      @PRINTFD16_1624.P5
+W4 -W7  @FLT64.P1
+W4 -W7  @MULFF64.P2
+W4 -W7  @MULS6464.P3
+W4 -W7  @DIVFF64.P4
+W4 -W7  @DIVS6464.P5
 W4 -W7  @ADDFF64.P6
-W4 -W7  @DIVFF64.P7
+W4      @PRINTFD16_1626.P7
 800-863 RCV_BUFFER_1
 864-865 RCV_NEXT_IN_1
 866-867 RCV_NEXT_OUT_1
@@ -94,43 +94,45 @@ W4 -W7  @DIVFF64.P7
 996.1   tick
 996.2   enc_tick
 996.3   uart_tick
-996.4   descend_flag
-996.5   ascend_flag
-996.6   enc_mutx
+996.4   drive_inc
+996.5   descend_flag
+996.6   ascend_flag
+996.7   enc_mutx
 997     tick_count
 998-999 position_capture
-99A-99D millis_count
-99E-9A1 uart_millis
-9A2-A05 Serial_OutputBuffer
-A06-A07 ascending_speed
-A08-A09 descending_speed
-A0A-A0B attained_speed
-A0C-A0D attained_throttle
-A0E-A0F loaded_speed
-A10-A11 prev_speed
-A12-A13 @sprintf_string
-A18-A1F sin.x
-A28-A2F cos.x
-A30     cos.quad
-A31     cos.i
-A32-A39 cos.y
-A3A-A41 cos.t
-A42-A49 cos.t2
-A4A-A51 cos.frac
-A52-A99 cos.p_64
-ADA-ADB timer3_isr.i
+99A-99B sec_tick
+99C-99F millis_count
+9A0-9A3 uart_millis
+9A4-A07 Serial_OutputBuffer
+A08-A09 ascending_speed
+A0A-A0B descending_speed
+A0C-A0D attained_speed
+A0E-A0F attained_throttle
+A10-A11 loaded_speed
+A12-A13 prev_speed
+A14-A15 @sprintf_string
+A1A-A21 sin.x
+A2A-A31 cos.x
+A32     cos.quad
+A33     cos.i
+A34-A3B cos.y
+A3C-A43 cos.t
+A44-A4B cos.t2
+A4C-A53 cos.frac
+A54-A9B cos.p_64
+ADC-ADD timer3_isr.i
 F80-FFF _STACK_
 
 ROM Allocation:
-000100  ascend_speed_table.call
-000122  ascend_speed_table.data
-000278  descend_speed_table.call
-00029A  descend_speed_table.data
-0003F0  timer_table.call
-000412  timer_table.data
-000568  gain_table.call
-00058A  gain_table.data
-0006E0  @const1622.call
+000100  descend_speed_table.call
+000122  descend_speed_table.data
+000278  timer_table.call
+00029A  timer_table.data
+0003F0  gain_table.call
+000412  gain_table.data
+000568  ascend_speed_table.call
+00058A  ascend_speed_table.data
+0006E0  @const1624.call
 000708  @RCV_ISR_1
 000742  PWM1_isr
 0007A4  @MULS3232
@@ -148,10 +150,10 @@ ROM Allocation:
 001298  @F64TOSI64
 0012F6  fill_sine_table
 0013BE  QEI_get_direction
-0013CC  @PRINTFD16_1624
+0013CC  @PRINTFD16_1626
 0014FC  MAIN
 0014FC  @cinit1
-00155C  @cinit2
+001560  @cinit2
 0135  StrtoulGO
 0135  StrtolGO
 
@@ -159,18 +161,18 @@ Project Directory:
     C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\
 
 Project Files:
-    main.c                                                  [01-Jul-24 15:14  CRC=738BDB7A]
+    main.c                                                  [03-Jul-24 11:20  CRC=413B5ABD]
     ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h  [21-Oct-22 11:12  CRC=AE0CC97E]
-    Inc\lookup_tables.h                                     [01-Jul-24 14:50  CRC=9CE6E6E4]
+    Inc\lookup_tables.h                                     [03-Jul-24 10:34  CRC=2226CD7C]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h   [30-Jun-20 14:21  CRC=452E14BB]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h   [30-Jan-19 12:26  CRC=897CEC6C]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\string.h   [06-Apr-20 08:43  CRC=B1605627]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h    [03-Jan-08 15:55  CRC=2D1F019F]
 
-Source signature=9AEC09FF
+Source signature=EDDB6FDA
 Program memory checksum=0000
-Hex file CRC=EC98
+Hex file CRC=C8E5
 
 Units:
     C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main (main)

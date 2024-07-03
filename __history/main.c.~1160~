@@ -102,9 +102,7 @@ unsigned int16 position_capture = 0;
 int1 tick = 0;
 int1 enc_tick = 0;
 int1 uart_tick = 0;
-int1 drive_inc = 0;
 int8 tick_count = 0;
-int16 sec_tick = 0;
 unsigned long millis_count = 0;
 unsigned long uart_millis = 0;
 
@@ -125,7 +123,6 @@ void  PWM1_isr(void)
    {     
       millis_count++;
       uart_millis++;
-//!      sec_tick++;
       tick = 1;
       
       tick_count=0;
@@ -143,8 +140,8 @@ void  PWM1_isr(void)
       
       millis_count = 0;
       
-   } 
-
+   }  
+  
 
 }
 
@@ -196,13 +193,14 @@ void  timer3_isr(void)
 void main()
 { 
    
-
+   prev_speed = 0;
+   
+   
    *U1BRG = 8;    // setting uart baudrate to 115200.
    
    sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
    printf(Serial_OutputBuffer);
-   
-   
+  
    attained_throttle = 20;
    position_capture = 0;
    freq = 1;
@@ -228,12 +226,11 @@ void main()
    while(TRUE)         
    {
       
-      
       if (tick) {
          
          raw_adc = read_adc();
          
-//!         output_bit(LED_PIN , 1);
+         output_bit(LED_PIN , 1);
          if (raw_adc > 1023) 
          {
             raw_adc = 1023;
@@ -251,7 +248,7 @@ void main()
          {  
             throttle_level = 0; 
          }
- 
+
           ascending_speed  = ascend_speed_table[attained_throttle];
           descending_speed = descend_speed_table[attained_throttle];  
           loaded_speed = ascend_speed_table[attained_throttle -1];
@@ -293,14 +290,15 @@ void main()
           {
           //
           }
-        
+          
+         
          freq = attained_throttle;
          peak_voltage = gain_table[attained_throttle];
          
          prev_speed = attained_speed;
          
          tick = 0;  
-//!         output_bit(LED_PIN , 0);
+         output_bit(LED_PIN , 0);
         
       } 
       
@@ -442,41 +440,6 @@ if (current_speed != set_speed && current_speed == next_speed)
 //!                }
 //!             }
 //!             else {descend_flag = 0;}
-
-//-----------drive test code--------//
-      if (drive_inc) 
-      {
-
-         
-         attained_throttle++;
-         if (attained_throttle > 255)
-         {
-            attained_throttle = 255;
-         }
-         if (attained_throttle < 0)   
-         {  
-            attained_throttle = 0; 
-         }
-         freq = attained_throttle;
-         peak_voltage = gain_table[attained_throttle];
-
-         drive_inc = 0;
-      }
-      
-      //!   if (sec_tick >= 1000) 
-//!   {
-//!      drive_inc = 1;
-//!      sec_tick = 0;
-//!   
-//!   }
-
-   // printing tables//
-   for (int i = 0 ;i <= 255; i++) 
-   {  
-      sprintf(Serial_OutputBuffer , "[%d] : %d\n" , i , ascend_speed_table[i]);
-      printf(Serial_OutputBuffer);
-   }
-  
 
 */
 

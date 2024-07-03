@@ -125,7 +125,7 @@ void  PWM1_isr(void)
    {     
       millis_count++;
       uart_millis++;
-//!      sec_tick++;
+      sec_tick++;
       tick = 1;
       
       tick_count=0;
@@ -144,7 +144,13 @@ void  PWM1_isr(void)
       millis_count = 0;
       
    } 
-
+   if (sec_tick >= 1000) 
+   {
+      drive_inc = 1;
+      sec_tick = 0;
+   
+   }
+  
 
 }
 
@@ -196,13 +202,14 @@ void  timer3_isr(void)
 void main()
 { 
    
-
+   prev_speed = 0;
+   
+   
    *U1BRG = 8;    // setting uart baudrate to 115200.
    
    sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
    printf(Serial_OutputBuffer);
-   
-   
+  
    attained_throttle = 20;
    position_capture = 0;
    freq = 1;
@@ -227,7 +234,17 @@ void main()
 
    while(TRUE)         
    {
-      
+      if (drive_inc) 
+      {
+//!         output_bit(LED_PIN , 1);   
+         
+         attained_throttle++;
+         freq = attained_throttle;
+         peak_voltage = gain_table[attained_throttle];
+         
+//!         output_bit(LED_PIN , 0);
+         drive_inc = 0;
+      }
       
       if (tick) {
          
@@ -251,51 +268,52 @@ void main()
          {  
             throttle_level = 0; 
          }
- 
-          ascending_speed  = ascend_speed_table[attained_throttle];
-          descending_speed = descend_speed_table[attained_throttle];  
-          loaded_speed = ascend_speed_table[attained_throttle -1];
+  
+//!          ascending_speed  = ascend_speed_table[attained_throttle];
+//!          descending_speed = descend_speed_table[attained_throttle];  
+//!          loaded_speed = ascend_speed_table[attained_throttle -1];
+//!          
+//!          if (!enc_mutx) 
+//!          {
+//!            attained_speed = position_count_new;      // READING ENCODER's SHARED VARIABLE. 
+//! 
+//!          }
+//!          
+//!          
+//!          if(throttle_level > attained_throttle && attained_speed >= ascending_speed)
+//!          {
+//!            attained_throttle++;
+//!
+//!          }
+//!          else if (throttle_level > attained_throttle && attained_speed < loaded_speed)   
+//!          {
+//!            
+//!            attained_throttle--;
+//!            if (attained_throttle < 20) 
+//!            {
+//!               attained_throttle = 20;
+//!               
+//!            }
+//!          
+//!          }
+//!          else if(throttle_level < attained_throttle && attained_speed <= descending_speed)
+//!          {
+//!            
+//!            attained_throttle--; 
+//!            if (attained_throttle < 20)
+//!            {
+//!               attained_throttle = 20;
+//!            }
+//!             
+//!          }
+//!          else if (throttle_level == attained_throttle)
+//!          {
+//!          //
+//!          }
           
-          if (!enc_mutx) 
-          {
-            attained_speed = position_count_new;      // READING ENCODER's SHARED VARIABLE. 
- 
-          }
-          
-          
-          if(throttle_level > attained_throttle && attained_speed >= ascending_speed)
-          {
-            attained_throttle++;
-
-          }
-          else if (throttle_level > attained_throttle && attained_speed < loaded_speed)   
-          {
-            
-            attained_throttle--;
-            if (attained_throttle < 20) 
-            {
-               attained_throttle = 20;
-               
-            }
-          
-          }
-          else if(throttle_level < attained_throttle && attained_speed <= descending_speed)
-          {
-            
-            attained_throttle--; 
-            if (attained_throttle < 20)
-            {
-               attained_throttle = 20;
-            }
-             
-          }
-          else if (throttle_level == attained_throttle)
-          {
-          //
-          }
-        
-         freq = attained_throttle;
-         peak_voltage = gain_table[attained_throttle];
+         
+//!         freq = attained_throttle;
+//!         peak_voltage = gain_table[attained_throttle];
          
          prev_speed = attained_speed;
          
@@ -338,9 +356,10 @@ void main()
          prev_count = position_count;           
          position_count_new = enc_count;
          
-         sprintf(Serial_OutputBuffer, "\r\n %d,%d,%d,%d,%d,%d" , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed);
+//!         sprintf(Serial_OutputBuffer, "\r\n %d,%d,%d,%d,%d,%d" , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed);
+//!         printf(Serial_OutputBuffer);
+         sprintf(Serial_OutputBuffer, "\r\n %d,%d" ,attained_throttle,  attained_speed);
          printf(Serial_OutputBuffer);
-         
          enc_mutx = 0;
          enc_tick = 0;
 
@@ -442,41 +461,6 @@ if (current_speed != set_speed && current_speed == next_speed)
 //!                }
 //!             }
 //!             else {descend_flag = 0;}
-
-//-----------drive test code--------//
-      if (drive_inc) 
-      {
-
-         
-         attained_throttle++;
-         if (attained_throttle > 255)
-         {
-            attained_throttle = 255;
-         }
-         if (attained_throttle < 0)   
-         {  
-            attained_throttle = 0; 
-         }
-         freq = attained_throttle;
-         peak_voltage = gain_table[attained_throttle];
-
-         drive_inc = 0;
-      }
-      
-      //!   if (sec_tick >= 1000) 
-//!   {
-//!      drive_inc = 1;
-//!      sec_tick = 0;
-//!   
-//!   }
-
-   // printing tables//
-   for (int i = 0 ;i <= 255; i++) 
-   {  
-      sprintf(Serial_OutputBuffer , "[%d] : %d\n" , i , ascend_speed_table[i]);
-      printf(Serial_OutputBuffer);
-   }
-  
 
 */
 
