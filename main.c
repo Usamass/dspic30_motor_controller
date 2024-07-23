@@ -1,7 +1,9 @@
 #include <30F4011.h>
 #include <Inc/lookup_tables.h>
+
 #DEVICE ADC=10
 #device ICSP=1
+#include <digital_filter/digital_filter.h>
 #use delay(clock=64000000,crystal=8000000)
 #use rs232(UART1, baud=57600, RECEIVE_BUFFER=100 , stream=UART_PORT1)
 
@@ -12,7 +14,6 @@
 #FUSES PROTECT                  //Code protected from reads
 #include <math.h>
 #include <stdlib.h>
-#define clock_freq 64000000
 
 #define P1TCON    0x01C0
 #define P1TMR     0x01C2 
@@ -32,12 +33,31 @@
 #define PLLFBD    0x0746
 
 
+/* ADC REGISTERS */
+
+// adc buffer registers
+#define ADCBUF0 0x0280
+#define ADCBUF1 0x0282
+#define ADCBUF2 0x0284
+#define ADCBUF3 0x0286
+// adc control registers
+#define ADCON1 0x02A0
+#define ADCON2 0x02A2
+#define ADCON3 0x02A4
+// adc chennel select registers.
+#define ADCHS  0x02A6
+#define ADPCFG 0x02A8
+#define ADCSSL 0x02AA
+
+#define IFS0 0x0084
+
+
 /*------------QUADRATURE ENCODER REGISTERS-------------------*/
 #define QEICON  0x0122       // Control Status Register.
 #define DFLTCON 0x0124      // Digital Filter Control Register.
 #define POSCNT  0x0126     // Position Count Register.
 #define MAXCNT  0x0128    // Maximum Count Register.
-#define ADPCFG  0x02A8   // Encoder Multiplexed pins.
+//!#define ADPCFG  0x02A8   // Encoder Multiplexed pins.
 #define IEC2    0x0090  // for enabling the QE interrupt.
 #define IPC10   0x00A8 // QEI interrupt priority Register.
 
@@ -50,6 +70,7 @@
 
 #define ADC_pin sAN1
 #define LED_PIN PIN_C13
+#define TICK_PIN PIN_B0
 
 #define voltage_offset 1000//1248
 #define low_duty_limit 50
@@ -69,15 +90,26 @@
 #define TIM_tick_pin PIN_B3
 #define ENC_TICK_PIN PIN_B0
 
+#define KALMAN_UP_1     7
+#define KALMAN_DOWN_1   5
+
+#define KALMAN_UP_2     8
+#define KALMAN_DOWN_2   5
+
+#define current_prob1   sAN6
+#define current_prob2   sAN8
+
+
+#define TIM_FREQ  60 // for 4k hz sampling rate.
+
 #define init_freq 30
 
- 
-  
 void initMCPWM(void);
 void fill_sine_table(void);  
-int1 QEI_get_direction(void); 
+int1 QEI_get_direction(void);
+int set_pwm_duty(int16 ,  int16);
 
-unsigned int16 duty[3]={voltage_offset,voltage_offset,voltage_offset},sample=0;
+unsigned int16 duty[3]={0,0,0},sample=0;
 signed int16 peak_voltage =0;//  1184; 
 signed int32 reference[3] = {0,0,0};
 
@@ -86,76 +118,94 @@ signed int16 sine_table[max_samples];
 unsigned int16 sine_index,phase_angle[3] = {0 , 0 , 0};  
 double theeta;
 
-const unsigned max_freq = 250; //Hz
-
 unsigned int16 raw_adc =0 ;
 signed int16 throttle_level = 0;
 unsigned int16 freq = 1;
 
+//-----------ENCODER VARIABLES-----------//
 int32 position_count = 0;
 int32 prev_count = 0;
 int32 enc_count = 0;
 int32 position_count_new = 0;
 int1 direction_flag = 0;
 unsigned int16 position_capture = 0;
-
+//-----------ENCODER VARIABLES-----------//
+int1 sec_flage = 0;
 int1 tick = 0;
 int1 enc_tick = 0;
-int1 uart_tick = 0;
-int1 drive_inc = 0;
 int8 tick_count = 0;
-int16 sec_tick = 0;
 unsigned long millis_count = 0;
-unsigned long uart_millis = 0;
+unsigned long sec_count = 0;
 
 char Serial_OutputBuffer[100];
 
-unsigned int16 ascending_speed , descending_speed , attained_speed ,attained_throttle, loaded_speed , prev_speed;  
-
-int1 descend_flag = 0;
-int1 ascend_flag = 0;
-
+unsigned int16 ascending_speed , descending_speed , attained_speed , loaded_speed;  
+int16 loaded_val = 0;
+int16 attained_throttle;
+unsigned int32 throttle_delay = 0;
 static int1 enc_mutx = 0;
+
+//---------------FILTER VARIABLES-----------------//
+KALMAN filter1_sin1 , filter2_sin1 , filter1_sin2 , filter2_sin2;
+unsigned int16 ADC1_sample =   0;
+unsigned int16 ADC2_sample =   0;
+
+unsigned int16 filtered_sin1 = 0;
+unsigned int16 filtered_sin2 = 0;
+
+signed sampled_sin1 = 0;
+signed sampled_sin2 = 0;
+
+unsigned int16 abs_sin1 = 0;
+unsigned int16 abs_sin2 = 0;
+
+unsigned int16 prob1 = 0;
+unsigned int16 prob2 = 0;
+
+char symb = ' ';
+char symb1 = ' ';
+//---------------FILTER VARIABLES-----------------//
+
+int1 ch1 = 0;
+int1 stop_pwm = 0;
+
+
 #int_PWM1
 void  PWM1_isr(void) 
 {
-
    tick_count++;
    if(tick_count >= 8)
    {     
       millis_count++;
-      uart_millis++;
-//!      sec_tick++;
+      sec_count++;
       tick = 1;
       
       tick_count=0;
    
    }
-   if (uart_millis >= 10) 
-   {
-//!      uart_tick = 1;
-      uart_millis = 0;
-      
    
-   }
    if (millis_count >= 100) {
       enc_tick = 1;
-      
       millis_count = 0;
       
-   } 
-
-
+   }
+   if (sec_count >= 1000) 
+   {
+      sec_flage = 1;
+      sec_count = 0;
+   
+   }
+   
 }
 
 #INT_TIMER3
 void  timer3_isr(void) 
 {
- 
+   
    sample = (sample+1)%max_samples;
    phase_angle[0] = sample;
-   phase_angle[1] = (sample+10)%max_samples;
-   phase_angle[2] = (sample+20)%max_samples; 
+   phase_angle[1] = (sample+10)%max_samples; 
+   phase_angle[2] = (sample+20)%max_samples;  
 
    for (int i = 0 ; i < 3 ; i++) {
       
@@ -183,18 +233,93 @@ void  timer3_isr(void)
       }
    }
       
-   *P1DC1 = reference[0];  *(P1DC1+1) = reference[0]>>8;
-   *P1DC2 = reference[1];  *(P1DC2+1) = reference[1]>>8;
-   *P1DC3 = reference[2];  *(P1DC3+1) = reference[2]>>8;
-
-   setup_timer2(TMR_INTERNAL | TMR_DIV_BY_1 | TMR_32_BIT , timer_table[freq]); //need to implement on TIM2 register configuration.
-   output_bit(TIM_tick_pin , 0);
+   duty[0] = reference[0];  
+   duty[1] = reference[1];  
+   duty[2] = reference[2];
    
+   if (!stop_pwm) 
+   {
+       *(P1DC1+1) = duty[0]>>8;   *P1DC1 = duty[0]; 
+       *(P1DC2+1) = duty[1]>>8;   *P1DC2 = duty[1];
+       *(P1DC3+1) = duty[2]>>8;   *P1DC3 = duty[2];
+   }
+   else 
+   {
+       *(P1DC1+1) = 0x00;   *P1DC1 = 0x00; 
+       *(P1DC2+1) = 0x00;   *P1DC2 = 0x00;
+       *(P1DC3+1) = 0x00;   *P1DC3 = 0x00;
+   }
+   
+   setup_timer2(TMR_INTERNAL | TMR_DIV_BY_1 | TMR_32_BIT , timer_table[freq]); //need to implement on TIM2 register configuration.
+
+
+}
+
+#INT_TIMER4
+void  timer4_isr(void) 
+{  
+   output_bit(LED_PIN , 1);
+
+   setup_adc_ports(ADC_pin);
+      
+   set_adc_channel(1);
+   raw_adc = read_adc();
+   output_bit(LED_PIN , 0);
+   
+   if (raw_adc > 1023)
+   {
+      raw_adc = 1023;
+   }
+   raw_adc = raw_adc >> 1;
+         
+   
+  
+   if (!ch1) 
+   {
+    
+      setup_adc_ports(current_prob1);
+      set_adc_channel(6);
+      ADC1_sample = read_adc();
+
+      KALMAN_begin(&filter1_sin1 , &ADC1_sample , &filtered_sin1);
+      sampled_sin1 = filtered_sin1 - ADC1_sample;
+      abs_sin1 = abs(sampled_sin1);
+      filtered_sin1 = 0;
+      KALMAN_begin(&filter2_sin1 , &abs_sin1 , &filtered_sin1);
+      prob1 = filtered_sin1;
+      
+      ch1 = 1;
+   }
+   else 
+   {
+       
+      setup_adc_ports(current_prob2);
+      set_adc_channel(8);
+      ADC2_sample = read_adc();
+
+      KALMAN_begin(&filter1_sin2 , &ADC2_sample , &filtered_sin2);
+      sampled_sin2 = filtered_sin2 - ADC2_sample; 
+      abs_sin2 = abs(sampled_sin2); 
+      filtered_sin2 = 0;
+      KALMAN_begin(&filter2_sin2 , &abs_sin2 , &filtered_sin2);
+      prob2 = filtered_sin2;
+      
+      ch1 = 0;
+   
+   
+   }
+   
+      
 }
 
    
 void main()
 { 
+   KALMAN_init(&filter1_sin1 , KALMAN_UP_1 , KALMAN_DOWN_1);
+   KALMAN_init(&filter2_sin1 , KALMAN_UP_2 , KALMAN_DOWN_2);
+   
+   KALMAN_init(&filter1_sin2 , KALMAN_UP_1 , KALMAN_DOWN_1);
+   KALMAN_init(&filter2_sin2 , KALMAN_UP_2 , KALMAN_DOWN_2);
    
 
    *U1BRG = 8;    // setting uart baudrate to 115200.
@@ -203,23 +328,28 @@ void main()
    printf(Serial_OutputBuffer);
    
    
-   attained_throttle = 20;
+   attained_throttle = 0;
    position_capture = 0;
    freq = 1;
-   
+    
    initMCPWM();
    fill_sine_table();
 
    output_drive(LED_PIN);
+   output_drive(TICK_PIN);
 
-   setup_adc(ADC_CLOCK_DIV_32);
-   setup_adc_ports(ADC_pin);
-   set_adc_channel(1);
+   setup_adc(ADC_CLOCK_DIV_2 | ADC_TAD_MUL_16);
+   
    delay_us(10);
    
    setup_qei( QEI_MODE_X2 , QEI_FILTER_DIV_1 ,0);
    setup_timer2(TMR_INTERNAL | TMR_DIV_BY_1 | TMR_32_BIT , timer_table[freq]);
    enable_interrupts(INT_TIMER3);   // enable interrupt in timer3 register (in case of 32bit mode) 
+
+    // enable interrupt
+   
+   setup_timer4(TMR_INTERNAL | TMR_DIV_BY_64 , TIM_FREQ);
+   enable_interrupts(INT_TIMER4);
 
    enable_interrupts(INT_PWM1);
    enable_interrupts(INTR_GLOBAL);
@@ -227,22 +357,11 @@ void main()
 
    while(TRUE)         
    {
-      
-      
-      if (tick) {
+     
+      if (enc_tick) 
+      {
          
-         raw_adc = read_adc();
-         
-//!         output_bit(LED_PIN , 1);
-         if (raw_adc > 1023) 
-         {
-            raw_adc = 1023;
-         }
-
-         raw_adc = raw_adc -200;
-         throttle_level = raw_adc;
-        
-         
+         throttle_level = raw_adc - 100;
          if (throttle_level > 255)
          {
             throttle_level = 255;
@@ -253,8 +372,15 @@ void main()
          }
  
           ascending_speed  = ascend_speed_table[attained_throttle];
-          descending_speed = descend_speed_table[attained_throttle];  
-          loaded_speed = ascend_speed_table[attained_throttle -1];
+          descending_speed = descend_speed_table[attained_throttle];
+          
+          loaded_val = attained_throttle -1;
+          if (loaded_val < 0) 
+          {
+            loaded_val = 0;
+          
+          }
+          loaded_speed = ascend_speed_table[loaded_val];
           
           if (!enc_mutx) 
           {
@@ -263,55 +389,90 @@ void main()
           }
           
           
-          if(throttle_level > attained_throttle && attained_speed >= ascending_speed)
-          {
-            attained_throttle++;
-
-          }
-          else if (throttle_level > attained_throttle && attained_speed < loaded_speed)   
+          if (throttle_level > attained_throttle) 
           {
             
-            attained_throttle--;
-            if (attained_throttle < 20) 
+            symb1 = '+';
+            if (attained_speed >= ascending_speed)
             {
-               attained_throttle = 20;
+            
+               symb = '+';
+               attained_throttle++;
+               throttle_delay = 0;
+
+            }
+            else 
+            {
+               symb = '0';
+               throttle_delay++;
+       
+            }
+            
+            if (attained_speed < loaded_speed) 
+            {
+               attained_throttle--;
+               symb = '-';
+               if (attained_throttle < 0) 
+               {
+                  attained_throttle = 0;
                
+               }
+                 
+            }
+     
+          }
+          else if(throttle_level < attained_throttle) 
+          {
+            symb1 = '-';
+            if (attained_speed <= descending_speed) 
+            {
+               attained_throttle--; 
+               throttle_delay = 0;
+               symb = '-';
+               if (attained_throttle < 0)
+               {
+                  attained_throttle = 0;
+               }
+         
+            }
+            else 
+            {
+               symb = '0';
+               throttle_delay++;
+   
             }
           
-          }
-          else if(throttle_level < attained_throttle && attained_speed <= descending_speed)
-          {
-            
-            attained_throttle--; 
-            if (attained_throttle < 20)
-            {
-               attained_throttle = 20;
-            }
-             
+          
           }
           else if (throttle_level == attained_throttle)
           {
-          //
+               symb1 = '0';
+               symb = '0';
+            
           }
-        
-         freq = attained_throttle;
-         peak_voltage = gain_table[attained_throttle];
+          
+
+          if (attained_throttle != 0) 
+          {
+            freq = attained_throttle;
+            peak_voltage = gain_table[attained_throttle];
+            stop_pwm = 0;
+             
+          }
+          else stop_pwm = 1;
+          
+          if (throttle_delay >= 99) 
+          {
+            throttle_delay = 0;
+          
+          }
          
-         prev_speed = attained_speed;
-         
-         tick = 0;  
-//!         output_bit(LED_PIN , 0);
         
       } 
-      
-      if (uart_tick) 
-      {
-         
-         uart_tick = 0;
-      
-      }
+ 
       if (enc_tick) 
       {
+         
          enc_mutx = 1;
          position_count = *(POSCNT +1);
          position_count = position_count << 8;
@@ -337,13 +498,17 @@ void main()
          enc_count = enc_count >> 1;
          prev_count = position_count;           
          position_count_new = enc_count;
-         
-         sprintf(Serial_OutputBuffer, "\r\n %d,%d,%d,%d,%d,%d" , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed);
+        
+         sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c , %02d" ,
+         raw_adc , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed , prob1,prob2 , 
+         symb1 , symb ,throttle_delay);
          printf(Serial_OutputBuffer);
-         
+
          enc_mutx = 0;
          enc_tick = 0;
-
+       
+  
+  
       }
     } 
 }    
@@ -477,7 +642,7 @@ if (current_speed != set_speed && current_speed == next_speed)
       printf(Serial_OutputBuffer);
    }
   
-
+ 
 */
 
 

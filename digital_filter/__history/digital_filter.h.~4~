@@ -1,0 +1,17 @@
+typedef struct 
+{
+   int32 kalman_big_1;
+   int32 kalman_big_2;
+   int32 kalman_diff;
+   
+   int32 KALMAN_UP;
+   int32 KALMAN_DOWN;   
+   
+   
+}  KALMAN;
+
+
+void KALMAN_begin(KALMAN* kalman_filter , unsigned int16* input , unsigned int16* filtered_out);
+void KALMAN_init(KALMAN* kalman_filter , int32 kalman_up , int32 kalman_down);
+
+
