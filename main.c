@@ -145,6 +145,7 @@ int16 loaded_val = 0;
 int16 attained_throttle;
 unsigned int32 throttle_delay = 0;
 static int1 enc_mutx = 0;
+int1 speed_dec = 0;
 
 //---------------FILTER VARIABLES-----------------//
 KALMAN filter1_sin1 , filter2_sin1 , filter1_sin2 , filter2_sin2;
@@ -392,7 +393,7 @@ void main()
           current_speed = attained_speed;
           
           
-          if (throttle_level > attained_throttle) 
+          if (throttle_level > attained_throttle && !speed_dec) 
           {
             
             symb1 = '+';
@@ -411,10 +412,12 @@ void main()
        
             }
             
+            
+            
             if (attained_speed < loaded_speed) 
             {
                attained_throttle--;
-               symb = '-';
+               symb = '!';
                if (attained_throttle < 0) 
                {
                   attained_throttle = 0;
@@ -424,7 +427,7 @@ void main()
             }
      
           }
-          else if(throttle_level < attained_throttle || current_speed < prev_speed) 
+          else if(throttle_level < attained_throttle) 
           {
             symb1 = '-';
             if (attained_speed <= descending_speed) 
@@ -450,36 +453,31 @@ void main()
          
           else if (throttle_level == attained_throttle)
           {
-               attained_throttle--;
-               symb = '-';
-               if (attained_throttle < 0) 
-               {
-                  attained_throttle = 0;
-               
-               }
-               symb1 = '0';
-               symb = '0';
+           
+            symb1 = '0';
+            symb = '0';
            
             
           }
+          if (attained_speed < loaded_speed) 
+          {
+            speed_dec = 1;
+            
+            attained_throttle--;
+            symb = '=';
+            if (attained_throttle < 0) 
+            {
+               attained_throttle = 0;
+             
+            }
+            
+          }
+          else 
+          {
+            speed_dec = 0;
           
-//!          if (current_speed < prev_speed) 
-//!          {
-//!               attained_throttle--;
-//!               symb = '-';
-//!               if (attained_throttle < 0) 
-//!               {
-//!                  attained_throttle = 0;
-//!               
-//!               }
-//!               
-//!               prev_speed = current_speed;
-//!          
-//!          }
-          
-         
-          
-
+          }
+ 
           if (attained_throttle != 0) 
           {
             freq = attained_throttle;

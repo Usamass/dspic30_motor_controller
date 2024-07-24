@@ -1,6 +1,6 @@
 
-ROM used:   7768/32768 (24%)
-            7768/32768 (24%) including unused fragments
+ROM used:   7780/32768 (24%)
+            7780/32768 (24%) including unused fragments
 
             1.3 Average locations per line
             4.2 Average locations per statement
@@ -13,17 +13,17 @@ Stack size: 128
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  682   241  13  main.c
+  684   246  13  main.c
   878     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
    88     0   0  Inc\lookup_tables.h
    50    16   1  digital_filter\digital_filter.h
  2228   925  50  ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h
- 1354   524  29  ..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
+ 1354   524  28  ..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
    32     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
   435   129   7  ..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
    28     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
 ----- -----
- 5775  1835 Total
+ 5777  1840 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -48,33 +48,33 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0    102   1    0    268  3.2  PWM1_isr
 0    560   4    2   2244  9.4  timer3_isr
 0    250   2    0   1089  5.8  timer4_isr
-0   1302   8    0   4285 13.3  MAIN
-0     40   0    0             @const1658
+0   1314   8    0   4417 12.8  MAIN
+0     40   0    0             @const1659
 0     14   0    0             @SPRINTF
-0    304   2    0             @PRINTFD16_1660
-0    312   2    0   1224  3.9  @PRINTFD32_1660
+0    304   2    0     86  3.9  @PRINTFD16_1661
+0    312   2    0     86  3.9  @PRINTFD32_1661
 0     88   1    0   1224  3.9  initMCPWM
 0    200   1    0    175  4.2  fill_sine_table
 0     14   0    0     86  3.9  QEI_get_direction
- Inline         0    175  4.2  @cinit1
+ Inline         0             @cinit1
 
 Program metrics:
     Functions               13
-    Statements              1835
-    Comments                1413
-    Volume (V)              18883
-    Difficulty (D)          74.3
-    Effort to implement (E) 1402509
-    Time to implement (T)   21 hours, 39 minutes
+    Statements              1840
+    Comments                1400
+    Volume (V)              16992
+    Difficulty (D)          73.7
+    Effort to implement (E) 1252985
+    Time to implement (T)   19 hours, 20 minutes
     Est Delivered Bugs (B)  4
-    Cyclomatic Complexity   40
-    Maintainability (MI)    31
+    Cyclomatic Complexity   42
+    Maintainability (MI)    35
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-000FE   252  0  
-00100-07FFE  7512  25000  
+00100-07FFE  7524  24988  
 
 
 

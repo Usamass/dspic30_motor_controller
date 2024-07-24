@@ -1051,7 +1051,7 @@ D42_L25=[60434]Stopped Editing.
 D42_L26=[61297]Started Editing.
 D42_L27=[61993]Stopped Editing.
 D43=24-07-2024
-D43_L=12
+D43_L=29
 D43_L1=[32804]Started Editing.
 D43_L2=[33600]Stopped Editing.
 D43_L3=[33965]Started Editing.
@@ -1066,22 +1066,39 @@ D43_E=91
 D43_D=0
 D43_L11=[37198]Project Closed.
 D43_L12=[38060]Project Opened.
+D43_L13=[38546]Started Editing.
+D43_L14=[38848]Stopped Editing.
+D43_L15=[39082]Started Editing.
+D43_L16=[39382]Stopped Editing.
+D43_L17=[39448]Started Editing.
+D43_L18=[39985]Stopped Editing.
+D43_L19=[40022]Started Editing.
+D43_L20=[40344]Stopped Editing.
+D43_L21=[40426]Started Editing.
+D43_L22=[41264]Stopped Editing.
+D43_L23=[41883]Started Editing.
+D43_L24=[43201]Stopped Editing.
+D43_L25=[43348]Started Editing.
+D43_L26=[43649]Stopped Editing.
+D43_L27=[44109]Started Editing.
+D43_L28=[44978]Stopped Editing.
+D43_L29=[45761]Started Editing.
 
 [Opened Files]
 1=main.c
-t1=407
-Count=2
+t1=450
+Count=3
 2=digital_filter\digital_filter.h
 t2=1
 3=Inc\lookup_tables.h
-t3=65
+t3=1
 4=digital_filter\digital_filter.h
 t4=17
 [main.c]
 Type=4
 
 [defines]
-buildcount=1498
+buildcount=1523
 
 [ExtraIncludes]
 Count=1
