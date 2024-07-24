@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=42
+Days=43
 D1=24-04-2024
 D1_L=27
 D1_L1=[38590]Project Opened.
@@ -1022,7 +1022,7 @@ D41_L7=[58299]Project Opened.
 D41_L8=[58751]Started Editing.
 D41_L9=[59051]Stopped Editing.
 D42=23-07-2024
-D42_L=24
+D42_L=27
 D42_L1=[38821]Project Opened.
 D42_L2=[38919]Started Editing.
 D42_L3=[39231]Stopped Editing.
@@ -1047,13 +1047,28 @@ D42_L21=[59338]Stopped Editing.
 D42_L22=[59355]Started Editing.
 D42_L23=[59666]Stopped Editing.
 D42_L24=[60117]Started Editing.
+D42_L25=[60434]Stopped Editing.
+D42_L26=[61297]Started Editing.
+D42_L27=[61993]Stopped Editing.
+D43=24-07-2024
+D43_L=10
+D43_L1=[32804]Started Editing.
+D43_L2=[33600]Stopped Editing.
+D43_L3=[33965]Started Editing.
+D43_L4=[34321]Stopped Editing.
+D43_L5=[34386]Started Editing.
+D43_L6=[35146]Stopped Editing.
+D43_L7=[35245]Started Editing.
+D43_L8=[35860]Stopped Editing.
+D43_L9=[36134]Started Editing.
+D43_L10=[36767]Stopped Editing.
 
 [Opened Files]
 1=main.c
-t1=421
-Count=1
-2=Inc\lookup_tables.h
-t2=21
+t1=407
+Count=2
+2=digital_filter\digital_filter.h
+t2=1
 3=Inc\lookup_tables.h
 t3=65
 4=digital_filter\digital_filter.h
@@ -1062,7 +1077,7 @@ t4=17
 Type=4
 
 [defines]
-buildcount=1485
+buildcount=1498
 
 [ExtraIncludes]
 Count=1

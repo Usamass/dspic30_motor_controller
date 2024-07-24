@@ -1,5 +1,4 @@
-Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 23-Jul-24 at 16:29
->>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 136(6,15): Variable never used:   uart_tick
-      Memory usage:   ROM=24%      RAM=37% - 48%
-      0 Errors,  1 Warnings.
+Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 24-Jul-24 at 10:03
+      Memory usage:   ROM=24%      RAM=38% - 48%
+      0 Errors,  0 Warnings.
 Build Successful.

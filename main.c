@@ -140,6 +140,7 @@ unsigned long sec_count = 0;
 char Serial_OutputBuffer[100];
 
 unsigned int16 ascending_speed , descending_speed , attained_speed , loaded_speed;  
+unsigned int16 current_speed , prev_speed;
 int16 loaded_val = 0;
 int16 attained_throttle;
 unsigned int32 throttle_delay = 0;
@@ -321,7 +322,8 @@ void main()
    KALMAN_init(&filter1_sin2 , KALMAN_UP_1 , KALMAN_DOWN_1);
    KALMAN_init(&filter2_sin2 , KALMAN_UP_2 , KALMAN_DOWN_2);
    
-
+   current_speed = 0; prev_speed = 0;
+   
    *U1BRG = 8;    // setting uart baudrate to 115200.
    
    sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
@@ -387,6 +389,7 @@ void main()
             attained_speed = position_count_new;      // READING ENCODER's SHARED VARIABLE. 
  
           }
+          current_speed = attained_speed;
           
           
           if (throttle_level > attained_throttle) 
@@ -421,7 +424,7 @@ void main()
             }
      
           }
-          else if(throttle_level < attained_throttle) 
+          else if(throttle_level < attained_throttle || current_speed < prev_speed) 
           {
             symb1 = '-';
             if (attained_speed <= descending_speed) 
@@ -444,12 +447,37 @@ void main()
           
           
           }
+         
           else if (throttle_level == attained_throttle)
           {
+               attained_throttle--;
+               symb = '-';
+               if (attained_throttle < 0) 
+               {
+                  attained_throttle = 0;
+               
+               }
                symb1 = '0';
                symb = '0';
+           
             
           }
+          
+//!          if (current_speed < prev_speed) 
+//!          {
+//!               attained_throttle--;
+//!               symb = '-';
+//!               if (attained_throttle < 0) 
+//!               {
+//!                  attained_throttle = 0;
+//!               
+//!               }
+//!               
+//!               prev_speed = current_speed;
+//!          
+//!          }
+          
+         
           
 
           if (attained_throttle != 0) 

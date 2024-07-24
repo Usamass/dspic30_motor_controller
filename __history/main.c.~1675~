@@ -133,19 +133,16 @@ unsigned int16 position_capture = 0;
 int1 sec_flage = 0;
 int1 tick = 0;
 int1 enc_tick = 0;
-int1 uart_tick = 0;
 int8 tick_count = 0;
 unsigned long millis_count = 0;
 unsigned long sec_count = 0;
-unsigned long prev_millis_count = 0;
 
 char Serial_OutputBuffer[100];
 
 unsigned int16 ascending_speed , descending_speed , attained_speed , loaded_speed;  
 int16 loaded_val = 0;
-int16 attained_throttle , prev_throttle = 0 , new_throttle = 0;
-int16 throttle_rate = 0;
-unsigned int16 throttle_value = 0;
+int16 attained_throttle;
+unsigned int32 throttle_delay = 0;
 static int1 enc_mutx = 0;
 
 //---------------FILTER VARIABLES-----------------//
@@ -171,8 +168,7 @@ char symb1 = ' ';
 
 int1 ch1 = 0;
 int1 stop_pwm = 0;
-int8 ascend_speed_diff = 0;
-int8 descend_speed_diff = 0;
+
 
 #int_PWM1
 void  PWM1_isr(void) 
@@ -190,7 +186,6 @@ void  PWM1_isr(void)
    
    if (millis_count >= 100) {
       enc_tick = 1;
-//!      uart_tick = 1;
       millis_count = 0;
       
    }
@@ -279,9 +274,6 @@ void  timer4_isr(void)
          
    
   
-
-      
-  
    if (!ch1) 
    {
     
@@ -365,14 +357,8 @@ void main()
 
    while(TRUE)         
    {
-      if (sec_flage) 
-      {
-         new_throttle = attained_throttle - prev_throttle;
-         prev_throttle = attained_throttle;
-         sec_flage = 0;
-      }
-      
-      if (tick) 
+     
+      if (enc_tick) 
       {
          
          throttle_level = raw_adc - 100;
@@ -409,18 +395,17 @@ void main()
             symb1 = '+';
             if (attained_speed >= ascending_speed)
             {
-               attained_throttle++;
-             //  throttle_value = 0;
-               symb = '+';
-               
             
+               symb = '+';
+               attained_throttle++;
+               throttle_delay = 0;
+
             }
             else 
             {
-              // throttle_value++;
-              
                symb = '0';
-            
+               throttle_delay++;
+       
             }
             
             if (attained_speed < loaded_speed) 
@@ -432,7 +417,7 @@ void main()
                   attained_throttle = 0;
                
                }
-               
+                 
             }
      
           }
@@ -442,62 +427,42 @@ void main()
             if (attained_speed <= descending_speed) 
             {
                attained_throttle--; 
+               throttle_delay = 0;
                symb = '-';
                if (attained_throttle < 0)
                {
                   attained_throttle = 0;
                }
-//!               throttle_value = 0;
-            
+         
             }
             else 
             {
-//!               throttle_value--;
-            
+               symb = '0';
+               throttle_delay++;
+   
             }
           
           
           }
           else if (throttle_level == attained_throttle)
           {
-//!            throttle_value = 0;
                symb1 = '0';
-               symb =  '0';
+               symb = '0';
+            
             
           }
+          if (attained_speed <= descending_speed) 
+            {
+               attained_throttle--; 
+               throttle_delay = 0;
+               symb = '-';
+               if (attained_throttle < 0)
+               {
+                  attained_throttle = 0;
+               }
+         
+            }
           
-//!          if(throttle_level > attained_throttle && attained_speed >= ascending_speed)
-//!          {
-//!            attained_throttle++;
-//!            
-//!          }
-//!          else if (throttle_level > attained_throttle && attained_speed < loaded_speed)   
-//!          {
-//!            
-//!            attained_throttle--;
-//!            if (attained_throttle < 0) 
-//!            {
-//!               attained_throttle = 0;
-//!               
-//!            }
-//!            throttle_value++;
-//!          
-//!          }
-//!          else if(throttle_level < attained_throttle && attained_speed <= descending_speed)
-//!          {
-//!            
-//!            attained_throttle--; 
-//!            if (attained_throttle < 0)
-//!            {
-//!               attained_throttle = 0;
-//!            }
-//!             throttle_value--;
-//!          }
-//!          else if (throttle_level == attained_throttle)
-//!          {
-//!            throttle_value = 0;
-//!            
-//!          }
 
           if (attained_throttle != 0) 
           {
@@ -508,27 +473,15 @@ void main()
           }
           else stop_pwm = 1;
           
-//!          if ((throttle_level - attained_throttle) != 0) 
-//!          {
-//!            throttle_value++;
-//!          
-//!          }
+          if (throttle_delay >= 99) 
+          {
+            throttle_delay = 0;
           
+          }
          
-         tick = 0;  
-
         
       } 
-
-      
-      if (uart_tick) 
-      {
-         
-
-         
-         uart_tick = 0;
-      
-      }
+ 
       if (enc_tick) 
       {
          
@@ -558,16 +511,16 @@ void main()
          prev_count = position_count;           
          position_count_new = enc_count;
         
-         sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c" ,
+         sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c , %02d" ,
          raw_adc , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed , prob1,prob2 , 
-         symb1 , symb);
+         symb1 , symb ,throttle_delay);
          printf(Serial_OutputBuffer);
-//!         sprintf(Serial_OutputBuffer , "\r\n%d,%d" ,  new_throttle , throttle_value);
-//!         printf(Serial_OutputBuffer);
+
          enc_mutx = 0;
          enc_tick = 0;
        
-
+  
+  
       }
     } 
 }    
