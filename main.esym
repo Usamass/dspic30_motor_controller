@@ -1,8 +1,8 @@
 F N "timer3_isr" 0 204 ""
 D G "__PCD__" 0 256 ""5.112""
 D G "__DEVICE__" 0 256 "4011"
-D G "__DATE__" 0 256 ""24-Jul-24""
-D G "__TIME__" 0 256 ""12:24:41""
+D G "__DATE__" 0 256 ""25-Jul-24""
+D G "__TIME__" 0 256 ""14:02:29""
 D G "_UNICODE" 0 256 ""?""
 D G "__EVAL" 0 256 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
 c L "set_tris_b" 1 3 6 "FUNCTION"
@@ -1456,8 +1456,10 @@ D G "INT_QEI" 1 874 "60"
 D G "INT_FAULTA" 1 875 "66"
 V G "timer_table" 2 2 "[1]" `828 
 V G "gain_table" 2 25 "[1]" `831 
-V G "ascend_speed_table" 2 46 "[1]" `834 
-V G "descend_speed_table" 2 67 "[1]" `837 
+C L "jump_to_isr" 2 46 18 "FUNCTION"
+V G "ascend_speed_table" 2 67 "[1]" `834 
+V G "descend_speed_table" 2 87 "[1]" `837 
+C L "jump_to_isr" 2 46 19 "FUNCTION"
 T G "KALMAN" 3 11 "{sint32 kalman_big_1,sint32 kalman_big_2,sint32 kalman_diff,sint32 KALMAN_UP,sint32 KALMAN_DOWN}" `845 
 F N "KALMAN_begin" 3 14 ""
 V L "kalman_filter" 3 14 " *" `847 
@@ -2693,14 +2695,15 @@ F G "MAIN" 0 319 "void()" `1656
 C L "MAIN" 0 36 1 "FUNCTION"
 C L "MAIN" 0 36 2 "FUNCTION"
 C L "MAIN" 0 36 1 "FUNCTION"
-F N "initMCPWM" 0 547 ""
-F G "initMCPWM" 0 548 "void()" `1591 
+C L "MAIN" 0 36 1 "FUNCTION"
+F N "initMCPWM" 0 531 ""
+F G "initMCPWM" 0 532 "void()" `1591 
 C L "initMCPWM" 0 36 1 "FUNCTION"
 C L "initMCPWM" 0 36 1 "FUNCTION"
-F N "fill_sine_table" 0 567 ""
-F G "fill_sine_table" 0 568 "void()" `1592 
-F N "QEI_get_direction" 0 576 ""
-F G "QEI_get_direction" 0 577 "int8()" `1593 
+F N "fill_sine_table" 0 551 ""
+F G "fill_sine_table" 0 552 "void()" `1592 
+F N "QEI_get_direction" 0 560 ""
+F G "QEI_get_direction" 0 561 "int8()" `1593 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1

@@ -145,6 +145,7 @@ int16 loaded_val = 0;
 int16 attained_throttle;
 unsigned int32 throttle_delay = 0;
 static int1 enc_mutx = 0;
+int1 speed_dec = 0;
 
 //---------------FILTER VARIABLES-----------------//
 KALMAN filter1_sin1 , filter2_sin1 , filter1_sin2 , filter2_sin2;
@@ -185,7 +186,7 @@ void  PWM1_isr(void)
    
    }
    
-   if (millis_count >= 100) {
+   if (millis_count >= 50) {
       enc_tick = 1;
       millis_count = 0;
       
@@ -373,8 +374,8 @@ void main()
             throttle_level = 0; 
          }
  
-          ascending_speed  = ascend_speed_table[attained_throttle];
-          descending_speed = descend_speed_table[attained_throttle];
+          ascending_speed  = (ascend_speed_table[attained_throttle] >> 1) -1;
+          descending_speed = (descend_speed_table[attained_throttle] >> 1) +1;
           
           loaded_val = attained_throttle -1;
           if (loaded_val < 0) 
@@ -389,10 +390,9 @@ void main()
             attained_speed = position_count_new;      // READING ENCODER's SHARED VARIABLE. 
  
           }
-          current_speed = attained_speed;
           
           
-          if (throttle_level > attained_throttle) 
+          if (throttle_level > attained_throttle && !speed_dec) // check if speed is not decreasing then increament the throttle.
           {
             
             symb1 = '+';
@@ -410,18 +410,7 @@ void main()
                throttle_delay++;
        
             }
-            
-            if (attained_speed < loaded_speed) 
-            {
-               attained_throttle--;
-               symb = '-';
-               if (attained_throttle < 0) 
-               {
-                  attained_throttle = 0;
-               
-               }
-                 
-            }
+
      
           }
           else if(throttle_level < attained_throttle) 
@@ -447,28 +436,34 @@ void main()
           
           
           }
-          else if (current_speed < prev_speed) 
-          {
-            attained_throttle--;
-            
-            if (attained_throttle < 0) 
-            {
-               attained_throttle = 0;
-               
-            }
-            prev_speed = current_speed;
-          
-          }
+         
           else if (throttle_level == attained_throttle)
           {
-               symb1 = '0';
-               symb = '0';
+           
+            symb1 = '0';
+            symb = '0';
            
             
           }
+          if (attained_speed < loaded_speed) 
+          {
+            speed_dec = 1;
+            
+            attained_throttle--;
+            symb = '-';
+            if (attained_throttle < 0) 
+            {
+               attained_throttle = 0;
+             
+            }
+            
+          }
+          else 
+          {
+            speed_dec = 0;
           
-          
-
+          }
+ 
           if (attained_throttle != 0) 
           {
             freq = attained_throttle;

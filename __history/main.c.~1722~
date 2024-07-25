@@ -140,10 +140,12 @@ unsigned long sec_count = 0;
 char Serial_OutputBuffer[100];
 
 unsigned int16 ascending_speed , descending_speed , attained_speed , loaded_speed;  
+unsigned int16 current_speed , prev_speed;
 int16 loaded_val = 0;
 int16 attained_throttle;
 unsigned int32 throttle_delay = 0;
 static int1 enc_mutx = 0;
+int1 speed_dec = 0;
 
 //---------------FILTER VARIABLES-----------------//
 KALMAN filter1_sin1 , filter2_sin1 , filter1_sin2 , filter2_sin2;
@@ -184,7 +186,7 @@ void  PWM1_isr(void)
    
    }
    
-   if (millis_count >= 100) {
+   if (millis_count >= 50) {
       enc_tick = 1;
       millis_count = 0;
       
@@ -321,7 +323,8 @@ void main()
    KALMAN_init(&filter1_sin2 , KALMAN_UP_1 , KALMAN_DOWN_1);
    KALMAN_init(&filter2_sin2 , KALMAN_UP_2 , KALMAN_DOWN_2);
    
-
+   current_speed = 0; prev_speed = 0;
+   
    *U1BRG = 8;    // setting uart baudrate to 115200.
    
    sprintf(Serial_OutputBuffer, "\nMotor Control Unit v0.1\r\n");
@@ -371,8 +374,8 @@ void main()
             throttle_level = 0; 
          }
  
-          ascending_speed  = ascend_speed_table[attained_throttle];
-          descending_speed = descend_speed_table[attained_throttle];
+          ascending_speed  = ascend_speed_table[attained_throttle] >> 1;
+          descending_speed = descend_speed_table[attained_throttle] >> 1;
           
           loaded_val = attained_throttle -1;
           if (loaded_val < 0) 
@@ -389,7 +392,7 @@ void main()
           }
           
           
-          if (throttle_level > attained_throttle) 
+          if (throttle_level > attained_throttle && !speed_dec) // check if speed is not decreasing then increament the throttle.
           {
             
             symb1 = '+';
@@ -407,18 +410,7 @@ void main()
                throttle_delay++;
        
             }
-            
-            if (attained_speed < loaded_speed) 
-            {
-               attained_throttle--;
-               symb = '-';
-               if (attained_throttle < 0) 
-               {
-                  attained_throttle = 0;
-               
-               }
-                 
-            }
+
      
           }
           else if(throttle_level < attained_throttle) 
@@ -444,25 +436,34 @@ void main()
           
           
           }
+         
           else if (throttle_level == attained_throttle)
           {
-               symb1 = '0';
-               symb = '0';
-            if (attained_speed <= descending_speed) 
+           
+            symb1 = '0';
+            symb = '0';
+           
+            
+          }
+          if (attained_speed < loaded_speed) 
+          {
+            speed_dec = 1;
+            
+            attained_throttle--;
+            symb = '-';
+            if (attained_throttle < 0) 
             {
-               attained_throttle--; 
-               throttle_delay = 0;
-               symb = '-';
-               if (attained_throttle < 0)
-               {
-                  attained_throttle = 0;
-               }
-         
+               attained_throttle = 0;
+             
             }
             
           }
+          else 
+          {
+            speed_dec = 0;
           
-
+          }
+ 
           if (attained_throttle != 0) 
           {
             freq = attained_throttle;

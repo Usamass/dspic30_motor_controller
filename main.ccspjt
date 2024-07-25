@@ -17,7 +17,7 @@ Type=4
 forcecoff=0
 
 [ProjectLog]
-Days=43
+Days=44
 D1=24-04-2024
 D1_L=27
 D1_L1=[38590]Project Opened.
@@ -31,7 +31,7 @@ D1_L8=[43127]Started Editing.
 D1_L9=[43826]Stopped Editing.
 D1_L10=[43940]Started Editing.
 D1_L11=[44386]Stopped Editing.
-TotalEdit=1592
+TotalEdit=1634
 TotalDebug=0
 D1_E=41
 D1_D=0
@@ -1051,7 +1051,7 @@ D42_L25=[60434]Stopped Editing.
 D42_L26=[61297]Started Editing.
 D42_L27=[61993]Stopped Editing.
 D43=24-07-2024
-D43_L=29
+D43_L=44
 D43_L1=[32804]Started Editing.
 D43_L2=[33600]Stopped Editing.
 D43_L3=[33965]Started Editing.
@@ -1062,7 +1062,7 @@ D43_L7=[35245]Started Editing.
 D43_L8=[35860]Stopped Editing.
 D43_L9=[36134]Started Editing.
 D43_L10=[36767]Stopped Editing.
-D43_E=91
+D43_E=133
 D43_D=0
 D43_L11=[37198]Project Closed.
 D43_L12=[38060]Project Opened.
@@ -1083,27 +1083,53 @@ D43_L26=[43649]Stopped Editing.
 D43_L27=[44109]Started Editing.
 D43_L28=[44978]Stopped Editing.
 D43_L29=[45761]Started Editing.
+D43_L30=[46061]Stopped Editing.
+D43_L31=[50467]Started Editing.
+D43_L32=[50767]Stopped Editing.
+D43_L33=[51457]Started Editing.
+D43_L34=[51832]Stopped Editing.
+D43_L35=[52325]Started Editing.
+D43_L36=[52625]Stopped Editing.
+D43_L37=[55313]Project Closed.
+D43_L38=[55319]Project Opened.
+D43_L39=[55669]Started Editing.
+D43_L40=[57300]Stopped Editing.
+D43_L41=[57424]Started Editing.
+D43_L42=[58096]Stopped Editing.
+D43_L43=[58415]Started Editing.
+D43_L44=[58720]Stopped Editing.
+D44=25-07-2024
+D44_L=2
+D44_L1=[44735]Started Editing.
+D44_L2=[45054]Stopped Editing.
 
 [Opened Files]
 1=main.c
-t1=450
-Count=3
-2=digital_filter\digital_filter.h
-t2=1
+t1=373
+Count=2
+2=Inc\lookup_tables.h
+t2=63
 3=Inc\lookup_tables.h
-t3=1
+t3=37
 4=digital_filter\digital_filter.h
 t4=17
 [main.c]
 Type=4
 
 [defines]
-buildcount=1523
+buildcount=1544
 
 [ExtraIncludes]
 Count=1
 1=main=c:\users\eelab\documents\[2024-05-15] motor_control\digital_filter\digital_filter.h
 2=main=c:\users\eelab\documents\[2024-05-15] motor_control\digital_filter\digital_filter.c
+
+[Documentation]
+1=C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main Notes.txt
+1T=main Notes.txt
+1E=
+1W=0
+Count=1
 [Units]
 Count=1
 1=main (main)

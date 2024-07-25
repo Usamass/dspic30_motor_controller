@@ -186,7 +186,7 @@ void  PWM1_isr(void)
    
    }
    
-   if (millis_count >= 100) {
+   if (millis_count >= 50) {
       enc_tick = 1;
       millis_count = 0;
       
@@ -374,9 +374,10 @@ void main()
             throttle_level = 0; 
          }
  
-          ascending_speed  = ascend_speed_table[attained_throttle];
+          ascending_speed  = ascend_speed_table[attained_throttle] ;
+
           descending_speed = descend_speed_table[attained_throttle];
-          
+
           loaded_val = attained_throttle -1;
           if (loaded_val < 0) 
           {
@@ -384,16 +385,16 @@ void main()
           
           }
           loaded_speed = ascend_speed_table[loaded_val];
+
           
           if (!enc_mutx) 
           {
             attained_speed = position_count_new;      // READING ENCODER's SHARED VARIABLE. 
  
           }
-          current_speed = attained_speed;
           
           
-          if (throttle_level > attained_throttle && !speed_dec) 
+          if (throttle_level > attained_throttle && !speed_dec) // check if speed is not decreasing then increament the throttle.
           {
             
             symb1 = '+';
@@ -411,20 +412,7 @@ void main()
                throttle_delay++;
        
             }
-            
-            
-            
-            if (attained_speed < loaded_speed) 
-            {
-               attained_throttle--;
-               symb = '!';
-               if (attained_throttle < 0) 
-               {
-                  attained_throttle = 0;
-               
-               }
-                 
-            }
+
      
           }
           else if(throttle_level < attained_throttle) 
@@ -464,7 +452,7 @@ void main()
             speed_dec = 1;
             
             attained_throttle--;
-            symb = '=';
+            symb = '-';
             if (attained_throttle < 0) 
             {
                attained_throttle = 0;
