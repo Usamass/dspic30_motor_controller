@@ -409,6 +409,36 @@ void main()
             throttle_level = 0; 
          }
          
+         position_count = *(POSCNT +1);
+         position_count = position_count << 8;
+         position_count = position_count | *POSCNT;   
+         
+
+         direction_flag = QEI_get_direction();
+
+         enc_count = position_count - prev_count;
+     
+         if (enc_count < 0 && enc_count < -2) 
+         {
+            enc_count = enc_count + TIM_OVERFLOW_VAL ;
+
+         }
+
+//!         if (direction_flag == 0 && enc_count > 0)   
+//!         {
+//!            enc_count = enc_count - TIM_OVERFLOW_VAL ;
+//!         }
+//!   
+         if (direction_flag == 0 && enc_count > 0 && enc_count > 2)
+         {
+            enc_count = enc_count - TIM_OVERFLOW_VAL;
+         
+         }
+         enc_count = abs(enc_count);
+         enc_count = enc_count >> 1;
+         
+
+ 
           ascending_speed  = ascend_speed_table[attained_throttle] ;
 
           descending_speed = descend_speed_table[attained_throttle];
@@ -421,7 +451,7 @@ void main()
           }
           loaded_speed = ascend_speed_table[loaded_val];
 
-          attained_speed = enc_count;    
+          attained_speed = enc_count;      
           if (throttle_level > attained_throttle && !speed_dec) // check if speed is not decreasing then increament the throttle.
           {
             
@@ -443,7 +473,7 @@ void main()
 
      
           }
-          else if(throttle_level < attained_throttle)
+          else if(throttle_level < attained_throttle) 
           {
             symb1 = '-';
             if (attained_speed <= descending_speed) 
@@ -466,15 +496,15 @@ void main()
           
           
           }
+         
           else if (throttle_level == attained_throttle)
           {
            
             symb1 = '0';
-            symb  = '0';
+            symb = '0';
            
             
           }
-          
           if (attained_speed < loaded_speed) 
           {
             speed_dec = 1;
@@ -516,7 +546,6 @@ void main()
           
           }
  
- 
           if (attained_throttle != 0 && !(input(BRAKE_INPUT)))   
           {
             if (*(P1TCON+1) != 0x80)         // don't repeatedly enable the PWM module in loop..
@@ -532,7 +561,6 @@ void main()
           else 
           {
             stop_pwm = 1;
-//!            attained_throttle = 0;
             new_throttle = (attained_speed << 9) + 
                            (attained_speed << 7) +
                            (attained_speed << 5) +
@@ -568,30 +596,9 @@ void main()
 //!      {
 //!         
 //!         enc_mutx = 1;
-         position_count = *(POSCNT +1);
-         position_count = position_count << 8;
-         position_count = position_count | *POSCNT;   
+//!         
          
-
-         direction_flag = QEI_get_direction();
-
-         enc_count = position_count - prev_count;
-     
-         if (enc_count < 0 && enc_count < -2) 
-         {
-            enc_count = enc_count + TIM_OVERFLOW_VAL ;
-
-         }
-
-         if (direction_flag == 0 && enc_count > 0 && enc_count > 2)
-         {
-            enc_count = enc_count - TIM_OVERFLOW_VAL;
-         
-         }
-         enc_count = abs(enc_count);
-         enc_count = enc_count >> 1;
-         
-         prev_count = position_count; 
+        
          sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c , %02d , %d , %d" ,
          raw_adc , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed , prob1,prob2 , 
          symb1 , symb ,throttle_delay , new_throttle , throttle_diff);
@@ -599,7 +606,7 @@ void main()
          
          output_bit(LED_PIN , 0); 
          
-         
+         prev_count = position_count; 
          enc_tick = 0;
         
        

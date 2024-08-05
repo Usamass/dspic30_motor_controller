@@ -1,73 +1,73 @@
 W0      @SCRATCH
 W0L     _RETURN_
-W0 -W2  @DIVFF48.P1
-W0 -W1  @READ_ROM_MEMORY.P2
-W0      @delay_ms1.P3
+W0 -W1  @PRINTFD32_1663.P1
+W0      @delay_ms1.P2
+W0 -W1  @READ_ROM_MEMORY.P3
 W0      @delay_us1.P4
 W0 -W3  @SI64TOF48.P5
-W0 -W1  @DIV3232B.P6
-W0 -W2  @F48TO64.P7
-W0 -W1  @SFTOI.P8
+W0 -W3  @DIVFF64.P6
+W0 -W1  @DIV3232B.P7
+W0 -W2  @F48TO64.P8
 W0 -W3  @F64TOI64.P9
-W0 -W3  @I64TOF64.P10
-W0 -W2  @FLT48.P11
-W0 -W3  @MULFF64.P12
-W0 -W2  @MULS4848.P13
-W0 -W2  @F48TOSI64.P14
-W0      @SITOF.P15
-W0 -W1  @FLT.P16
-W0 -W2  @MULFF48.P17
-W0 -W3  @DIVS6464.P18
-W0      @ITOF.P19
-W0 -W1  @MULFF.P20
-W0 -W1  @ADDFF.P21
-W0 -W3  @DIVFF64.P22
+W0      @ITOF.P10
+W0 -W3  @I64TOF64.P11
+W0 -W2  @FLT48.P12
+W0 -W3  @MULFF64.P13
+W0 -W2  @MULS4848.P14
+W0 -W2  @F48TOSI64.P15
+W0      @SITOF.P16
+W0 -W1  @FLT.P17
+W0 -W2  @MULFF48.P18
+W0 -W1  @SFTOI.P19
+W0 -W2  @DIVFF48.P20
+W0 -W1  @MULFF.P21
+W0 -W1  @ADDFF.P22
 W0 -W3  @MULS6464.P23
-W0 -W3  @SI64TOF64.P24
-W0 -W1  @PRINTFD32_1661.P25
-W0 -W3  @ADDFF64.P26
+W0 -W3  @DIVS6464.P24
+W0      @PRINTFD16_1663.P25
+W0 -W1  @DIVS3232A.P26
 W0 -W2  @ADDFF48.P27
-W0 -W3  @I64TOF48.P28
+W0 -W3  @SI64TOF64.P28
 W0 -W1  @DIVFF.P29
-W0 -W1  @DIVS3232A.P30
-W0 -W1  @MUL3232.P31
+W0 -W1  @MUL3232.P30
+W0 -W3  @I64TOF48.P31
 W0 -W3  @F64TOSI64.P32
-W0 -W1  @MULS3232.P33
-W0 -W3  @FLT64.P34
-W0L     @SPRINTF.P35
+W0 -W3  @FLT64.P33
+W0 -W3  @ADDFF64.P34
+W0 -W1  @MULS3232.P35
 W0 -W2  @DIVS4848.P36
-W0      @PRINTFD16_1661.P37
+W0L     @SPRINTF.P37
 W1      @SCRATCH
-W1      @WRITE_PACKED_MEMORY.P1
-W1      @READ_PACKED_MEMORY.P2
+W1      @READ_PACKED_MEMORY.P1
+W1      @WRITE_PACKED_MEMORY.P2
 W2      @READ_PACKED_MEMORY.P1
-W2      @WRITE_PACKED_MEMORY.P2
-W2      @READ_ROM_MEMORY.P3
-W2 -W3  @MULFF.P4
-W2 -W3  @DIVFF.P5
-W2 -W3  @DIV3232B.P6
-W2 -W3  @ADDFF.P7
-W2 -W3  @MULS3232.P8
+W2 -W3  @FLT.P2
+W2 -W3  @MULFF.P3
+W2 -W3  @DIV3232B.P4
+W2 -W3  @MULS3232.P5
+W2 -W3  @ADDFF.P6
+W2      @WRITE_PACKED_MEMORY.P7
+W2 -W3  @MUL3232.P8
 W2 -W3  @DIVS3232A.P9
-W2 -W3  @FLT.P10
-W2 -W3  @MUL3232.P11
-W3 -W5  @FLT48.P1
-W3      @READ_PACKED_MEMORY.P2
-W3      @WRITE_PACKED_MEMORY.P3
-W3 -W5  @DIVS4848.P4
-W3 -W5  @ADDFF48.P5
-W3 -W5  @MULS4848.P6
-W3 -W5  @MULFF48.P7
-W3 -W5  @DIVFF48.P8
+W2      @READ_ROM_MEMORY.P10
+W2 -W3  @DIVFF.P11
+W3      @WRITE_PACKED_MEMORY.P1
+W3 -W5  @ADDFF48.P2
+W3      @READ_PACKED_MEMORY.P3
+W3 -W5  @MULS4848.P4
+W3 -W5  @MULFF48.P5
+W3 -W5  @DIVS4848.P6
+W3 -W5  @DIVFF48.P7
+W3 -W5  @FLT48.P8
 W3      @READ_ROM_MEMORY.P9
-W4      @PRINTFD16_1661.P1
-W4 -W7  @MULS6464.P2
+W4 -W7  @MULS6464.P1
+W4 -W7  @FLT64.P2
 W4 -W7  @DIVFF64.P3
-W4 -W7  @MULFF64.P4
-W4 -W7  @FLT64.P5
-W4 -W7  @DIVS6464.P6
-W4 -W7  @ADDFF64.P7
-W4      @PRINTFD32_1661.P8
+W4 -W7  @ADDFF64.P4
+W4 -W7  @DIVS6464.P5
+W4      @PRINTFD16_1663.P6
+W4 -W7  @MULFF64.P7
+W4      @PRINTFD32_1663.P8
 800-863 RCV_BUFFER_1
 864-865 RCV_NEXT_IN_1
 866-867 RCV_NEXT_OUT_1
@@ -97,9 +97,9 @@ W4      @PRINTFD32_1661.P8
 996.2   tick
 996.3   enc_tick
 996.4   enc_mutx
-996.5   speed_dec
-996.6   ch1
-996.7   stop_pwm
+996.5   ch1
+996.6   stop_pwm
+996.7   speed_dec
 997     tick_count
 998-999 position_capture
 99A-99D millis_count
@@ -107,46 +107,49 @@ W4      @PRINTFD32_1661.P8
 9A2-A05 Serial_OutputBuffer
 A06-A07 ascending_speed
 A08-A09 descending_speed
-A0A-A0B attained_speed
-A0C-A0D loaded_speed
-A0E-A0F current_speed
-A10-A11 prev_speed
-A12-A13 loaded_val
-A14-A15 attained_throttle
-A16-A19 throttle_delay
-A1A-A2D filter1_sin1
-A2E-A41 filter2_sin1
-A42-A55 filter1_sin2
-A56-A69 filter2_sin2
-A6A-A6B ADC1_sample
-A6C-A6D ADC2_sample
-A6E-A6F filtered_sin1
-A70-A71 filtered_sin2
-A72-A73 sampled_sin1
-A74-A75 sampled_sin2
-A76-A77 abs_sin1
-A78-A79 abs_sin2
-A7A-A7B prob1
-A7C-A7D prob2
-A7E     symb
-A7F     symb1
-A80-A81 @sprintf_string
-A82-A83 KALMAN_init.kalman_filter
-A84-A87 KALMAN_init.KALMAN_UP
-A86-A8D sin.x
-A88-A8B KALMAN_init.KALMAN_DOWN
-A96-A9D cos.x
-A9E     cos.quad
-A9F     cos.i
-AA0-AA7 cos.y
-AA8-AAF cos.t
-AB0-AB7 cos.t2
-AB8-ABF cos.frac
-AC0-B07 cos.p_64
-B48-B49 timer3_isr.i
-B48-B49 KALMAN_begin.kalman_filter
-B4A-B4B KALMAN_begin.input
-B4C-B4D KALMAN_begin.filtered_out
+A0A-A0B loaded_speed
+A0C-A0F attained_speed
+A10-A11 current_speed
+A12-A13 prev_speed
+A14-A15 loaded_val
+A16-A17 attained_throttle
+A18-A1B new_throttle
+A1C-A1D prev_throttle
+A1E-A21 throttle_delay
+A22-A35 filter1_sin1
+A36-A49 filter2_sin1
+A4A-A5D filter1_sin2
+A5E-A71 filter2_sin2
+A72-A73 ADC1_sample
+A74-A75 ADC2_sample
+A76-A77 filtered_sin1
+A78-A79 filtered_sin2
+A7A-A7B sampled_sin1
+A7C-A7D sampled_sin2
+A7E-A7F abs_sin1
+A80-A81 abs_sin2
+A82-A83 prob1
+A84-A85 prob2
+A86     symb
+A87     symb1
+A88-A89 @sprintf_string
+A8A     MAIN.throttle_diff
+A8C-A8D KALMAN_init.kalman_filter
+A8E-A95 sin.x
+A8E-A91 KALMAN_init.KALMAN_UP
+A92-A95 KALMAN_init.KALMAN_DOWN
+AA0-AA7 cos.x
+AA8     cos.quad
+AA9     cos.i
+AAA-AB1 cos.y
+AB2-AB9 cos.t
+ABA-AC1 cos.t2
+AC2-AC9 cos.frac
+ACA-B11 cos.p_64
+B58-B59 timer3_isr.i
+B58-B59 KALMAN_begin.kalman_filter
+B5A-B5B KALMAN_begin.input
+B5C-B5D KALMAN_begin.filtered_out
 F80-FFF _STACK_
 
 ROM Allocation:
@@ -158,13 +161,14 @@ ROM Allocation:
 000412  ascend_speed_table.data
 00056A  descend_speed_table.call
 00058C  descend_speed_table.data
-0006E4  @const1659.call
+0006E4  @const1661.call
 00070C  @RCV_ISR_1
 000746  PWM1_isr
-0007AC  @MULS3232
-0007EE  timer3_isr
-000A1E  KALMAN_begin
-000B8A  timer4_isr
+000766  @MULS3232
+0007A8  timer3_isr
+0009CE  timer5_isr
+000A26  KALMAN_begin
+000B92  timer4_isr
 000C84  KALMAN_init
 000CC6  @SPRINTF
 000CD4  initMCPWM
@@ -179,12 +183,12 @@ ROM Allocation:
 001562  @F64TOSI64
 0015C0  fill_sine_table
 001688  QEI_get_direction
-001696  @PRINTFD16_1661
+001696  @PRINTFD16_1663
 0017C6  @DIV3232B
-00180A  @PRINTFD32_1661
+00180A  @PRINTFD32_1663
 001942  MAIN
 001942  @cinit1
-0019C6  @cinit2
+0019CE  @cinit2
 0135  StrtoulGO
 0135  StrtolGO
 
@@ -192,9 +196,9 @@ Project Directory:
     C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\
 
 Project Files:
-    main.c                                                  [25-Jul-24 14:02  CRC=50A437C0]
+    main.c                                                  [05-Aug-24 16:01  CRC=C6B5013E]
     ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h  [21-Oct-22 11:12  CRC=AE0CC97E]
-    Inc\lookup_tables.h                                     [24-Jul-24 16:03  CRC=6FCFC17E]
+    Inc\lookup_tables.h                                     [02-Aug-24 16:21  CRC=5C246FD5]
     digital_filter\digital_filter.h                         [24-Jul-24 10:41  CRC=D6370F9D]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\math.h     [05-May-20 13:57  CRC=02232397]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h   [30-Jun-20 14:21  CRC=452E14BB]
@@ -202,9 +206,9 @@ Project Files:
     ..\..\..\..\Program Files (x86)\PICC\Drivers\string.h   [06-Apr-20 08:43  CRC=B1605627]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h    [03-Jan-08 15:55  CRC=2D1F019F]
 
-Source signature=2124507C
+Source signature=8389C851
 Program memory checksum=0000
-Hex file CRC=C6A6
+Hex file CRC=E11C
 
 Units:
     C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main (main)

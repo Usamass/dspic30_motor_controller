@@ -470,7 +470,7 @@ void main()
           {
            
             symb1 = '0';
-            symb  = '0';
+            symb = '0';
            
             
           }
@@ -532,28 +532,27 @@ void main()
           else 
           {
             stop_pwm = 1;
-//!            attained_throttle = 0;
-            new_throttle = (attained_speed << 9) + 
-                           (attained_speed << 7) +
-                           (attained_speed << 5) +
-                           (attained_speed << 1);
-                         
-            new_throttle = new_throttle >> 10;
-            new_throttle -= 6;
-
-            if (new_throttle < 0) 
-            {
-               new_throttle = 0;
-            
-            }
-            else if (new_throttle > 255) 
-            {
-               new_throttle = 255;
-          
-            }
-
-            attained_throttle = new_throttle;
-            throttle_diff = attained_throttle - new_throttle;
+//!            new_throttle = (attained_speed << 9) + 
+//!                           (attained_speed << 7) +
+//!                           (attained_speed << 5) +
+//!                           (attained_speed << 1);
+//!                         
+//!            new_throttle = new_throttle >> 10;
+//!            new_throttle -= 6;
+//!
+//!            if (new_throttle < 0) 
+//!            {
+//!               new_throttle = 0;
+//!            
+//!            }
+//!            else if (new_throttle > 255) 
+//!            {
+//!               new_throttle = 255;
+//!          
+//!            }
+//!
+//!            attained_throttle = new_throttle;
+//!            throttle_diff = attained_throttle - new_throttle;
 
           }
 
@@ -583,6 +582,11 @@ void main()
 
          }
 
+//!         if (direction_flag == 0 && enc_count > 0)   
+//!         {
+//!            enc_count = enc_count - TIM_OVERFLOW_VAL ;
+//!         }
+//!   
          if (direction_flag == 0 && enc_count > 0 && enc_count > 2)
          {
             enc_count = enc_count - TIM_OVERFLOW_VAL;

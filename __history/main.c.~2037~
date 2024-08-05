@@ -409,6 +409,10 @@ void main()
             throttle_level = 0; 
          }
          
+         
+         
+
+ 
           ascending_speed  = ascend_speed_table[attained_throttle] ;
 
           descending_speed = descend_speed_table[attained_throttle];
@@ -421,7 +425,7 @@ void main()
           }
           loaded_speed = ascend_speed_table[loaded_val];
 
-          attained_speed = enc_count;    
+          attained_speed = enc_count;      
           if (throttle_level > attained_throttle && !speed_dec) // check if speed is not decreasing then increament the throttle.
           {
             
@@ -443,7 +447,7 @@ void main()
 
      
           }
-          else if(throttle_level < attained_throttle)
+          else if(throttle_level < attained_throttle) 
           {
             symb1 = '-';
             if (attained_speed <= descending_speed) 
@@ -466,15 +470,15 @@ void main()
           
           
           }
+         
           else if (throttle_level == attained_throttle)
           {
            
             symb1 = '0';
-            symb  = '0';
+            symb = '0';
            
             
           }
-          
           if (attained_speed < loaded_speed) 
           {
             speed_dec = 1;
@@ -532,7 +536,6 @@ void main()
           else 
           {
             stop_pwm = 1;
-//!            attained_throttle = 0;
             new_throttle = (attained_speed << 9) + 
                            (attained_speed << 7) +
                            (attained_speed << 5) +
@@ -583,6 +586,11 @@ void main()
 
          }
 
+//!         if (direction_flag == 0 && enc_count > 0)   
+//!         {
+//!            enc_count = enc_count - TIM_OVERFLOW_VAL ;
+//!         }
+//!   
          if (direction_flag == 0 && enc_count > 0 && enc_count > 2)
          {
             enc_count = enc_count - TIM_OVERFLOW_VAL;

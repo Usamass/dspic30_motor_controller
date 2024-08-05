@@ -1,10 +1,9 @@
-F N "timer3_isr" 0 204 ""
-D G "__PCD__" 0 256 ""5.112""
-D G "__DEVICE__" 0 256 "4011"
-D G "__DATE__" 0 256 ""25-Jul-24""
-D G "__TIME__" 0 256 ""14:02:29""
-D G "_UNICODE" 0 256 ""?""
-D G "__EVAL" 0 256 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
+D G "__PCD__" 0 818 ""5.112""
+D G "__DEVICE__" 0 818 "4011"
+D G "__DATE__" 0 818 ""05-Aug-24""
+D G "__TIME__" 0 818 ""16:01:01""
+D G "_UNICODE" 0 818 ""?""
+D G "__EVAL" 0 818 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
 c L "set_tris_b" 1 3 6 "FUNCTION"
 F N "set_tris_b" 1 45 ""
 V L "value" 1 45 "int16" `55 
@@ -1456,10 +1455,10 @@ D G "INT_QEI" 1 874 "60"
 D G "INT_FAULTA" 1 875 "66"
 V G "timer_table" 2 2 "[1]" `828 
 V G "gain_table" 2 25 "[1]" `831 
-C L "jump_to_isr" 2 46 18 "FUNCTION"
-V G "ascend_speed_table" 2 67 "[1]" `834 
-V G "descend_speed_table" 2 87 "[1]" `837 
-C L "jump_to_isr" 2 46 19 "FUNCTION"
+C L "jump_to_isr" 2 46 54 "FUNCTION"
+V G "ascend_speed_table" 2 110 "[1]" `834 
+V G "descend_speed_table" 2 132 "[1]" `837 
+C L "jump_to_isr" 2 46 38 "FUNCTION"
 T G "KALMAN" 3 11 "{sint32 kalman_big_1,sint32 kalman_big_2,sint32 kalman_diff,sint32 KALMAN_UP,sint32 KALMAN_DOWN}" `845 
 F N "KALMAN_begin" 3 14 ""
 V L "kalman_filter" 3 14 " *" `847 
@@ -2605,105 +2604,116 @@ D G "throttle_PIN" 0 88 "PIN_B1"
 D G "PWM_tick_pin" 0 89 "PIN_B2"
 D G "TIM_tick_pin" 0 90 "PIN_B3"
 D G "ENC_TICK_PIN" 0 91 "PIN_B0"
-D G "KALMAN_UP_1" 0 93 "7"
-D G "KALMAN_DOWN_1" 0 94 "5"
-D G "KALMAN_UP_2" 0 96 "8"
-D G "KALMAN_DOWN_2" 0 97 "5"
-D G "current_prob1" 0 99 "sAN6"
-D G "current_prob2" 0 100 "sAN8"
-D G "TIM_FREQ" 0 103 "60" "for 4k hz sampling rate."
-D G "init_freq" 0 105 "30"
-F N "initMCPWM" 0 107 ""
-f G "initMCPWM" 0 107 "void()" `1591 
-F N "fill_sine_table" 0 108 ""
-f G "fill_sine_table" 0 108 "void()" `1592 
-F N "QEI_get_direction" 0 109 ""
-f G "QEI_get_direction" 0 109 "int8()" `1593 
-F N "set_pwm_duty" 0 110 ""
-V L "??65535" 0 110 "sint16" `1595 
-V L "??65535" 0 110 "sint16" `1596 
-f G "set_pwm_duty" 0 110 "sint16(sint16 ,sint16 )" `1594 
-V G "duty" 0 112 "int16[3]" `1597 
-V G "sample" 0 112 "int16" `1598 
-V G "peak_voltage" 0 113 "sint16" `1599 
-C L "set_pwm_duty" 0 36 1 "FUNCTION"
-V G "reference" 0 114 "sint32[3]" `1600 
-V G "max_samples" 0 116 "int16" `1601 
-V G "sine_table" 0 117 "sint16[30]" `1603 
-V G "sine_index" 0 118 "int16" `1604 
-V G "phase_angle" 0 118 "int16[3]" `1605 
-V G "theeta" 0 119 "?" `1606 
-V G "raw_adc" 0 121 "int16" `1607 
-V G "throttle_level" 0 122 "sint16" `1608 
-V G "freq" 0 123 "int16" `1609 
-C L "set_pwm_duty" 0 36 1 "FUNCTION"
-V G "position_count" 0 126 "sint32" `1610 
-V G "prev_count" 0 127 "sint32" `1611 
-V G "enc_count" 0 128 "sint32" `1612 
-V G "position_count_new" 0 129 "sint32" `1613 
-V G "direction_flag" 0 130 "int1" `1614 
-V G "position_capture" 0 131 "int16" `1615 
-C L "set_pwm_duty" 0 36 1 "FUNCTION"
-V G "sec_flage" 0 133 "int1" `1616 
-V G "tick" 0 134 "int1" `1617 
-V G "enc_tick" 0 135 "int1" `1618 
-V G "tick_count" 0 136 "sint8" `1619 
-V G "millis_count" 0 137 "int32" `1620 
-V G "sec_count" 0 138 "int32" `1621 
-V G "Serial_OutputBuffer" 0 140 "sint8[100]" `1622 
-V G "ascending_speed" 0 142 "int16" `1623 
-V G "descending_speed" 0 142 "int16" `1624 
-V G "attained_speed" 0 142 "int16" `1625 
-V G "loaded_speed" 0 142 "int16" `1626 
-V G "current_speed" 0 143 "int16" `1627 
-V G "prev_speed" 0 143 "int16" `1628 
-V G "loaded_val" 0 144 "sint16" `1629 
-V G "attained_throttle" 0 145 "sint16" `1630 
-V G "throttle_delay" 0 146 "int32" `1631 
-V G "enc_mutx" 0 147 "int1" `1632 
-V G "speed_dec" 0 148 "int1" `1633 
-C L "set_pwm_duty" 0 36 1 "FUNCTION"
-V G "filter1_sin1" 0 151 "KALMAN" `1634 
-V G "filter2_sin1" 0 151 "KALMAN" `1635 
-V G "filter1_sin2" 0 151 "KALMAN" `1636 
-V G "filter2_sin2" 0 151 "KALMAN" `1637 
-V G "ADC1_sample" 0 152 "int16" `1638 
-V G "ADC2_sample" 0 153 "int16" `1639 
-V G "filtered_sin1" 0 155 "int16" `1640 
-V G "filtered_sin2" 0 156 "int16" `1641 
-V G "sampled_sin1" 0 158 "sint16" `1642 
-V G "sampled_sin2" 0 159 "sint16" `1643 
-V G "abs_sin1" 0 161 "int16" `1644 
-V G "abs_sin2" 0 162 "int16" `1645 
-V G "prob1" 0 164 "int16" `1646 
-V G "prob2" 0 165 "int16" `1647 
-V G "symb" 0 167 "sint8" `1648 
-V G "symb1" 0 168 "sint8" `1649 
-C L "set_pwm_duty" 0 36 1 "FUNCTION"
-V G "ch1" 0 171 "int1" `1650 
-V G "stop_pwm" 0 172 "int1" `1651 
-F N "PWM1_isr" 0 176 ""
-F G "PWM1_isr" 0 177 "void()" `1652 
-F N "timer3_isr" 0 204 ""
-F G "timer3_isr" 0 205 "void()" `1653 
-V L "i" 0 212 "sint16" `1654 
+D G "BRAKE_INPUT" 0 92 "PIN_D2"
+D G "KALMAN_UP_1" 0 94 "7"
+D G "KALMAN_DOWN_1" 0 95 "5"
+D G "KALMAN_UP_2" 0 97 "8"
+D G "KALMAN_DOWN_2" 0 98 "5"
+D G "current_prob1" 0 100 "sAN6"
+D G "current_prob2" 0 101 "sAN8"
+D G "TIM_FREQ" 0 104 "60" "for 4k hz sampling rate."
+D G "PROCS_SCHD_TIM" 0 105 "250"
+D G "init_freq" 0 107 "30"
+F N "initMCPWM" 0 109 ""
+f G "initMCPWM" 0 109 "void()" `1591 
+F N "fill_sine_table" 0 110 ""
+f G "fill_sine_table" 0 110 "void()" `1592 
+F N "QEI_get_direction" 0 111 ""
+f G "QEI_get_direction" 0 111 "int8()" `1593 
+F N "disable_pwm" 0 112 ""
+f G "disable_pwm" 0 112 "void()" `1594 
+V G "duty" 0 114 "int16[3]" `1595 
+V G "sample" 0 114 "int16" `1596 
+V G "peak_voltage" 0 115 "sint16" `1597 
+C L "disable_pwm" 0 36 1 "FUNCTION"
+V G "reference" 0 116 "sint32[3]" `1598 
+V G "max_samples" 0 118 "int16" `1599 
+V G "sine_table" 0 119 "sint16[30]" `1601 
+V G "sine_index" 0 120 "int16" `1602 
+V G "phase_angle" 0 120 "int16[3]" `1603 
+V G "theeta" 0 121 "?" `1604 
+V G "raw_adc" 0 123 "int16" `1605 
+V G "throttle_level" 0 124 "sint16" `1606 
+V G "freq" 0 126 "int16" `1607 
+C L "disable_pwm" 0 36 1 "FUNCTION"
+V G "position_count" 0 129 "sint32" `1608 
+V G "prev_count" 0 130 "sint32" `1609 
+V G "enc_count" 0 131 "sint32" `1610 
+V G "position_count_new" 0 132 "sint32" `1611 
+V G "direction_flag" 0 133 "int1" `1612 
+V G "position_capture" 0 134 "int16" `1613 
+C L "disable_pwm" 0 36 1 "FUNCTION"
+V G "sec_flage" 0 136 "int1" `1614 
+V G "tick" 0 137 "int1" `1615 
+V G "enc_tick" 0 138 "int1" `1616 
+V G "tick_count" 0 139 "sint8" `1617 
+V G "millis_count" 0 140 "int32" `1618 
+V G "sec_count" 0 141 "int32" `1619 
+V G "Serial_OutputBuffer" 0 143 "sint8[100]" `1620 
+V G "ascending_speed" 0 145 "int16" `1621 
+V G "descending_speed" 0 145 "int16" `1622 
+V G "loaded_speed" 0 145 "int16" `1623 
+V G "attained_speed" 0 146 "int32" `1624 
+V G "current_speed" 0 147 "int16" `1625 
+V G "prev_speed" 0 147 "int16" `1626 
+V G "loaded_val" 0 148 "sint16" `1627 
+V G "attained_throttle" 0 149 "sint16" `1628 
+V G "new_throttle" 0 150 "sint32" `1629 
+V G "prev_throttle" 0 151 "sint16" `1630 
+V G "throttle_delay" 0 152 "int32" `1631 
+V G "enc_mutx" 0 153 "int1" `1632 
+C L "disable_pwm" 0 36 1 "FUNCTION"
+V G "filter1_sin1" 0 156 "KALMAN" `1633 
+V G "filter2_sin1" 0 156 "KALMAN" `1634 
+V G "filter1_sin2" 0 156 "KALMAN" `1635 
+V G "filter2_sin2" 0 156 "KALMAN" `1636 
+V G "ADC1_sample" 0 157 "int16" `1637 
+V G "ADC2_sample" 0 158 "int16" `1638 
+V G "filtered_sin1" 0 160 "int16" `1639 
+V G "filtered_sin2" 0 161 "int16" `1640 
+V G "sampled_sin1" 0 163 "sint16" `1641 
+V G "sampled_sin2" 0 164 "sint16" `1642 
+V G "abs_sin1" 0 166 "int16" `1643 
+V G "abs_sin2" 0 167 "int16" `1644 
+V G "prob1" 0 169 "int16" `1645 
+V G "prob2" 0 170 "int16" `1646 
+V G "symb" 0 172 "sint8" `1647 
+V G "symb1" 0 173 "sint8" `1648 
+C L "disable_pwm" 0 36 1 "FUNCTION"
+V G "ch1" 0 176 "int1" `1649 
+V G "stop_pwm" 0 177 "int1" `1650 
+V G "speed_dec" 0 178 "int1" `1651 
+F N "PWM1_isr" 0 181 ""
+F G "PWM1_isr" 0 182 "void()" `1652  "!   output_bit(LED_PIN , 1);"
+C L "PWM1_isr" 0 36 18 "FUNCTION"
+F N "timer3_isr" 0 211 ""
+F G "timer3_isr" 0 212 "void()" `1653 
+V L "i" 0 219 "sint16" `1654 
 C L "timer3_isr" 0 36 1 "FUNCTION"
-F N "timer4_isr" 0 261 ""
-F G "timer4_isr" 0 262 "void()" `1655 
-F N "MAIN" 0 318 ""
-F G "MAIN" 0 319 "void()" `1656 
+F N "timer5_isr" 0 268 ""
+F G "timer5_isr" 0 269 "void()" `1655 
+F N "timer4_isr" 0 292 ""
+F G "timer4_isr" 0 293 "void()" `1656 
+F N "MAIN" 0 348 ""
+F G "MAIN" 0 349 "void()" `1657 
+V L "throttle_diff" 0 350 "sint8" `1658 
 C L "MAIN" 0 36 1 "FUNCTION"
 C L "MAIN" 0 36 2 "FUNCTION"
 C L "MAIN" 0 36 1 "FUNCTION"
 C L "MAIN" 0 36 1 "FUNCTION"
-F N "initMCPWM" 0 531 ""
-F G "initMCPWM" 0 532 "void()" `1591 
+C L "MAIN" 0 36 5 "FUNCTION"
+C L "MAIN" 0 36 1 "FUNCTION"
+C L "MAIN" 0 36 1 "FUNCTION"
+C L "MAIN" 0 36 1 "FUNCTION"
+C L "MAIN" 0 36 3 "FUNCTION"
+F N "initMCPWM" 0 613 ""
+F G "initMCPWM" 0 614 "void()" `1591 
 C L "initMCPWM" 0 36 1 "FUNCTION"
 C L "initMCPWM" 0 36 1 "FUNCTION"
-F N "fill_sine_table" 0 551 ""
-F G "fill_sine_table" 0 552 "void()" `1592 
-F N "QEI_get_direction" 0 560 ""
-F G "QEI_get_direction" 0 561 "int8()" `1593 
+F N "fill_sine_table" 0 633 ""
+F G "fill_sine_table" 0 634 "void()" `1592 
+F N "QEI_get_direction" 0 642 ""
+F G "QEI_get_direction" 0 643 "int8()" `1593 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1

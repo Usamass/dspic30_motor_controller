@@ -470,7 +470,7 @@ void main()
           {
            
             symb1 = '0';
-            symb  = '0';
+            symb = '0';
            
             
           }
@@ -532,7 +532,6 @@ void main()
           else 
           {
             stop_pwm = 1;
-//!            attained_throttle = 0;
             new_throttle = (attained_speed << 9) + 
                            (attained_speed << 7) +
                            (attained_speed << 5) +
@@ -553,7 +552,7 @@ void main()
             }
 
             attained_throttle = new_throttle;
-            throttle_diff = attained_throttle - new_throttle;
+//!            throttle_diff = attained_throttle - new_throttle;
 
           }
 

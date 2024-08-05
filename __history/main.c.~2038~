@@ -421,7 +421,7 @@ void main()
           }
           loaded_speed = ascend_speed_table[loaded_val];
 
-          attained_speed = enc_count;    
+          attained_speed = enc_count;      
           if (throttle_level > attained_throttle && !speed_dec) // check if speed is not decreasing then increament the throttle.
           {
             
@@ -443,7 +443,7 @@ void main()
 
      
           }
-          else if(throttle_level < attained_throttle)
+          else if(throttle_level < attained_throttle) 
           {
             symb1 = '-';
             if (attained_speed <= descending_speed) 
@@ -470,7 +470,7 @@ void main()
           {
            
             symb1 = '0';
-            symb  = '0';
+            symb = '0';
            
             
           }
@@ -479,34 +479,34 @@ void main()
           {
             speed_dec = 1;
             
-            //attained_throttle--;
+            attained_throttle--;
             symb = '!';
-//!            if (attained_throttle < 0) 
-//!            {
-//!               attained_throttle = 0;
-//!             
-//!            }
+            if (attained_throttle < 0) 
+            {
+               attained_throttle = 0;
+             
+            }
 //          formula : ((attained_speed * 674)/1024) -8.
-            new_throttle = (attained_speed << 9) + 
-                           (attained_speed << 7) +
-                           (attained_speed << 5) +
-                           (attained_speed << 1); // --> 674 * attained_speed
-                         
-            new_throttle = new_throttle >> 10;
-            new_throttle -= 6;
-
-            if (new_throttle < 0) 
-            {
-               new_throttle = 0;
-            
-            }
-            else if (new_throttle > 255) 
-            {
-               new_throttle = 255;
-          
-            }
-
-            attained_throttle = new_throttle;
+//!            new_throttle = (attained_speed << 9) + 
+//!                           (attained_speed << 7) +
+//!                           (attained_speed << 5) +
+//!                           (attained_speed << 1); // --> 674 * attained_speed
+//!                         
+//!            new_throttle = new_throttle >> 10;
+//!            new_throttle -= 6;
+//!
+//!            if (new_throttle < 0) 
+//!            {
+//!               new_throttle = 0;
+//!            
+//!            }
+//!            else if (new_throttle > 255) 
+//!            {
+//!               new_throttle = 255;
+//!          
+//!            }
+//!
+//!            attained_throttle = new_throttle;
           
             
           }
@@ -532,7 +532,6 @@ void main()
           else 
           {
             stop_pwm = 1;
-//!            attained_throttle = 0;
             new_throttle = (attained_speed << 9) + 
                            (attained_speed << 7) +
                            (attained_speed << 5) +
@@ -583,6 +582,11 @@ void main()
 
          }
 
+//!         if (direction_flag == 0 && enc_count > 0)   
+//!         {
+//!            enc_count = enc_count - TIM_OVERFLOW_VAL ;
+//!         }
+//!   
          if (direction_flag == 0 && enc_count > 0 && enc_count > 2)
          {
             enc_count = enc_count - TIM_OVERFLOW_VAL;

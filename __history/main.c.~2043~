@@ -470,7 +470,7 @@ void main()
           {
            
             symb1 = '0';
-            symb  = '0';
+            symb = '0';
            
             
           }
