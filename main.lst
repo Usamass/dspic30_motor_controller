@@ -1,9 +1,9 @@
-CCS PCD C Compiler, Version 5.112, 5967               05-Aug-24 16:01
+CCS PCD C Compiler, Version 5.112, 5967               08-Aug-24 09:51
 
                Filename:   C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.lst
 
-               ROM used:   8226 bytes (25%)
-                           Largest free fragment is 24542
+               ROM used:   8230 bytes (25%)
+                           Largest free fragment is 24538
                RAM used:   779 (38%) at main() level
                            992 (48%) worst case
                Stack used: 108 locations (58 in main + 50 for interrupts)
@@ -6961,7 +6961,7 @@ CCS PCD C Compiler, Version 5.112, 5967               05-Aug-24 16:01
 .................... #define UPDN 3       // Direction testing flag.
 .................... /*------------QUADRATURE ENCODER REGISTERS-------------------*/
 .................... 
-.................... #define TIM_OVERFLOW_VAL 65535
+.................... #define TIM_OVERFLOW_VAL 65536
 .................... #define U1TXREG   0x0210
 .................... #define U1BRG     0x0214
 .................... 
@@ -7023,8 +7023,8 @@ CCS PCD C Compiler, Version 5.112, 5967               05-Aug-24 16:01
 .................... unsigned int16 freq = 1;
 .................... 
 .................... //-----------ENCODER VARIABLES-----------//
-.................... int32 position_count = 0;
-.................... int32 prev_count = 0;
+.................... unsigned int32 position_count = 0;
+.................... unsigned int32 prev_count = 0;
 .................... int32 enc_count = 0;
 .................... int32 position_count_new = 0;
 .................... int1 direction_flag = 0;
@@ -7066,13 +7066,14 @@ CCS PCD C Compiler, Version 5.112, 5967               05-Aug-24 16:01
 .................... unsigned int16 prob1 = 0;
 .................... unsigned int16 prob2 = 0;
 .................... 
-.................... char symb = ' ';
+.................... char symb =  ' ';
 .................... char symb1 = ' ';
 .................... //---------------FILTER VARIABLES-----------------//
 .................... 
 .................... int1 ch1 = 0;
 .................... int1 stop_pwm = 0;
 .................... int1 speed_dec = 0;
+.................... 
 .................... 
 .................... #int_PWM1
 .................... void  PWM1_isr(void) 
@@ -8044,206 +8045,344 @@ CCS PCD C Compiler, Version 5.112, 5967               05-Aug-24 16:01
 ....................      
 ....................       if (enc_tick) 
 1BB0:  BTSS.B  996.3
-1BB2:  BRA     201E
+1BB2:  BRA     2022
 ....................       {
-....................          output_bit(LED_PIN , 1); 
+....................           output_bit(LED_PIN , 1); 
 1BB4:  BSET.B  2D1.5
 1BB6:  BCLR.B  2CD.5
 ....................          
-....................          throttle_level = raw_adc - 100;
+....................           throttle_level = raw_adc - 100;
 1BB8:  MOV     980,W4
 1BBA:  SUB     #64,W4
 1BBC:  MOV     W4,982
-....................          if (throttle_level > 255)
+....................           if (throttle_level > 255)
 1BBE:  MOV     982,W4
 1BC0:  MOV     #FF,W3
 1BC2:  CP      W3,W4
 1BC4:  BRA     GE,1BCA
-....................          {
-....................             throttle_level = 255;
+....................           {
+....................              throttle_level = 255;
 1BC6:  MOV     #FF,W4
 1BC8:  MOV     W4,982
-....................          }
-....................          if (throttle_level < 0)   
+....................           }
+....................           if (throttle_level < 0)   
 1BCA:  MOV     982,W4
 1BCC:  CP      W4,#0
 1BCE:  BRA     GE,1BD2
-....................          {  
-....................             throttle_level = 0; 
+....................           {  
+....................              throttle_level = 0; 
 1BD0:  CLR     982
-....................          }
+....................           }
 ....................          
+....................           position_count = *(POSCNT +1);
+1BD2:  MOV.B   127,W0L
+1BD4:  MOV.B   W0L,986
+1BD6:  CLR.B   987
+1BD8:  CLR     988
+....................           position_count = position_count << 8;
+1BDA:  MOV.B   988,W0L
+1BDC:  MOV.B   W0L,989
+1BDE:  MOV.B   987,W0L
+1BE0:  MOV.B   W0L,988
+1BE2:  MOV.B   986,W0L
+1BE4:  MOV.B   W0L,987
+1BE6:  CLR.B   986
+....................           position_count = position_count | *POSCNT;   
+1BE8:  MOV.B   126,W0L
+1BEA:  CLR.B   1
+1BEC:  IOR     986
+....................          
+.................... 
+....................           direction_flag = QEI_get_direction();
+1BEE:  CALL    1688
+1BF2:  BCLR.B  996.0
+1BF4:  BTSC.B  0.0
+1BF6:  BSET.B  996.0
+.................... 
+....................           enc_count = position_count - prev_count;
+1BF8:  MOV     986,W4
+1BFA:  MOV     98A,W3
+1BFC:  SUB     W4,W3,W0
+1BFE:  MOV     W0,98E
+1C00:  MOV     988,W4
+1C02:  MOV     98C,W3
+1C04:  SUBB    W4,W3,W0
+1C06:  MOV     W0,990
+....................          
+....................           if (enc_count < 0)
+1C08:  MOV     990,W4
+1C0A:  CP      W4,#0
+1C0C:  BRA     GT,1C5A
+1C0E:  BRA     LT,1C16
+1C10:  MOV     98E,W4
+1C12:  CP      W4,#0
+1C14:  BRA     C,1C5A
+....................           {
+....................              if (enc_count > -32768)
+1C16:  MOV     990,W4
+1C18:  MOV     #FFFF,W3
+1C1A:  CP      W3,W4
+1C1C:  BRA     GT,1C3A
+1C1E:  BRA     LT,1C28
+1C20:  MOV     98E,W4
+1C22:  MOV     #8000,W3
+1C24:  CP      W3,W4
+1C26:  BRA     C,1C3A
+....................              {
+....................                 // its a speed dip or motor rotating CCW.
+....................                 enc_count = -enc_count;
+1C28:  MOV     #0,W4
+1C2A:  MOV     98E,W3
+1C2C:  SUB     W4,W3,W0
+1C2E:  MOV     W0,98E
+1C30:  MOV     #0,W4
+1C32:  MOV     990,W3
+1C34:  SUBB    W4,W3,W0
+1C36:  MOV     W0,990
+....................                
+....................             
+....................              }
+1C38:  BRA     1C58
+....................              else if (enc_count < -32768) 
+1C3A:  MOV     990,W4
+1C3C:  MOV     #FFFF,W3
+1C3E:  CP      W3,W4
+1C40:  BRA     LT,1C58
+1C42:  BRA     GT,1C4C
+1C44:  MOV     98E,W4
+1C46:  MOV     #8000,W3
+1C48:  CP      W3,W4
+1C4A:  BRA     LEU,1C58
+....................              {
+....................                 // its a + overflow.
+....................                 enc_count = enc_count + 65536;
+1C4C:  MOV     98E,W4
+1C4E:  ADD     W4,#0,W0
+1C50:  MOV     W0,98E
+1C52:  MOV     990,W4
+1C54:  ADDC    W4,#1,W0
+1C56:  MOV     W0,990
+....................             
+....................              }
+....................          
+....................           }
+1C58:  BRA     1C84
+....................           else if (enc_count > 0 && enc_count > 32768) 
+1C5A:  MOV     990,W4
+1C5C:  CP      W4,#0
+1C5E:  BRA     LT,1C84
+1C60:  BRA     GT,1C68
+1C62:  MOV     98E,W4
+1C64:  CP      W4,#0
+1C66:  BRA     LEU,1C84
+1C68:  MOV     990,W4
+1C6A:  CP      W4,#0
+1C6C:  BRA     LT,1C84
+1C6E:  BRA     GT,1C78
+1C70:  MOV     98E,W4
+1C72:  MOV     #8000,W3
+1C74:  CP      W3,W4
+1C76:  BRA     C,1C84
+....................           {
+....................              // its a - overflow.
+....................              enc_count = enc_count - 65536;
+1C78:  MOV     98E,W4
+1C7A:  SUB     W4,#0,W0
+1C7C:  MOV     W0,98E
+1C7E:  MOV     990,W4
+1C80:  SUBB    W4,#1,W0
+1C82:  MOV     W0,990
+....................          
+....................           }
+....................      
+....................           enc_count = enc_count >> 1;
+1C84:  LSR     990
+1C86:  RRC     98E
+....................           enc_count = abs(enc_count);
+1C88:  MOV     98E,W0
+1C8A:  MOV     990,W1
+1C8C:  BTSS    W1.F
+1C8E:  BRA     1C9C
+1C90:  MOV     #0,W4
+1C92:  MOV     98E,W3
+1C94:  SUB     W4,W3,W0
+1C96:  MOV     #0,W4
+1C98:  MOV     990,W3
+1C9A:  SUBB    W4,W3,W1
+1C9C:  MOV     W0,98E
+1C9E:  MOV     W1,990
+.................... 
 ....................           ascending_speed  = ascend_speed_table[attained_throttle] ;
-1BD2:  MOV     A16,W4
-1BD4:  MUL.UU  W4,#2,W0
-1BD6:  CALL    3F0
-1BDA:  MOV     W0,A06
+1CA0:  MOV     A16,W4
+1CA2:  MUL.UU  W4,#2,W0
+1CA4:  CALL    3F0
+1CA8:  MOV     W0,A06
 .................... 
 ....................           descending_speed = descend_speed_table[attained_throttle];
-1BDC:  MOV     A16,W4
-1BDE:  MUL.UU  W4,#2,W0
-1BE0:  CALL    56A
-1BE4:  MOV     W0,A08
+1CAA:  MOV     A16,W4
+1CAC:  MUL.UU  W4,#2,W0
+1CAE:  CALL    56A
+1CB2:  MOV     W0,A08
 .................... 
 ....................           loaded_val = attained_throttle -1;
-1BE6:  MOV     A16,W4
-1BE8:  SUB     W4,#1,W0
-1BEA:  MOV     W0,A14
+1CB4:  MOV     A16,W4
+1CB6:  SUB     W4,#1,W0
+1CB8:  MOV     W0,A14
 ....................           if (loaded_val < 0) 
-1BEC:  MOV     A14,W4
-1BEE:  CP      W4,#0
-1BF0:  BRA     GE,1BF4
+1CBA:  MOV     A14,W4
+1CBC:  CP      W4,#0
+1CBE:  BRA     GE,1CC2
 ....................           {
 ....................             loaded_val = 0;
-1BF2:  CLR     A14
+1CC0:  CLR     A14
 ....................           
 ....................           }
 ....................           loaded_speed = ascend_speed_table[loaded_val];
-1BF4:  MOV     A14,W4
-1BF6:  MUL.UU  W4,#2,W0
-1BF8:  CALL    3F0
-1BFC:  MOV     W0,A0A
+1CC2:  MOV     A14,W4
+1CC4:  MUL.UU  W4,#2,W0
+1CC6:  CALL    3F0
+1CCA:  MOV     W0,A0A
 .................... 
-....................           attained_speed = enc_count;    
-1BFE:  PUSH    98E
-1C00:  POP     A0C
-1C02:  PUSH    990
-1C04:  POP     A0E
+....................           attained_speed = enc_count;
+1CCC:  PUSH    98E
+1CCE:  POP     A0C
+1CD0:  PUSH    990
+1CD2:  POP     A0E
 ....................           if (throttle_level > attained_throttle && !speed_dec) // check if speed is not decreasing then increament the throttle.
-1C06:  MOV     A16,W0
-1C08:  MOV     982,W4
-1C0A:  CP      W4,W0
-1C0C:  BRA     LE,1C3E
-1C0E:  BTSC.B  996.7
-1C10:  BRA     1C3E
+1CD4:  MOV     A16,W0
+1CD6:  MOV     982,W4
+1CD8:  CP      W4,W0
+1CDA:  BRA     LE,1D0C
+1CDC:  BTSC.B  996.7
+1CDE:  BRA     1D0C
 ....................           {
 ....................             
 ....................             symb1 = '+';
-1C12:  MOV.B   #2B,W0L
-1C14:  MOV.B   W0L,A87
+1CE0:  MOV.B   #2B,W0L
+1CE2:  MOV.B   W0L,A87
 ....................             if (attained_speed >= ascending_speed)
-1C16:  MOV     A0E,W4
-1C18:  CP      W4,#0
-1C1A:  BRA     NC,1C32
-1C1C:  BRA     GTU,1C26
-1C1E:  MOV     A06,W0
-1C20:  MOV     A0C,W4
-1C22:  CP      W4,W0
-1C24:  BRA     NC,1C32
+1CE4:  MOV     A0E,W4
+1CE6:  CP      W4,#0
+1CE8:  BRA     NC,1D00
+1CEA:  BRA     GTU,1CF4
+1CEC:  MOV     A06,W0
+1CEE:  MOV     A0C,W4
+1CF0:  CP      W4,W0
+1CF2:  BRA     NC,1D00
 ....................             {
 ....................             
 ....................                symb = '+';
-1C26:  MOV.B   #2B,W0L
-1C28:  MOV.B   W0L,A86
+1CF4:  MOV.B   #2B,W0L
+1CF6:  MOV.B   W0L,A86
 ....................                attained_throttle++;
-1C2A:  INC     0A16
+1CF8:  INC     0A16
 ....................                throttle_delay = 0;
-1C2C:  CLR     A1E
-1C2E:  CLR     A20
+1CFA:  CLR     A1E
+1CFC:  CLR     A20
 .................... 
 ....................             }
-1C30:  BRA     1C3C
+1CFE:  BRA     1D0A
 ....................             else 
 ....................             {
 ....................                symb = '0';
-1C32:  MOV.B   #30,W0L
-1C34:  MOV.B   W0L,A86
+1D00:  MOV.B   #30,W0L
+1D02:  MOV.B   W0L,A86
 ....................                throttle_delay++;
-1C36:  INC     0A1E
-1C38:  BTSC.B  42.1
-1C3A:  INC     0A20
+1D04:  INC     0A1E
+1D06:  BTSC.B  42.1
+1D08:  INC     0A20
 ....................        
 ....................             }
 .................... 
 ....................      
 ....................           }
-1C3C:  BRA     1C88
+1D0A:  BRA     1D56
 ....................           else if(throttle_level < attained_throttle)
-1C3E:  MOV     982,W0
-1C40:  MOV     A16,W4
-1C42:  CP      W4,W0
-1C44:  BRA     LE,1C7A
+1D0C:  MOV     982,W0
+1D0E:  MOV     A16,W4
+1D10:  CP      W4,W0
+1D12:  BRA     LE,1D48
 ....................           {
 ....................             symb1 = '-';
-1C46:  MOV.B   #2D,W0L
-1C48:  MOV.B   W0L,A87
+1D14:  MOV.B   #2D,W0L
+1D16:  MOV.B   W0L,A87
 ....................             if (attained_speed <= descending_speed) 
-1C4A:  MOV     A0E,W4
-1C4C:  CP      W4,#0
-1C4E:  BRA     GTU,1C6E
-1C50:  BRA     NC,1C5A
-1C52:  MOV     A0C,W0
-1C54:  MOV     A08,W4
-1C56:  CP      W4,W0
-1C58:  BRA     NC,1C6E
+1D18:  MOV     A0E,W4
+1D1A:  CP      W4,#0
+1D1C:  BRA     GTU,1D3C
+1D1E:  BRA     NC,1D28
+1D20:  MOV     A0C,W0
+1D22:  MOV     A08,W4
+1D24:  CP      W4,W0
+1D26:  BRA     NC,1D3C
 ....................             {
 ....................                attained_throttle--; 
-1C5A:  DEC     0A16
+1D28:  DEC     0A16
 ....................                throttle_delay = 0;
-1C5C:  CLR     A1E
-1C5E:  CLR     A20
+1D2A:  CLR     A1E
+1D2C:  CLR     A20
 ....................                symb = '-';
-1C60:  MOV.B   #2D,W0L
-1C62:  MOV.B   W0L,A86
+1D2E:  MOV.B   #2D,W0L
+1D30:  MOV.B   W0L,A86
 ....................                if (attained_throttle < 0)
-1C64:  MOV     A16,W4
-1C66:  CP      W4,#0
-1C68:  BRA     GE,1C6C
+1D32:  MOV     A16,W4
+1D34:  CP      W4,#0
+1D36:  BRA     GE,1D3A
 ....................                {
 ....................                   attained_throttle = 0;
-1C6A:  CLR     A16
+1D38:  CLR     A16
 ....................                }
 ....................          
 ....................             }
-1C6C:  BRA     1C78
+1D3A:  BRA     1D46
 ....................             else 
 ....................             {
 ....................                symb = '0';
-1C6E:  MOV.B   #30,W0L
-1C70:  MOV.B   W0L,A86
+1D3C:  MOV.B   #30,W0L
+1D3E:  MOV.B   W0L,A86
 ....................                throttle_delay++;
-1C72:  INC     0A1E
-1C74:  BTSC.B  42.1
-1C76:  INC     0A20
+1D40:  INC     0A1E
+1D42:  BTSC.B  42.1
+1D44:  INC     0A20
 ....................    
 ....................             }
 ....................           
 ....................           
 ....................           }
-1C78:  BRA     1C88
+1D46:  BRA     1D56
 ....................           else if (throttle_level == attained_throttle)
-1C7A:  MOV     982,W0
-1C7C:  CP      A16
-1C7E:  BRA     NZ,1C88
+1D48:  MOV     982,W0
+1D4A:  CP      A16
+1D4C:  BRA     NZ,1D56
 ....................           {
 ....................            
 ....................             symb1 = '0';
-1C80:  MOV.B   #30,W0L
-1C82:  MOV.B   W0L,A87
-....................             symb = '0';
-1C84:  MOV.B   #30,W0L
-1C86:  MOV.B   W0L,A86
+1D4E:  MOV.B   #30,W0L
+1D50:  MOV.B   W0L,A87
+....................             symb  = '0';
+1D52:  MOV.B   #30,W0L
+1D54:  MOV.B   W0L,A86
 ....................            
 ....................             
 ....................           }
 ....................           
 ....................           if (attained_speed < loaded_speed) 
-1C88:  MOV     A0E,W4
-1C8A:  CP      W4,#0
-1C8C:  BRA     GTU,1D40
-1C8E:  BRA     NC,1C98
-1C90:  MOV     A0C,W0
-1C92:  MOV     A0A,W4
-1C94:  CP      W4,W0
-1C96:  BRA     LEU,1D40
+1D56:  MOV     A0E,W4
+1D58:  CP      W4,#0
+1D5A:  BRA     GTU,1E0E
+1D5C:  BRA     NC,1D66
+1D5E:  MOV     A0C,W0
+1D60:  MOV     A0A,W4
+1D62:  CP      W4,W0
+1D64:  BRA     LEU,1E0E
 ....................           {
 ....................             speed_dec = 1;
-1C98:  BSET.B  996.7
+1D66:  BSET.B  996.7
 ....................             
-....................             //attained_throttle--;
+.................... //!            attained_throttle--;
 ....................             symb = '!';
-1C9A:  MOV.B   #21,W0L
-1C9C:  MOV.B   W0L,A86
+1D68:  MOV.B   #21,W0L
+1D6A:  MOV.B   W0L,A86
 .................... //!            if (attained_throttle < 0) 
 .................... //!            {
 .................... //!               attained_throttle = 0;
@@ -8254,471 +8393,345 @@ CCS PCD C Compiler, Version 5.112, 5967               05-Aug-24 16:01
 ....................                            (attained_speed << 7) +
 ....................                            (attained_speed << 5) +
 ....................                            (attained_speed << 1); // --> 674 * attained_speed
-1C9E:  MOV     #9,W4
-1CA0:  MOV     A0C,W5
-1CA2:  MOV     A0E,W6
-1CA4:  INC     W4,W4
-1CA6:  DEC     W4,W4
-1CA8:  BRA     Z,1CB0
-1CAA:  SL      W5,W5
-1CAC:  RLC     W6,W6
-1CAE:  BRA     1CA6
-1CB0:  MOV     #7,W4
-1CB2:  MOV     A0C,W0
-1CB4:  MOV     A0E,W1
-1CB6:  INC     W4,W4
-1CB8:  DEC     W4,W4
-1CBA:  BRA     Z,1CC2
-1CBC:  SL      W0,W0
-1CBE:  RLC     W1,W1
-1CC0:  BRA     1CB8
-1CC2:  ADD     W0,W5,W5
-1CC4:  ADDC    W1,W6,W6
-1CC6:  MOV     #5,W4
-1CC8:  MOV     A0C,W0
-1CCA:  MOV     A0E,W1
-1CCC:  INC     W4,W4
-1CCE:  DEC     W4,W4
-1CD0:  BRA     Z,1CD8
-1CD2:  SL      W0,W0
-1CD4:  RLC     W1,W1
-1CD6:  BRA     1CCE
-1CD8:  ADD     W0,W5,W5
-1CDA:  ADDC    W1,W6,W6
-1CDC:  MOV     #1,W4
-1CDE:  MOV     A0C,W0
-1CE0:  MOV     A0E,W1
-1CE2:  INC     W4,W4
-1CE4:  DEC     W4,W4
-1CE6:  BRA     Z,1CEE
-1CE8:  SL      W0,W0
-1CEA:  RLC     W1,W1
-1CEC:  BRA     1CE4
-1CEE:  ADD     W0,W5,W0
-1CF0:  MOV     W0,A18
-1CF2:  ADDC    W1,W6,W0
-1CF4:  MOV     W0,A1A
+1D6C:  MOV     #9,W4
+1D6E:  MOV     A0C,W5
+1D70:  MOV     A0E,W6
+1D72:  INC     W4,W4
+1D74:  DEC     W4,W4
+1D76:  BRA     Z,1D7E
+1D78:  SL      W5,W5
+1D7A:  RLC     W6,W6
+1D7C:  BRA     1D74
+1D7E:  MOV     #7,W4
+1D80:  MOV     A0C,W0
+1D82:  MOV     A0E,W1
+1D84:  INC     W4,W4
+1D86:  DEC     W4,W4
+1D88:  BRA     Z,1D90
+1D8A:  SL      W0,W0
+1D8C:  RLC     W1,W1
+1D8E:  BRA     1D86
+1D90:  ADD     W0,W5,W5
+1D92:  ADDC    W1,W6,W6
+1D94:  MOV     #5,W4
+1D96:  MOV     A0C,W0
+1D98:  MOV     A0E,W1
+1D9A:  INC     W4,W4
+1D9C:  DEC     W4,W4
+1D9E:  BRA     Z,1DA6
+1DA0:  SL      W0,W0
+1DA2:  RLC     W1,W1
+1DA4:  BRA     1D9C
+1DA6:  ADD     W0,W5,W5
+1DA8:  ADDC    W1,W6,W6
+1DAA:  MOV     #1,W4
+1DAC:  MOV     A0C,W0
+1DAE:  MOV     A0E,W1
+1DB0:  INC     W4,W4
+1DB2:  DEC     W4,W4
+1DB4:  BRA     Z,1DBC
+1DB6:  SL      W0,W0
+1DB8:  RLC     W1,W1
+1DBA:  BRA     1DB2
+1DBC:  ADD     W0,W5,W0
+1DBE:  MOV     W0,A18
+1DC0:  ADDC    W1,W6,W0
+1DC2:  MOV     W0,A1A
 ....................                          
 ....................             new_throttle = new_throttle >> 10;
-1CF6:  MOV     #A,W4
-1CF8:  INC     W4,W4
-1CFA:  DEC     W4,W4
-1CFC:  BRA     Z,1D04
-1CFE:  LSR     A1A
-1D00:  RRC     A18
-1D02:  BRA     1CFA
-....................             new_throttle -= 6;
-1D04:  MOV     A18,W4
-1D06:  SUB     W4,#6,W0
-1D08:  MOV     W0,A18
-1D0A:  MOV     A1A,W4
-1D0C:  SUBB    W4,#0,W0
-1D0E:  MOV     W0,A1A
+1DC4:  MOV     #A,W4
+1DC6:  INC     W4,W4
+1DC8:  DEC     W4,W4
+1DCA:  BRA     Z,1DD2
+1DCC:  LSR     A1A
+1DCE:  RRC     A18
+1DD0:  BRA     1DC8
+....................             new_throttle -= 5;
+1DD2:  MOV     A18,W4
+1DD4:  SUB     W4,#5,W0
+1DD6:  MOV     W0,A18
+1DD8:  MOV     A1A,W4
+1DDA:  SUBB    W4,#0,W0
+1DDC:  MOV     W0,A1A
 .................... 
 ....................             if (new_throttle < 0) 
-1D10:  MOV     A1A,W4
-1D12:  CP      W4,#0
-1D14:  BRA     GT,1D24
-1D16:  BRA     LT,1D1E
-1D18:  MOV     A18,W4
-1D1A:  CP      W4,#0
-1D1C:  BRA     C,1D24
+1DDE:  MOV     A1A,W4
+1DE0:  CP      W4,#0
+1DE2:  BRA     GT,1DF2
+1DE4:  BRA     LT,1DEC
+1DE6:  MOV     A18,W4
+1DE8:  CP      W4,#0
+1DEA:  BRA     C,1DF2
 ....................             {
 ....................                new_throttle = 0;
-1D1E:  CLR     A18
-1D20:  CLR     A1A
+1DEC:  CLR     A18
+1DEE:  CLR     A1A
 ....................             
 ....................             }
-1D22:  BRA     1D3A
+1DF0:  BRA     1E08
 ....................             else if (new_throttle > 255) 
-1D24:  MOV     A1A,W4
-1D26:  CP      W4,#0
-1D28:  BRA     LT,1D3A
-1D2A:  BRA     GT,1D34
-1D2C:  MOV     A18,W4
-1D2E:  MOV     #FF,W3
-1D30:  CP      W3,W4
-1D32:  BRA     C,1D3A
+1DF2:  MOV     A1A,W4
+1DF4:  CP      W4,#0
+1DF6:  BRA     LT,1E08
+1DF8:  BRA     GT,1E02
+1DFA:  MOV     A18,W4
+1DFC:  MOV     #FF,W3
+1DFE:  CP      W3,W4
+1E00:  BRA     C,1E08
 ....................             {
 ....................                new_throttle = 255;
-1D34:  MOV     #FF,W4
-1D36:  MOV     W4,A18
-1D38:  CLR     A1A
+1E02:  MOV     #FF,W4
+1E04:  MOV     W4,A18
+1E06:  CLR     A1A
 ....................           
 ....................             }
 .................... 
 ....................             attained_throttle = new_throttle;
-1D3A:  PUSH    A18
-1D3C:  POP     A16
-....................           
+1E08:  PUSH    A18
+1E0A:  POP     A16
+.................... //!          
 ....................             
 ....................           }
-1D3E:  BRA     1D42
+1E0C:  BRA     1E10
 ....................           else 
 ....................           {
 ....................             speed_dec = 0;
-1D40:  BCLR.B  996.7
+1E0E:  BCLR.B  996.7
 ....................           
 ....................           }
 ....................  
 ....................  
 ....................           if (attained_throttle != 0 && !(input(BRAKE_INPUT)))   
-1D42:  CP0     A16
-1D44:  BRA     Z,1D6C
-1D46:  BSET.B  2D2.2
-1D48:  NOP     
-1D4A:  BTSC.B  2D4.2
-1D4C:  BRA     1D6C
+1E10:  CP0     A16
+1E12:  BRA     Z,1E3A
+1E14:  BSET.B  2D2.2
+1E16:  NOP     
+1E18:  BTSC.B  2D4.2
+1E1A:  BRA     1E3A
 ....................           {
 ....................             if (*(P1TCON+1) != 0x80)         // don't repeatedly enable the PWM module in loop..
-1D4E:  MOV     1C0,W4
-1D50:  LSR     W4,#8,W4
-1D52:  XOR.B   #80,W4L
-1D54:  BRA     Z,1D5A
+1E1C:  MOV     1C0,W4
+1E1E:  LSR     W4,#8,W4
+1E20:  XOR.B   #80,W4L
+1E22:  BRA     Z,1E28
 ....................             {
 ....................                *(P1TCON+1) = 0x80;
-1D56:  MOV.B   #80,W0L
-1D58:  MOV.B   W0L,1C1
+1E24:  MOV.B   #80,W0L
+1E26:  MOV.B   W0L,1C1
 ....................             
 ....................             }
 ....................             freq = attained_throttle;
-1D5A:  PUSH    A16
-1D5C:  POP     984
+1E28:  PUSH    A16
+1E2A:  POP     984
 ....................             peak_voltage = gain_table[attained_throttle];
-1D5E:  MOV     A16,W4
-1D60:  MUL.UU  W4,#2,W0
-1D62:  CALL    278
-1D66:  MOV     W0,926
+1E2C:  MOV     A16,W4
+1E2E:  MUL.UU  W4,#2,W0
+1E30:  CALL    278
+1E34:  MOV     W0,926
 ....................             stop_pwm = 0;
-1D68:  BCLR.B  996.6
+1E36:  BCLR.B  996.6
 ....................             
 ....................           }
-1D6A:  BRA     1E20
+1E38:  BRA     1EEE
 ....................           else 
 ....................           {
+....................           
 ....................             stop_pwm = 1;
-1D6C:  BSET.B  996.6
+1E3A:  BSET.B  996.6
 .................... //!            attained_throttle = 0;
 ....................             new_throttle = (attained_speed << 9) + 
 ....................                            (attained_speed << 7) +
 ....................                            (attained_speed << 5) +
 ....................                            (attained_speed << 1);
-1D6E:  MOV     #9,W4
-1D70:  MOV     A0C,W5
-1D72:  MOV     A0E,W6
-1D74:  INC     W4,W4
-1D76:  DEC     W4,W4
-1D78:  BRA     Z,1D80
-1D7A:  SL      W5,W5
-1D7C:  RLC     W6,W6
-1D7E:  BRA     1D76
-1D80:  MOV     #7,W4
-1D82:  MOV     A0C,W0
-1D84:  MOV     A0E,W1
-1D86:  INC     W4,W4
-1D88:  DEC     W4,W4
-1D8A:  BRA     Z,1D92
-1D8C:  SL      W0,W0
-1D8E:  RLC     W1,W1
-1D90:  BRA     1D88
-1D92:  ADD     W0,W5,W5
-1D94:  ADDC    W1,W6,W6
-1D96:  MOV     #5,W4
-1D98:  MOV     A0C,W0
-1D9A:  MOV     A0E,W1
-1D9C:  INC     W4,W4
-1D9E:  DEC     W4,W4
-1DA0:  BRA     Z,1DA8
-1DA2:  SL      W0,W0
-1DA4:  RLC     W1,W1
-1DA6:  BRA     1D9E
-1DA8:  ADD     W0,W5,W5
-1DAA:  ADDC    W1,W6,W6
-1DAC:  MOV     #1,W4
-1DAE:  MOV     A0C,W0
-1DB0:  MOV     A0E,W1
-1DB2:  INC     W4,W4
-1DB4:  DEC     W4,W4
-1DB6:  BRA     Z,1DBE
-1DB8:  SL      W0,W0
-1DBA:  RLC     W1,W1
-1DBC:  BRA     1DB4
-1DBE:  ADD     W0,W5,W0
-1DC0:  MOV     W0,A18
-1DC2:  ADDC    W1,W6,W0
-1DC4:  MOV     W0,A1A
+1E3C:  MOV     #9,W4
+1E3E:  MOV     A0C,W5
+1E40:  MOV     A0E,W6
+1E42:  INC     W4,W4
+1E44:  DEC     W4,W4
+1E46:  BRA     Z,1E4E
+1E48:  SL      W5,W5
+1E4A:  RLC     W6,W6
+1E4C:  BRA     1E44
+1E4E:  MOV     #7,W4
+1E50:  MOV     A0C,W0
+1E52:  MOV     A0E,W1
+1E54:  INC     W4,W4
+1E56:  DEC     W4,W4
+1E58:  BRA     Z,1E60
+1E5A:  SL      W0,W0
+1E5C:  RLC     W1,W1
+1E5E:  BRA     1E56
+1E60:  ADD     W0,W5,W5
+1E62:  ADDC    W1,W6,W6
+1E64:  MOV     #5,W4
+1E66:  MOV     A0C,W0
+1E68:  MOV     A0E,W1
+1E6A:  INC     W4,W4
+1E6C:  DEC     W4,W4
+1E6E:  BRA     Z,1E76
+1E70:  SL      W0,W0
+1E72:  RLC     W1,W1
+1E74:  BRA     1E6C
+1E76:  ADD     W0,W5,W5
+1E78:  ADDC    W1,W6,W6
+1E7A:  MOV     #1,W4
+1E7C:  MOV     A0C,W0
+1E7E:  MOV     A0E,W1
+1E80:  INC     W4,W4
+1E82:  DEC     W4,W4
+1E84:  BRA     Z,1E8C
+1E86:  SL      W0,W0
+1E88:  RLC     W1,W1
+1E8A:  BRA     1E82
+1E8C:  ADD     W0,W5,W0
+1E8E:  MOV     W0,A18
+1E90:  ADDC    W1,W6,W0
+1E92:  MOV     W0,A1A
 ....................                          
 ....................             new_throttle = new_throttle >> 10;
-1DC6:  MOV     #A,W4
-1DC8:  INC     W4,W4
-1DCA:  DEC     W4,W4
-1DCC:  BRA     Z,1DD4
-1DCE:  LSR     A1A
-1DD0:  RRC     A18
-1DD2:  BRA     1DCA
+1E94:  MOV     #A,W4
+1E96:  INC     W4,W4
+1E98:  DEC     W4,W4
+1E9A:  BRA     Z,1EA2
+1E9C:  LSR     A1A
+1E9E:  RRC     A18
+1EA0:  BRA     1E98
 ....................             new_throttle -= 6;
-1DD4:  MOV     A18,W4
-1DD6:  SUB     W4,#6,W0
-1DD8:  MOV     W0,A18
-1DDA:  MOV     A1A,W4
-1DDC:  SUBB    W4,#0,W0
-1DDE:  MOV     W0,A1A
+1EA2:  MOV     A18,W4
+1EA4:  SUB     W4,#6,W0
+1EA6:  MOV     W0,A18
+1EA8:  MOV     A1A,W4
+1EAA:  SUBB    W4,#0,W0
+1EAC:  MOV     W0,A1A
 .................... 
 ....................             if (new_throttle < 0) 
-1DE0:  MOV     A1A,W4
-1DE2:  CP      W4,#0
-1DE4:  BRA     GT,1DF4
-1DE6:  BRA     LT,1DEE
-1DE8:  MOV     A18,W4
-1DEA:  CP      W4,#0
-1DEC:  BRA     C,1DF4
+1EAE:  MOV     A1A,W4
+1EB0:  CP      W4,#0
+1EB2:  BRA     GT,1EC2
+1EB4:  BRA     LT,1EBC
+1EB6:  MOV     A18,W4
+1EB8:  CP      W4,#0
+1EBA:  BRA     C,1EC2
 ....................             {
 ....................                new_throttle = 0;
-1DEE:  CLR     A18
-1DF0:  CLR     A1A
+1EBC:  CLR     A18
+1EBE:  CLR     A1A
 ....................             
 ....................             }
-1DF2:  BRA     1E0A
+1EC0:  BRA     1ED8
 ....................             else if (new_throttle > 255) 
-1DF4:  MOV     A1A,W4
-1DF6:  CP      W4,#0
-1DF8:  BRA     LT,1E0A
-1DFA:  BRA     GT,1E04
-1DFC:  MOV     A18,W4
-1DFE:  MOV     #FF,W3
-1E00:  CP      W3,W4
-1E02:  BRA     C,1E0A
+1EC2:  MOV     A1A,W4
+1EC4:  CP      W4,#0
+1EC6:  BRA     LT,1ED8
+1EC8:  BRA     GT,1ED2
+1ECA:  MOV     A18,W4
+1ECC:  MOV     #FF,W3
+1ECE:  CP      W3,W4
+1ED0:  BRA     C,1ED8
 ....................             {
 ....................                new_throttle = 255;
-1E04:  MOV     #FF,W4
-1E06:  MOV     W4,A18
-1E08:  CLR     A1A
+1ED2:  MOV     #FF,W4
+1ED4:  MOV     W4,A18
+1ED6:  CLR     A1A
 ....................           
 ....................             }
 .................... 
 ....................             attained_throttle = new_throttle;
-1E0A:  PUSH    A18
-1E0C:  POP     A16
+1ED8:  PUSH    A18
+1EDA:  POP     A16
 ....................             throttle_diff = attained_throttle - new_throttle;
-1E0E:  MOV     A16,W0
-1E10:  CLR     W1
-1E12:  BTSC    W0.F
-1E14:  SETM    W1
-1E16:  MOV     A18,W4
-1E18:  SUB     W0,W4,W0
-1E1A:  MOV     A1A,W4
-1E1C:  SUBB    W1,W4,W1
-1E1E:  MOV.B   W0L,A8A
+1EDC:  MOV     A16,W0
+1EDE:  CLR     W1
+1EE0:  BTSC    W0.F
+1EE2:  SETM    W1
+1EE4:  MOV     A18,W4
+1EE6:  SUB     W0,W4,W0
+1EE8:  MOV     A1A,W4
+1EEA:  SUBB    W1,W4,W1
+1EEC:  MOV.B   W0L,A8A
 .................... 
 ....................           }
 .................... 
 ....................           if (throttle_delay >= 99) 
-1E20:  MOV     A20,W4
-1E22:  CP      W4,#0
-1E24:  BRA     NC,1E34
-1E26:  BRA     GTU,1E30
-1E28:  MOV     A1E,W4
-1E2A:  MOV     #63,W3
-1E2C:  CP      W3,W4
-1E2E:  BRA     GTU,1E34
+1EEE:  MOV     A20,W4
+1EF0:  CP      W4,#0
+1EF2:  BRA     NC,1F02
+1EF4:  BRA     GTU,1EFE
+1EF6:  MOV     A1E,W4
+1EF8:  MOV     #63,W3
+1EFA:  CP      W3,W4
+1EFC:  BRA     GTU,1F02
 ....................           {
 ....................             throttle_delay = 0;
-1E30:  CLR     A1E
-1E32:  CLR     A20
+1EFE:  CLR     A1E
+1F00:  CLR     A20
 ....................           
 ....................           }
 .................... 
-....................  
-.................... //!      if (enc_tick) 
-.................... //!      {
-.................... //!         
-.................... //!         enc_mutx = 1;
-....................          position_count = *(POSCNT +1);
-1E34:  MOV.B   127,W0L
-1E36:  MOV.B   W0L,986
-1E38:  CLR.B   987
-1E3A:  CLR     988
-....................          position_count = position_count << 8;
-1E3C:  MOV.B   988,W0L
-1E3E:  MOV.B   W0L,989
-1E40:  MOV.B   987,W0L
-1E42:  MOV.B   W0L,988
-1E44:  MOV.B   986,W0L
-1E46:  MOV.B   W0L,987
-1E48:  CLR.B   986
-....................          position_count = position_count | *POSCNT;   
-1E4A:  MOV.B   126,W0L
-1E4C:  CLR.B   1
-1E4E:  IOR     986
-....................          
-.................... 
-....................          direction_flag = QEI_get_direction();
-1E50:  CALL    1688
-1E54:  BCLR.B  996.0
-1E56:  BTSC.B  0.0
-1E58:  BSET.B  996.0
-.................... 
-....................          enc_count = position_count - prev_count;
-1E5A:  MOV     986,W4
-1E5C:  MOV     98A,W3
-1E5E:  SUB     W4,W3,W0
-1E60:  MOV     W0,98E
-1E62:  MOV     988,W4
-1E64:  MOV     98C,W3
-1E66:  SUBB    W4,W3,W0
-1E68:  MOV     W0,990
-....................      
-....................          if (enc_count < 0 && enc_count < -2) 
-1E6A:  MOV     990,W4
-1E6C:  CP      W4,#0
-1E6E:  BRA     GT,1E98
-1E70:  BRA     LT,1E78
-1E72:  MOV     98E,W4
-1E74:  CP      W4,#0
-1E76:  BRA     C,1E98
-1E78:  MOV     990,W4
-1E7A:  MOV     #FFFF,W3
-1E7C:  CP      W3,W4
-1E7E:  BRA     LT,1E98
-1E80:  BRA     GT,1E8A
-1E82:  MOV     98E,W4
-1E84:  MOV     #FFFE,W3
-1E86:  CP      W3,W4
-1E88:  BRA     LEU,1E98
-....................          {
-....................             enc_count = enc_count + TIM_OVERFLOW_VAL ;
-1E8A:  MOV     #FFFF,W4
-1E8C:  MOV     98E,W3
-1E8E:  ADD     W3,W4,W0
-1E90:  MOV     W0,98E
-1E92:  MOV     990,W4
-1E94:  ADDC    W4,#0,W0
-1E96:  MOV     W0,990
-.................... 
-....................          }
-.................... 
-....................          if (direction_flag == 0 && enc_count > 0 && enc_count > 2)
-1E98:  BTSC.B  996.0
-1E9A:  BRA     1EC6
-1E9C:  MOV     990,W4
-1E9E:  CP      W4,#0
-1EA0:  BRA     LT,1EC6
-1EA2:  BRA     GT,1EAA
-1EA4:  MOV     98E,W4
-1EA6:  CP      W4,#0
-1EA8:  BRA     LEU,1EC6
-1EAA:  MOV     990,W4
-1EAC:  CP      W4,#0
-1EAE:  BRA     LT,1EC6
-1EB0:  BRA     GT,1EB8
-1EB2:  MOV     98E,W4
-1EB4:  CP      W4,#2
-1EB6:  BRA     LEU,1EC6
-....................          {
-....................             enc_count = enc_count - TIM_OVERFLOW_VAL;
-1EB8:  MOV     98E,W4
-1EBA:  MOV     #FFFF,W3
-1EBC:  SUB     W4,W3,W0
-1EBE:  MOV     W0,98E
-1EC0:  MOV     990,W4
-1EC2:  SUBB    W4,#0,W0
-1EC4:  MOV     W0,990
-....................          
-....................          }
-....................          enc_count = abs(enc_count);
-1EC6:  MOV     98E,W0
-1EC8:  MOV     990,W1
-1ECA:  BTSS    W1.F
-1ECC:  BRA     1EDA
-1ECE:  MOV     #0,W4
-1ED0:  MOV     98E,W3
-1ED2:  SUB     W4,W3,W0
-1ED4:  MOV     #0,W4
-1ED6:  MOV     990,W3
-1ED8:  SUBB    W4,W3,W1
-1EDA:  MOV     W0,98E
-1EDC:  MOV     W1,990
-....................          enc_count = enc_count >> 1;
-1EDE:  LSR     990
-1EE0:  RRC     98E
-....................          
-....................          prev_count = position_count; 
-1EE2:  PUSH    986
-1EE4:  POP     98A
-1EE6:  PUSH    988
-1EE8:  POP     98C
-....................          sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c , %02d , %d , %d" ,
+....................          sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c , %02d , %d" ,
 ....................          raw_adc , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed , prob1,prob2 , 
-....................          symb1 , symb ,throttle_delay , new_throttle , throttle_diff);
-1EEA:  MOV     #9A2,W4
-1EEC:  MOV     W4,A88
-1EEE:  MOV.B   #D,W0L
-1EF0:  CALL    CC6
-1EF4:  MOV.B   #A,W0L
-1EF6:  CALL    CC6
-1EFA:  MOV     980,W0
-1EFC:  MOV     #8003,W4
-1EFE:  CALL    1696
-1F02:  MOV.B   #2C,W0L
-1F04:  CALL    CC6
-1F08:  MOV     982,W0
-1F0A:  MOV     #8003,W4
-1F0C:  CALL    1696
-1F10:  MOV.B   #2C,W0L
-1F12:  CALL    CC6
-1F16:  MOV     A16,W0
-1F18:  MOV     #8003,W4
-1F1A:  CALL    1696
-1F1E:  MOV.B   #2C,W0L
-1F20:  CALL    CC6
-1F24:  MOV     A0C,W0
-1F26:  MOV     A0E,W1
-1F28:  MOV     #8003,W4
-1F2A:  CALL    180A
-1F2E:  MOV.B   #2C,W0L
-1F30:  CALL    CC6
-1F34:  MOV     A06,W0
-1F36:  MOV     #8003,W4
-1F38:  CALL    1696
-1F3C:  MOV.B   #2C,W0L
-1F3E:  CALL    CC6
-1F42:  MOV     A08,W0
-1F44:  MOV     #8003,W4
-1F46:  CALL    1696
-1F4A:  MOV.B   #2C,W0L
-1F4C:  CALL    CC6
-1F50:  MOV     A0A,W0
-1F52:  MOV     #8003,W4
-1F54:  CALL    1696
-1F58:  MOV.B   #20,W0L
-1F5A:  CALL    CC6
-1F5E:  MOV.B   #3A,W0L
-1F60:  CALL    CC6
-1F64:  MOV.B   #20,W0L
-1F66:  CALL    CC6
-1F6A:  MOV     A82,W0
-1F6C:  MOV     #8002,W4
-1F6E:  CALL    1696
-1F72:  MOV.B   #2C,W0L
-1F74:  CALL    CC6
-1F78:  MOV     A84,W0
-1F7A:  MOV     #8002,W4
-1F7C:  CALL    1696
-1F80:  MOV.B   #20,W0L
-1F82:  CALL    CC6
-1F86:  MOV.B   #3A,W0L
-1F88:  CALL    CC6
-1F8C:  MOV.B   #20,W0L
-1F8E:  CALL    CC6
-1F92:  MOV.B   A87,W0L
-1F94:  CALL    CC6
+....................          symb1 , symb ,throttle_delay , new_throttle);
+1F02:  MOV     #9A2,W4
+1F04:  MOV     W4,A88
+1F06:  MOV.B   #D,W0L
+1F08:  CALL    CC6
+1F0C:  MOV.B   #A,W0L
+1F0E:  CALL    CC6
+1F12:  MOV     980,W0
+1F14:  MOV     #8003,W4
+1F16:  CALL    1696
+1F1A:  MOV.B   #2C,W0L
+1F1C:  CALL    CC6
+1F20:  MOV     982,W0
+1F22:  MOV     #8003,W4
+1F24:  CALL    1696
+1F28:  MOV.B   #2C,W0L
+1F2A:  CALL    CC6
+1F2E:  MOV     A16,W0
+1F30:  MOV     #8003,W4
+1F32:  CALL    1696
+1F36:  MOV.B   #2C,W0L
+1F38:  CALL    CC6
+1F3C:  MOV     A0C,W0
+1F3E:  MOV     A0E,W1
+1F40:  MOV     #8003,W4
+1F42:  CALL    180A
+1F46:  MOV.B   #2C,W0L
+1F48:  CALL    CC6
+1F4C:  MOV     A06,W0
+1F4E:  MOV     #8003,W4
+1F50:  CALL    1696
+1F54:  MOV.B   #2C,W0L
+1F56:  CALL    CC6
+1F5A:  MOV     A08,W0
+1F5C:  MOV     #8003,W4
+1F5E:  CALL    1696
+1F62:  MOV.B   #2C,W0L
+1F64:  CALL    CC6
+1F68:  MOV     A0A,W0
+1F6A:  MOV     #8003,W4
+1F6C:  CALL    1696
+1F70:  MOV.B   #20,W0L
+1F72:  CALL    CC6
+1F76:  MOV.B   #3A,W0L
+1F78:  CALL    CC6
+1F7C:  MOV.B   #20,W0L
+1F7E:  CALL    CC6
+1F82:  MOV     A82,W0
+1F84:  MOV     #8002,W4
+1F86:  CALL    1696
+1F8A:  MOV.B   #2C,W0L
+1F8C:  CALL    CC6
+1F90:  MOV     A84,W0
+1F92:  MOV     #8002,W4
+1F94:  CALL    1696
 1F98:  MOV.B   #20,W0L
 1F9A:  CALL    CC6
-1F9E:  MOV.B   #2C,W0L
+1F9E:  MOV.B   #3A,W0L
 1FA0:  CALL    CC6
 1FA4:  MOV.B   #20,W0L
 1FA6:  CALL    CC6
-1FAA:  MOV.B   A86,W0L
+1FAA:  MOV.B   A87,W0L
 1FAC:  CALL    CC6
 1FB0:  MOV.B   #20,W0L
 1FB2:  CALL    CC6
@@ -8726,59 +8739,64 @@ CCS PCD C Compiler, Version 5.112, 5967               05-Aug-24 16:01
 1FB8:  CALL    CC6
 1FBC:  MOV.B   #20,W0L
 1FBE:  CALL    CC6
-1FC2:  MOV     A1E,W0
-1FC4:  MOV     A20,W1
-1FC6:  MOV     #8002,W4
-1FC8:  CALL    180A
-1FCC:  MOV.B   #20,W0L
-1FCE:  CALL    CC6
-1FD2:  MOV.B   #2C,W0L
-1FD4:  CALL    CC6
-1FD8:  MOV.B   #20,W0L
-1FDA:  CALL    CC6
-1FDE:  MOV     A18,W0
-1FE0:  MOV     A1A,W1
-1FE2:  MOV     #0,W4
-1FE4:  CALL    180A
-1FE8:  MOV.B   #20,W0L
-1FEA:  CALL    CC6
-1FEE:  MOV.B   #2C,W0L
-1FF0:  CALL    CC6
-1FF4:  MOV.B   #20,W0L
-1FF6:  CALL    CC6
-1FFA:  MOV.B   A8A,W0L
-1FFC:  SE      W0,W0
-1FFE:  MOV     #0,W4
-2000:  CALL    1696
+1FC2:  MOV.B   A86,W0L
+1FC4:  CALL    CC6
+1FC8:  MOV.B   #20,W0L
+1FCA:  CALL    CC6
+1FCE:  MOV.B   #2C,W0L
+1FD0:  CALL    CC6
+1FD4:  MOV.B   #20,W0L
+1FD6:  CALL    CC6
+1FDA:  MOV     A1E,W0
+1FDC:  MOV     A20,W1
+1FDE:  MOV     #8002,W4
+1FE0:  CALL    180A
+1FE4:  MOV.B   #20,W0L
+1FE6:  CALL    CC6
+1FEA:  MOV.B   #2C,W0L
+1FEC:  CALL    CC6
+1FF0:  MOV.B   #20,W0L
+1FF2:  CALL    CC6
+1FF6:  MOV     A18,W0
+1FF8:  MOV     A1A,W1
+1FFA:  MOV     #0,W4
+1FFC:  CALL    180A
+....................          
+.................... //!         sprintf(Serial_OutputBuffer , "\r\n %05d , %05d , %03d" , position_count , prev_count , enc_count);
 ....................          printf(Serial_OutputBuffer);
-2004:  MOV     #9A2,W1
-2006:  CP0.B   [W1]
-2008:  BRA     Z,2018
-200A:  BTSC.B  20F.1
-200C:  BRA     200A
-200E:  MOV.B   [W1+#0],W0L
-2010:  MOV.B   W0L,210
-2012:  CLR.B   211
-2014:  INC     W1,W1
-2016:  BRA     2006
+2000:  MOV     #9A2,W1
+2002:  CP0.B   [W1]
+2004:  BRA     Z,2014
+2006:  BTSC.B  20F.1
+2008:  BRA     2006
+200A:  MOV.B   [W1+#0],W0L
+200C:  MOV.B   W0L,210
+200E:  CLR.B   211
+2010:  INC     W1,W1
+2012:  BRA     2002
+....................          prev_count = position_count;
+2014:  PUSH    986
+2016:  POP     98A
+2018:  PUSH    988
+201A:  POP     98C
 ....................          
 ....................          output_bit(LED_PIN , 0); 
-2018:  BCLR.B  2D1.5
-201A:  BCLR.B  2CD.5
+201C:  BCLR.B  2D1.5
+201E:  BCLR.B  2CD.5
 ....................          
 ....................          
 ....................          enc_tick = 0;
-201C:  BCLR.B  996.3
+2020:  BCLR.B  996.3
 ....................         
 ....................        
 ....................   
 ....................   
 ....................       }
-201E:  BRA     1BB0
+2022:  BRA     1BB0
 ....................     } 
-.................... }    
+.................... }
 .................... 
-2020:  PWRSAV  #0
+2024:  PWRSAV  #0
 .................... 
 .................... void initMCPWM(void) 
 .................... {    

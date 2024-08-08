@@ -1,3 +1,2 @@
-Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 05-Aug-24 at 16:16
-*** Error 12 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 261(17,29): Undefined identifier   TMR_INTERNAL
-*** Error 79 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 261(78,79): Expect }
+Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 08-Aug-24 at 10:52
+*** Error 79 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 263(78,79): Expect }

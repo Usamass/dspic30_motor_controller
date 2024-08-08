@@ -1,5 +1,5 @@
 ÀÄmain
-   ÃÄMAIN  0/1760  Ram=1
+   ÃÄMAIN  0/1764  Ram=1
    ³  ÃÄ@cinit1  (Inline)  Ram=1
    ³  ÃÄ@cinit2  (Inline)  Ram=0
    ³  ÃÄKALMAN_init  0/66  Ram=11
@@ -35,11 +35,11 @@
    ³  ³  ÃÄ@MULFF64  0/272  Ram=0
    ³  ³  ÀÄ@F64TOSI64  0/94  Ram=0
    ³  ÃÄ@const828  0/376  Ram=0
+   ³  ÃÄQEI_get_direction  0/14  Ram=1
    ³  ÃÄ@const834  0/378  Ram=1
    ³  ÃÄ@const837  0/378  Ram=1
    ³  ÃÄ@const834  0/378  Ram=1
    ³  ÃÄ@const831  0/376  Ram=1
-   ³  ÃÄQEI_get_direction  0/14  Ram=1
    ³  ÃÄ@SPRINTF  0/14  Ram=1
    ³  ÃÄ@SPRINTF  0/14  Ram=1
    ³  ÃÄ@PRINTFD16_1663  0/304  Ram=1
@@ -95,12 +95,7 @@
    ³  ÃÄ@SPRINTF  0/14  Ram=1
    ³  ÃÄ@SPRINTF  0/14  Ram=1
    ³  ÃÄ@SPRINTF  0/14  Ram=1
-   ³  ÃÄ@PRINTFD32_1663  0/312  Ram=1
-   ³  ³  ÀÄ*
-   ³  ÃÄ@SPRINTF  0/14  Ram=1
-   ³  ÃÄ@SPRINTF  0/14  Ram=1
-   ³  ÃÄ@SPRINTF  0/14  Ram=1
-   ³  ÀÄ@PRINTFD16_1663  0/304  Ram=1
+   ³  ÀÄ@PRINTFD32_1663  0/312  Ram=1
    ³     ÀÄ*
    ÃÄ@RCV_ISR_1  0/58  Ram=1
    ÃÄPWM1_isr  0/32  Ram=1

@@ -196,7 +196,7 @@ Project Directory:
     C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\
 
 Project Files:
-    main.c                                                  [05-Aug-24 16:01  CRC=C6B5013E]
+    main.c                                                  [08-Aug-24 09:51  CRC=C50BB059]
     ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h  [21-Oct-22 11:12  CRC=AE0CC97E]
     Inc\lookup_tables.h                                     [02-Aug-24 16:21  CRC=5C246FD5]
     digital_filter\digital_filter.h                         [24-Jul-24 10:41  CRC=D6370F9D]
@@ -206,9 +206,9 @@ Project Files:
     ..\..\..\..\Program Files (x86)\PICC\Drivers\string.h   [06-Apr-20 08:43  CRC=B1605627]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h    [03-Jan-08 15:55  CRC=2D1F019F]
 
-Source signature=8389C851
+Source signature=81E0776C
 Program memory checksum=0000
-Hex file CRC=E11C
+Hex file CRC=A83A
 
 Units:
     C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main (main)

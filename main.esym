@@ -1,9 +1,9 @@
-D G "__PCD__" 0 818 ""5.112""
-D G "__DEVICE__" 0 818 "4011"
-D G "__DATE__" 0 818 ""05-Aug-24""
-D G "__TIME__" 0 818 ""16:01:01""
-D G "_UNICODE" 0 818 ""?""
-D G "__EVAL" 0 818 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
+D G "__PCD__" 0 830 ""5.112""
+D G "__DEVICE__" 0 830 "4011"
+D G "__DATE__" 0 830 ""08-Aug-24""
+D G "__TIME__" 0 830 ""09:51:10""
+D G "_UNICODE" 0 830 ""?""
+D G "__EVAL" 0 830 ""?"" "Standard Header file for the DSPIC30F4011 device ////////////////"
 c L "set_tris_b" 1 3 6 "FUNCTION"
 F N "set_tris_b" 1 45 ""
 V L "value" 1 45 "int16" `55 
@@ -2585,7 +2585,7 @@ D G "MAXCNT" 0 59 "0x0128" "Maximum Count Register."
 D G "IEC2" 0 61 "0x0090" "for enabling the QE interrupt."
 D G "IPC10" 0 62 "0x00A8" "QEI interrupt priority Register."
 D G "UPDN" 0 64 "3" "Direction testing flag."
-D G "TIM_OVERFLOW_VAL" 0 67 "65535"
+D G "TIM_OVERFLOW_VAL" 0 67 "65536"
 D G "U1TXREG" 0 68 "0x0210"
 D G "U1BRG" 0 69 "0x0214"
 D G "ADC_pin" 0 71 "sAN1"
@@ -2636,8 +2636,8 @@ V G "raw_adc" 0 123 "int16" `1605
 V G "throttle_level" 0 124 "sint16" `1606 
 V G "freq" 0 126 "int16" `1607 
 C L "disable_pwm" 0 36 1 "FUNCTION"
-V G "position_count" 0 129 "sint32" `1608 
-V G "prev_count" 0 130 "sint32" `1609 
+V G "position_count" 0 129 "int32" `1608 
+V G "prev_count" 0 130 "int32" `1609 
 V G "enc_count" 0 131 "sint32" `1610 
 V G "position_count_new" 0 132 "sint32" `1611 
 V G "direction_flag" 0 133 "int1" `1612 
@@ -2683,37 +2683,40 @@ C L "disable_pwm" 0 36 1 "FUNCTION"
 V G "ch1" 0 176 "int1" `1649 
 V G "stop_pwm" 0 177 "int1" `1650 
 V G "speed_dec" 0 178 "int1" `1651 
-F N "PWM1_isr" 0 181 ""
-F G "PWM1_isr" 0 182 "void()" `1652  "!   output_bit(LED_PIN , 1);"
+F N "PWM1_isr" 0 182 ""
+F G "PWM1_isr" 0 183 "void()" `1652  "!   output_bit(LED_PIN , 1);"
 C L "PWM1_isr" 0 36 18 "FUNCTION"
-F N "timer3_isr" 0 211 ""
-F G "timer3_isr" 0 212 "void()" `1653 
-V L "i" 0 219 "sint16" `1654 
+F N "timer3_isr" 0 212 ""
+F G "timer3_isr" 0 213 "void()" `1653 
+V L "i" 0 220 "sint16" `1654 
 C L "timer3_isr" 0 36 1 "FUNCTION"
-F N "timer5_isr" 0 268 ""
-F G "timer5_isr" 0 269 "void()" `1655 
-F N "timer4_isr" 0 292 ""
-F G "timer4_isr" 0 293 "void()" `1656 
-F N "MAIN" 0 348 ""
-F G "MAIN" 0 349 "void()" `1657 
-V L "throttle_diff" 0 350 "sint8" `1658 
+F N "timer5_isr" 0 269 ""
+F G "timer5_isr" 0 270 "void()" `1655 
+F N "timer4_isr" 0 293 ""
+F G "timer4_isr" 0 294 "void()" `1656 
+F N "MAIN" 0 349 ""
+F G "MAIN" 0 350 "void()" `1657 
+V L "throttle_diff" 0 351 "sint8" `1658 
 C L "MAIN" 0 36 1 "FUNCTION"
 C L "MAIN" 0 36 2 "FUNCTION"
+C L "MAIN" 0 36 1 "FUNCTION"
+C L "MAIN" 0 36 1 "FUNCTION"
+C L "MAIN" 0 36 1 "FUNCTION"
 C L "MAIN" 0 36 1 "FUNCTION"
 C L "MAIN" 0 36 1 "FUNCTION"
 C L "MAIN" 0 36 5 "FUNCTION"
 C L "MAIN" 0 36 1 "FUNCTION"
 C L "MAIN" 0 36 1 "FUNCTION"
 C L "MAIN" 0 36 1 "FUNCTION"
-C L "MAIN" 0 36 3 "FUNCTION"
-F N "initMCPWM" 0 613 ""
-F G "initMCPWM" 0 614 "void()" `1591 
+C L "MAIN" 0 36 1 "FUNCTION"
+F N "initMCPWM" 0 625 ""
+F G "initMCPWM" 0 626 "void()" `1591 
 C L "initMCPWM" 0 36 1 "FUNCTION"
 C L "initMCPWM" 0 36 1 "FUNCTION"
-F N "fill_sine_table" 0 633 ""
-F G "fill_sine_table" 0 634 "void()" `1592 
-F N "QEI_get_direction" 0 642 ""
-F G "QEI_get_direction" 0 643 "int8()" `1593 
+F N "fill_sine_table" 0 645 ""
+F G "fill_sine_table" 0 646 "void()" `1592 
+F N "QEI_get_direction" 0 654 ""
+F G "QEI_get_direction" 0 655 "int8()" `1593 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1

@@ -423,14 +423,14 @@ void main()
           {
              if (enc_count > -32768)
              {
-                // its a speed dip or motor rotating CW direction.
+                // its a speed dip or motor rotating CCW.
                 enc_count = -enc_count;
                
             
              }
              else if (enc_count < -32768) 
              {
-                // its a (positive) overflow.
+                // its a + overflow.
                 enc_count = enc_count + 65536;
             
              }
@@ -438,7 +438,7 @@ void main()
           }
           else if (enc_count > 0 && enc_count > 32768) 
           {
-             // its a (negative) overflow.
+             // its a - overflow.
              enc_count = enc_count - 65536;
          
           }
@@ -603,7 +603,8 @@ void main()
          sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c , %02d , %d" ,
          raw_adc , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed , prob1,prob2 , 
          symb1 , symb ,throttle_delay , new_throttle);
-
+         
+//!         sprintf(Serial_OutputBuffer , "\r\n %05d , %05d , %03d" , position_count , prev_count , enc_count);
          printf(Serial_OutputBuffer);
          prev_count = position_count;
          

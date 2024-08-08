@@ -412,40 +412,30 @@ void main()
          
           position_count = *(POSCNT +1);
           position_count = position_count << 8;
-          position_count = position_count | *POSCNT;   
+          position_count = position_count | *POSCNT;
          
 
           direction_flag = QEI_get_direction();
-
+        
           enc_count = position_count - prev_count;
-         
-          if (enc_count < 0)
-          {
-             if (enc_count > -32768)
-             {
-                // its a speed dip or motor rotating CW direction.
-                enc_count = -enc_count;
-               
-            
-             }
-             else if (enc_count < -32768) 
-             {
-                // its a (positive) overflow.
-                enc_count = enc_count + 65536;
-            
-             }
-         
-          }
-          else if (enc_count > 0 && enc_count > 32768) 
-          {
-             // its a (negative) overflow.
-             enc_count = enc_count - 65536;
-         
-          }
      
-          enc_count = enc_count >> 1;
-          enc_count = abs(enc_count);
+          if (direction_flag == 1 && enc_count < 0) 
+          {
+             enc_count = enc_count + TIM_OVERFLOW_VAL;
+            
 
+          }
+         
+
+          if (direction_flag == 0 && enc_count > 0)
+          {
+             enc_count = enc_count - TIM_OVERFLOW_VAL;
+             
+         
+          }
+          enc_count = abs(enc_count);
+          enc_count = enc_count >> 1;
+         
           ascending_speed  = ascend_speed_table[attained_throttle] ;
 
           descending_speed = descend_speed_table[attained_throttle];
@@ -458,7 +448,7 @@ void main()
           }
           loaded_speed = ascend_speed_table[loaded_val];
 
-          attained_speed = enc_count;
+          attained_speed = enc_count;    
           if (throttle_level > attained_throttle && !speed_dec) // check if speed is not decreasing then increament the throttle.
           {
             
@@ -543,7 +533,8 @@ void main()
           
             }
 
-            attained_throttle = new_throttle;        
+            attained_throttle = new_throttle;
+//!          
             
           }
           else 
@@ -600,12 +591,13 @@ void main()
           
           }
 
-         sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c , %02d , %d" ,
+         sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c , %02d , %d , %d , %d" ,
          raw_adc , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed , prob1,prob2 , 
-         symb1 , symb ,throttle_delay , new_throttle);
-
-         printf(Serial_OutputBuffer);
-         prev_count = position_count;
+         symb1 , symb ,throttle_delay , new_throttle , position_count , prev_count);
+         
+//!         sprintf(Serial_OutputBuffer , "\r\n %05d , %05d , %03d" , position_count , prev_count , enc_count);
+//!         printf(Serial_OutputBuffer);
+         prev_count = position_count; 
          
          output_bit(LED_PIN , 0); 
          
