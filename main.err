@@ -1,2 +1,9 @@
-Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 08-Aug-24 at 10:52
-*** Error 79 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 263(78,79): Expect }
+Compiling C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main on 08-Aug-24 at 16:22
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 133(7,25): Variable never used:   position_count_new
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 138(6,10): Variable never used:   tick
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 140(6,16): Variable never used:   tick_count
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 152(7,20): Variable never used:   prev_throttle
+>>> Warning 202 "C:\Users\eelab\Documents\[2024-05-15] MOTOR_CONTROL\main.c" Line 154(13,21): Variable never used:   enc_mutx
+      Memory usage:   ROM=25%      RAM=38% - 48%
+      0 Errors,  5 Warnings.
+Build Successful.

@@ -65,6 +65,7 @@
 /*------------QUADRATURE ENCODER REGISTERS-------------------*/
 
 #define TIM_OVERFLOW_VAL 65536
+#define OVERFLOW_LIMIT ((TIM_OVERFLOW_VAL)/2)
 #define U1TXREG   0x0210
 #define U1BRG     0x0214
 
@@ -412,8 +413,7 @@ void main()
          
           position_count = *(POSCNT +1);
           position_count = position_count << 8;
-          position_count = position_count | *POSCNT;   
-         
+          position_count = position_count | *POSCNT; 
 
           direction_flag = QEI_get_direction();
 
@@ -421,30 +421,31 @@ void main()
          
           if (enc_count < 0)
           {
-             if (enc_count > -32768)
+             if (enc_count > -OVERFLOW_LIMIT)
              {
                 // its a speed dip or motor rotating CW direction.
                 enc_count = -enc_count;
                
             
              }
-             else if (enc_count < -32768) 
+             else if (enc_count < -OVERFLOW_LIMIT) 
              {
                 // its a (positive) overflow.
-                enc_count = enc_count + 65536;
+                enc_count = enc_count + TIM_OVERFLOW_VAL;
             
              }
          
           }
-          else if (enc_count > 0 && enc_count > 32768) 
+          else if (enc_count > 0 && enc_count > OVERFLOW_LIMIT) 
           {
              // its a (negative) overflow.
-             enc_count = enc_count - 65536;
+             enc_count = enc_count - TIM_OVERFLOW_VAL;
+             enc_count = -enc_count;
          
           }
-     
+//!          enc_count = abs(enc_count);
           enc_count = enc_count >> 1;
-          enc_count = abs(enc_count);
+          
 
           ascending_speed  = ascend_speed_table[attained_throttle] ;
 
@@ -459,7 +460,7 @@ void main()
           loaded_speed = ascend_speed_table[loaded_val];
 
           attained_speed = enc_count;
-          if (throttle_level > attained_throttle && !speed_dec) // check if speed is not decreasing then increament the throttle.
+          if (throttle_level > attained_throttle && !speed_dec)   // check if speed is not decreasing then increament the throttle.
           {
             
             symb1 = '+';
@@ -600,9 +601,9 @@ void main()
           
           }
 
-         sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c , %02d , %d" ,
+         sprintf(Serial_OutputBuffer, "\r\n%03d,%03d,%03d,%03d,%03d,%03d,%03d : %02d,%02d : %c , %c , %02d , %d , %d , %d" ,
          raw_adc , throttle_level , attained_throttle,  attained_speed , ascending_speed, descending_speed , loaded_speed , prob1,prob2 , 
-         symb1 , symb ,throttle_delay , new_throttle);
+         symb1 , symb ,throttle_delay , new_throttle , position_count , prev_count);
 
          printf(Serial_OutputBuffer);
          prev_count = position_count;

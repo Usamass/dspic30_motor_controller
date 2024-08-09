@@ -1,6 +1,6 @@
 
-ROM used:   8230/32768 (25%)
-            8230/32768 (25%) including unused fragments
+ROM used:   8278/32768 (25%)
+            8278/32768 (25%) including unused fragments
 
             1.4 Average locations per line
             4.5 Average locations per statement
@@ -13,7 +13,7 @@ Stack size: 128
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  829   249  14  main.c
+  828   249  14  main.c
   878     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\30F4011.h
   194     0   0  Inc\lookup_tables.h
    50    16   1  digital_filter\digital_filter.h
@@ -23,7 +23,7 @@ Lines Stmts  %   Files
   435   129   7  ..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
    28     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
 ----- -----
- 6028  1843 Total
+ 6027  1843 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -49,11 +49,11 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0    550   3    3   1986  9.3  timer3_isr
 0     88   1    1    170  3.1  timer5_isr
 0    242   1    1    995  5.8  timer4_isr
-0   1764  11    1   5668 13.4  MAIN
+0   1812  11    1   5808 13.9  MAIN
 0     40   0    1             @const1661
 0     14   0    1     86  3.9  @SPRINTF
 0    304   2    1     86  3.9  @PRINTFD16_1663
-0    312   2    1   1224  3.9  @PRINTFD32_1663
+0    312   2    1     86  3.9  @PRINTFD32_1663
 0     88   1    1   1224  3.9  initMCPWM
 0    200   1    1    175  4.2  fill_sine_table
 0     14   0    1     86  3.9  QEI_get_direction
@@ -62,20 +62,20 @@ Page ROM  %  RAM    Vol Diff  Functions:
 Program metrics:
     Functions               23
     Statements              1843
-    Comments                1607
-    Volume (V)              22001
-    Difficulty (D)          114.1
-    Effort to implement (E) 2510226
-    Time to implement (T)   38 hours, 44 minutes
+    Comments                1606
+    Volume (V)              20261
+    Difficulty (D)          114.8
+    Effort to implement (E) 2326467
+    Time to implement (T)   35 hours, 54 minutes
     Est Delivered Bugs (B)  6
-    Cyclomatic Complexity   51
-    Maintainability (MI)    82
+    Cyclomatic Complexity   52
+    Maintainability (MI)    83
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-000FE   252  0  
-00100-07FFE  7974  24538  
+00100-07FFE  8022  24490  
 
 
 
